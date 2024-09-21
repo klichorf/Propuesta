@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Recomendaciones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+    <section class="justificaciones">
+        <nav class="navbar">
+            <div class="logo">
+                <lord-icon src="https://cdn.lordicon.com/cwhyhhho.json" trigger="hover"
+                    style="width:70px;height:70px"></lord-icon>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                &#9776; <!-- Icono de hamburguesa -->
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a href="#">
+                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph"
+                                state="morph-open"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
+                                style="width:25px;height:25px"></lord-icon></span>
+                        Gestión Ordenes
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/zsaomnmb.json" trigger="loop"
+                                state="loop-all"
+                                colors="primary:#ffc738,secondary:#f24c00,tertiary:#f28ba8,quaternary:#2516c7"
+                                style="width:25px;height:25px"></lord-icon></span>
+                        Resumen Kapis
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                                style="width:25px;height:25px"></lord-icon></span>
+                        Justificaciones
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="pasta">Pasta larga 🅿️</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div style="margin: auto;margin-top: 6%;">
+            <h2>Justificaciones</h2>
+        </div>
+        <div class="titulos">
+            <span id="horaActual" style="color: rgb(19, 11, 131); font-weight: bold; margin-bottom: 1%;">
+                <!-- Aquí se muestra la hora -->
+            </span>
+            <span id="diaActual" style="color: rgb(204, 21, 143); font-weight: bold; size: 15px;margin-left: 30%; ">
+                <!-- Aquí se muestra el día juliano -->
+            </span>
+        </div>
+
+        <div class="titulos">
+            <p style="color: rgb(104, 15, 104); font-weight: bold;">Jeje de Turno:</p>
+            <p style="color: rgb(2, 0, 2); font-weight: bold; margin-right: 85%;">Orochimaru</p>
+        </div>
+        <div class="titulos">
+            <p style="color: rgb(104, 15, 104); font-weight: bold;">Mecanico de empaque:</p>
+            <p style="color: rgb(2, 0, 2); font-weight: bold; margin-right: 78%;">Naruto Uzumaki</p>
+        </div>
+        <p>
+        <h4 style="text-align: center;">Eficiencia General del Equipo</h4>
+        </p>
+
+        <section class="display">
+            <!-- gráfico tiempo -->
+            <section class="desperdicio" id="columnchart_values"></section>
+            <section>
+                <section class="desperdicio" id="chart_div">
+                </section>
+                <!-- Filtrar por fecha y referencia -->
+                <label style="margin: 5%;" for="fecha"><strong>Filtrar por fecha:</strong></label>
+                <input type="date" id="fecha" name="fecha" class="modern-date-picker" style="margin-top: 5%">
+                <label style="margin: 5%;" for="referencia"><strong>Filtrar por referencia:</strong></label>
+                <input type="text" id="referencia" list="referencias" placeholder="Referencia"
+                    class="modern-date-picker" style="margin-top: 5%; margin-left: 5%;">
+                <button style="margin-left: 5%;" class="btn btn-info" onclick="drawStuff()">Filtrar</button><br><br><br>
+                <datalist id="referencias">
+                    <!-- Las opciones se llenarán con JavaScript -->
+                </datalist>
+            </section>
+
+
+
+
+            <!-- Contenedor para el botón de control de la máquina -->
+            <div style="text-align: center;">
+                <button id="toggleBtn" class="btn btn-primary" onclick="toggleMachine()">clic</button>
+
+            </div>
+            <!-- Contenedor del gráfico -->
+            <section class="desperdicio" id="timelinechart_div">
+            </section>
+
+
+
+
+
+        </section>
+        <!-- sidebar -->
+        <section id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"></a>
+            <div class="container-fluid">
+                <div class="tab-menu mb-4">
+                    <div id="tab-justificar" class="tab">
+                        <H2>Justificar</H2>
+                    </div>
+                    <div id="tab-dividir" class="tab">Dividir
+                        estado</div>
+                </div>
+                <div id="folder-justificar" class="folder-content">
+                    <div class="mb-4">
+                        <label>Comentarios</label>
+                        <textarea class="form-control" rows="4" placeholder="Ingrese comentarios"></textarea>
+                    </div>
+                    <!-- Duración -->
+                    <div class="mb-4" id="Duración">
+                        <label><strong>Duración: <span></span></strong></label>
+                    </div>
+
+
+                    <!-- Aquí se mostrará la opción seleccionada -->
+                    <div class="mb-4" id="seleccion-alarmas">
+                        <label><strong id="seleccion-mensaje">Seleccione una opción:</strong></label>
+                        <p id="seleccion-alarma-texto" style="color: aquamarine;">Ninguna opción seleccionada</p>
+                        <!-- Aquí se actualizará el texto -->
+                    </div>
+                    <div class="d-flex justify-content-center mb-4">
+                        <button id="btn-justificar-1" class="btn btn-primary m-2" disabled>Justificar</button>
+                        <button class="btn btn-secondary m-2"
+                            onclick=" closeSidebar();limpiarSeleccion()">Cancelar</button>
+                    </div>
+                    <div>
+                        <label>Maquina 3</label>
+                        <div class="list-group-item-primary" style="border-radius: 15px;">
+                            <div class="list-group-item text-center">NO
+                                PROGRAMACIÓN</div>
+                            <div class="list-group-item text-center">PERDIDAS
+                                PROGRAMADAS</div>
+                            <!-- Item con submenú desplegable -->
+                            <div class="list-group-item text-center d-flex justify-content-center align--center"
+                                id="ajustes-item" onclick="toggleSubmenu()">
+                                <span>AJUSTES</span>
+                                <i class="fas fa-bars"></i>
+                                <!-- Ícono de menú desplegable -->
+                            </div>
+                            <div id="ajustes-submenu" class="submenu list-group" style="display: none;">
+                                <div class="list-group-item text-center bg-dark text-white"
+                                    onclick="toggleDropdown('empacadora-submenu')">EMPACADORA</div>
+                                <div id="empacadora-submenu" class="submenu list-group ">
+                                    <div class="list-group-item text-center empacadora-submenu-item bg-primary"
+                                        onclick="toggleDropdown('alarmas-submenu')">ALARMAS <i
+                                            class="fa-solid fa-ellipsis"></i></div>
+                                    <div id="alarmas-submenu" class="submenu list-group">
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="tolva1">Tolva 1</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="tolva2">Tolva 2</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="doble-descarga">Doble descarga</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="macula-encontrada">Macula encontrada</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="roctura-cuello">Roctura en el cuello</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="overflow-mordaza">Overflow Mordaza</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="temp-mordaza-inferior">Temperaturas mordaza</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="temp-mordaza-superior">Temperarutas cilindros</div>
+                                        <div class="list-group-item text-center empacadora-submenu-item"
+                                            data-item="temp-mordaza-superior">Falla impresion</div>
+                                    </div>
+
+
+
+
+                                    <!-- Cards personalizadas, todas ocultas inicialmente -->
+                                    <div id="alerta-tolva1" class="card"
+                                        style="width: 18rem; display: none; align-items: center;">
+                                        <img src="..." class="card-img-top" alt="Tolva 1">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Tolva 1</h5>
+                                            <p class="card-text" style="color: black;">Detalles de Tolva 1.</p>
+                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="alerta-tolva2" class="card"
+                                        style="width: 18rem; display: none; align-items: center;">
+                                        <img src="..." class="card-img-top" alt="Tolva 2">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Tolva 2</h5>
+                                            <p class="card-text" style="color: black;">Detalles de Tolva 2.</p>
+                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="alerta-doble-descarga" class="card"
+                                        style="width: 18rem; display: none; align-items: center;">
+                                        <img src="..." class="card-img-top" alt="Doble Descarga">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Doble Descarga</h5>
+                                            <p class="card-text" style="color: black;">Detalles de Doble Descarga.</p>
+                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Aquí puedes agregar más cards personalizadas para los otros ítems -->
+
+                                </div>
+                                <div class="list-group-item text-center bg-info text-white"
+                                    onclick="toggleDropdown('embolsadora-submenu')">EMBOLSADORA</div>
+                                <div id="embolsadora-submenu" class="submenu list-group " style="display: none;">
+                                    <div class="list-group-item text-center">
+                                        CALIDAD</div>
+                                    <div class="list-group-item text-center">
+                                        MECANICOS</div>
+                                    <div class="list-group-item text-center">
+                                        INSUMOS</div>
+                                </div>
+                                <div class="list-group-item text-center bg-secondary text-white"
+                                    onclick="toggleDropdown('etiquetadora-submenu')">ETIQUETADORA</div>
+                                <div id="etiquetadora-submenu" class="submenu list-group" style="display: none;">
+                                    <div class="list-group-item text-center">
+                                        CALIDAD</div>
+                                    <div class="list-group-item text-center">
+                                        INSUMOS</div>
+                                </div>
+                            </div>
+                            <div class="list-group-item text-center">AJUSTES
+                                DE CALIDAD</div>
+                            <div class="list-group-item text-center">ARRANQUES</div>
+                            <div class="list-group-item text-center">ALISTAMIENTOS</div>
+                            <div class="list-group-item text-center">AVERIAS</div>
+                            <div class="list-group-item text-center">GERENCIAMIENTOS</div>
+                            <div class="list-group-item text-center">ORGANIZACIÓN
+                                DE LÍNEA</div>
+                            <div class="list-group-item text-center">SERVICIOS</div>
+                            <div class="list-group-item text-center">TIEMPO
+                                VALOR AGREGADO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Modal -->
+        <div id="justificarModal" class="modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Seleccione una posible causa</p>
+                        <section>
+                            <div class="list-group-item text-center empacadora-submenu-item">CALIDAD</div>
+                            <div class="list-group-item text-center empacadora-submenu-item">MECANICA</div>
+                            <div class="list-group-item text-center empacadora-submenu-item">INSUMOS</div>
+                        </section>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="confirmarJustificar">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Tolva 1 -->
+        <div id="modal-tolva1" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Tolva 1</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://th.bing.com/th/id/OIP.6mHyDOgq03W0Aj_s7y35mwHaHa?rs=1&pid=ImgDetMain"
+                            class="card-img-top" alt="Tolva 1">
+                        <p class="card-text" style="color: black;">Obstrucción en la Tolva: Puede haber pasta acumulada
+                            o un objeto extraño que bloquea el flujo de pasta.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Tolva 2 -->
+        <div id="modal-tolva2" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Tolva 2</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="..." class="card-img-top" alt="Tolva 2">
+                        <p class="card-text" style="color: black;">Obstrucción en la Tolva: Puede haber pasta acumulada
+                            o un objeto extraño que bloquea el flujo de pasta.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Doble Descarga -->
+        <div id="modal-doble-descarga" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Doble Descarga</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="..." class="card-img-top" alt="Doble Descarga">
+                        <p class="card-text" style="color: black;">Se ha producido una descarga adicional o inesperada
+                            en el canal alimentador.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aquí puedes agregar más modales personalizados para los otros ítems -->
+
+
+
+
+
+
+
+
+
+
+        <!-- Tabla de justificaciones -->
+        <section class="justificaciones" style="margin-bottom: 1%; width: 90%;">
+            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de Justificaciones</h4>
+
+            <div id="custom-alert" style="display:none; color: red; text-align: center;">
+                <div class="alert alert-danger" role="alert">
+                    selecione alguna opcion
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button id="justificar-btn" type="button" class="btn btn-primary"
+                    onclick="openSidebar()">Justificar</button>
+            </div>
+            <!-- Contenedor de la tabla -->
+            <div class="table-container">
+                <table id="justificationsTable" style="font-size: 1em" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>OPCIONES</th>
+                            <th>FECHA INICIO</th>
+                            <th>FECHA FINAL</th>
+                            <th>DURACIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody> <!-- Aqui se almacenan las nuevas filas -->
+                </table>
+            </div>
+        </section>
+        <!-- Alerta personalizada (oculta por defecto) -->
+
+
+        <section class="justificaciones" style="margin-bottom: 5%; width: 90%;">
+            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de estados de máquina</h4>
+            <!-- Contenedor de la tabla -->
+            <div class="table-container">
+                <table style="font-size: 1em" class="table table-hover">
+                    <tr>
+                        <th>Referencia</th>
+                        <th>Duración (min)</th>
+                        <th>Causa justificación</th>
+                        <th>Causa asociada</th>
+                        <th>Desperdicio primario (gr)</th>
+                        <th>Desperdicio secundario (gr)</th>
+                    </tr>
+                    <tr>
+                        <td>Clásico Doria 250</td>
+                        <td>12</td>
+                        <td>Tolva 1</td>
+                        <td>Doble Descarga</td>
+                        <td>100</td>
+                        <td>0</td>
+                    </tr>
+
+                </table>
+            </div>
+        </section>
+    </section>
+
+
+
+
+    </section>
+
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar', 'timeline'] });
+    </script>
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

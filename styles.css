@@ -1,0 +1,722 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.pasta{
+    margin-bottom: 5%;
+}
+
+.navbar {
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hamburger {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.icon-right {
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        background-color: #333;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        display: none;
+        z-index: 1;
+    }
+
+    .nav-links li {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+}
+
+.justificaciones {
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f3f7;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 123, 255, 0.5);
+    width: 95%;
+    margin: 2px auto;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    overflow: hidden; /* Asegura que el contenido no desborde el contenedor */
+}
+
+.justificaciones table {
+    width: 100%; /* Asegura que la tabla se ajuste al ancho del contenedor */
+    border-collapse: collapse; /* Opcional: elimina el espacio entre celdas */
+}
+
+.botones{
+    width: 10%; /* Asegura que la tabla se ajuste al ancho del contenedor */
+    border-collapse: collapse; /* Opcional: elimina el espacio entre celdas */
+    align-items: center;
+}
+
+.justificaciones th, .justificaciones td {
+    text-align: left;
+    padding: 8px;
+}
+
+.graficos{
+    margin-top: 0%;
+}
+
+.titulos {
+    display: flex; /* Utilizamos flexbox */
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 90%; /* Aseguramos que el div no ocupe más del 90% del ancho del contenedor padre */
+    margin: 0 auto; /* Centrar el div horizontalmente */   
+    box-sizing: border-box; /* Incluye el padding dentro del width */
+    overflow: hidden; /* Evita que el contenido se salga del contenedor */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .titulos {
+        display: block; /* Cambia la disposición de flex a block para apilar los elementos */
+        text-align: left; /* Alinea los textos a la izquierda */
+    }
+
+    .titulos p {
+        margin-right: 0; /* Resetea los márgenes derechos de los párrafos */
+        margin-bottom: 10px; /* Añade espacio entre los párrafos para que no queden pegados */
+    }
+}
+#horaActual {
+    flex: 1; /* Hacemos que la hora ocupe espacio flexible */
+}
+
+#diaActual {
+    margin-left: auto; /* Empuja el día juliano al extremo derecho */
+    margin-right: 10%;
+    white-space: nowrap; /* Evita que el texto se parta en varias líneas */
+}
+
+
+
+.hora {
+    margin-left:100px; /* Empuja la hora al lado derecho */
+    font-size: 16px; /* Ajusta el tamaño de la fuente si es necesario */
+    font-weight: bold; /* Pone la hora en negrilla */
+    color: rgb(38, 0, 255); /* Color de la hora */
+}
+
+
+
+.left {
+    display: flex;
+    justify-content: start; 
+    margin-left: 5%;
+    align-items: center; /* Centrar verticalmente (opcional) */
+    text-align: center; /* Centrar el texto dentro del div */
+    width: 100%; /* Asegura que el div ocupe el ancho completo del contenedor */
+    margin-top: 5%;
+}
+.right {
+    flex: 1;
+    margin-top: 5%;
+}
+
+.right {
+    text-align: left;
+}
+
+.right p {
+    margin:  0;
+}
+
+.right span {
+    font-weight: bold;
+}
+
+.timeline {
+    background-color: #fff; /* Color de fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 123, 255, 0.5); /* Sombra del contenedor */
+    padding: 20px; /* Espacio interno */
+    margin: 10px auto; /* Espaciado externo */
+    width: 90%; /* Ajusta el ancho según sea necesario */
+    max-width: 800px; /* Opcional: ancho máximo para centrado y control del tamaño */
+    text-align: center; /* Centra el texto */
+}
+
+.timeline h4 {
+    margin: 0; /* Elimina el margen por defecto del h4 */
+    font-size: 1.5em; /* Ajusta el tamaño del texto del título según sea necesario */
+    color: #333; /* Color del texto (ajusta según el esquema de color) */
+}
+
+
+
+.bar-graph {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 50px; 
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    width: 100%; /* Ajusta el ancho al 100% del contenedor padre */
+    box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+}
+
+.bar {
+    display: flex;
+    height: 100%;
+    width: 18%;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    transition: transform 0.3s ease;
+    
+}
+
+.actualizar {
+    height: 100%;
+    width: 18%; 
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.bar-1 {
+    background-color: red;
+    height: 20%;
+    line-height: 30px;
+    
+}
+
+.bar-2 {
+    background-color: green;
+    height: 50%;
+    line-height: 30px;
+}
+
+.bar-3 {
+    background-color: orange;
+    height: 80%;
+    line-height: 30px;
+}
+
+.bar-4 {
+    background-color: blue;
+    height: 60%;
+    line-height: 30px;
+}
+
+.bar-5 {
+    background-color: purple;
+    height: 40%;
+    line-height: 30px;
+}
+table, th, td {
+
+    margin-top: 5%;
+    text-align: center;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  .red-circle {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  input[type="checkbox"] {
+    accent-color: blue;
+  }
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #0a0d24;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    color: white;
+    z-index: 2; /* Asegura que el sidebar esté por encima de las barras */
+  }
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;}
+
+    .tab-menu {
+        display: flex;
+        border-bottom: 2px solid #000;
+    }
+    .tab-menu div {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .tab-menu div:first-child {
+        border-right: 2px solid #000;
+    }
+    .state-select div {
+        padding: 10px;
+        border-bottom: 1px solid #000;
+        cursor: pointer;
+        background-color: #538a65;
+    }
+    .state-select div:last-child {
+        border-bottom: none; }
+
+        .no-programacion {
+            background-color: #FF4C4C; /* Rojo brillante */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .perdidas-programadas {
+            background-color: #28A745; /* Verde fuerte */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .ajustes-item {
+            background-color: #17A2B8; /* Azul turquesa */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .empacadora {
+            background-color: #FFC107; /* Amarillo brillante */
+            color: #000000; /* Negro para el texto */
+        }
+        
+        .encartonadora {
+            background-color: #007BFF; /* Azul brillante */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .etiquetadora {
+            background-color: #DC3545; /* Rojo intenso */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .ajustes-calidad {
+            background-color: #6F42C1; /* Púrpura */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .arranques {
+            background-color: #E83E8C; /* Rosa fuerte */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .alistamientos {
+            background-color: #343A40; /* Gris oscuro */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .averias {
+            background-color: #FD7E14; /* Naranja brillante */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .gerenciamientos {
+            background-color: #20C997; /* Verde esmeralda */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .organizacion-linea {
+            background-color: #6610F2; /* Púrpura oscuro */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .servicios {
+            background-color: #6C757D; /* Gris oscuro */
+            color: #FFFFFF; /* Blanco para el texto */
+        }
+        
+        .tiempo-valor-agregado {
+            background-color: #F8F9FA; /* Gris claro */
+            color: #000000; /* Negro para el texto */
+        }
+        
+        /* Opcional: estilos para hover */
+        .list-group-item:hover {
+            opacity: 0.8;
+        }
+
+
+        /* Estilos para los títulos de la lista */
+.no-programacion {
+    background-color: #3474b1; /* Rojo brillante */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.perdidas-programadas {
+    background-color: #28A745; /* Verde fuerte */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.ajustes-item {
+    background-color: #17A2B8; /* Azul turquesa */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.empacadora {
+    background-color: #FFC107; /* Amarillo brillante */
+    color: #000000; /* Negro para el texto */
+}
+
+.encartonadora {
+    background-color: #007BFF; /* Azul brillante */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.etiquetadora {
+    background-color: #DC3545; /* Rojo intenso */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.ajustes-calidad {
+    background-color: #6F42C1; /* Púrpura */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.arranques {
+    background-color: #E83E8C; /* Rosa fuerte */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.alistamientos {
+    background-color: #343A40; /* Gris oscuro */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.averias {
+    background-color: #FD7E14; /* Naranja brillante */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.gerenciamientos {
+    background-color: #20C997; /* Verde esmeralda */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.organizacion-linea {
+    background-color: #6610F2; /* Púrpura oscuro */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.servicios {
+    background-color: #6C757D; /* Gris oscuro */
+    color: #FFFFFF; /* Blanco para el texto */
+}
+
+.tiempo-valor-agregado {
+    background-color: #F8F9FA; /* Gris claro */
+    color: #000000; /* Negro para el texto */
+}
+
+/* Opcional: estilos para hover */
+.list-group-item:hover {
+    opacity: 0.8;
+}
+        
+#ajustes-item {
+    font-size: 15px; /* Tamaño del texto */
+    padding: 10px; /* Espacio interno */
+}
+
+#ajustes-item .fa-bars {
+    font-size: 18px; /* Tamaño del ícono */
+}
+
+#ajustes-item span {
+    margin-right: 10px; /* Espacio entre el texto y el ícono */
+}
+
+.submenu {
+    display: none; /* Oculta los submenús por defecto */
+}
+
+.list-group-item {
+    cursor: pointer; /* Indica que el elemento es clickeable */
+}
+
+.list-group-item:hover {
+    opacity: 0.8; /* Añade un efecto de hover */
+}
+
+.ml-4 {
+    margin-left: 1.5rem; /* Espacio a la izquierda del submenú */
+}
+.list-group-item-primary {
+    border-radius: 15px;
+}
+
+.highlight-on-hover {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .highlight-on-hover:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 255, 0.5);
+    border-radius: 10px;
+  }
+
+  .display {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.display {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.desperdicio {
+    border-radius: 15px;
+    overflow: hidden; /* Asegura que el contenido dentro del borde redondeado no se salga */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra alrededor del gráfico */
+    margin-left: 5%;
+
+    
+
+}
+
+#columnchart_values, #timelinechart_div, #chart_div {
+    width: 90%;
+    height: auto; /* Puedes ajustar esta altura según sea necesario */
+    margin-top: 3%;
+    
+}
+
+@media (max-width: 768px) {
+    #columnchart_values, #timelinechart_div, #chart_div {
+        height: 300px; /* Altura ajustada para pantallas más pequeñas */
+    }
+
+}
+
+input[type="date"] {
+    border: none;
+    outline: none;
+}
+
+label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.modern-date-picker {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modern-date-picker:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+    align-items: center;
+}
+
+/* Estilos para la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre celdas */
+    table-layout: auto; /* Ajusta el ancho de las columnas al contenido */
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Línea inferior para separación */
+}
+
+/* Estilo para el círculo rojo */
+.red-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+/* Estilo adicional para mejorar el diseño */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5; /* Color de fondo al pasar el ratón sobre la fila */
+}
+/* Estilo para el contenedor principal */
+.section-container {
+    width: 100%;
+    max-width: 1200px; /* Ajusta según sea necesario */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+/* Estilo adicional para mejorar el diseño */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+}
+.chart-container {
+    border-radius: 15px; /* Ajusta el radio del borde según tus preferencias */
+    overflow: hidden; /* Oculta el contenido que sobresale del borde redondeado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: agrega una sombra para mayor efecto */
+}
+
+.red-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.green-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#justificationsTable {
+    width: 100%; /* Ajusta el ancho de la tabla según sea necesario */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* Colores para los subítems de la Empacadora */
+.empacadora-submenu-item {
+    background-color: #ffcc00; /* Color de fondo */
+    color: #000000; /* Color del texto */
+}
+
+.empacadora-submenu-item:hover {
+    background-color: #0d91b9; /* Cambia el color al pasar el mouse */
+    color: #ffffff;
+}
+
+/* Fondo azul para el submenú de alarmas */
+#alarmas-submenu {
+    background-color: #007bff; /* Azul */
+    color: #ffffff; /* Texto blanco */
+    border-radius: 10px; /* Bordes redondeados opcionales */
+}
+
+#alarmas-submenu .list-group-item:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+/* Clase para la opción seleccionada */
+.opcion-seleccionada {
+    background-color: #ccffcc; /* Verde claro */
+    font-weight: bold; /* Opcional: para resaltar el texto */
+    color: #20c3c9;
+}
+
+.modal {
+    z-index: 1050; /* Asegúrate de que el modal esté por encima de otros elementos */
+}
+
+
