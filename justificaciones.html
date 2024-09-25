@@ -74,30 +74,33 @@
         <div style="margin: auto;margin-top: 6%;">
             <h2>Justificaciones</h2>
         </div>
-        <div class="titulos">
-            <span id="horaActual" style="color: rgb(19, 11, 131); font-weight: bold; margin-bottom: 1%;">
-                <!-- Aquí se muestra la hora -->
-            </span>
-            <span id="diaActual" style="color: rgb(204, 21, 143); font-weight: bold; size: 15px;margin-left: 30%; ">
-                <!-- Aquí se muestra el día juliano -->
-            </span>
-        </div>
 
-        <div class="titulos">
-            <p style="color: rgb(104, 15, 104); font-weight: bold;">Jeje de Turno:</p>
-            <p style="color: rgb(2, 0, 2); font-weight: bold; margin-right: 85%;">Orochimaru</p>
-        </div>
-        <div class="titulos">
-            <p style="color: rgb(104, 15, 104); font-weight: bold;">Mecanico de empaque:</p>
-            <p style="color: rgb(2, 0, 2); font-weight: bold; margin-right: 78%;">Naruto Uzumaki</p>
-        </div>
+
+
+
+
+
+
+
+
+
         <p>
         <h4 style="text-align: center;">Eficiencia General del Equipo</h4>
         </p>
 
+        <div class="titulos">
+            <span id="resultado" style="color: rgb(163, 19, 26); font-weight: bold; margin-bottom: 1%;">
+                <!-- Aquí se muestra el lote -->
+            </span>
+        </div>
+
         <section class="display">
             <!-- gráfico tiempo -->
-            <section class="desperdicio" id="columnchart_values"></section>
+            <section class="desperdicio" id="columnchart_values">
+
+            </section>
+
+
             <section>
                 <section class="desperdicio" id="chart_div">
                 </section>
@@ -208,39 +211,6 @@
 
 
 
-                                    <!-- Cards personalizadas, todas ocultas inicialmente -->
-                                    <div id="alerta-tolva1" class="card"
-                                        style="width: 18rem; display: none; align-items: center;">
-                                        <img src="..." class="card-img-top" alt="Tolva 1">
-                                        <div class="card-body">
-                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Tolva 1</h5>
-                                            <p class="card-text" style="color: black;">Detalles de Tolva 1.</p>
-                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
-                                        </div>
-                                    </div>
-
-                                    <div id="alerta-tolva2" class="card"
-                                        style="width: 18rem; display: none; align-items: center;">
-                                        <img src="..." class="card-img-top" alt="Tolva 2">
-                                        <div class="card-body">
-                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Tolva 2</h5>
-                                            <p class="card-text" style="color: black;">Detalles de Tolva 2.</p>
-                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
-                                        </div>
-                                    </div>
-
-                                    <div id="alerta-doble-descarga" class="card"
-                                        style="width: 18rem; display: none; align-items: center;">
-                                        <img src="..." class="card-img-top" alt="Doble Descarga">
-                                        <div class="card-body">
-                                            <h5 class="card-title" style="color: rgb(8, 51, 51);">Doble Descarga</h5>
-                                            <p class="card-text" style="color: black;">Detalles de Doble Descarga.</p>
-                                            <button class="cerrar-card btn btn-dark">Cerrar</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Aquí puedes agregar más cards personalizadas para los otros ítems -->
-
                                 </div>
                                 <div class="list-group-item text-center bg-info text-white"
                                     onclick="toggleDropdown('embolsadora-submenu')">EMBOLSADORA</div>
@@ -339,7 +309,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="..." class="card-img-top" alt="Tolva 2">
+                        <img src="" class="card-img-top" alt="Tolva 2">
                         <p class="card-text" style="color: black;">Obstrucción en la Tolva: Puede haber pasta acumulada
                             o un objeto extraño que bloquea el flujo de pasta.</p>
                     </div>
@@ -361,7 +331,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="..." class="card-img-top" alt="Doble Descarga">
+                        <img src="" class="card-img-top" alt="Doble Descarga">
                         <p class="card-text" style="color: black;">Se ha producido una descarga adicional o inesperada
                             en el canal alimentador.</p>
                     </div>

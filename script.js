@@ -47,11 +47,19 @@ function obtenerDiaJuliano(fecha) {
     const inicioAño = new Date(fecha.getFullYear(), 0, 1); // 1 de enero del mismo año
     const diferencia = fecha - inicioAño; // Diferencia en milisegundos
     const unDia = 1000 * 60 * 60 * 24; // Milisegundos en un día
-    return Math.round(diferencia / unDia) + 1; // +1 porque el día 1 de enero es el día 1
+    return Math.floor(diferencia / unDia) + 1; // +1 porque el día 1 de enero es el día 1
 }
 
-// Calcular y mostrar la hora y el día actual
-function mostrarHoraYDia() {
+// Función para calcular una fecha de vencimiento sumando días
+function calcularFechaVencimiento(dias) {
+    const fechaHoy = fechaActual();
+    const milisegundosPorDia = 1000 * 60 * 60 * 24; // Milisegundos en un día
+    const fechaVencimiento = new Date(fechaHoy.getTime() + (dias * milisegundosPorDia)); // Sumar días
+    return fechaVencimiento;
+}
+
+// Función para mostrar la hora, el día juliano y la fecha de vencimiento
+function mostrarHoraYDia(maquina) {
     const fechaHoy = fechaActual();
     const diaJuliano = obtenerDiaJuliano(fechaHoy);
 
@@ -60,51 +68,61 @@ function mostrarHoraYDia() {
     const minutos = String(fechaHoy.getMinutes()).padStart(2, '0');
     const horaFormateada = `${horas}:${minutos}`;
 
+    // Año simplificado (últimos dos dígitos)
+    const añoSimplificado = String(fechaHoy.getFullYear()).slice(-2);
+
+    // Calcular la fecha de vencimiento 540 días después de la fecha actual
+    const fechaVencimiento = calcularFechaVencimiento(540);
+    const diaVencimiento = String(fechaVencimiento.getDate()).padStart(2, '0');
+    const mesVencimiento = fechaVencimiento.toLocaleString('default', { month: 'short' }).toUpperCase();
+    const añoVencimiento = String(fechaVencimiento.getFullYear()).slice(-2);
+
+    const fechaExpiracion = `${diaVencimiento} ${mesVencimiento} ${añoVencimiento}`;
+
+    // Construir el formato final
+    const formatoFinal = `L${diaJuliano} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
+
     // Actualizar el contenido del DOM
-    document.getElementById("horaActual").textContent = horaFormateada;
-    document.getElementById("diaActual").textContent = `Día Juliano: ${diaJuliano}`;
+
+    document.getElementById("resultado").textContent = formatoFinal;
 }
 
-// Llamar a la función para mostrar la hora y el día
-mostrarHoraYDia();
-
+// Función para actualizar la hora en tiempo real (cada segundo)
 function actualizarHora() {
-    let ahora = new Date();
-    let horas = ahora.getHours().toString().padStart(2, '0');
-    let minutos = ahora.getMinutes().toString().padStart(2, '0');
-    let segundos = ahora.getSeconds().toString().padStart(2, '0');
-    document.getElementById('horaActual').textContent = horas + ':' + minutos + ':' + segundos;
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, '0');
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    const segundos = ahora.getSeconds().toString().padStart(2, '0');
+
 }
 
-// Actualizar la hora al cargar la página y cada segundo
-actualizarHora();
+// Llamar a la función para mostrar la hora, el día juliano y el formato personalizado
+mostrarHoraYDia("04"); // Cambia el número de la máquina según corresponda
+
+// Actualizar la hora cada segundo
 setInterval(actualizarHora, 1000);
 
 
+
+// Función para dibujar el gráfico de columnas// Función para dibujar el gráfico de columnas
 // Función para dibujar el gráfico de columnas
 function drawColumnChart() {
+    let metaPorHora = 6300; // Meta de producción por hora
     let data = google.visualization.arrayToDataTable([
-        ["Hora", "Unidades producidas", { role: "style" }],
-        ["06:00 AM", 80, "#76A7FA"],
-        ["07:00 AM", 95, "#76A7FA"],
-        ["08:00 AM", 1420, "#76A7FA"],
-        ["09:00 AM", 130, "#76A7FA"],
-        ["10:00 AM", 110, "#76A7FA"],
-        ["11:00 AM", 140, "#76A7FA"],
-        ["12:00 PM", 150, "#76A7FA"],
-        ["01:00 PM", 160, "#76A7FA"],
-        ["02:00 PM", 170, "#76A7FA"]
+        ["Hora", "Unidades producidas", { role: "style" }, { role: "annotation" }],
+        ["06:00 AM", 5000, (5000 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (5000 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por debajo del 85%
+        ["07:00 AM", 7000, (7000 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (7000 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por encima del 85%
+        ["08:00 AM", 6200, (6200 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (6200 / metaPorHora * 100).toFixed(2) + "%"],  // Producción cerca del 85%
+        ["09:00 AM", 8000, (8000 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (8000 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por encima del 85%
+        ["10:00 AM", 4500, (4500 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (4500 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por debajo del 85%
+        ["11:00 AM", 6300, (6300 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (6300 / metaPorHora * 100).toFixed(2) + "%"],  // Producción al 100%
+        ["12:00 PM", 4000, (4000 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (4000 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por debajo del 85%
+        ["01:00 PM", 7500, (7500 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (7500 / metaPorHora * 100).toFixed(2) + "%"],  // Producción por encima del 85%
+        ["02:00 PM", 6500, (6500 / metaPorHora * 100) < 85 ? "red" : "#76A7FA", (6500 / metaPorHora * 100).toFixed(2) + "%"]   // Producción por encima del 85%
     ]);
 
     let view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-        {
-            calc: "stringify",
-            sourceColumn: 1,
-            type: "string",
-            role: "annotation"
-        },
-        2]);
+    view.setColumns([0, 1, 2, 3]);  // Mantener las columnas de la tabla
 
     let options = {
         title: "",
@@ -129,14 +147,21 @@ function drawColumnChart() {
             }
         },
         vAxis: {
-            // Opcional: configurar el eje vertical si es necesario
+            title: 'OE',
+            minValue: 0,
+            textStyle: {
+                fontSize: 12
+            },
+            titleTextStyle: {
+                bold: true,
+                italic: false
+            }
         }
     };
 
     let chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
     chart.draw(view, options);
 }
-
 
 
 
@@ -604,6 +629,9 @@ function mostrarModal() {
         });
     }
 }
+
+
+
 // Asigna el evento onclick al botón Justificar
 document.getElementById('btn-justificar-1').addEventListener('click', mostrarModal);
 
