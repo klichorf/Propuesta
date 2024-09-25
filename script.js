@@ -22,9 +22,7 @@ function initCharts() {
     drawTimelineChart();
     console.log('Gráfico de la línea de tiempo dibujado'); // Confirmación tras dibujar el gráfico de la línea de tiempo
 
-    drawStuff();
-    console.log('Gráfico de desperdicio  dibujado '); // Confirmación tras dibujar el gráfico adicional
-
+   
     // Agregar listener para redibujar los gráficos al cambiar el tamaño de la ventana
 
     window.addEventListener('resize', debounce(drawCharts, 150));
@@ -472,95 +470,6 @@ function formatTime(date) {
 
 
 
-
-
-// Función para dibujar el gráfico de materiales (filtrado)
-function drawStuff() {
-    let chartDiv = document.getElementById('chart_div');
-
-    let fechaInput = document.getElementById('fecha');
-    let referenciaInput = document.getElementById('referencia');
-    let fecha = fechaInput.value;
-    let referencia = referenciaInput.value;
-    // Agrega event listeners para el evento 'change'
-    fechaInput.addEventListener('change', drawStuff);
-    referenciaInput.addEventListener('change', drawStuff);
-
-    // Datos simulados (reemplaza esto con datos reales)
-    let rawData = [
-        ['2024-09-01', 'Espagueti 500 g', 200, 150],
-        ['2024-09-01', 'Fettuccine 500 g', 100, 50],
-        ['2024-09-02', 'Linguine 1 kg', 300, 250],
-        ['2024-09-02', 'Bucatini 250 g', 400, 350]
-    ];
-
-    // Extrae referencias únicas para el datalist
-    let uniqueReferences = [...new Set(rawData.map(row => row[1]))];
-    let datalist = document.getElementById('referencias');
-    datalist.innerHTML = uniqueReferences.map(ref => `<option value="${ref}">`).join('');
-
-    // Filtra los datos basados en la fecha y referencia seleccionadas
-    let filteredData = rawData.filter(function (row) {
-        let fechaMatch = fecha ? row[0] === fecha : true;
-        let referenciaMatch = referencia ? row[1] === referencia : true;
-        return fechaMatch && referenciaMatch;
-    });
-
-    // Convertir datos filtrados a formato de Google Charts
-    let data = google.visualization.arrayToDataTable([
-        ['', '', ''],
-        ...filteredData.map(row => [row[0] + ' - ' + row[1], row[2], row[3]])
-    ]);
-
-    let materialOptions = {
-        chart: {
-            title: '-----Desperdicio de Material Primario y Secundario',
-            subtitle: '-----Por fecha y referencia',
-
-        },
-
-        width: '100%',
-        height: 299,
-        bars: 'vertical',
-        axes: {
-            y: {
-                materialPrimario: { label: 'Desperdicio Primario (kg)' },
-                materialSecundario: { side: 'right', label: 'Desperdicio Secundario (kg)' }
-            }
-        },
-        series: {
-            0: { axis: 'materialPrimario' },
-            1: { axis: 'materialSecundario' }
-        },
-        legend: { position: "bottom" },
-        chartArea: {
-            width: '100%',
-            height: '80%',
-            left: '0%', // Ajusta el área del gráfico para asegurar el centrado
-            top: '15%'  // Ajusta la posición vertical del gráfico
-        }
-
-    };
-
-    // Añade este CSS a tu página
-    let css = `
-    .google-visualization-chart-title {
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
- 
-    }
-    .google-visualization-chart-subtitle {
-        text-align: center;
-        font-size: 14px;
-        font-style: italic;
-    }
-`;
-
-
-    let materialChart = new google.charts.Bar(chartDiv);
-    materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
-}
 
 
 
