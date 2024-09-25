@@ -33,8 +33,10 @@ function initCharts() {
 function drawCharts() {
     drawColumnChart();
     drawTimelineChart();
-    drawStuff();
+    drawScatterChart()
+
 }
+
 // Función para obtener la fecha actual
 function fechaActual() {
     return new Date(); // Devolver la fecha actual
@@ -81,18 +83,20 @@ function mostrarHoraYDia(maquina) {
     const formatoFinal = `L${diaJuliano} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
 
     // Actualizar el contenido del DOM
-
     document.getElementById("resultado").textContent = formatoFinal;
 }
 
 // Función para actualizar la hora en tiempo real (cada segundo)
 function actualizarHora() {
-    const ahora = new Date();
-    const horas = ahora.getHours().toString().padStart(2, '0');
-    const minutos = ahora.getMinutes().toString().padStart(2, '0');
-    const segundos = ahora.getSeconds().toString().padStart(2, '0');
-
+    const maquina = "03"; // Reemplazar con el valor de tu máquina
+    mostrarHoraYDia(maquina); // Llama a la función para actualizar el DOM
 }
+
+// Llamar a actualizarHora cada segundo para mantener la hora y fecha actualizada
+setInterval(actualizarHora, 1000);
+
+// Llamada inicial para mostrar la información al cargar la página
+actualizarHora();
 
 // Llamar a la función para mostrar la hora, el día juliano y el formato personalizado
 mostrarHoraYDia("04"); // Cambia el número de la máquina según corresponda
@@ -145,7 +149,7 @@ function drawColumnChart() {
             }
         },
         vAxis: {
-            title: 'OE',
+            title: 'OEE',
             minValue: 0,
             textStyle: {
                 fontSize: 12
@@ -159,6 +163,83 @@ function drawColumnChart() {
 
     let chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
     chart.draw(view, options);
+}
+
+
+
+// Cargar la API de Google Charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawScatterChart);
+
+function drawScatterChart() {
+    // Datos de ejemplo con una referencia de 250g
+    let data = google.visualization.arrayToDataTable([
+        ['Hora', 'Peso (g)', { role: 'style' }, { role: 'annotation' }],
+        ['06:00 AM', 245, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '245g'],
+        ['07:00 AM', 252, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '252g'],
+        ['08:00 AM', 249, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '249g'],
+        ['09:00 AM', 253, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '253g'],
+        ['10:00 AM', 246, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '246g'],
+        ['11:00 AM', 250, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '250g'],
+        ['12:00 PM', 255, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '255g'],
+        ['01:00 PM', 248, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '248g'],
+        ['02:00 PM', 251, 'point { size: 5; shape-type: circle; fill-color:#020200 }', '251g']
+    ]);
+
+    // Opciones de configuración para el gráfico
+    let options = {
+
+        width: '80%',
+        height: 300,
+        legend: 'none',
+        chartArea: {
+            width: '80%',
+            height: '70%',
+
+ 
+     
+            
+        },
+
+        vAxis: {
+            title: 'Peso (g)',
+            minValue: 240, //peso minimo 
+            maxValue: 260,  // peso maximo
+            gridlines: { count: 5 }, // Líneas de referencia en el eje vertical
+            textStyle: {
+                fontSize: 12
+            },
+            titleTextStyle: {
+                bold: true,
+                italic: false,
+                color: '#a51717' //color rojo
+            }
+        },
+        series: {
+            0: {
+                color: '#76A7FA',   // Color de la línea y los puntos
+                lineWidth: 2,       // Ancho de la línea
+                pointSize: 7,       // Tamaño de los puntos
+                pointShape: 'circle',
+                visibleInLegend: true
+            }
+        },
+        trendlines: { // Línea de tendencia (promedio)
+            0: {
+                type: 'linear',
+                color: 'green',
+                lineWidth: 2,
+                opacity: 0.9,
+                showR2: true, // Mostrar valor R2 en la leyenda
+                visibleInLegend: true
+            }
+        },
+
+    };
+
+    // Crear el gráfico de líneas y dibujarlo
+    let chart = new google.visualization.LineChart(document.getElementById('scatterchart_values'));
+    chart.draw(data, options);
 }
 
 
