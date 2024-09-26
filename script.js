@@ -80,7 +80,7 @@ function mostrarHoraYDia(maquina) {
     const fechaExpiracion = `${diaVencimiento} ${mesVencimiento} ${añoVencimiento}`;
 
     // Construir el formato final
-    const formatoFinal = `L${diaJuliano} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
+    const formatoFinal = `LOTE : L${diaJuliano} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
 
     // Actualizar el contenido del DOM
     document.getElementById("resultado").textContent = formatoFinal;
