@@ -37,6 +37,38 @@ function drawCharts() {
 
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Opciones para Tempus Dominus
+    const options = {
+        display: {
+            components: {
+                decades: false,
+                year: true,
+                month: true,
+                date: true,
+                hours: false,
+                minutes: false,
+                seconds: false
+            }
+        },
+        defaultDate: new Date(),
+        useCurrent: false, // Para que no seleccione automáticamente la fecha actual al iniciar
+    };
+
+    // Inicializar Tempus Dominus DatePicker
+    const datePickerElement = document.getElementById('datepicker');
+    const datePickerInstance = new tempusDominus.TempusDominus(datePickerElement, options);
+
+    // Evento para actualizar la hora cuando se selecciona una fecha
+    datePickerElement.addEventListener('change.td', function(event) {
+        const selectedDate = event.detail.date;
+        actualizarHora(selectedDate); // Llamar a la función con la fecha seleccionada
+    });
+
+    // Llamada inicial para mostrar la información al cargar la página con la fecha actual
+    actualizarHora();
+});
+
 // Función para obtener la fecha actual
 function fechaActual() {
     return new Date(); // Devolver la fecha actual
@@ -51,17 +83,17 @@ function obtenerDiaJuliano(fecha) {
 }
 
 // Función para calcular una fecha de vencimiento sumando días
-function calcularFechaVencimiento(dias) {
-    const fechaHoy = fechaActual();
+function calcularFechaVencimiento(fechaBase, dias) {
     const milisegundosPorDia = 1000 * 60 * 60 * 24; // Milisegundos en un día
-    const fechaVencimiento = new Date(fechaHoy.getTime() + (dias * milisegundosPorDia)); // Sumar días
+    const fechaVencimiento = new Date(fechaBase.getTime() + (dias * milisegundosPorDia)); // Sumar días a la fecha base
     return fechaVencimiento;
 }
 
 // Función para mostrar la hora, el día juliano y la fecha de vencimiento
-function mostrarHoraYDia(maquina) {
+function mostrarHoraYDia(maquina, fechaSeleccionada) {
     const fechaHoy = fechaActual();
-    const diaJuliano = obtenerDiaJuliano(fechaHoy);
+    const diaJulianoHoy = obtenerDiaJuliano(fechaHoy);
+    const diaJulianoSeleccionado = obtenerDiaJuliano(fechaSeleccionada);
 
     // Formato de la hora actual
     const horas = String(fechaHoy.getHours()).padStart(2, '0');
@@ -71,40 +103,34 @@ function mostrarHoraYDia(maquina) {
     // Año simplificado (últimos dos dígitos)
     const añoSimplificado = String(fechaHoy.getFullYear()).slice(-2);
 
-    // Calcular la fecha de vencimiento 540 días después de la fecha actual
-    const fechaVencimiento = calcularFechaVencimiento(540);
+    // Calcular la fecha de vencimiento 540 días después de la fecha seleccionada
+    const fechaVencimiento = calcularFechaVencimiento(fechaSeleccionada, 540);
     const diaVencimiento = String(fechaVencimiento.getDate()).padStart(2, '0');
     const mesVencimiento = fechaVencimiento.toLocaleString('default', { month: 'short' }).toUpperCase();
     const añoVencimiento = String(fechaVencimiento.getFullYear()).slice(-2);
 
     const fechaExpiracion = `${diaVencimiento} ${mesVencimiento} ${añoVencimiento}`;
 
+    // Verificar si la fecha seleccionada es anterior a la actual
+    let diaJulianoFinal;
+    if (fechaSeleccionada < fechaHoy) {
+        diaJulianoFinal = diaJulianoHoy; // Mantener el día juliano actual
+    } else {
+        diaJulianoFinal = diaJulianoSeleccionado; // Actualizar al día juliano de la fecha seleccionada
+    }
+
     // Construir el formato final
-    const formatoFinal = `LOTE : L${diaJuliano} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
+    const formatoFinal = `LOTE : L${diaJulianoFinal} ${maquina} ${añoSimplificado} ${horaFormateada} EXP: ${fechaExpiracion}`;
 
     // Actualizar el contenido del DOM
     document.getElementById("resultado").textContent = formatoFinal;
 }
 
-// Función para actualizar la hora en tiempo real (cada segundo)
-function actualizarHora() {
+// Función para actualizar la hora y mostrar el resultado con la fecha seleccionada
+function actualizarHora(fechaSeleccionada = fechaActual()) {
     const maquina = "03"; // Reemplazar con el valor de tu máquina
-    mostrarHoraYDia(maquina); // Llama a la función para actualizar el DOM
+    mostrarHoraYDia(maquina, fechaSeleccionada); // Llama a la función para actualizar el DOM
 }
-
-// Llamar a actualizarHora cada segundo para mantener la hora y fecha actualizada
-setInterval(actualizarHora, 1000);
-
-// Llamada inicial para mostrar la información al cargar la página
-actualizarHora();
-
-// Llamar a la función para mostrar la hora, el día juliano y el formato personalizado
-mostrarHoraYDia("04"); // Cambia el número de la máquina según corresponda
-
-// Actualizar la hora cada segundo
-setInterval(actualizarHora, 1000);
-
-
 
 // Función para dibujar el gráfico de columnas// Función para dibujar el gráfico de columnas
 // Función para dibujar el gráfico de columnas

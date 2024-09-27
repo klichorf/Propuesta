@@ -719,4 +719,67 @@ label {
     z-index: 1050; /* Asegúrate de que el modal esté por encima de otros elementos */
 }
 
+.datetimepicker {
+    margin-top: 20px;
+}
 
+.datetimepicker input {
+    font-size: 12px; /* Reduce el tamaño de la fuente */
+    padding: 10px; /* Aumenta el padding */
+    height: auto; /* Ajusta la altura */
+    border: 1px solid #6c757d; /* Borde gris */
+    border-radius: 5px; /* Esquinas redondeadas */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+.datetimepicker input:focus {
+    border-color: #007bff; /* Cambia el color del borde al enfocar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
+}
+
+.datetimepicker .td-picker-grid {
+    font-size: 12px; /* Tamaño de fuente más pequeño para el calendario */
+}
+
+.datetimepicker .td-picker td, .datetimepicker .td-picker th {
+    padding: 5px; /* Espaciado entre días */
+    text-align: center; /* Centrar el texto */
+    color: #343a40; /* Color del texto */
+}
+
+.datetimepicker .td-picker td {
+    background-color: #ffffff; /* Fondo blanco para los días */
+    border-radius: 5px; /* Esquinas redondeadas */
+    transition: background-color 0.3s; /* Transición para el fondo */
+}
+
+.datetimepicker .td-picker td:hover {
+    background-color: #007bff; /* Color de fondo al pasar el mouse */
+    color: #ffffff; /* Color del texto al pasar el mouse */
+}
+
+.datetimepicker .form-control {
+    max-width: 150px; /* Ajusta el ancho del input */
+    margin: 0 auto; /* Centra el input */
+}
+
+#resultado {
+    font-size: 14px; /* Ajusta el tamaño de la fuente del resultado */
+    margin-top: 10px; /* Espacio superior */
+    color: #343a40; /* Color del texto */
+    background-color: #e9ecef; /* Fondo gris claro */
+    padding: 10px; /* Padding interno */
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.input-group .btn {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    transition: background-color 0.3s; /* Transición para el fondo */
+}
+
+.input-group .btn:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
