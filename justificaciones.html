@@ -16,19 +16,9 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css"
         crossorigin="anonymous">
-
-
 </head>
 
 <body>
-
-
-
-
-
-
-
-
     <section class="justificaciones">
         <nav class="navbar">
             <div class="logo">
@@ -72,25 +62,9 @@
                 </li>
             </ul>
         </nav>
-
-
-
-
-
-
-
-
-
-
         <p>
         <h4 style="text-align: center; margin-top: 5%;">Eficiencia General del Equipo</h4>
         </p>
-
-
-
-
-
-
         <div class="container" style="display: block;">
             <!-- HTML del DatePicker -->
             <div class="titulos" style="margin-bottom: 10px;"> <!-- Cambié margin-right por margin-bottom -->
@@ -98,44 +72,25 @@
                     <!-- Aquí se muestra el lote -->
                 </span>
             </div>
-        
             <div id="datepicker" class="titulos" data-td-target-input="nearest">
-                <input type="text" class="form-control" data-td-target="#datepicker" style="background-color: rgb(37, 109, 109);color: rgb(5, 4, 14); width: 25%;font-weight: bold;">
+                <input type="text" class="form-control" data-td-target="#datepicker"
+                    style="background-color: rgb(37, 109, 109);color: rgb(5, 4, 14); width: 25%;font-weight: bold;">
             </div>
         </div>
-
         <section class="display">
             <!-- gráfico OEE -->
             <section class="desperdicio" id="columnchart_values">
-
             </section>
-
-
             <!-- gráfico peso -->
-
             <section class="desperdicio" id="scatterchart_values" style="width: 90%; height: 300px; margin-top: 1%; ">
-
-
             </section>
-
-
-
-
-
-
             <!-- Contenedor para el botón de control de la máquina -->
             <div style="text-align: center; margin-top: 5%;">
                 <button id="toggleBtn" class="btn btn-primary" onclick="toggleMachine()">clic</button>
-
             </div>
             <!-- Contenedor del gráfico TIEMPO-->
             <section class="desperdicio" id="timelinechart_div" style="width: 90%; height: 200px; margin-top: 1%;">
             </section>
-
-
-
-
-
         </section>
         <!-- sidebar -->
         <section id="mySidebar" class="sidebar">
@@ -157,8 +112,6 @@
                     <div class="mb-4" id="Duración">
                         <label><strong>Duración: <span></span></strong></label>
                     </div>
-
-
                     <!-- Aquí se mostrará la opción seleccionada -->
                     <div class="mb-4" id="seleccion-alarmas">
                         <label><strong id="seleccion-mensaje">Seleccione una opción:</strong></label>
@@ -211,10 +164,6 @@
                                         <div class="list-group-item text-center empacadora-submenu-item"
                                             data-item="temp-mordaza-superior">Falla impresion</div>
                                     </div>
-
-
-
-
                                 </div>
                                 <div class="list-group-item text-center bg-info text-white"
                                     onclick="toggleDropdown('embolsadora-submenu')">EMBOLSADORA</div>
@@ -251,8 +200,6 @@
                 </div>
             </div>
         </section>
-
-
         <!-- Modal -->
         <div id="justificarModal" class="modal" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -278,7 +225,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal para Tolva 1 -->
         <div id="modal-tolva1" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -301,7 +247,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal para Tolva 2 -->
         <div id="modal-tolva2" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -323,7 +268,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal para Doble Descarga -->
         <div id="modal-doble-descarga" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -345,22 +289,10 @@
                 </div>
             </div>
         </div>
-
         <!-- Aquí puedes agregar más modales personalizados para los otros ítems -->
-
-
-
-
-
-
-
-
-
-
         <!-- Tabla de justificaciones -->
         <section class="justificaciones" style="margin-bottom: 1%; width: 90%;">
             <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de Justificaciones</h4>
-
             <div id="custom-alert" style="display:none; color: red; text-align: center;">
                 <div class="alert alert-danger" role="alert">
                     selecione alguna opcion
@@ -386,8 +318,6 @@
             </div>
         </section>
         <!-- Alerta personalizada (oculta por defecto) -->
-
-
         <section class="justificaciones" style="margin-bottom: 5%; width: 90%;">
             <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de estados de máquina</h4>
             <!-- Contenedor de la tabla -->
@@ -409,17 +339,11 @@
                         <td>100</td>
                         <td>0</td>
                     </tr>
-
                 </table>
             </div>
         </section>
     </section>
-
-
-
-
     </section>
-
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -429,10 +353,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script
@@ -442,9 +364,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js"
         crossorigin="anonymous"></script>
-
-
-
 </body>
 
 </html>
