@@ -26,6 +26,8 @@ function drawCharts() {
     drawTimelineChart();
     drawScatterChart()
 }
+
+// Lote
 document.addEventListener('DOMContentLoaded', function() {
     // Opciones para Tempus Dominus
     const options = {
@@ -100,11 +102,27 @@ function mostrarHoraYDia(maquina, fechaSeleccionada) {
     // Actualizar el contenido del DOM
     document.getElementById("resultado").textContent = formatoFinal;
 }
-// Función para actualizar la hora y mostrar el resultado con la fecha seleccionada
 function actualizarHora(fechaSeleccionada = fechaActual()) {
-    const maquina = "03"; // Reemplazar con el valor de tu máquina
-    mostrarHoraYDia(maquina, fechaSeleccionada); // Llama a la función para actualizar el DOM
+    const fechaHoy = fechaActual();
+    const datePickerInput = document.querySelector('#resultado'); // Seleccionar el contenedor con el ID 'resultado'
+
+    // Ignorar la hora, minutos y segundos al comparar las fechas
+    const soloFechaHoy = new Date(fechaHoy.getFullYear(), fechaHoy.getMonth(), fechaHoy.getDate());
+    const soloFechaSeleccionada = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate());
+
+    // Comparar solo las fechas (sin la hora)
+    if (soloFechaSeleccionada < soloFechaHoy) {
+        datePickerInput.style.backgroundColor = "#580303"; // Fondo rojo para fechas pasadas
+    } else if (soloFechaSeleccionada > soloFechaHoy) {
+        datePickerInput.style.backgroundColor = "#043b12"; // Fondo verde para fechas futuras
+    } else {
+        datePickerInput.style.backgroundColor = "#020f35"; // Fondo por defecto para la fecha actual
+    }
+
+    const maquina = "03";
+    mostrarHoraYDia(maquina, fechaSeleccionada);
 }
+
 // Función para dibujar el gráfico de columnas// Función para dibujar el gráfico de columnas
 // Función para dibujar el gráfico de columnas
 function drawColumnChart() {

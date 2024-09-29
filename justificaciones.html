@@ -6,16 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Recomendaciones</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tempus Dominus CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -63,20 +60,32 @@
             </ul>
         </nav>
         <p>
-        <h4 style="text-align: center; margin-top: 5%;">Eficiencia General del Equipo</h4>
+        <h4 style="text-align: center; margin-top: 5%; color: aliceblue;">Eficiencia General del Equipo</h4>
         </p>
-        <div class="container" style="display: block;">
-            <!-- HTML del DatePicker -->
-            <div class="titulos" style="margin-bottom: 10px;"> <!-- Cambié margin-right por margin-bottom -->
-                <span id="resultado" style="color: rgb(163, 19, 26); font-weight: bold;">
-                    <!-- Aquí se muestra el lote -->
-                </span>
-            </div>
-            <div id="datepicker" class="titulos" data-td-target-input="nearest">
-                <input type="text" class="form-control" data-td-target="#datepicker"
-                    style="background-color: rgb(37, 109, 109);color: rgb(5, 4, 14); width: 25%;font-weight: bold;">
+        <div class="container" style="margin-top: 5%;">
+            <div class="row">
+                <!-- Contenedor del Lote -->
+                <div class="col-md-6 mb-3"> <!-- Se alinean lado a lado en pantallas medianas y más grandes -->
+                    <div class="titulos">
+                        <span id="resultado" style="color: rgb(227, 236, 238); font-weight: bold;">
+                            <!-- Aquí se muestra el lote -->
+                        </span>
+                    </div>
+                </div>
+        
+                <!-- Contenedor del DatePicker -->
+        
+                <div class="col-md-3" style="width: auto;"> <!-- Se coloca debajo en pantallas pequeñas -->
+                    <div class="titulos">
+                        <span id="datepicker" data-td-target-input="nearest">
+                            <input type="text" class="form-control" data-td-target="#datepicker">
+                        </span>
+                    </div>
+
+                </div>
             </div>
         </div>
+        
         <section class="display">
             <!-- gráfico OEE -->
             <section class="desperdicio" id="columnchart_values">
@@ -89,7 +98,7 @@
                 <button id="toggleBtn" class="btn btn-primary" onclick="toggleMachine()">clic</button>
             </div>
             <!-- Contenedor del gráfico TIEMPO-->
-            <section class="desperdicio" id="timelinechart_div" style="width: 90%; height: 200px; margin-top: 1%;">
+            <section class="desperdicio" id="timelinechart_div" style="width: 90%; height: 150px; margin-top: 1%; background-color: rgb(161, 240, 14);">
             </section>
         </section>
         <!-- sidebar -->
@@ -291,7 +300,7 @@
         </div>
         <!-- Aquí puedes agregar más modales personalizados para los otros ítems -->
         <!-- Tabla de justificaciones -->
-        <section class="justificaciones" style="margin-bottom: 1%; width: 90%;">
+        <section class="justificaciones" style="margin-bottom: 1%; width: 90%; background-color: aliceblue;">
             <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de Justificaciones</h4>
             <div id="custom-alert" style="display:none; color: red; text-align: center;">
                 <div class="alert alert-danger" role="alert">
@@ -318,7 +327,7 @@
             </div>
         </section>
         <!-- Alerta personalizada (oculta por defecto) -->
-        <section class="justificaciones" style="margin-bottom: 5%; width: 90%;">
+        <section class="justificaciones" style="margin-bottom: 5%; width: 90%; background-color: aliceblue;">
             <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de estados de máquina</h4>
             <!-- Contenedor de la tabla -->
             <div class="table-container">

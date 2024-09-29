@@ -70,7 +70,7 @@
 .justificaciones {
     display: flex;
     flex-direction: column;
-    background-color: #f2f3f7;
+    background-color: #151524;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 123, 255, 0.5);
     width: 95%;
@@ -280,7 +280,7 @@ label {
 .opcion-seleccionada {
     background-color: #ccffcc; /* Verde claro */
     font-weight: bold; /* Opcional: para resaltar el texto */
-    color: #20c3c9;
+    color: #050808;
 }
 .modal {
     z-index: 1050; /* Asegúrate de que el modal esté por encima de otros elementos */
@@ -288,7 +288,7 @@ label {
 #resultado {
     font-size: 14px;
     margin-top: 10px;
-    background-color: #8596ca;
+    background-color: #020f35;
     padding: 10px;
     border-radius: 13px;
     -webkit-border-radius: 13px;
