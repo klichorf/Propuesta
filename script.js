@@ -27,35 +27,52 @@ function drawCharts() {
     drawScatterChart()
 }
 
+
+
 // Lote
 document.addEventListener('DOMContentLoaded', function() {
+
+
+ 
     // Opciones para Tempus Dominus
+
     const options = {
         display: {
             components: {
-                decades: false,
-                year: true,
-                month: true,
-                date: true,
-                hours: false,
-                minutes: false,
-                seconds: false
-            }
+                clock: false, // Desactivar completamente el reloj para que no muestre la hora
+                calendar: true // Asegurar que el calendario siga activo
+            },
+
         },
+ 
+        
         defaultDate: new Date(),
         useCurrent: false, // Para que no seleccione automáticamente la fecha actual al iniciar
     };
     // Inicializar Tempus Dominus DatePicker
     const datePickerElement = document.getElementById('datepicker');
     const datePickerInstance = new tempusDominus.TempusDominus(datePickerElement, options);
+
     // Evento para actualizar la hora cuando se selecciona una fecha
     datePickerElement.addEventListener('change.td', function(event) {
         const selectedDate = event.detail.date;
         actualizarHora(selectedDate); // Llamar a la función con la fecha seleccionada
     });
+
+
+            // Flip al hacer clic
+            document.querySelector('.card-flip').addEventListener('click', function () {
+                document.querySelector('.flip-card-inner').classList.toggle('flipped');
+            });
     // Llamada inicial para mostrar la información al cargar la página con la fecha actual
     actualizarHora();
+
+    
 });
+
+
+
+
 // Función para obtener la fecha actual
 function fechaActual() {
     return new Date(); // Devolver la fecha actual
@@ -112,16 +129,20 @@ function actualizarHora(fechaSeleccionada = fechaActual()) {
 
     // Comparar solo las fechas (sin la hora)
     if (soloFechaSeleccionada < soloFechaHoy) {
-        datePickerInput.style.backgroundColor = "#580303"; // Fondo rojo para fechas pasadas
+        datePickerInput.style.backgroundColor = "#df0885"; // Fondo rojo para fechas pasadas
+        datePickerInput.style.color = "white"; // Letra blanca para mayor contraste con fondo rojo
     } else if (soloFechaSeleccionada > soloFechaHoy) {
-        datePickerInput.style.backgroundColor = "#043b12"; // Fondo verde para fechas futuras
+        datePickerInput.style.backgroundColor = "#09ff1d"; // Fondo verde para fechas futuras
+        datePickerInput.style.color = "black"; // Letra negra para mayor contraste con fondo verde
     } else {
         datePickerInput.style.backgroundColor = "#020f35"; // Fondo por defecto para la fecha actual
+        datePickerInput.style.color = "white"; // Letra blanca para mayor contraste con fondo azul oscuro
     }
 
     const maquina = "03";
     mostrarHoraYDia(maquina, fechaSeleccionada);
 }
+
 
 // Función para dibujar el gráfico de columnas// Función para dibujar el gráfico de columnas
 // Función para dibujar el gráfico de columnas

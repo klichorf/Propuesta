@@ -70,7 +70,7 @@
 .justificaciones {
     display: flex;
     flex-direction: column;
-    background-color: #151524;
+    background-color: #eaeaec;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 123, 255, 0.5);
     width: 95%;
@@ -295,4 +295,69 @@ label {
     -moz-border-radius: 13px;
     -ms-border-radius: 13px;
     -o-border-radius: 13px;
+}
+
+.card-flip {
+    perspective: 1000px; /* Permite el 3D */
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden; /* Ocultar la cara posterior cuando no está visible */
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+/* Efecto de vidrio */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    border-radius: 15px;
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde de "vidrio" */
+}
+
+.card-title {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Agrega sombra a los títulos */
+}
+
+.card-body {
+    color: #fff;
+}
+
+#datepicker {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 10px; /* Espaciado interno */
+    border: 2px solid #4a90e2; /* Borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+#datepicker:focus {
+    border-color: #007bff; /* Color del borde al hacer foco */
+    outline: none; /* Elimina el contorno predeterminado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al hacer foco */
+}
+
+#datepicker::placeholder {
+    color: #999; /* Color del texto del placeholder */
+    font-style: italic; /* Estilo en cursiva para el placeholder */
 }
