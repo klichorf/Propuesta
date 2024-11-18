@@ -1,0 +1,42 @@
+/* Efecto de vidrio */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    border-radius: 15px;
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde de "vidrio" */
+}
+
+.card-title {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Agrega sombra a los títulos */
+}
+
+#datepicker {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 10px; /* Espaciado interno */
+    border: 2px solid #4a90e2; /* Borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+.card-body {
+    display: flex; /* Flexbox para centrar verticalmente */
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center; /* Centrar verticalmente */
+    height: 100%; /* Asegurar que el contenedor llene el espacio */
+}
+
+
+#datepicker:focus {
+    border-color: #007bff; /* Color del borde al hacer foco */
+    outline: none; /* Elimina el contorno predeterminado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al hacer foco */
+}
+
+#datepicker::placeholder {
+    color: #999; /* Color del texto del placeholder */
+    font-style: italic; /* Estilo en cursiva para el placeholder */
+}
