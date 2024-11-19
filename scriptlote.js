@@ -3,13 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const options = {
         display: {
             inline: true, // Muestra el calendario directamente
-            components: {
-                clock: false, // Desactiva el reloj
-                calendar: true // Activa el calendario
-            },
+            icons: {
+                previous: 'fa-solid fa-chevron-left',
+                next: 'fa-solid fa-chevron-right',
+            }
+       
+           
         },
         defaultDate: new Date(), // Configura la fecha predeterminada como la actual
-        useCurrent: false, // No selecciona automáticamente la fecha actual
+       
     };
 
     // Inicializar Tempus Dominus directamente en el contenedor

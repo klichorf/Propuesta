@@ -1,42 +1,54 @@
-/* Efecto de vidrio */
+
+
+.container {
+    max-width: 100%; /* Ocupa todo el ancho posible */
+    padding: 20px;
+}
+
+.card {
+    width: 100%; /* Ocupa el ancho del contenedor */
+    max-width: 500px; /* Máximo ancho para mantener el diseño limpio */
+    margin: 10px auto; /* Centrado automático con espaciado */
+}
 .glass-effect {
-    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    background: linear-gradient(135deg, 
+                #eed877 0%, /* Color inicial */
+                #dfe6b7 50%, /* Color intermedio */
+                #9cbd50 100%); /* Color final */
     border-radius: 15px;
     backdrop-filter: blur(10px); /* Efecto de desenfoque */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde de "vidrio" */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    border: 1px solid rgba(67, 90, 61, 0.3); /* Borde de "vidrio" */
+    transition: background 1s ease-in-out; /* Transición suave */
 }
-
 .card-title {
     color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Agrega sombra a los títulos */
+    text-align: center; /* Centra el texto */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para realce */
 }
-
 #datepicker {
     width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 400px; /* Establece un ancho máximo para dispositivos grandes */
+    margin: 0 auto; /* Centra horizontalmente */
     padding: 10px; /* Espaciado interno */
-    border: 2px solid #4a90e2; /* Borde azul */
+    border: 2px solid #a81212; /* Borde azul */
     border-radius: 10px; /* Bordes redondeados */
     font-size: 16px; /* Tamaño de fuente */
     transition: border-color 0.3s; /* Transición suave para el borde */
+    display: flex; /* Asegura compatibilidad con otros elementos dentro del calendario */
+    justify-content: center; /* Centra contenido interno horizontalmente */
+    align-items: center; /* Centra contenido interno verticalmente */
 }
+
 
 .card-body {
     display: flex; /* Flexbox para centrar verticalmente */
     flex-direction: column;
     align-items: center; /* Centrar horizontalmente */
     justify-content: center; /* Centrar verticalmente */
-    height: 100%; /* Asegurar que el contenedor llene el espacio */
 }
 
-
-#datepicker:focus {
-    border-color: #007bff; /* Color del borde al hacer foco */
-    outline: none; /* Elimina el contorno predeterminado */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al hacer foco */
-}
-
-#datepicker::placeholder {
-    color: #999; /* Color del texto del placeholder */
-    font-style: italic; /* Estilo en cursiva para el placeholder */
+#resultado {
+    color: #e3ecee; /* Color más claro para contraste */
+    font-weight: bold;
 }
