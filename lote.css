@@ -12,9 +12,9 @@
 }
 .glass-effect {
     background: linear-gradient(135deg, 
-                #eed877 0%, /* Color inicial */
-                #dfe6b7 50%, /* Color intermedio */
-                #9cbd50 100%); /* Color final */
+                #12086b 0%, /* Color inicial */
+                #07268d 50%, /* Color intermedio */
+                #1216e2 100%); /* Color final */
     border-radius: 15px;
     backdrop-filter: blur(10px); /* Efecto de desenfoque */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
