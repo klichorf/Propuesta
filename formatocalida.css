@@ -1,0 +1,49 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #barcodeInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #productDisplay {
+    margin-top: 20px;
+  }
+  
+  #productName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+
+  #productImage {
+    max-width: 300px; /* Ancho máximo de 300px */
+    max-height: 300px; /* Alto máximo de 300px */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+    object-fit: cover; /* Ajusta la imagen al contenedor sin deformarla */
+    margin: 0 auto; /* Centra la imagen */
+  }
+  

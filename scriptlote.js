@@ -115,5 +115,76 @@ function toggleSubmenu() {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const yeminaStatus = document.getElementById('yeminaStatus');
+    const additionalInfo = document.getElementById('additionalInfo');
+    const datePickerElement = document.getElementById('datepicker');
 
+    // Evento para manejar cambios de fecha desde el calendario
+    datePickerElement.addEventListener('change.td', function (event) {
+        const selectedDate = event.detail.date || new Date(); // Actualizar fecha seleccionada
+        actualizarEstado(selectedDate); // Actualizar el estado automáticamente
+    });
 
+    function actualizarEstado(fechaEmpaque) {
+        const fechaVencimiento = calcularFechaVencimiento(fechaEmpaque);
+        const numeroSemana = obtenerNumeroSemana(fechaEmpaque);
+        // Actualizar fecha de empaque y vencimiento
+        yeminaStatus.innerHTML = `${formatearFecha(fechaEmpaque)} - Vence: ${formatearFecha(fechaVencimiento)}<br>Semana: ${numeroSemana}`;
+        // Actualizar información adicional
+        const mesVencimiento = obtenerNombreMesCorto(fechaVencimiento);
+        const añoVencimiento = fechaVencimiento.getFullYear();
+        const codigoLDR = `LDR ${obtenerUltimoDigitoAño(fechaEmpaque)} ${obtenerDiaJuliano(fechaEmpaque)}`;
+        const horaActual = obtenerHoraActual();
+        const maquina = "L3"; // Identificación de la máquina
+
+     
+
+        // Actualizar contenido adicional con la semana
+        additionalInfo.innerHTML = `${mesVencimiento} ${añoVencimiento}<br>${codigoLDR}<br>${horaActual} ${maquina}`;
+    }
+
+    function calcularFechaVencimiento(fechaBase) {
+        const fechaVencimiento = new Date(fechaBase);
+        fechaVencimiento.setFullYear(fechaVencimiento.getFullYear() + 2); // Sumar 2 años
+        fechaVencimiento.setMonth(fechaVencimiento.getMonth() + 8); // Sumar 8 meses
+        return fechaVencimiento;
+    }
+
+    function formatearFecha(fecha) {
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Meses comienzan en 0
+        const año = fecha.getFullYear();
+        return `${dia}/${mes}/${año}`;
+    }
+
+    function obtenerNombreMesCorto(fecha) {
+        const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+        return meses[fecha.getMonth()];
+    }
+
+    function obtenerUltimoDigitoAño(fecha) {
+        return String(fecha.getFullYear()).slice(-1);
+    }
+
+    function obtenerDiaJuliano(fecha) {
+        const inicioAño = new Date(fecha.getFullYear(), 0, 0); // Primer día del año de la fecha seleccionada
+        const diferencia = fecha - inicioAño;
+        const unDia = 1000 * 60 * 60 * 24; // Milisegundos en un día
+        return Math.floor(diferencia / unDia);
+    }
+
+    function obtenerHoraActual() {
+        const ahora = new Date();
+        const horas = String(ahora.getHours()).padStart(2, '0');
+        const minutos = String(ahora.getMinutes()).padStart(2, '0');
+        return `${horas}:${minutos}`;
+    }
+
+    // Función para obtener el número de semana
+    function obtenerNumeroSemana(fecha) {
+        const primerDiaAnio = new Date(fecha.getFullYear(), 0, 1);
+        const diasTranscurridos = Math.floor((fecha - primerDiaAnio) / (1000 * 60 * 60 * 24));
+        return Math.ceil((diasTranscurridos + 1) / 7);
+    }
+});

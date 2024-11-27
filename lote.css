@@ -52,3 +52,9 @@
     color: #e3ecee; /* Color más claro para contraste */
     font-weight: bold;
 }
+
+
+.black-background {
+    background: rgb(1, 12, 54);
+    border-radius: 15px;
+}
