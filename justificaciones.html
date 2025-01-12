@@ -2,13 +2,14 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Recomendaciones</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="modal.css">
 </head>
 
 <body>
@@ -16,10 +17,11 @@
         <nav class="navbar">
             <div class="logo">
                 <lord-icon src="https://cdn.lordicon.com/cwhyhhho.json" trigger="hover"
-                    style="width:70px;height:70px"></lord-icon>
+                    style="width: 70px; height: 70px"></lord-icon>
             </div>
             <div class="hamburger" onclick="toggleMenu()">
-                &#9776; <!-- Icono de hamburguesa -->
+                &#9776;
+                <!-- Icono de hamburguesa -->
             </div>
             <ul class="nav-links" id="navLinks">
                 <li>
@@ -27,18 +29,18 @@
                         <span class="icon"><lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph"
                                 state="morph-open"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
-                                style="width:25px;height:25px"></lord-icon></span>
-                                dibujo cuello
+                                style="width: 25px; height: 25px"></lord-icon></span>
+                        dibujo cuello
                     </a>
                 </li>
-                <li>
+                <li></li>
 
                 <li>
                     <a href="calculadora.html">
                         <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
-                                style="width:25px;height:25px"></lord-icon></span>
-                       Calculadora juliana
+                                style="width: 25px; height: 25px"></lord-icon></span>
+                        Calculadora juliana
                     </a>
                 </li>
                 <li>
@@ -48,21 +50,25 @@
                 </li>
             </ul>
         </nav>
-       <section class="display">
+        <section class="display">
             <!-- gráfico OEE -->
-            <section class="desperdicio" id="columnchart_values">
-            </section>
+            <section class="desperdicio" id="columnchart_values"></section>
             <!-- gráfico peso -->
-            <section class="desperdicio" id="scatterchart_values" style="width: 90%; height: 300px; margin-top: 1%; ">
+            <section class="desperdicio" id="scatterchart_values" style="width: 90%; height: 300px; margin-top: 1%">
             </section>
             <!-- Contenedor para el botón de control de la máquina -->
-            <div style="text-align: center; margin-top: 5%;">
-                <button id="toggleBtn" class="btn btn-primary" onclick="toggleMachine()">clic</button>
+            <div style="text-align: center; margin-top: 5%">
+                <button id="toggleBtn" class="btn btn-primary" onclick="toggleMachine()">
+                    clic
+                </button>
             </div>
             <!-- Contenedor del gráfico TIEMPO-->
-            <section class="desperdicio" id="timelinechart_div"
-                style="width: 90%; height: 150px; margin-top: 1%; background-color: rgb(103, 136, 158);">
-            </section>
+            <section class="desperdicio" id="timelinechart_div" style="
+            width: 90%;
+            height: 150px;
+            margin-top: 1%;
+            background-color: rgb(103, 136, 158);
+          "></section>
         </section>
         <!-- sidebar -->
         <section id="mySidebar" class="sidebar">
@@ -70,10 +76,9 @@
             <div class="container-fluid">
                 <div class="tab-menu mb-4">
                     <div id="tab-justificar" class="tab">
-                        <H2>Justificar</H2>
+                        <h2>Justificar</h2>
                     </div>
-                    <div id="tab-dividir" class="tab">Dividir
-                        estado</div>
+                    <div id="tab-dividir" class="tab">Dividir estado</div>
                 </div>
                 <div id="folder-justificar" class="folder-content">
                     <div class="mb-4">
@@ -87,21 +92,26 @@
                     <!-- Aquí se mostrará la opción seleccionada -->
                     <div class="mb-4" id="seleccion-alarmas">
                         <label><strong id="seleccion-mensaje">Seleccione una opción:</strong></label>
-                        <p id="seleccion-alarma-texto" style="color: aquamarine;">Ninguna opción seleccionada</p>
+                        <p id="seleccion-alarma-texto" style="color: aquamarine">
+                            Ninguna opción seleccionada
+                        </p>
                         <!-- Aquí se actualizará el texto -->
                     </div>
                     <div class="d-flex justify-content-center mb-4">
-                        <button id="btn-justificar-1" class="btn btn-primary m-2" disabled>Justificar</button>
-                        <button class="btn btn-secondary m-2"
-                            onclick=" closeSidebar();limpiarSeleccion()">Cancelar</button>
+                        <button id="btn-justificar-1" class="btn btn-primary m-2" disabled>
+                            Justificar
+                        </button>
+                        <button class="btn btn-secondary m-2" onclick=" closeSidebar();limpiarSeleccion()">
+                            Cancelar
+                        </button>
                     </div>
                     <div>
                         <label>Maquina 3</label>
-                        <div class="list-group-item-primary" style="border-radius: 15px;">
-                            <div class="list-group-item text-center">NO
-                                PROGRAMACIÓN</div>
-                            <div class="list-group-item text-center">PERDIDAS
-                                PROGRAMADAS</div>
+                        <div class="list-group-item-primary" style="border-radius: 15px">
+                            <div class="list-group-item text-center">NO PROGRAMACIÓN</div>
+                            <div class="list-group-item text-center">
+                                PERDIDAS PROGRAMADAS
+                            </div>
                             <!-- Item con submenú desplegable -->
                             <div class="list-group-item text-center d-flex justify-content-center align--center"
                                 id="ajustes-item" onclick="toggleSubmenu()">
@@ -109,64 +119,87 @@
                                 <i class="fas fa-bars"></i>
                                 <!-- Ícono de menú desplegable -->
                             </div>
-                            <div id="ajustes-submenu" class="submenu list-group" style="display: none;">
+                            <div id="ajustes-submenu" class="submenu list-group" style="display: none">
                                 <div class="list-group-item text-center bg-dark text-white"
-                                    onclick="toggleDropdown('empacadora-submenu')">EMPACADORA</div>
-                                <div id="empacadora-submenu" class="submenu list-group ">
+                                    onclick="toggleDropdown('empacadora-submenu')">
+                                    EMPACADORA
+                                </div>
+                                <div id="empacadora-submenu" class="submenu list-group">
                                     <div class="list-group-item text-center empacadora-submenu-item bg-primary"
-                                        onclick="toggleDropdown('alarmas-submenu')">ALARMAS <i
-                                            class="fa-solid fa-ellipsis"></i></div>
+                                        onclick="toggleDropdown('alarmas-submenu')">
+                                        ALARMAS <i class="fa-solid fa-ellipsis"></i>
+                                    </div>
                                     <div id="alarmas-submenu" class="submenu list-group">
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="tolva1">Tolva 1</div>
+                                            data-item="tolva1">
+                                            Tolva 1
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="tolva2">Tolva 2</div>
+                                            data-item="tolva2">
+                                            Tolva 2
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="doble-descarga">Doble descarga</div>
+                                            data-item="doble-descarga">
+                                            Doble descarga
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="macula-encontrada">Macula encontrada</div>
+                                            data-item="macula-encontrada">
+                                            Macula no encontrada
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="roctura-cuello">Roctura en el cuello</div>
+                                            data-item="roctura-cuello">
+                                            Roctura en el cuello
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="overflow-mordaza">Overflow Mordaza</div>
+                                            data-item="overflow-mordaza">
+                                            Overflow Mordaza
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="temp-mordaza-inferior">Temperaturas mordaza</div>
+                                            data-item="temp-mordaza-inferior">
+                                            Temperaturas mordaza
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="temp-mordaza-superior">Temperarutas cilindros</div>
+                                            data-item="temp-mordaza-superior">
+                                            Temperarutas cilindros
+                                        </div>
                                         <div class="list-group-item text-center empacadora-submenu-item"
-                                            data-item="temp-mordaza-superior">Falla impresion</div>
+                                            data-item="falla-impresion">
+                                            Falla impresión
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="list-group-item text-center bg-info text-white"
-                                    onclick="toggleDropdown('embolsadora-submenu')">EMBOLSADORA</div>
-                                <div id="embolsadora-submenu" class="submenu list-group " style="display: none;">
-                                    <div class="list-group-item text-center">
-                                        CALIDAD</div>
-                                    <div class="list-group-item text-center">
-                                        MECANICOS</div>
-                                    <div class="list-group-item text-center">
-                                        INSUMOS</div>
+                                    onclick="toggleDropdown('embolsadora-submenu')">
+                                    EMBOLSADORA
+                                </div>
+                                <div id="embolsadora-submenu" class="submenu list-group" style="display: none">
+                                    <div class="list-group-item text-center">CALIDAD</div>
+                                    <div class="list-group-item text-center">MECANICOS</div>
+                                    <div class="list-group-item text-center">INSUMOS</div>
                                 </div>
                                 <div class="list-group-item text-center bg-secondary text-white"
-                                    onclick="toggleDropdown('etiquetadora-submenu')">ETIQUETADORA</div>
-                                <div id="etiquetadora-submenu" class="submenu list-group" style="display: none;">
-                                    <div class="list-group-item text-center">
-                                        CALIDAD</div>
-                                    <div class="list-group-item text-center">
-                                        INSUMOS</div>
+                                    onclick="toggleDropdown('etiquetadora-submenu')">
+                                    ETIQUETADORA
+                                </div>
+                                <div id="etiquetadora-submenu" class="submenu list-group" style="display: none">
+                                    <div class="list-group-item text-center">CALIDAD</div>
+                                    <div class="list-group-item text-center">INSUMOS</div>
                                 </div>
                             </div>
-                            <div class="list-group-item text-center">AJUSTES
-                                DE CALIDAD</div>
+                            <div class="list-group-item text-center">
+                                AJUSTES DE CALIDAD
+                            </div>
                             <div class="list-group-item text-center">ARRANQUES</div>
                             <div class="list-group-item text-center">ALISTAMIENTOS</div>
                             <div class="list-group-item text-center">AVERIAS</div>
                             <div class="list-group-item text-center">GERENCIAMIENTOS</div>
-                            <div class="list-group-item text-center">ORGANIZACIÓN
-                                DE LÍNEA</div>
+                            <div class="list-group-item text-center">
+                                ORGANIZACIÓN DE LÍNEA
+                            </div>
                             <div class="list-group-item text-center">SERVICIOS</div>
-                            <div class="list-group-item text-center">TIEMPO
-                                VALOR AGREGADO</div>
+                            <div class="list-group-item text-center">
+                                TIEMPO VALOR AGREGADO
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,44 +210,67 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"></h5>
+                        <h5 class="modal-title" ></h5>
+                        <!-- Título dinámico -->
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Seleccione una posible causa</p>
-                        <section>
-                            <div class="list-group-item text-center empacadora-submenu-item">CALIDAD</div>
-                            <div class="list-group-item text-center empacadora-submenu-item">MECANICA</div>
-                            <div class="list-group-item text-center empacadora-submenu-item">INSUMOS</div>
-                        </section>
+                        <strong><p id="mensajeSeleccion"> Seleccione una posible causa</p></strong>
+                        <!-- Mensaje inicial -->
                     </div>
+                    <section>
+                        <!-- Ítems de fallas -->
+                        <div class="list-group-item text-center empacadora-submenu-item-1" data-falla="tolva1"
+                            data-categoria="Calidad">
+                            CALIDAD
+                        </div>
+                        <div class="list-group-item text-center empacadora-submenu-item-1" data-falla="tolva1"
+                            data-categoria="Mecanica">
+                            MECÁNICA
+                        </div>
+                        <div class="list-group-item text-center empacadora-submenu-item-1" data-falla="tolva1"
+                            data-categoria="Insumos">
+                            INSUMOS
+                        </div>
+                    </section>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="confirmarJustificar">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary" id="confirmarJustificar">
+                            Confirmar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Modal para Tolva 1 -->
         <div id="modal-tolva1" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Tolva 1</h5>
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194)">
+                            Tolva 1
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <img src="https://th.bing.com/th/id/OIP.6mHyDOgq03W0Aj_s7y35mwHaHa?rs=1&pid=ImgDetMain"
-                            class="card-img-top" alt="Tolva 1">
-                        <p class="card-text" style="color: black;">Obstrucción en la Tolva: Puede haber pasta acumulada
-                            o un objeto extraño que bloquea el flujo de pasta.</p>
+                            class="card-img-top" alt="Tolva 1" />
+                        <p class="card-text" style="color: black">
+                            Obstrucción en la Tolva: Puede haber pasta acumulada o un objeto
+                            extraño que bloquea el flujo de pasta.
+                        </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">
+                            Cerrar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -224,18 +280,24 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Tolva 2</h5>
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194)">
+                            Tolva 2
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="" class="card-img-top" alt="Tolva 2">
-                        <p class="card-text" style="color: black;">Obstrucción en la Tolva: Puede haber pasta acumulada
-                            o un objeto extraño que bloquea el flujo de pasta.</p>
+                        <img src="" class="card-img-top" alt="Tolva 2" />
+                        <p class="card-text" style="color: black">
+                            Obstrucción en la Tolva: Puede haber pasta acumulada o un objeto
+                            extraño que bloquea el flujo de pasta.
+                        </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">
+                            Cerrar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -245,34 +307,43 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" style="color: rgb(55, 162, 194);">Doble Descarga</h5>
+                        <h5 class="modal-title" style="color: rgb(55, 162, 194)">
+                            Doble Descarga
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="" class="card-img-top" alt="Doble Descarga">
-                        <p class="card-text" style="color: black;">Se ha producido una descarga adicional o inesperada
-                            en el canal alimentador.</p>
+                        <img src="" class="card-img-top" alt="Doble Descarga" />
+                        <p class="card-text" style="color: black">
+                            Se ha producido una descarga adicional o inesperada en el canal
+                            alimentador.
+                        </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">
+                            Cerrar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Aquí puedes agregar más modales personalizados para los otros ítems -->
         <!-- Tabla de justificaciones -->
-        <section class="justificaciones" style="margin-bottom: 1%; width: 90%; background-color: aliceblue;">
-            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de Justificaciones</h4>
-            <div id="custom-alert" style="display:none; color: red; text-align: center;">
+        <section class="justificaciones" style="margin-bottom: 1%; width: 90%; background-color: aliceblue">
+            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%">
+                Tabla de Justificaciones
+            </h4>
+            <div id="custom-alert" style="display: none; color: red; text-align: center">
                 <div class="alert alert-danger" role="alert">
                     selecione alguna opcion
                 </div>
             </div>
-            <div style="text-align: center;">
-                <button id="justificar-btn" type="button" class="btn btn-primary"
-                    onclick="openSidebar()">Justificar</button>
+            <div style="text-align: center">
+                <button id="justificar-btn" type="button" class="btn btn-primary" onclick="openSidebar()">
+                    Justificar
+                </button>
             </div>
             <!-- Contenedor de la tabla -->
             <div class="table-container">
@@ -285,13 +356,16 @@
                             <th>DURACIÓN</th>
                         </tr>
                     </thead>
-                    <tbody></tbody> <!-- Aqui se almacenan las nuevas filas -->
+                    <tbody></tbody>
+                    <!-- Aqui se almacenan las nuevas filas -->
                 </table>
             </div>
         </section>
         <!-- Alerta personalizada (oculta por defecto) -->
-        <section class="justificaciones" style="margin-bottom: 5%; width: 90%; background-color: aliceblue;">
-            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%;">Tabla de estados de máquina</h4>
+        <section class="justificaciones" style="margin-bottom: 5%; width: 90%; background-color: aliceblue">
+            <h4 style="text-align: center; margin-bottom: 2%; margin-top: 1%">
+                Tabla de estados de máquina
+            </h4>
             <!-- Contenedor de la tabla -->
             <div class="table-container">
                 <table style="font-size: 1em" class="table table-hover">
@@ -324,6 +398,24 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="scriptgraficoOEE.js"></script>
+    <script src="scriptgraficoPeso.js"></script>
+    <script src="scriptGraficoSimulacionParadas.js"></script>
+    <script src="scriptNavbar.js"></script>
+    <script src="scriptBotonParoMarcha.js"></script>
+    <script src="scritpSideBar.js"></script>
+    <script src="scriptSimulacionParadas.js"></script>
+    <script src="scriptTablaJustificaciones.js"></script>
+    <script src="scriptBotonTablaJustificaciones.js"></script>
+    <script src="scritpCalculoTotalDurationTablaJustificaciones.js"></script>
+    <script src="scriptMostrarModalPosibleCausa.js"></script>
+    <script src="scriptMostrarModalalarmas-submenu.js"></script>
+    <script src="scritpBotonOpcionSelecionada.js"></script>
+    <script src="scriptMostrarAlarmaSeleccionada.js"></script>
+    <script src="scritpBotonCancelarOpcionSelecionada.js"></script>
+    <script src="scriptCancelarOpcionSeleccionada.js"></script>
+    <script src="scritpSelecionPosibleCausa.js"></script>
+
 </body>
 
 </html>
