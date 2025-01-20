@@ -30,9 +30,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-btn">
                             <span class="icon">
-                                <lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph" state="morph-open"
-                                           colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
-                                           style="width: 25px; height: 25px"></lord-icon>
+                                <lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph"
+                                    state="morph-open"
+                                    colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
+                                    style="width: 25px; height: 25px"></lord-icon>
                             </span>
                             Biblioteca de Piezas
                         </a>
@@ -45,7 +46,7 @@
 
                     </li>
                 </ul>
-             
+
 
                 <li>
                     <a href="calculadora.html">
@@ -82,8 +83,8 @@
 
         </nav>
 
-       
-       
+
+
         <section class="display">
             <!-- gráfico OEE -->
             <section class="desperdicio" id="columnchart_values"></section>
@@ -142,14 +143,11 @@
                     <div>
                         <label>Maquina 3</label>
                         <div class="list-group-item-primary" style="border-radius: 15px">
-                            <div class="list-group-item text-center">NO PROGRAMACIÓN</div>
-                            <div class="list-group-item text-center">
-                                PERDIDAS PROGRAMADAS
-                            </div>
+
                             <!-- Item con submenú desplegable -->
                             <div class="list-group-item text-center d-flex justify-content-center align--center"
                                 id="ajustes-item" onclick="toggleSubmenu()">
-                                <span>AJUSTES</span>
+                                <span>PROPUESTA</span>
                                 <i class="fas fa-bars"></i>
                                 <!-- Ícono de menú desplegable -->
                             </div>
@@ -220,20 +218,7 @@
                                     <div class="list-group-item text-center">INSUMOS</div>
                                 </div>
                             </div>
-                            <div class="list-group-item text-center">
-                                AJUSTES DE CALIDAD
-                            </div>
-                            <div class="list-group-item text-center">ARRANQUES</div>
-                            <div class="list-group-item text-center">ALISTAMIENTOS</div>
-                            <div class="list-group-item text-center">AVERIAS</div>
-                            <div class="list-group-item text-center">GERENCIAMIENTOS</div>
-                            <div class="list-group-item text-center">
-                                ORGANIZACIÓN DE LÍNEA
-                            </div>
-                            <div class="list-group-item text-center">SERVICIOS</div>
-                            <div class="list-group-item text-center">
-                                TIEMPO VALOR AGREGADO
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -244,14 +229,16 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" ></h5>
+                        <h5 class="modal-title"></h5>
                         <!-- Título dinámico -->
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <strong><p id="mensajeSeleccion"> Seleccione una posible causa</p></strong>
+                        <strong>
+                            <p id="mensajeSeleccion"> Seleccione una posible causa</p>
+                        </strong>
                         <!-- Mensaje inicial -->
                     </div>
                     <section>
@@ -267,6 +254,10 @@
                         <div class="list-group-item text-center empacadora-submenu-item-1" data-falla="tolva1"
                             data-categoria="Insumos">
                             INSUMOS
+                        </div>
+                        <div class="list-group-item text-center empacadora-submenu-item-1" data-falla="tolva1"
+                            data-categoria="Insumos">
+                            PARAMETROS
                         </div>
                     </section>
                     <div class="modal-footer">
