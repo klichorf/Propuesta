@@ -1,49 +1,142 @@
-/* styles.css */
+/* General */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f4f4f9;
-  }
-  
-  .container {
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  #barcodeInput {
-    width: 80%;
-    padding: 10px;
-    font-size: 16px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  #productDisplay {
-    margin-top: 20px;
-  }
-  
-  #productName {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f4f4f9;
+  flex-direction: column; /* Para que los elementos se apilen verticalmente */
+}
 
-  #productImage {
-    max-width: 300px; /* Ancho máximo de 300px */
-    max-height: 300px; /* Alto máximo de 300px */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: none;
-    object-fit: cover; /* Ajusta la imagen al contenedor sin deformarla */
-    margin: 0 auto; /* Centra la imagen */
+/* Contenedor principal */
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Ajuste para que no se sobrepase del contenedor */
+  max-width: 800px; /* Máximo ancho para que no se estire mucho en pantallas grandes */
+  margin-top: 10%; /* Espacio entre el contenedor y el navbar */
+}
+
+/* Estilos del input del código de barras */
+#barcodeInput {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Mostrar detalles del producto */
+#productDisplay {
+  margin-top: 20px;
+}
+
+#productName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#productImage {
+  max-width: 500px;
+  max-height: 600px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: none;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Navbar */
+.pasta {
+  margin-bottom: 5%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: rgb(187, 180, 180);
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.icon-right {
+  margin-left: 5px;
+}
+
+/* Responsividad para el navbar */
+@media (max-width: 768px) {
+  .hamburger {
+      display: block;
   }
-  
+
+  .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      background-color: #333;
+      position: absolute;
+      top: 70px;
+      right: 0;
+      width: 100%;
+      display: none;
+      z-index: 1;
+  }
+
+  .nav-links li {
+      display: block;
+      text-align: center;
+      padding: 10px 0;
+  }
+
+  .nav-links.show {
+      display: flex;
+  }
+}

@@ -17,11 +17,11 @@ const products = {
   },
   "7702085012482": {
     name: "Pasta Doria Tornillo 250 G",
-    image: "https://via.placeholder.com/200x200.png?text=Tornillo+Doria+250G",
+    image: "https://jumbocolombiaio.vtexassets.com/arquivos/ids/186175-1600-1600/7702085012482.jpg",	
   },
   "7702085243022": {
     name: "Pasta Monticello Espagueti 500 G",
-    image: "https://via.placeholder.com/200x200.png?text=Monticello+Espagueti+500G",
+    image: "https://jumbocolombiaio.vtexassets.com/arquivos/ids/186134-1600-1600/7702085243022.jpg",
   },
   "7702085243480": {
     name: "Pasta Monticello Fusilli 500 G",
@@ -29,7 +29,7 @@ const products = {
   },
   "7702085021149": {
     name: "Pasta Monticello Penne Rigate 500 G",
-    image: "https://via.placeholder.com/200x200.png?text=Monticello+Penne+Rigate+500G",
+    image: "https://jumbocolombiaio.vtexassets.com/arquivos/ids/184699-1600-1600.jpg",
   },
 
   "7702085003428": {
@@ -38,7 +38,7 @@ const products = {
   },
   "7702085013069": {
     name: "Pasta Doria Fideo 500 G",
-    image: "https://via.placeholder.com/200x200.png?text=Doria+Fideo+500G",
+    image: "https://jumbocolombiaio.vtexassets.com/arquivos/ids/186158-1600-1600.jpg",
   },
   "7702085003473": {
     name: "Quinua Grano Doria 300 G",
@@ -46,7 +46,7 @@ const products = {
   },
   "7702085013120": {
     name: "Pasta Doria Concha 500 G",
-    image: "https://via.placeholder.com/200x200.png?text=Doria+Concha+500G",
+    image: "https://jumbocolombiaio.vtexassets.com/arquivos/ids/186170-1600-1600.jpg",
   },
 };
 

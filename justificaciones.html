@@ -24,16 +24,28 @@
                 <!-- Icono de hamburguesa -->
             </div>
             <ul class="nav-links" id="navLinks">
-                <li>
-                    <a href="Ensamblaje2.html">
-                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph"
-                                state="morph-open"
-                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
-                                style="width: 25px; height: 25px"></lord-icon></span>
-                        dibujo cuello
-                    </a>
-                </li>
-                <li></li>
+
+                <ul class="nav-links">
+                    <!-- Opción de biblioteca de piezas con submenú desplegable -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-btn">
+                            <span class="icon">
+                                <lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph" state="morph-open"
+                                           colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
+                                           style="width: 25px; height: 25px"></lord-icon>
+                            </span>
+                            Biblioteca de Piezas
+                        </a>
+                        <!-- Submenú desplegable -->
+                        <ul class="submenu">
+                            <li><a href="Ensamblaje2.html">Dibujo Cuello</a></li>
+                            <li><a href="paleta.html">Dibujo Paleta </a></li>
+                            <!-- Agrega más elementos del submenú aquí -->
+                        </ul>
+
+                    </li>
+                </ul>
+             
 
                 <li>
                     <a href="calculadora.html">
@@ -43,13 +55,35 @@
                         Calculadora juliana
                     </a>
                 </li>
+
                 <li>
-                    <a href="#">
-                        <span class="pasta">Pasta larga 🅿️</span>
+                    <a href="formatoCalida.html">
+                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                                style="width: 25px; height: 25px"></lord-icon></span>
+                        Formato Calidad
                     </a>
                 </li>
+
+                <li>
+                    <a href="diagrama.html">
+                        <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                                style="width: 25px; height: 25px"></lord-icon></span>
+                        diagrama justificaciones
+                    </a>
+                </li>
+
+
+
+
             </ul>
+
+
         </nav>
+
+       
+       
         <section class="display">
             <!-- gráfico OEE -->
             <section class="desperdicio" id="columnchart_values"></section>

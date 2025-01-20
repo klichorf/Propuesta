@@ -66,7 +66,7 @@ function drawColumnChart() {
             let oee = (produccion / metaPorHora) * 100; // Calcular el OEE
 
             // Si el OEE es mayor al 100%, mostrar una alerta
-            if (oee > 100) {
+            if (oee > 99) {
                 alert("¡Alerta! El OEE es mayor al 100%. Esto podría indicar un mal funcionamiento del sensor.");
             }
         }
@@ -79,7 +79,7 @@ function calculateOEE(produccion, metaPorHora) {
 
 function calculateColor(produccion, metaPorHora) {
     let oee = (produccion / metaPorHora) * 100;
-    if (oee > 100) {
+    if (oee > 99) {
         return "yellow";  // OEE mayor a 100%, color amarillo
     } else if (oee < 85) {
         return "red";  // OEE menor a 85%, color rojo

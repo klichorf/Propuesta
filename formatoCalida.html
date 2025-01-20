@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lector de Código de Barras</title>
-  <link rel="stylesheet" href="formatocalida.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Recomendaciones</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />  <link rel="stylesheet" href="formatocalida.css">
+
 </head>
 <body>
-  <div class="container">
+
+  <nav class="navbar">
+    <div class="logo">
+        <lord-icon src="https://cdn.lordicon.com/cwhyhhho.json" trigger="hover"
+            style="width: 70px; height: 70px"></lord-icon>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+        &#9776;
+        <!-- Icono de hamburguesa -->
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li>
+            <a href="Ensamblaje2.html">
+                <span class="icon"><lord-icon src="https://cdn.lordicon.com/qwjfapmb.json" trigger="morph"
+                        state="morph-open"
+                        colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#545454,quaternary:#f24c00,quinary:#f9c9c0"
+                        style="width: 25px; height: 25px"></lord-icon></span>
+                dibujo cuello
+            </a>
+        </li>
+        <li></li>
+
+        <li>
+            <a href="calculadora.html">
+                <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                        colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                        style="width: 25px; height: 25px"></lord-icon></span>
+                Calculadora juliana
+            </a>
+        </li>
+
+        <li>
+            <a href="formatoCalida.html">
+                <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                        colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                        style="width: 25px; height: 25px"></lord-icon></span>
+                Formato Calidad
+            </a>
+        </li>
+
+        <li>
+            <a href="diagrama.html">
+                <span class="icon"><lord-icon src="https://cdn.lordicon.com/vhyuhmbl.json" trigger="hover"
+                        colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#545454"
+                        style="width: 25px; height: 25px"></lord-icon></span>
+                diagrama justificaciones
+            </a>
+        </li>
+
+
+
+
+    </ul>
+
+
+</nav>
+  <div class="container" >
     <h1>Lector de Código de Barras</h1>
     <input type="text" id="barcodeInput" placeholder="Escanea el código de barras" autocomplete="off">
     <div id="productDisplay">
@@ -15,6 +75,69 @@
       <img id="productImage" src="" alt="Imagen del producto">
     </div>
   </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Referencia</th>
+        <th>Nombre del Producto</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7702085013021</td>
+        <td>Pasta Doria clásica 500g</td>
+       
+      </tr>
+      <tr>
+        <td>7702085019023</td>
+        <td>Pasta Doria 1 Kg</td>
+       
+      </tr>
+      <tr>
+        <td>7702085012024</td>
+        <td>Pasta Doria Espagueti 250 G</td>
+        
+      </tr>
+      <tr>
+        <td>7702085012482</td>
+        <td>Pasta Doria Tornillo 250 G</td>
+       
+      </tr>
+      <tr>
+        <td>7702085243022</td>
+        <td>Pasta Monticello Espagueti 500 G</td>
+       
+      </tr>
+      <tr>
+        <td>7702085243480</td>
+        <td>Pasta Monticello Fusilli 500 G</td>
+       
+      </tr>
+      <tr>
+        <td>7702085021149</td>
+        <td>Pasta Monticello Penne Rigate 500 G</td>
+       
+      </tr>
+
+      <tr>
+        <td>7702085013069</td>
+        <td>Pasta Doria Fideo 500 G</td>
+        
+      </tr>
+
+      <tr>
+        <td>7702085013120</td>
+        <td>Pasta Doria Concha 500 G</td>
+       
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
   <script src="formatoCalida.js"></script>
 </body>
 </html>
