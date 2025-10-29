@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Informe de Mantenimiento - Móvil</title>
+<style>
+:root{
+  --bg:#f6f9fc;
+  --card:#ffffff;
+  --accent:#0b78d1;
+  --muted:#666;
+}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#111;}
+.container{max-width:760px;margin:0 auto;padding:16px;}
+.card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(12,20,30,0.06);margin-bottom:12px;}
+label{display:block;font-weight:600;margin-top:10px;margin-bottom:6px}
+input,textarea,select{
+ width:100%;padding:10px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px;box-sizing:border-box;
+}
+textarea{min-height:90px;resize:vertical}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;margin-top:10px}
+.btn.secondary{background:#eef6ff;color:var(--accent);border:1px solid #cfe7ff}
+.file-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1px solid #ddd}
+.signature{border:1px solid #ddd;border-radius:8px;background:#fff;width:100%;height:140px;touch-action:none}
+.muted{color:var(--muted);font-size:13px}
+.flex-between{display:flex;justify-content:space-between;align-items:center}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Informe de Mantenimiento</h2>
+
+  <form id="formulario" class="card" onsubmit="return false;">
+    <label>Código</label>
+    <input id="codigo" type="text" placeholder="FO-1600-041">
+
+<label>Planta</label>
+<select id="planta">
+  <option value="" disabled selected>Seleccione una planta</option>
+  <option value="GRANOS">GRANOS</option>
+  <option value="ASEO">ASEO</option>
+  <option value="ALIMENTOS">ALIMENTOS</option>
+  <option value="AGUAS">AGUAS</option>
+</select>
+
+
+<label>Área</label>
+<select id="area">
+  <option value="" disabled selected>Seleccione un área</option>
+</select>
+
+<label>Equipo / Máquina</label>
+<select id="equipo">
+  <option value="" disabled selected>Seleccione un equipo</option>
+</select>
+
+
+
+    <label>Fecha Inicio</label>
+    <input id="fechaInicio" type="datetime-local" required>
+
+    <label>Fecha Fin</label>
+    <input id="fechaFin" type="datetime-local">
+
+    <label>Tipo de mantenimiento</label>
+    <select id="tipoMantenimiento">
+      <option>Preventivo</option>
+      <option selected>Correctivo</option>
+      <option>Predictivo</option>
+      <option>Mejora/Adecuación</option>
+    </select>
+
+    <label>Ejecutor</label>
+    <select id="ejecutor">
+      <option selected>JORGE LEONARDO RODRIGUEZ</option>
+      <option>ÁNGELA ISABEL RAMOS FORERO</option>
+      <option>MIGUEL ÁNGEL PÁEZ GARCÍA</option>
+      <option>JUAN DAVID VASCO ARTEAGA</option>
+    </select>
+
+    <label>Tiempo empleado</label>
+    <input id="tiempo" type="text" readonly placeholder="Se calculará automáticamente">
+
+    <label>Daños encontrados</label>
+    <textarea id="danos"></textarea>
+
+    <label>Trabajo ejecutado</label>
+    <textarea id="trabajo"></textarea>
+
+    <label>Repuestos utilizados / recomendados</label>
+    <textarea id="repuestos"></textarea>
+
+    <label>Herramientas utilizadas</label>
+    <textarea id="herramientas"></textarea>
+
+    <label>Registro fotográfico</label>
+    <input id="fotos" type="file" accept="image/*" capture="environment" multiple>
+    <div id="thumbs" class="file-list"></div>
+
+    <hr>
+    <label>Firma Ejecutor</label>
+    <canvas id="sigEjecutor" class="signature"></canvas>
+    <button type="button" class="btn secondary" onclick="limpiarFirma('sigEjecutor')">Limpiar</button>
+
+    <label>Firma Coordinador</label>
+    <canvas id="sigCoordinador" class="signature"></canvas>
+    <button type="button" class="btn secondary" onclick="limpiarFirma('sigCoordinador')">Limpiar</button>
+
+    <div class="flex-between" style="margin-top:10px">
+      <button type="button" class="btn secondary" onclick="descargarPDF()">Descargar PDF</button>
+      <button type="button" class="btn" onclick="compartirPDF()">Compartir PDF</button>
+    </div>
+  </form>
+
+  <div id="estado" class="muted"></div>
+</div>
+
+<script>
+const { jsPDF } = window.jspdf;
+let imagesData=[], sigEjecutorData=null, sigCoordinadorData=null;
+
+// capturar fotos
+document.getElementById('fotos').addEventListener('change', async e=>{
+ const files=[...e.target.files];
+ for(const f of files){
+   const data=await fileToDataURL(f,1024);
+   imagesData.push(data);
+ }
+ renderThumbs();
+});
+function renderThumbs(){
+ const div=document.getElementById('thumbs');
+ div.innerHTML='';
+ imagesData.forEach((src,i)=>{
+  const img=document.createElement('img');
+  img.src=src;img.className='thumb';
+  img.onclick=()=>{if(confirm('Eliminar foto?')){imagesData.splice(i,1);renderThumbs();}};
+  div.appendChild(img);
+ });
+}
+function fileToDataURL(file,max=1024){return new Promise(res=>{
+ const img=new Image(),r=new FileReader();
+ r.onload=e=>{img.onload=()=>{
+  let w=img.width,h=img.height;
+  if(Math.max(w,h)>max){const s=max/Math.max(w,h);w*=s;h*=s;}
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  c.getContext('2d').drawImage(img,0,0,w,h);
+  res(c.toDataURL('image/jpeg',0.8));
+ };img.src=e.target.result;};
+ r.readAsDataURL(file);
+});}
+
+// firmas
+function initFirma(id){
+ const c=document.getElementById(id),ctx=c.getContext('2d');
+ ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);
+ let d=false,lx,ly;
+ function pos(e){const r=c.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;const y=(e.touches?e.touches[0].clientY:e.clientY)-r.top;return {x,y};}
+ c.addEventListener('pointerdown',e=>{d=true;({x:lx,y:ly}=pos(e));});
+ c.addEventListener('pointermove',e=>{if(!d)return;const {x,y}=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(x,y);ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();lx=x;ly=y;});
+ window.addEventListener('pointerup',()=>{d=false;});
+}
+function limpiarFirma(id){
+ const c=document.getElementById(id);const ctx=c.getContext('2d');
+ ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);
+ if(id==='sigEjecutor')sigEjecutorData=null;
+ if(id==='sigCoordinador')sigCoordinadorData=null;
+}
+initFirma('sigEjecutor');initFirma('sigCoordinador');
+
+// calcular tiempo
+const fi=document.getElementById('fechaInicio'),ff=document.getElementById('fechaFin');
+function calcTiempo(){
+ if(!fi.value||!ff.value)return;
+ const a=new Date(fi.value),b=new Date(ff.value);
+ if(b>a){
+  const d=(b-a)/60000;const h=Math.floor(d/60),m=Math.floor(d%60);
+  document.getElementById('tiempo').value=`${h}h ${m}m`;
+ }}
+fi.addEventListener('change',calcTiempo);ff.addEventListener('change',calcTiempo);
+
+async function generarPDF() {
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+  const W = doc.internal.pageSize.getWidth(),
+        H = doc.internal.pageSize.getHeight(),
+        M = 50;
+
+  const accent = [200, 0, 0];   // Rojo corporativo
+  const gray = [50, 50, 50];    // Gris para texto
+
+  let y = M;
+
+  // --- ENCABEZADO CON LOGO Y DATOS ---
+  const logo = await getBase64FromUrl('logo.png'); // tu archivo logo
+  const logoW = 100, logoH = 60;
+
+  // Rectángulo rojo principal
+  doc.setFillColor(...accent);
+  doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 30, 'F');
+
+  // Logo
+  doc.addImage(logo, 'PNG', M, y - 5, logoW, logoH);
+
+  // Textos dentro del encabezado
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(255, 255, 255);
+  doc.text("INFORME TÉCNICO", M + logoW + 20 + (W - M * 2 - logoW - 10) / 2, y + 20, { align: 'center' });
+
+  // Línea inferior del encabezado (MANTENIMIENTO)
+  doc.setFillColor(255, 255, 255);
+  doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(12);
+  doc.text("MANTENIMIENTO", M + logoW + 20 + (W - M * 2 - logoW - 10) / 2, y + 45, { align: 'center' });
+
+  // Textos del lado derecho
+  doc.setFontSize(10);
+  doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
+  doc.text(`Versión: 01`, W - M - 100, y + 22);
+  doc.text(`Actualizado: 14-AGO-25`, W - M - 100, y + 45);
+
+  // Mover el cursor después del encabezado
+  y += 90;
+
+  // --- CONTENIDO GENERAL ---
+  const campos = [
+    ["Código", v('codigo')], ["Planta", v('planta')],["Equipo", v('equipo')], 
+    ["Fecha Inicio", fmtFecha(v('fechaInicio'))], ["Fecha Fin", fmtFecha(v('fechaFin'))],
+    ["Tipo", v('tipoMantenimiento')], ["Ejecutor", v('ejecutor')], ["Tiempo", v('tiempo')]
+  ];
+
+  doc.setFontSize(11);
+  doc.setTextColor(...gray);
+  for (const [k, val] of campos) {
+    doc.setFont('helvetica', 'bold'); doc.text(`${k}:`, M, y);
+    doc.setFont('helvetica', 'normal'); doc.text(String(val || '-'), M + 110, y);
+    y += 20; if (y > H - 150) { doc.addPage(); y = M; }
+  }
+
+  addSec("Daños encontrados", v('danos'));
+  addSec("Trabajo ejecutado", v('trabajo'));
+  addSec("Repuestos utilizados / recomendados", v('repuestos'));
+  addSec("Herramientas utilizadas", v('herramientas'));
+
+  // --- FOTOS ---
+  if (imagesData.length > 0) {
+    doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
+    doc.text("Registro fotográfico", M, y + 10); y += 20;
+    let x = M; const size = 120, gap = 12;
+    for (const img of imagesData) {
+      if (x + size > W - M) { x = M; y += size + gap; }
+      if (y + size > H - 120) { doc.addPage(); y = M; }
+      doc.addImage(img, 'JPEG', x, y, size, size);
+      x += size + gap;
+    } y += size + 20;
+  }
+
+  // --- FIRMAS ---
+  const se = document.getElementById('sigEjecutor').toDataURL();
+  const sc = document.getElementById('sigCoordinador').toDataURL();
+  const fw = 150, fh = 70; const fy = H - 150;
+  doc.setDrawColor(180, 180, 180);
+  doc.line(M, fy + fh + 5, M + fw, fy + fh + 5);
+  doc.line(W - M - fw, fy + fh + 5, W - M, fy + fh + 5);
+  doc.setFontSize(10);
+  doc.text("Ejecutor", M + fw / 2, fy + fh + 18, { align: 'center' });
+  doc.text("Coordinador", W - M - fw / 2, fy + fh + 18, { align: 'center' });
+  doc.addImage(se, 'PNG', M, fy, fw, fh);
+  doc.addImage(sc, 'PNG', W - M - fw, fy, fw, fh);
+
+  // --- PIE ---
+  doc.setFontSize(9);
+  doc.text("Generado desde formulario móvil", M, H - 20);
+
+  const blob = doc.output('blob');
+  return new File([blob], 'informe.pdf', { type: 'application/pdf' });
+
+  // --- FUNCIONES AUXILIARES ---
+  function v(id) { return document.getElementById(id).value; }
+  function fmtFecha(f) {
+    if (!f) return '';
+    const d = new Date(f);
+    return d.toLocaleString().replace(',', '');
+  }
+  function addSec(t, txt) {
+    if (!txt) return;
+    y += 10;
+    doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
+    doc.text(t, M, y); y += 12;
+    doc.setFont('helvetica', 'normal'); doc.setTextColor(...gray);
+    const lines = doc.splitTextToSize(txt, W - M * 2);
+    doc.text(lines, M, y + 8);
+    y += lines.length * 14 + 10;
+  }
+  async function getBase64FromUrl(url) {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+
+
+// descargar
+async function descargarPDF(){
+ const f=await generarPDF();
+ const a=document.createElement('a');a.href=URL.createObjectURL(f);
+ a.download='informe_mantenimiento.pdf';a.click();
+}
+// compartir
+async function compartirPDF(){
+ const file=await generarPDF();
+ if(navigator.canShare && navigator.canShare({files:[file]})){
+  await navigator.share({title:'Informe de mantenimiento',files:[file]});
+ }else{
+  alert('Tu navegador no admite compartir archivos. Usa "Descargar PDF".');
+ }
+}
+
+// -------------------------
+// DATOS DE PLANTAS, ÁREAS Y EQUIPOS
+// -------------------------
+const datosPlantas = {
+  ASEO: {
+    "Área de Disco": [
+      "Laminadora",
+      "Cortadora",
+      "Tornillo Compactador",
+      "Mezcladora",
+      "Chiller"
+    ],
+    "Área Doypack": [
+      "Envasadora",
+      "Dosificadora",
+      "Selladora"
+    ],
+    "Área Líquidos": [
+      "Llenadora de Líquidos",
+      "Etiquetadora",
+      "Rotativa",
+      "Encintadora"
+    ],
+    "Área Viscosos": [
+      "Llenadora de Viscosos",
+      "Etiquetadora",
+      "Rotativa",
+      "Codificadora"
+    ],
+    "Área de Crema": [
+      "Llenadora de Crema"
+    ],
+    "Área Varsol": [
+      "Llenadora Varsol",
+      "Etiquetadora",
+      "Codificadora"
+    ],
+    "Área Hipoclorito": [
+      "Llenadora",
+      "Tapadora"
+    ],
+    "Área Compresores": [
+      "Compresor GA22",
+      "Compresor GX7"
+    ]
+  },
+
+  ALIMENTOS: {
+    "Área de Envasado": [
+      "Envasadora Tecmar",
+      "Estuchadora",
+      "Encintadora",
+      "Envasadora Sopas",
+      "Envasadora Gelatinas",
+      "Estuchadora de Gelatinas",
+      "Envasadora Tecnopack",
+      "Envasadora Tecnotock",
+      "Selladora Manual",
+      "Doypack",
+      "Envasadora de Panela",
+      "Tedmaq",
+      "Multipack",
+      "Estuchadora Rotativa",
+      "Nutri Baby"
+    ],
+    "Área de Mezclas": [
+      "Ciclón",
+      "Mezcladora Tecmar",
+      "Mezcladora Sopas",
+      "Mezcladora Gelatinas",
+      "Mezcladora Tecnopack",
+      "Mezcladora Tecnotock",
+      "Mezcladora Doypack",
+      "Mezcladora Hojuelas"
+    ]
+  },
+
+  AGUAS: {
+    "Área de Empacadora": [
+      "Llenadora de Agua",
+      "Etiquetadora",
+      "Empacadora",
+      "Codificadora",
+      "Bandas",
+      "Posicionador de Botellas",
+      "Clorinador",
+      "Compresor GA26",
+      "Caldera",
+      "Bomba de Salida Tanque 20 Mil",
+      "Osmosis"
+    ],
+    "Área de Tanques": [
+      "Tanque 50 Mil",
+      "Tanque 20 Mil",
+      "Tanque 10 Mil",
+      "Tanque 5 Mil"
+    ],
+    "Área de Nitrógeno": [
+      "Tanque de Nitrógeno",
+      "PETAR"
+    ]
+  }
+};
+
+// -------------------------
+// REFERENCIAS DEL DOM
+// -------------------------
+const plantaSelect = document.getElementById("planta");
+const areaSelect = document.getElementById("area");
+const equipoSelect = document.getElementById("equipo");
+
+// -------------------------
+// CAMBIO DE PLANTA
+// -------------------------
+plantaSelect.addEventListener("change", () => {
+  const planta = plantaSelect.value;
+  const areas = Object.keys(datosPlantas[planta] || {});
+
+  // Limpiar selects
+  areaSelect.innerHTML = '<option disabled selected>Seleccione un área</option>';
+  equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
+
+  // Llenar áreas según planta
+  areas.forEach(area => {
+    const option = document.createElement("option");
+    option.value = area;
+    option.textContent = area;
+    areaSelect.appendChild(option);
+  });
+});
+
+// -------------------------
+// CAMBIO DE ÁREA
+// -------------------------
+areaSelect.addEventListener("change", () => {
+  const planta = plantaSelect.value;
+  const area = areaSelect.value;
+  const equipos = datosPlantas[planta]?.[area] || [];
+
+  // Limpiar equipos
+  equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
+
+  // Llenar equipos según área
+  equipos.forEach(equipo => {
+    const option = document.createElement("option");
+    option.value = equipo;
+    option.textContent = equipo;
+    equipoSelect.appendChild(option);
+  });
+});
+</script>
+</body>
+</html>
