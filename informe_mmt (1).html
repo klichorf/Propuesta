@@ -5,38 +5,199 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Informe de Mantenimiento - Móvil</title>
 <style>
-:root{
-  --bg:#f6f9fc;
-  --card:#ffffff;
-  --accent:#0b78d1;
-  --muted:#666;
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;     /* 🔹 agregado para fondo de las tarjetas */
+  --accent: #d40000;
+  --muted: #444;
 }
-body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#111;}
-.container{max-width:760px;margin:0 auto;padding:16px;}
-.card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(12,20,30,0.06);margin-bottom:12px;}
-label{display:block;font-weight:600;margin-top:10px;margin-bottom:6px}
-input,textarea,select{
- width:100%;padding:10px;border-radius:8px;border:1px solid #e2e8f0;font-size:14px;box-sizing:border-box;
-}
-textarea{min-height:90px;resize:vertical}
-.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;margin-top:10px}
-.btn.secondary{background:#eef6ff;color:var(--accent);border:1px solid #cfe7ff}
-.file-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.thumb{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1px solid #ddd}
-.signature{border:1px solid #ddd;border-radius:8px;background:#fff;width:100%;height:140px;touch-action:none}
-.muted{color:var(--muted);font-size:13px}
-.flex-between{display:flex;justify-content:space-between;align-items:center}
-</style>
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- Fondo principal ---------- */
+#contenedorPrincipal {
+  min-height: 100vh;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 1s ease-in-out;
+}
+
+/* ---------- Encabezado ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+.header .info {
+  flex: 1;
+  text-align: center;
+}
+.header .info h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+.header .info h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.header .datos {
+  text-align: right;
+  font-size: 13px;
+}
+
+/* ---------- Contenedor principal ---------- */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.card {
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(4px); /* opcional: agrega un efecto de difuminado elegante */
+  border-radius: 12px;
+  padding: 20px;
+}
+/* ---------- Inputs y etiquetas ---------- */
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn.secondary {
+  background: #fff;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* ---------- Firmas ---------- */
+.signature {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  width: 100%;
+  height: 140px;
+  touch-action: none;
+}
+
+/* ---------- Texto gris secundario ---------- */
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- Flex utilitario ---------- */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------- Imágenes cargadas ---------- */
+.file-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 100px;      /* 🔹 limita la altura */
+  overflow-y: auto;       /* 🔹 evita que expanda el layout */
+}
+.thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
+
+<!-- ---------- ENCABEZADO ---------- -->
+<div class="header" style="display:flex; align-items:center; justify-content:space-between; background:#f4f3f3; padding:10px 20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+<!-- LOGO + NOMBRE DE LA EMPRESA -->
+<div style="text-align:center;">
+<img src="logo.png" alt="Logo" style="width:90px; height:auto; margin-bottom:-5px;">
+  <p style="
+        font-size:12px;
+        font-weight:bold;
+        color:#1b0202;
+        line-height:1.1;
+        margin-top:0;
+        margin-bottom:0;
+     ">
+    ORGANIZACIÓN<br>CÁRDENAS S.A.S
+  </p>
+</div>
+  <!-- INFORMACIÓN CENTRAL -->
+  <div class="info" style="text-align:center;">
+    <h1 style="margin:0; font-size:16px; color:#1b0202;">INFORME TÉCNICO</h1>
+    <h2 style="margin:0; font-size:12px; color:#1b0202;">MANTENIMIENTO</h2>
+  </div>
+
+  <!-- DATOS A LA DERECHA -->
+  <div class="datos" style="font-size:13px; text-align:right; color:#333;">
+    <p style="margin:0;">
+      <b>Código:</b> FO-1600-041<br>
+      <b>Versión:</b> 01<br>
+      <b>Actualizado:</b> 14-AGO-25
+    </p>
+  </div>
+</div>
 <div class="container">
   <h2>Informe de Mantenimiento</h2>
 
-  <form id="formulario" class="card" onsubmit="return false;">
-    <label>Código</label>
+  <div  id="contenedorPrincipal"> 
+     <form id="formulario" class="card" onsubmit="return false;">
+    <label># activo</label>
     <input id="codigo" type="text" placeholder="FO-1600-041">
+     
+    <button id="btnQR" type="button" class="btn secondary" style="margin-top:10px; ">Escanear QR</button>
+    <div id="qrcode" style="margin-top:15px;"></div>
+
 
 <label>Planta</label>
 <select id="planta">
@@ -44,7 +205,7 @@ textarea{min-height:90px;resize:vertical}
   <option value="GRANOS">GRANOS</option>
   <option value="ASEO">ASEO</option>
   <option value="ALIMENTOS">ALIMENTOS</option>
-  <option value="AGUAS">AGUAS</option>
+  <option value="AGUAS">BEBIDAS</option>
 </select>
 
 
@@ -77,9 +238,12 @@ textarea{min-height:90px;resize:vertical}
     <label>Ejecutor</label>
     <select id="ejecutor">
       <option selected>JORGE LEONARDO RODRIGUEZ</option>
-      <option>ÁNGELA ISABEL RAMOS FORERO</option>
-      <option>MIGUEL ÁNGEL PÁEZ GARCÍA</option>
-      <option>JUAN DAVID VASCO ARTEAGA</option>
+      <option>PINEDA AGUDELO YONATAN STIVEN</option>
+      <option>QUEVEDO LADINO MARIO</option>
+      <option>SARMIENTO ATENCIO DANILO</option>
+      <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+      <option>JHON ANDRES QUINTERO</option>
+      <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
     </select>
 
     <label>Tiempo empleado</label>
@@ -97,9 +261,12 @@ textarea{min-height:90px;resize:vertical}
     <label>Herramientas utilizadas</label>
     <textarea id="herramientas"></textarea>
 
-    <label>Registro fotográfico</label>
+    <label>Registro fotográfico antes </label>
     <input id="fotos" type="file" accept="image/*" capture="environment" multiple>
     <div id="thumbs" class="file-list"></div>
+
+ 
+
 
     <hr>
     <label>Firma Ejecutor</label>
@@ -114,7 +281,9 @@ textarea{min-height:90px;resize:vertical}
       <button type="button" class="btn secondary" onclick="descargarPDF()">Descargar PDF</button>
       <button type="button" class="btn" onclick="compartirPDF()">Compartir PDF</button>
     </div>
-  </form>
+  </form> </div>
+
+
 
   <div id="estado" class="muted"></div>
 </div>
@@ -194,44 +363,66 @@ async function generarPDF() {
 
   let y = M;
 
-  // --- ENCABEZADO CON LOGO Y DATOS ---
-  const logo = await getBase64FromUrl('logo.png'); // tu archivo logo
-  const logoW = 100, logoH = 60;
+// --- ENCABEZADO CON LOGO Y DATOS ---
+const logo = await getBase64FromUrl('logo.png'); // tu archivo logo
+const logoW = 100, logoH = 60;
 
-  // Rectángulo rojo principal
-  doc.setFillColor(...accent);
-  doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 30, 'F');
+// Logo (queda solo a la izquierda)
+doc.addImage(logo, 'PNG', M, y - 5, logoW, logoH);
 
-  // Logo
-  doc.addImage(logo, 'PNG', M, y - 5, logoW, logoH);
+// Rectángulo rojo principal
+doc.setFillColor(...accent);
+doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 40, 'F');
 
-  // Textos dentro del encabezado
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(255, 255, 255);
-  doc.text("INFORME TÉCNICO", M + logoW + 20 + (W - M * 2 - logoW - 10) / 2, y + 20, { align: 'center' });
+// 🔹 Texto “ORGANIZACIÓN CÁRDENAS S.A.S” alineado con “INFORME TÉCNICO”
+doc.setFont('helvetica', 'bold');
+doc.setFontSize(16);
+doc.setTextColor(30, 30, 30);
+const nombreEmpresa = ["ORGANIZACIÓN CÁRDENAS S.A.S"];
+// → Se ubica al mismo nivel que el rectángulo rojo
+doc.text(nombreEmpresa, M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+  y - 10,
+  { align: 'center' });
 
-  // Línea inferior del encabezado (MANTENIMIENTO)
-  doc.setFillColor(255, 255, 255);
-  doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
-  doc.setTextColor(0, 0, 0);
-  doc.setFontSize(12);
-  doc.text("MANTENIMIENTO", M + logoW + 20 + (W - M * 2 - logoW - 10) / 2, y + 45, { align: 'center' });
+// Texto principal (INFORME TÉCNICO)
+doc.setFont('helvetica', 'bold');
+doc.setFontSize(13);
+doc.setTextColor(255, 255, 255);
+doc.text(
+  "INFORME TÉCNICO",
+  M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+  y + 20,
+  { align: 'center' }
+);
 
-  // Textos del lado derecho
-  doc.setFontSize(10);
-  doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
-  doc.text(`Versión: 01`, W - M - 100, y + 22);
-  doc.text(`Actualizado: 14-AGO-25`, W - M - 100, y + 45);
+// Línea blanca inferior (MANTENIMIENTO)
+doc.setFillColor(255, 255, 255);
+doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
+doc.setTextColor(0, 0, 0);
+doc.setFontSize(12);
+doc.text(
+  "MANTENIMIENTO",
+  M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+  y + 45,
+  { align: 'center' }
+);
 
-  // Mover el cursor después del encabezado
-  y += 90;
+// Textos del lado derecho
+doc.setFontSize(10);
+doc.setTextColor(255, 255, 255); // ⚪ Blanco
+doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
+doc.text(`Versión: 01`, W - M - 100, y + 22);
+
+
+// Mover cursor después del encabezado
+y += 90;
+
 
   // --- CONTENIDO GENERAL ---
   const campos = [
     ["Código", v('codigo')], ["Planta", v('planta')],["Equipo", v('equipo')], 
     ["Fecha Inicio", fmtFecha(v('fechaInicio'))], ["Fecha Fin", fmtFecha(v('fechaFin'))],
-    ["Tipo", v('tipoMantenimiento')], ["Ejecutor", v('ejecutor')], ["Tiempo", v('tiempo')]
+    ["Mantenimiento", v('tipoMantenimiento')], ["Ejecutor", v('ejecutor')], ["Tiempo", v('tiempo')]
   ];
 
   doc.setFontSize(11);
@@ -329,6 +520,29 @@ async function compartirPDF(){
 // DATOS DE PLANTAS, ÁREAS Y EQUIPOS
 // -------------------------
 const datosPlantas = {
+
+  GRANOS: {
+    "Área de Tolvas": [
+      "tolvas 1",
+      "tolvas 2",
+      "tolvas 3",
+      "tolvas 4",
+      "tolvas 5"
+    ],
+    "Área de Empaque": [
+      "TEDMAD",
+      "TECNOPACK",
+      "INNA 1",
+      "INNA 2",
+      "ROSDAN"
+    ],
+    "Área de compresores": [
+      "Empacadora Automática",
+      "Selladora de Sacos",
+      "Etiquetadora de Sacos"
+    ]
+  },
+
   ASEO: {
     "Área de Disco": [
       "Laminadora",
@@ -399,6 +613,11 @@ const datosPlantas = {
       "Mezcladora Tecnotock",
       "Mezcladora Doypack",
       "Mezcladora Hojuelas"
+    ],
+
+    "Área Compresores": [
+      "Compresor GA22",
+      "Compresor GX7"
     ]
   },
 
@@ -436,6 +655,24 @@ const plantaSelect = document.getElementById("planta");
 const areaSelect = document.getElementById("area");
 const equipoSelect = document.getElementById("equipo");
 
+
+
+// 🎨 Cambiar fondo según planta
+function cambiarFondo() {
+  const contenedor = document.getElementById("contenedorPrincipal");
+  const planta = plantaSelect.value;
+
+  const fondos = {
+    "GRANOS": "url('https://mre-site-makro-colombia-test-webapp-slot.azurewebsites.net/imagesProducts/medias/913263_1_239.webp')",
+    "ASEO": "url('https://organizacioncardenas.com/wp-content/uploads/2022/11/detergentelavado-e1678672244584-793x1024.png')",
+    "ALIMENTOS": "url('https://www.delaabuelaconamor.com/wp-content/uploads/2022/07/avena-hojuela-500g.png')",
+    "AGUAS": "url('https://media.surtiplaza.co/dimen/7707335286316.png')"
+  };
+
+  // Aplica el color de fondo correspondiente o un neutro por defecto
+  contenedor.style.background = fondos[planta] || "#f6f9fc";
+}
+
 // -------------------------
 // CAMBIO DE PLANTA
 // -------------------------
@@ -454,6 +691,11 @@ plantaSelect.addEventListener("change", () => {
     option.textContent = area;
     areaSelect.appendChild(option);
   });
+    // 👉 Cambiar fondo según la planta seleccionada
+  cambiarFondo();
+
+    // ✅ Recalcular tiempo si ya hay fechas seleccionadas
+  calcTiempo();
 });
 
 // -------------------------
@@ -475,6 +717,7 @@ areaSelect.addEventListener("change", () => {
     equipoSelect.appendChild(option);
   });
 });
+
 </script>
 </body>
 </html>
