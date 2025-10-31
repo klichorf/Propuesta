@@ -539,10 +539,11 @@ y += 90;
     } y += size + 20;
   }
 
-  // --- FIRMAS ---
+ // --- FIRMAS ---
 const se = document.getElementById('sigEjecutor').toDataURL();
 const sc = document.getElementById('sigCoordinador').toDataURL();
-const fw = 150, fh = 70; const fy = H - 150;
+const fw = 150, fh = 70;
+const fy = H - 150;
 
 doc.setDrawColor(180, 180, 180);
 
@@ -557,12 +558,14 @@ doc.addImage(sc, 'PNG', W - M - fw, fy, fw, fh);
 // Títulos (Ejecutor y Supervisor)
 doc.setFontSize(10);
 doc.setFont('helvetica', 'bold');
-doc.text("Ejecutor", M + fw / 2, fy + fh + 18, { align: 'center' });
+doc.setTextColor(0, 0, 0); // 🔹 Asegurar color negro
+doc.text("Técnico Mantenimiento", M + fw / 2, fy + fh + 18, { align: 'center' });
 doc.text("Supervisor", W - M - fw / 2, fy + fh + 18, { align: 'center' });
 
 // 🔹 Mostrar los nombres reales del ejecutor y supervisor debajo
 doc.setFont('helvetica', 'normal');
 doc.setFontSize(9);
+doc.setTextColor(0, 0, 0); // 🔹 Mantener negro
 
 const nombreEjecutor = document.getElementById("ejecutor").value || "-";
 const plantaActual = document.getElementById("planta").value;
@@ -853,3 +856,4 @@ function mostrarSupervisor(planta) {
 </script>
 </body>
 </html>
+
