@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Informe de Mantenimiento - Móvil</title>
-<style>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Informe de Mantenimiento - Móvil</title>
+        <style>
 :root {
   --bg: #ffffff;
   --card: #ffffff;     /* 🔹 agregado para fondo de las tarjetas */
@@ -235,19 +235,60 @@ textarea {
     height: 120px;
   }
 }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-</head>
-<body>
 
-<!-- ---------- ENCABEZADO ---------- -->
-<div class="header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-<!-- LOGO + NOMBRE DE LA EMPRESA -->
-<div style="text-align:center;">
-<img src="logo.png" alt="Logo" style="width:90px; height:auto; margin-bottom:5%;">
-  <p style="
+
+ /* Contenedor de los recuadros */
+  .contador-container {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  /* Estilo de cada recuadro */
+  .contador-item {
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 22px;
+    font-size: 14px;
+  }
+
+  /* Contenedor de los formularios */
+  #formularios {
+    margin-top: 20px;
+  }
+
+  .formulario {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+</style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+            rel="stylesheet">
+        <script
+            src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    </head>
+    <body>
+
+        <!-- ---------- ENCABEZADO ---------- -->
+        <div class="header"
+            style="display:flex; align-items:center; justify-content:space-between; padding:10px 20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+            <!-- LOGO + NOMBRE DE LA EMPRESA -->
+            <div style="text-align:center;">
+                <img src="logo.png" alt="Logo"
+                    style="width:90px; height:auto; margin-bottom:5%;">
+                <p style="
         font-size:12px;
         font-weight:bold;
         color:#1b0202;
@@ -255,127 +296,136 @@ textarea {
         margin-top:0;
         margin-bottom:5%;
      ">
-    ORGANIZACIÓN<br>CÁRDENAS S.A.S
-  </p>
-</div>
+                    ORGANIZACIÓN<br>CÁRDENAS S.A.S
+                </p>
+            </div>
 
-<!-- INFORMACIÓN CENTRAL -->
-<div class="info" style="text-align:center; font-family:'Poppins', sans-serif;">
-  <h1 style="font-size:20px; color:#1b0202; font-weight:700;">INFORME TÉCNICO</h1>
-  <h2 style="margin:0; font-size:17px; color:#1b0202; font-weight:500;">MANTENIMIENTO</h2>
-</div>
+            <!-- INFORMACIÓN CENTRAL -->
+            <div class="info"
+                style="text-align:center; font-family:'Poppins', sans-serif;">
+                <h1
+                    style="font-size:20px; color:#1b0202; font-weight:700;">INFORME
+                    TÉCNICO</h1>
+                <h2
+                    style="margin:0; font-size:17px; color:#1b0202; font-weight:500;">MANTENIMIENTO</h2>
+            </div>
 
+        </div>
+        <div class="container">
 
+            <div id="contenedorPrincipal">
+               <button id="nuevoFormulario" type="button" class="btn" style="margin-top:10px;">Nuevo</button>
 
-</div>
-<div class="container">
+                <div class="contador-container" id="contadorContainer"></div>
 
+                <form id="formulario" class="card" onsubmit="return false;">
+                    <label># activo</label>
+                    <input id="codigo" type="text" placeholder="FO-1600-041">
 
-  <div  id="contenedorPrincipal"> 
-     <form id="formulario" class="card" onsubmit="return false;">
-    <label># activo</label>
-    <input id="codigo" type="text" placeholder="FO-1600-041">
-     
-    <button id="btnQR" type="button" class="btn secondary" style="margin-top:10px; ">Escanear QR</button>
-    <div id="qrcode" style="margin-top:15px;"></div>
-    
-<p id="supervisor" style="font-weight:600; color:#021321; margin-top:10px; margin-bottom: 20px;">
-  👤 Supervisor: (selecciona una planta)
-</p>
+                    <button id="btnQR" type="button" class="btn secondary"
+                        style="margin-top:10px; ">Escanear QR</button>
+                    <div id="qrcode" style="margin-top:15px;"></div>
 
+                    <p id="supervisor"
+                        style="font-weight:600; color:#021321; margin-top:10px; margin-bottom: 20px;">
+                        👤 Supervisor: (selecciona una planta)
+                    </p>
 
-<label>Planta</label>
-<select id="planta">
-  <option value="" disabled selected>Seleccione una planta</option>
-  <option value="GRANOS">GRANOS</option>
-  <option value="ASEO">ASEO</option>
-  <option value="ALIMENTOS">ALIMENTOS</option>
-  <option value="AGUAS">BEBIDAS</option>
-</select>
+                    <label>Planta</label>
+                    <select id="planta">
+                        <option value disabled selected>Seleccione una
+                            planta</option>
+                        <option value="GRANOS">GRANOS</option>
+                        <option value="ASEO">ASEO</option>
+                        <option value="ALIMENTOS">ALIMENTOS</option>
+                        <option value="AGUAS">BEBIDAS</option>
+                    </select>
 
+                    <label>Área</label>
+                    <select id="area">
+                        <option value disabled selected>Seleccione un
+                            área</option>
+                    </select>
 
-<label>Área</label>
-<select id="area">
-  <option value="" disabled selected>Seleccione un área</option>
-</select>
+                    <label>Equipo / Máquina</label>
+                    <select id="equipo">
+                        <option value disabled selected>Seleccione un
+                            equipo</option>
+                    </select>
 
-<label>Equipo / Máquina</label>
-<select id="equipo">
-  <option value="" disabled selected>Seleccione un equipo</option>
-</select>
+                    <label>Fecha Inicio</label>
+                    <input id="fechaInicio" type="datetime-local" required>
 
+                    <label>Fecha Fin</label>
+                    <input id="fechaFin" type="datetime-local">
 
+                    <label>Tipo de mantenimiento</label>
+                    <select id="tipoMantenimiento">
+                        <option value disabled selected>Seleccione clase
+                        </option>
+                        <option>Preventivo</option>
+                        <option>Correctivo</option>
+                        <option>Predictivo</option>
+                        <option>Mejora/Adecuación</option>
+                    </select>
 
-    <label>Fecha Inicio</label>
-    <input id="fechaInicio" type="datetime-local" required>
+                    <label>Ténico Mantenimiento</label>
+                    <select id="ejecutor">
+                        <option value disabled selected>Seleccione Ténico
+                        </option>
+                        <option>JORGE LEONARDO RODRIGUEZ</option>
+                        <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                        <option>QUEVEDO LADINO MARIO</option>
+                        <option>SARMIENTO ATENCIO DANILO</option>
+                        <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+                        <option>JHON ANDRES QUINTERO</option>
+                        <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+                    </select>
 
-    <label>Fecha Fin</label>
-    <input id="fechaFin" type="datetime-local">
+                    <label>Tiempo empleado</label>
+                    <input id="tiempo" type="text" readonly
+                        placeholder="Se calculará automáticamente">
 
-    <label>Tipo de mantenimiento</label>
-    <select id="tipoMantenimiento">
-      <option>Preventivo</option>
-      <option selected>Correctivo</option>
-      <option>Predictivo</option>
-      <option>Mejora/Adecuación</option>
-    </select>
+                    <label>Daños encontrados</label>
+                    <textarea id="danos"></textarea>
 
-    <label>Ejecutor</label>
-    <select id="ejecutor">
-      <option selected>JORGE LEONARDO RODRIGUEZ</option>
-      <option>PINEDA AGUDELO YONATAN STIVEN</option>
-      <option>QUEVEDO LADINO MARIO</option>
-      <option>SARMIENTO ATENCIO DANILO</option>
-      <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
-      <option>JHON ANDRES QUINTERO</option>
-      <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
-    </select>
+                    <label>Trabajo ejecutado</label>
+                    <textarea id="trabajo"></textarea>
 
+                    <label>Repuestos utilizados / recomendados</label>
+                    <textarea id="repuestos"></textarea>
 
+                    <label>Herramientas utilizadas</label>
+                    <textarea id="herramientas"></textarea>
 
-    <label>Tiempo empleado</label>
-    <input id="tiempo" type="text" readonly placeholder="Se calculará automáticamente">
+                    <label>Registro fotográfico antes </label>
+                    <input id="fotos" type="file" accept="image/*"
+                        capture="environment" multiple>
+                    <div id="thumbs" class="file-list"></div>
 
-    <label>Daños encontrados</label>
-    <textarea id="danos"></textarea>
+                    <hr>
+                    <label>Firma Tecnico Mantenimiento</label>
+                    <canvas id="sigEjecutor" class="signature"></canvas>
+                    <button type="button" class="btn secondary"
+                        onclick="limpiarFirma('sigEjecutor')">Limpiar</button>
 
-    <label>Trabajo ejecutado</label>
-    <textarea id="trabajo"></textarea>
+                    <label>Firma supervisor/operario</label>
+                    <canvas id="sigCoordinador" class="signature"></canvas>
+                    <button type="button" class="btn secondary"
+                        onclick="limpiarFirma('sigCoordinador')">Limpiar</button>
 
-    <label>Repuestos utilizados / recomendados</label>
-    <textarea id="repuestos"></textarea>
+                    <div class="flex-between" style="margin-top:10px">
+                        <button type="button" class="btn secondary"
+                            onclick="descargarPDF()">Descargar PDF</button>
+                        <button type="button" class="btn"
+                            onclick="compartirPDF()">Compartir PDF</button>
+                    </div>
+                </form> </div>
 
-    <label>Herramientas utilizadas</label>
-    <textarea id="herramientas"></textarea>
+            <div id="estado" class="muted"></div>
+        </div>
 
-    <label>Registro fotográfico antes </label>
-    <input id="fotos" type="file" accept="image/*" capture="environment" multiple>
-    <div id="thumbs" class="file-list"></div>
-
- 
-
-
-    <hr>
-    <label>Firma Tecnico Mantenimiento</label>
-    <canvas id="sigEjecutor" class="signature"></canvas>
-    <button type="button" class="btn secondary" onclick="limpiarFirma('sigEjecutor')">Limpiar</button>
-
-    <label>Firma supervisor/operario</label>
-    <canvas id="sigCoordinador" class="signature"></canvas>
-    <button type="button" class="btn secondary" onclick="limpiarFirma('sigCoordinador')">Limpiar</button>
-
-    <div class="flex-between" style="margin-top:10px">
-      <button type="button" class="btn secondary" onclick="descargarPDF()">Descargar PDF</button>
-      <button type="button" class="btn" onclick="compartirPDF()">Compartir PDF</button>
-    </div>
-  </form> </div>
-
-
-
-  <div id="estado" class="muted"></div>
-</div>
-
-<script>
+        <script>
 const { jsPDF } = window.jspdf;
 let imagesData=[], sigEjecutorData=null, sigCoordinadorData=null;
 
@@ -607,23 +657,193 @@ doc.text(nombreSupervisor, W - M - fw / 2, fy + fh + 30, { align: 'center' });
   }
 }
 
+// -------------------------
+// VALIDAR CAMPOS OBLIGATORIOS
+// -------------------------
+function validarFormulario() {
+  const camposObligatorios = [
+    'codigo', 'planta', 'area', 'equipo',
+    'fechaInicio', 'fechaFin', 'tipoMantenimiento',
+    'ejecutor', 'danos', 'trabajo'
+  ];
 
-// descargar
-async function descargarPDF(){
- const f=await generarPDF();
- const a=document.createElement('a');a.href=URL.createObjectURL(f);
- a.download='informe_mantenimiento.pdf';a.click();
-}
-// compartir
-async function compartirPDF(){
- const file=await generarPDF();
- if(navigator.canShare && navigator.canShare({files:[file]})){
-  await navigator.share({title:'Informe de mantenimiento',files:[file]});
- }else{
-  alert('Tu navegador no admite compartir archivos. Usa "Descargar PDF".');
- }
+  let primeroFaltante = null;
+  let faltantes = [];
+
+  camposObligatorios.forEach(id => {
+    const campo = document.getElementById(id);
+    if (!campo || !campo.value.trim()) {
+      faltantes.push(id);
+      campo.style.border = '2px solid red';
+      if (!primeroFaltante) primeroFaltante = campo;
+    } else {
+      campo.style.border = ''; // limpiar si está correcto
+    }
+  });
+
+  // Validar firma del ejecutor
+  const sigCanvas = document.getElementById('sigEjecutor');
+  const vacia = sigCanvas.getContext('2d')
+    .getImageData(0, 0, sigCanvas.width, sigCanvas.height)
+    .data.some(v => v !== 255); // detecta si está vacía
+
+  if (!vacia) {
+    faltantes.push('sigEjecutor');
+    sigCanvas.style.border = '2px solid red';
+    if (!primeroFaltante) primeroFaltante = sigCanvas;
+  } else {
+    sigCanvas.style.border = '';
+  }
+
+  if (faltantes.length > 0) {
+    alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
+    primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+
+  return true;
 }
 
+// -------------------------
+// VALIDAR CAMPOS OBLIGATORIOS
+// -------------------------
+function validarFormulario() {
+  const camposObligatorios = [
+    'codigo', 'planta', 'area', 'equipo',
+    'fechaInicio', 'fechaFin', 'tipoMantenimiento',
+    'ejecutor', 'danos', 'trabajo'
+  ];
+
+  let primeroFaltante = null;
+  let faltantes = [];
+
+  camposObligatorios.forEach(id => {
+    const campo = document.getElementById(id);
+    if (!campo || !campo.value.trim()) {
+      faltantes.push(id);
+      campo.style.border = '2px solid red';
+      if (!primeroFaltante) primeroFaltante = campo;
+    } else {
+      campo.style.border = ''; // limpiar si está correcto
+    }
+  });
+
+  // Validar firma del ejecutor (detecta si está vacía)
+  const sigCanvas = document.getElementById('sigEjecutor');
+  const ctx = sigCanvas.getContext('2d');
+  const pixels = ctx.getImageData(0, 0, sigCanvas.width, sigCanvas.height).data;
+  const hayTinta = pixels.some(v => v !== 255);
+  if (!hayTinta) {
+    faltantes.push('sigEjecutor');
+    sigCanvas.style.border = '2px solid red';
+    if (!primeroFaltante) primeroFaltante = sigCanvas;
+  } else {
+    sigCanvas.style.border = '';
+  }
+
+  if (faltantes.length > 0) {
+    alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
+    primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+
+  return true;
+}
+
+// -------------------------
+// DESCARGAR PDF
+// -------------------------
+async function descargarPDF() {
+  if (!validarFormulario()) return; // detener si falta algo
+  const f = await generarPDF();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(f);
+  a.download = 'informe_mantenimiento.pdf';
+  a.click();
+}
+
+// -------------------------
+// COMPARTIR PDF
+// -------------------------
+async function compartirPDF() {
+  if (!validarFormulario()) return; // detener si falta algo
+  const file = await generarPDF();
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({ title: 'Informe de mantenimiento', files: [file] });
+  } else {
+    alert('Tu navegador no admite compartir archivos. Usa "Descargar PDF".');
+  }
+}
+
+
+// -------------------------
+// GESTIÓN DE PESTAÑAS DINÁMICAS 
+// -------------------------
+let contador = 0;
+const btnNuevo = document.getElementById("nuevoFormulario");
+const contenedorContador = document.getElementById("contadorContainer");
+const pestañasAbiertas = {};
+
+// 🔒 Evitar que se registre el listener más de una vez
+if (!btnNuevo.dataset.listenerAdded) {
+  btnNuevo.dataset.listenerAdded = "true";
+
+  btnNuevo.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    contador++;
+    const id = contador;
+
+    // Crear recuadro numerado
+    const recuadro = document.createElement("div");
+    recuadro.classList.add("contador-item");
+    recuadro.textContent = id;
+    recuadro.dataset.id = id;
+    contenedorContador.appendChild(recuadro);
+
+    // 🟢 Abrir solo una pestaña
+    if (!pestañasAbiertas[id] || pestañasAbiertas[id].closed) {
+      pestañasAbiertas[id] = window.open(
+        `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
+        `_blank`
+      );
+    } else {
+      pestañasAbiertas[id].focus();
+    }
+
+    // 🖱️ Click izquierdo -> enfocar pestaña existente
+    recuadro.addEventListener("click", () => {
+      const pestaña = pestañasAbiertas[id];
+      if (pestaña && !pestaña.closed) {
+        pestaña.focus();
+      } else {
+        const confirmar = confirm(`La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`);
+        if (confirmar) {
+          pestañasAbiertas[id] = window.open(
+            `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
+            `_blank`
+          );
+        } else {
+          recuadro.remove();
+          delete pestañasAbiertas[id];
+        }
+      }
+    });
+
+    // 🖱️ Click derecho -> cerrar pestaña
+    recuadro.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const confirmar = confirm(`¿Deseas cerrar la pestaña ${id}?`);
+      if (confirmar) {
+        if (pestañasAbiertas[id] && !pestañasAbiertas[id].closed) {
+          pestañasAbiertas[id].close();
+        }
+        recuadro.remove();
+        delete pestañasAbiertas[id];
+      }
+    });
+  });
+}
 // -------------------------
 // DATOS DE PLANTAS, ÁREAS Y EQUIPOS
 // -------------------------
@@ -853,7 +1073,10 @@ function mostrarSupervisor(planta) {
 }
 
 
+
+
+
 </script>
-</body>
+    </body>
 </html>
 
