@@ -1138,6 +1138,7 @@ btnNuevo.addEventListener("click", (e) => {
     }
 
 
+
 // -------------------------
 // NAVEGACIÓN ENTRE INSTANCIAS
 // -------------------------
@@ -1149,37 +1150,30 @@ if (contenedorContador) {
   etiqueta.classList.add("btn");
   etiqueta.style.marginLeft = "10px";
 
-  if (!instanciaActual || instanciaActual === "null") {
-    etiqueta.textContent = "Inicio";
-    etiqueta.style.background = "#2c2c2c";
-    etiqueta.style.color = "#fff";
-  } else {
-    etiqueta.textContent = `#${instanciaActual}`;
-  }
-
-  contenedorContador.appendChild(etiqueta);
-
-  // Botón para volver a principal
   if (instanciaActual && instanciaActual !== "null") {
-    const btnVolver = document.createElement("button");
-    btnVolver.textContent = "Volver a la pestaña principal";
-    btnVolver.classList.add("btn");
-    btnVolver.style.marginLeft = "10px";
+    // 🔹 Muestra el número de la instancia
+    etiqueta.textContent = `#${instanciaActual}`;
+    contenedorContador.appendChild(etiqueta);
 
-    btnVolver.onclick = () => {
-      if (window.opener && !window.opener.closed) {
-        window.opener.focus();
-      } else {
-        alert("No se encontró la pestaña principal.");
-      }
+    // 🔹 Agrega el botón "Inicio" SOLO dentro de una instancia
+    const btnInicio = document.createElement("button");
+    btnInicio.textContent = "Inicio";
+    btnInicio.classList.add("btn");
+    btnInicio.style.marginLeft = "10px";
+    btnInicio.style.background = "#2c2c2c";
+    btnInicio.style.color = "#fff";
+
+    btnInicio.onclick = () => {
+      window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
     };
 
-    contenedorContador.appendChild(btnVolver);
+    contenedorContador.appendChild(btnInicio);
   }
 }
 
 
   </script>
 </body>
+
 
 </html>
