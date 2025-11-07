@@ -1,294 +1,371 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Informe de Mantenimiento - Móvil</title>
-        <style>
-:root {
-  --bg: #ffffff;
-  --card: #ffffff;     /* 🔹 agregado para fondo de las tarjetas */
-  --accent: #d40000;
-  --muted: #444;
-}
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-background: rgba(226, 226, 234, 0.25);
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Informe de Mantenimiento - Móvil</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      /* 🔹 agregado para fondo de las tarjetas */
+      --accent: #d40000;
+      --muted: #444;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: rgba(226, 226, 234, 0.25);
 
 
-  
-}
 
-/* ---------- Fondo principal ---------- */
-#contenedorPrincipal {
-  min-height: 100vh;
-  padding: 20px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 1s ease-in-out;
-}
+    }
 
-/* ---------- Encabezado ---------- */
-.header {
+    /* ---------- Fondo principal ---------- */
+    #contenedorPrincipal {
+      min-height: 100vh;
+      padding: 20px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-image 1s ease-in-out;
+    }
+
+    /* ---------- Encabezado ---------- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+
+      /* ✨ Efecto vidrio (Glassmorphism) */
+      background: rgba(255, 255, 255, 0.15);
+      /* Fondo translúcido más neutro */
+      backdrop-filter: blur(14px) saturate(150%);
+      /* Efecto de desenfoque + saturación */
+      -webkit-backdrop-filter: blur(14px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      /* Borde blanco semitransparente */
+      border-radius: 16px;
+      /* Bordes suaves */
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      /* Sombra suave para profundidad */
+
+
+      /* ✍️ Texto */
+      color: #fff;
+      font-family: "Poppins", "Inter", system-ui, sans-serif;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      /* Mejora la legibilidad del texto */
+    }
+
+    /* ---------- Información central ---------- */
+    .header .info {
+      flex: 1;
+      text-align: center;
+    }
+
+    .header .info h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .header .info h2 {
+      margin: 2px 0 0 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    /* ---------- Datos del lado derecho ---------- */
+    .header .datos {
+      text-align: right;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    /* ---------- Contenedor principal ---------- */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(4px);
+      /* opcional: agrega un efecto de difuminado elegante */
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* ---------- Inputs y etiquetas ---------- */
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    /* ---------- Botones ---------- */
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+
+    .btn2 {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      background: var(--accent);
+      color: #022135;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* ---------- Firmas ---------- */
+    .signature {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      width: 100%;
+      height: 140px;
+      touch-action: none;
+    }
+
+    /* ---------- Texto gris secundario ---------- */
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ---------- Flex utilitario ---------- */
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ---------- Imágenes cargadas ---------- */
+    .file-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 100px;
+      /* 🔹 limita la altura */
+      overflow-y: auto;
+      /* 🔹 evita que expanda el layout */
+    }
+
+    .thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+
+
+    /* ---------- 🔹 MEDIA QUERIES RESPONSIVAS ---------- */
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      .header .info h1 {
+        font-size: 18px;
+      }
+
+      .header .info h2 {
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .thumb {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 480px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header .info h1 {
+        font-size: 16px;
+      }
+
+      .header .info h2 {
+        font-size: 13px;
+      }
+
+      .header .datos {
+        font-size: 12px;
+      }
+
+      .btn {
+        width: 100%;
+        /* 🔹 Botones ocupan todo el ancho */
+      }
+
+      .thumb {
+        width: 60px;
+        height: 60px;
+      }
+
+      .signature {
+        height: 120px;
+      }
+    }
+
+
+    /* Contenedor de los recuadros */
+    .contador-container {
+      display: inline-flex;
+      gap: 5px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    /* Estilo de cada recuadro */
+    .contador-item {
+      width: 25px;
+      height: 25px;
+      background-color: #eee;
+      border: 2px solid #007bff;
+      border-radius: 5px;
+      color: #007bff;
+      font-weight: bold;
+      text-align: center;
+      line-height: 22px;
+      font-size: 14px;
+    }
+
+    /* Contenedor de los formularios */
+    #formularios {
+      margin-top: 20px;
+    }
+
+    .formulario {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+
+    /* Contenedor principal de acciones (Nuevo + Instancias) */
+.acciones-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-
-  /* ✨ Efecto vidrio (Glassmorphism) */
-  background: rgba(255, 255, 255, 0.15);       /* Fondo translúcido más neutro */
-  backdrop-filter: blur(14px) saturate(150%);  /* Efecto de desenfoque + saturación */
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Borde blanco semitransparente */
-  border-radius: 16px;                         /* Bordes suaves */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);   /* Sombra suave para profundidad */
-
-  
-  /* ✍️ Texto */
-  color: #fff;
-  font-family: "Poppins", "Inter", system-ui, sans-serif;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);   /* Mejora la legibilidad del texto */
+  gap: 10px;
 }
 
-/* ---------- Información central ---------- */
-.header .info {
-  flex: 1;
+/* Contenedor del botón de instancia y volver */
+.instancia-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+/* ---------- Recuadros del contador ---------- */
+.contador-container {
+  display: inline-flex;
+  gap: 5px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.contador-item {
+  width: 25px;
+  height: 25px;
+  background-color: #eee;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  color: #007bff;
+  font-weight: bold;
   text-align: center;
-}
-
-.header .info h1 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.header .info h2 {
-  margin: 2px 0 0 0;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* ---------- Datos del lado derecho ---------- */
-.header .datos {
-  text-align: right;
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-/* ---------- Contenedor principal ---------- */
-.container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 16px;
-}
-.card {
-  background-color: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(4px); /* opcional: agrega un efecto de difuminado elegante */
-  border-radius: 12px;
-  padding: 20px;
-}
-/* ---------- Inputs y etiquetas ---------- */
-label {
-  display: block;
-  font-weight: 600;
-  margin-top: 10px;
-  margin-bottom: 6px;
-}
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  line-height: 22px;
   font-size: 14px;
-  box-sizing: border-box;
-}
-textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-/* ---------- Botones ---------- */
-.btn {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 0;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
+  transition: all 0.25s ease; /* Suaviza la animación */
   cursor: pointer;
-  margin-top: 10px;
-}
-.btn.secondary {
-  background: #fff;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-}
-.btn:hover {
-  opacity: 0.9;
 }
 
-/* ---------- Firmas ---------- */
-.signature {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  width: 100%;
-  height: 140px;
-  touch-action: none;
-}
-
-/* ---------- Texto gris secundario ---------- */
-.muted {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* ---------- Flex utilitario ---------- */
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ---------- Imágenes cargadas ---------- */
-.file-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-  max-height: 100px;      /* 🔹 limita la altura */
-  overflow-y: auto;       /* 🔹 evita que expanda el layout */
-}
-.thumb {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid #ddd;
+/* 🔹 Efecto al pasar el mouse */
+.contador-item:hover {
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+  transform: scale(1.1);
 }
 
 
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
 
-/* ---------- 🔹 MEDIA QUERIES RESPONSIVAS ---------- */
+<body>
 
-/* Tablets */
-@media (max-width: 768px) {
-  .header .info h1 {
-    font-size: 18px;
-  }
-
-  .header .info h2 {
-    font-size: 14px;
-  }
-
-  .container {
-    padding: 10px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  .thumb {
-    width: 70px;
-    height: 70px;
-  }
-}
-
-/* Celulares */
-@media (max-width: 480px) {
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .header .info h1 {
-    font-size: 16px;
-  }
-
-  .header .info h2 {
-    font-size: 13px;
-  }
-
-  .header .datos {
-    font-size: 12px;
-  }
-
-  .btn {
-    width: 100%; /* 🔹 Botones ocupan todo el ancho */
-  }
-
-  .thumb {
-    width: 60px;
-    height: 60px;
-  }
-
-  .signature {
-    height: 120px;
-  }
-}
-
-
- /* Contenedor de los recuadros */
-  .contador-container {
-    display: inline-flex;
-    gap: 5px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-
-  /* Estilo de cada recuadro */
-  .contador-item {
-    width: 25px;
-    height: 25px;
-    background-color: #eee;
-    border: 2px solid #007bff;
-    border-radius: 5px;
-    color: #007bff;
-    font-weight: bold;
-    text-align: center;
-    line-height: 22px;
-    font-size: 14px;
-  }
-
-  /* Contenedor de los formularios */
-  #formularios {
-    margin-top: 20px;
-  }
-
-  .formulario {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 10px;
-    margin-top: 10px;
-  }
-</style>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-            rel="stylesheet">
-        <script
-            src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-    </head>
-    <body>
-
-        <!-- ---------- ENCABEZADO ---------- -->
-        <div class="header"
-            style="display:flex; align-items:center; justify-content:space-between; padding:10px 20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-            <!-- LOGO + NOMBRE DE LA EMPRESA -->
-            <div style="text-align:center;">
-                <img src="logo.png" alt="Logo"
-                    style="width:90px; height:auto; margin-bottom:5%;">
-                <p style="
+  <!-- ---------- ENCABEZADO ---------- -->
+  <div class="header"
+    style="display:flex; align-items:center; justify-content:space-between; padding:10px 20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+    <!-- LOGO + NOMBRE DE LA EMPRESA -->
+    <div style="text-align:center;">
+      <img src="logo.png" alt="Logo" style="width:90px; height:auto; margin-bottom:5%;">
+      <p style="
         font-size:12px;
         font-weight:bold;
         color:#1b0202;
@@ -296,787 +373,808 @@ textarea {
         margin-top:0;
         margin-bottom:5%;
      ">
-                    ORGANIZACIÓN<br>CÁRDENAS S.A.S
-                </p>
-            </div>
+        ORGANIZACIÓN<br>CÁRDENAS S.A.S
+      </p>
+    </div>
 
-            <!-- INFORMACIÓN CENTRAL -->
-            <div class="info"
-                style="text-align:center; font-family:'Poppins', sans-serif;">
-                <h1
-                    style="font-size:20px; color:#1b0202; font-weight:700;">INFORME
-                    TÉCNICO</h1>
-                <h2
-                    style="margin:0; font-size:17px; color:#1b0202; font-weight:500;">MANTENIMIENTO</h2>
-            </div>
+    <!-- INFORMACIÓN CENTRAL -->
+    <div class="info" style="text-align:center; font-family:'Poppins', sans-serif;">
+      <h1 style="font-size:20px; color:#1b0202; font-weight:700;">INFORME
+        TÉCNICO</h1>
+      <h2 style="margin:0; font-size:17px; color:#1b0202; font-weight:500;">MANTENIMIENTO</h2>
+    </div>
 
-        </div>
-        <div class="container">
+  </div>
+  <div class="container">
 
-            <div id="contenedorPrincipal">
-               <button id="nuevoFormulario" type="button" class="btn" style="margin-top:10px;">Nuevo</button>
+    <div class="acciones-container">
+      <button id="nuevoFormulario" type="button" class="btn" style="margin-top:10px;">Nuevo</button>
+      <div class="contador-container" id="contadorContainer"></div>
+      <div class="instancia-container" id="instanciaContainer"></div>
+    </div>
 
-                <div class="contador-container" id="contadorContainer"></div>
+    <form id="formulario" class="card" onsubmit="return false;">
+      <label># activo</label>
+      <input id="codigo" type="text" placeholder="FO-1600-041">
 
-                <form id="formulario" class="card" onsubmit="return false;">
-                    <label># activo</label>
-                    <input id="codigo" type="text" placeholder="FO-1600-041">
+      <button id="btnQR" type="button" class="btn secondary" style="margin-top:10px; ">Escanear QR</button>
+      <div id="qrcode" style="margin-top:15px;"></div>
 
-                    <button id="btnQR" type="button" class="btn secondary"
-                        style="margin-top:10px; ">Escanear QR</button>
-                    <div id="qrcode" style="margin-top:15px;"></div>
+      <p id="supervisor" style="font-weight:600; color:#021321; margin-top:10px; margin-bottom: 20px;">
+        👤 Supervisor: (selecciona una planta)
+      </p>
 
-                    <p id="supervisor"
-                        style="font-weight:600; color:#021321; margin-top:10px; margin-bottom: 20px;">
-                        👤 Supervisor: (selecciona una planta)
-                    </p>
+      <label>Planta</label>
+      <select id="planta">
+        <option value disabled selected>Seleccione una
+          planta</option>
+        <option value="GRANOS">GRANOS</option>
+        <option value="ASEO">ASEO</option>
+        <option value="ALIMENTOS">ALIMENTOS</option>
+        <option value="AGUAS">BEBIDAS</option>
+      </select>
 
-                    <label>Planta</label>
-                    <select id="planta">
-                        <option value disabled selected>Seleccione una
-                            planta</option>
-                        <option value="GRANOS">GRANOS</option>
-                        <option value="ASEO">ASEO</option>
-                        <option value="ALIMENTOS">ALIMENTOS</option>
-                        <option value="AGUAS">BEBIDAS</option>
-                    </select>
+      <label>Área</label>
+      <select id="area">
+        <option value disabled selected>Seleccione un
+          área</option>
+      </select>
 
-                    <label>Área</label>
-                    <select id="area">
-                        <option value disabled selected>Seleccione un
-                            área</option>
-                    </select>
+      <label>Equipo / Máquina</label>
+      <select id="equipo">
+        <option value disabled selected>Seleccione un
+          equipo</option>
+      </select>
 
-                    <label>Equipo / Máquina</label>
-                    <select id="equipo">
-                        <option value disabled selected>Seleccione un
-                            equipo</option>
-                    </select>
+      <label>Fecha Inicio</label>
+      <input id="fechaInicio" type="datetime-local" required>
 
-                    <label>Fecha Inicio</label>
-                    <input id="fechaInicio" type="datetime-local" required>
+      <label>Fecha Fin</label>
+      <input id="fechaFin" type="datetime-local">
 
-                    <label>Fecha Fin</label>
-                    <input id="fechaFin" type="datetime-local">
+      <label>Tipo de mantenimiento</label>
+      <select id="tipoMantenimiento">
+        <option value disabled selected>Seleccione clase
+        </option>
+        <option>Preventivo</option>
+        <option>Correctivo</option>
+        <option>Predictivo</option>
+        <option>Mejora/Adecuación</option>
+      </select>
 
-                    <label>Tipo de mantenimiento</label>
-                    <select id="tipoMantenimiento">
-                        <option value disabled selected>Seleccione clase
-                        </option>
-                        <option>Preventivo</option>
-                        <option>Correctivo</option>
-                        <option>Predictivo</option>
-                        <option>Mejora/Adecuación</option>
-                    </select>
+      <label>Ténico Mantenimiento</label>
+      <select id="ejecutor">
+        <option value disabled selected>Seleccione Ténico
+        </option>
+        <option>JORGE LEONARDO RODRIGUEZ</option>
+        <option>PINEDA AGUDELO YONATAN STIVEN</option>
+        <option>QUEVEDO LADINO MARIO</option>
+        <option>SARMIENTO ATENCIO DANILO</option>
+        <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+        <option>JHON ANDRES QUINTERO</option>
+        <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+      </select>
 
-                    <label>Ténico Mantenimiento</label>
-                    <select id="ejecutor">
-                        <option value disabled selected>Seleccione Ténico
-                        </option>
-                        <option>JORGE LEONARDO RODRIGUEZ</option>
-                        <option>PINEDA AGUDELO YONATAN STIVEN</option>
-                        <option>QUEVEDO LADINO MARIO</option>
-                        <option>SARMIENTO ATENCIO DANILO</option>
-                        <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
-                        <option>JHON ANDRES QUINTERO</option>
-                        <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
-                    </select>
+      <label>Tiempo empleado</label>
+      <input id="tiempo" type="text" readonly placeholder="Se calculará automáticamente">
 
-                    <label>Tiempo empleado</label>
-                    <input id="tiempo" type="text" readonly
-                        placeholder="Se calculará automáticamente">
+      <label>Daños encontrados</label>
+      <textarea id="danos"></textarea>
 
-                    <label>Daños encontrados</label>
-                    <textarea id="danos"></textarea>
+      <label>Trabajo ejecutado</label>
+      <textarea id="trabajo"></textarea>
 
-                    <label>Trabajo ejecutado</label>
-                    <textarea id="trabajo"></textarea>
+      <label>Repuestos utilizados / recomendados</label>
+      <textarea id="repuestos"></textarea>
 
-                    <label>Repuestos utilizados / recomendados</label>
-                    <textarea id="repuestos"></textarea>
+      <label>Herramientas utilizadas</label>
+      <textarea id="herramientas"></textarea>
 
-                    <label>Herramientas utilizadas</label>
-                    <textarea id="herramientas"></textarea>
+      <label>Registro fotográfico antes </label>
+      <input id="fotos" type="file" accept="image/*" capture="environment" multiple>
+      <div id="thumbs" class="file-list"></div>
 
-                    <label>Registro fotográfico antes </label>
-                    <input id="fotos" type="file" accept="image/*"
-                        capture="environment" multiple>
-                    <div id="thumbs" class="file-list"></div>
+      <hr>
+      <label>Firma Tecnico Mantenimiento</label>
+      <canvas id="sigEjecutor" class="signature"></canvas>
+      <button type="button" class="btn secondary" onclick="limpiarFirma('sigEjecutor')">Limpiar</button>
 
-                    <hr>
-                    <label>Firma Tecnico Mantenimiento</label>
-                    <canvas id="sigEjecutor" class="signature"></canvas>
-                    <button type="button" class="btn secondary"
-                        onclick="limpiarFirma('sigEjecutor')">Limpiar</button>
+      <label>Firma supervisor/operario</label>
+      <canvas id="sigCoordinador" class="signature"></canvas>
+      <button type="button" class="btn secondary" onclick="limpiarFirma('sigCoordinador')">Limpiar</button>
 
-                    <label>Firma supervisor/operario</label>
-                    <canvas id="sigCoordinador" class="signature"></canvas>
-                    <button type="button" class="btn secondary"
-                        onclick="limpiarFirma('sigCoordinador')">Limpiar</button>
+      <div class="flex-between" style="margin-top:10px">
+        <button type="button" class="btn secondary" onclick="descargarPDF()">Descargar PDF</button>
+        <button type="button" class="btn" onclick="compartirPDF()">Compartir PDF</button>
+      </div>
+    </form>
+  </div>
 
-                    <div class="flex-between" style="margin-top:10px">
-                        <button type="button" class="btn secondary"
-                            onclick="descargarPDF()">Descargar PDF</button>
-                        <button type="button" class="btn"
-                            onclick="compartirPDF()">Compartir PDF</button>
-                    </div>
-                </form> </div>
+  <div id="estado" class="muted"></div>
+  </div>
 
-            <div id="estado" class="muted"></div>
-        </div>
+  <script>
+    const { jsPDF } = window.jspdf;
+    let imagesData = [], sigEjecutorData = null, sigCoordinadorData = null;
 
-        <script>
-const { jsPDF } = window.jspdf;
-let imagesData=[], sigEjecutorData=null, sigCoordinadorData=null;
+    // capturar fotos
+    document.getElementById('fotos').addEventListener('change', async e => {
+      const files = [...e.target.files];
+      for (const f of files) {
+        const data = await fileToDataURL(f, 1024);
+        imagesData.push(data);
+      }
+      renderThumbs();
+    });
+    function renderThumbs() {
+      const div = document.getElementById('thumbs');
+      div.innerHTML = '';
+      imagesData.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src; img.className = 'thumb';
+        img.onclick = () => { if (confirm('Eliminar foto?')) { imagesData.splice(i, 1); renderThumbs(); } };
+        div.appendChild(img);
+      });
+    }
+    function fileToDataURL(file, max = 1024) {
+      return new Promise(res => {
+        const img = new Image(), r = new FileReader();
+        r.onload = e => {
+          img.onload = () => {
+            let w = img.width, h = img.height;
+            if (Math.max(w, h) > max) { const s = max / Math.max(w, h); w *= s; h *= s; }
+            const c = document.createElement('canvas'); c.width = w; c.height = h;
+            c.getContext('2d').drawImage(img, 0, 0, w, h);
+            res(c.toDataURL('image/jpeg', 0.8));
+          }; img.src = e.target.result;
+        };
+        r.readAsDataURL(file);
+      });
+    }
 
-// capturar fotos
-document.getElementById('fotos').addEventListener('change', async e=>{
- const files=[...e.target.files];
- for(const f of files){
-   const data=await fileToDataURL(f,1024);
-   imagesData.push(data);
- }
- renderThumbs();
-});
-function renderThumbs(){
- const div=document.getElementById('thumbs');
- div.innerHTML='';
- imagesData.forEach((src,i)=>{
-  const img=document.createElement('img');
-  img.src=src;img.className='thumb';
-  img.onclick=()=>{if(confirm('Eliminar foto?')){imagesData.splice(i,1);renderThumbs();}};
-  div.appendChild(img);
- });
-}
-function fileToDataURL(file,max=1024){return new Promise(res=>{
- const img=new Image(),r=new FileReader();
- r.onload=e=>{img.onload=()=>{
-  let w=img.width,h=img.height;
-  if(Math.max(w,h)>max){const s=max/Math.max(w,h);w*=s;h*=s;}
-  const c=document.createElement('canvas');c.width=w;c.height=h;
-  c.getContext('2d').drawImage(img,0,0,w,h);
-  res(c.toDataURL('image/jpeg',0.8));
- };img.src=e.target.result;};
- r.readAsDataURL(file);
-});}
+    // firmas
+    function initFirma(id) {
+      const c = document.getElementById(id), ctx = c.getContext('2d');
+      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
+      let d = false, lx, ly;
+      function pos(e) { const r = c.getBoundingClientRect(); const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left; const y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top; return { x, y }; }
+      c.addEventListener('pointerdown', e => { d = true; ({ x: lx, y: ly } = pos(e)); });
+      c.addEventListener('pointermove', e => { if (!d) return; const { x, y } = pos(e); ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(x, y); ctx.strokeStyle = '#000'; ctx.lineWidth = 2; ctx.stroke(); lx = x; ly = y; });
+      window.addEventListener('pointerup', () => { d = false; });
+    }
+    function limpiarFirma(id) {
+      const c = document.getElementById(id); const ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, c.width, c.height); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
+      if (id === 'sigEjecutor') sigEjecutorData = null;
+      if (id === 'sigCoordinador') sigCoordinadorData = null;
+    }
+    initFirma('sigEjecutor'); initFirma('sigCoordinador');
 
-// firmas
-function initFirma(id){
- const c=document.getElementById(id),ctx=c.getContext('2d');
- ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);
- let d=false,lx,ly;
- function pos(e){const r=c.getBoundingClientRect();const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;const y=(e.touches?e.touches[0].clientY:e.clientY)-r.top;return {x,y};}
- c.addEventListener('pointerdown',e=>{d=true;({x:lx,y:ly}=pos(e));});
- c.addEventListener('pointermove',e=>{if(!d)return;const {x,y}=pos(e);ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(x,y);ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();lx=x;ly=y;});
- window.addEventListener('pointerup',()=>{d=false;});
-}
-function limpiarFirma(id){
- const c=document.getElementById(id);const ctx=c.getContext('2d');
- ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);
- if(id==='sigEjecutor')sigEjecutorData=null;
- if(id==='sigCoordinador')sigCoordinadorData=null;
-}
-initFirma('sigEjecutor');initFirma('sigCoordinador');
+    // calcular tiempo
+    const fi = document.getElementById('fechaInicio'), ff = document.getElementById('fechaFin');
+    function calcTiempo() {
+      if (!fi.value || !ff.value) return;
+      const a = new Date(fi.value), b = new Date(ff.value);
+      if (b > a) {
+        const d = (b - a) / 60000; const h = Math.floor(d / 60), m = Math.floor(d % 60);
+        document.getElementById('tiempo').value = `${h}h ${m}m`;
+      }
+    }
+    fi.addEventListener('change', calcTiempo); ff.addEventListener('change', calcTiempo);
 
-// calcular tiempo
-const fi=document.getElementById('fechaInicio'),ff=document.getElementById('fechaFin');
-function calcTiempo(){
- if(!fi.value||!ff.value)return;
- const a=new Date(fi.value),b=new Date(ff.value);
- if(b>a){
-  const d=(b-a)/60000;const h=Math.floor(d/60),m=Math.floor(d%60);
-  document.getElementById('tiempo').value=`${h}h ${m}m`;
- }}
-fi.addEventListener('change',calcTiempo);ff.addEventListener('change',calcTiempo);
-
-async function generarPDF() {
-  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-  const W = doc.internal.pageSize.getWidth(),
+    async function generarPDF() {
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const W = doc.internal.pageSize.getWidth(),
         H = doc.internal.pageSize.getHeight(),
         M = 50;
 
-  const accent = [200, 0, 0];   // Rojo corporativo
-  const gray = [50, 50, 50];    // Gris para texto
+      const accent = [200, 0, 0];   // Rojo corporativo
+      const gray = [50, 50, 50];    // Gris para texto
 
-  let y = M;
+      let y = M;
 
-// --- ENCABEZADO CON LOGO Y DATOS ---
-const logo = await getBase64FromUrl('logo.png'); // tu archivo logo
-const logoW = 50, logoH = 30;
+      // --- ENCABEZADO CON LOGO Y DATOS ---
+      const logo = await getBase64FromUrl('logo.png'); // tu archivo logo
+      const logoW = 50, logoH = 30;
 
-// Logo (queda solo a la izquierda)
-doc.addImage(logo, 'PNG', M, y +1, logoW, logoH);
+      // Logo (queda solo a la izquierda)
+      doc.addImage(logo, 'PNG', M, y + 1, logoW, logoH);
 
-// Rectángulo rojo principal
-doc.setFillColor(...accent);
-doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 40, 'F');
+      // Rectángulo rojo principal
+      doc.setFillColor(...accent);
+      doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 40, 'F');
 
-// 🔹 Texto “ORGANIZACIÓN CÁRDENAS S.A.S” alineado con “INFORME TÉCNICO”
-doc.setFont('helvetica', 'bold');
-doc.setFontSize(16);
-doc.setTextColor(30, 30, 30);
-const nombreEmpresa = ["ORGANIZACIÓN CÁRDENAS S.A.S"];
-// → Se ubica al mismo nivel que el rectángulo rojo
-doc.text(nombreEmpresa, M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-  y - 10,
-  { align: 'center' });
+      // 🔹 Texto “ORGANIZACIÓN CÁRDENAS S.A.S” alineado con “INFORME TÉCNICO”
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor(30, 30, 30);
+      const nombreEmpresa = ["ORGANIZACIÓN CÁRDENAS S.A.S"];
+      // → Se ubica al mismo nivel que el rectángulo rojo
+      doc.text(nombreEmpresa, M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+        y - 10,
+        { align: 'center' });
 
-// Texto principal (INFORME TÉCNICO)
-doc.setFont('helvetica', 'bold');
-doc.setFontSize(13);
-doc.setTextColor(255, 255, 255);
-doc.text(
-  "INFORME TÉCNICO",
-  M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-  y + 20,
-  { align: 'center' }
-);
+      // Texto principal (INFORME TÉCNICO)
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      doc.setTextColor(255, 255, 255);
+      doc.text(
+        "INFORME TÉCNICO",
+        M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+        y + 20,
+        { align: 'center' }
+      );
 
-// Línea blanca inferior (MANTENIMIENTO)
-doc.setFillColor(255, 255, 255);
-doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
-doc.setTextColor(0, 0, 0);
-doc.setFontSize(12);
-doc.text(
-  "MANTENIMIENTO",
-  M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-  y + 45,
-  { align: 'center' }
-);
+      // Línea blanca inferior (MANTENIMIENTO)
+      doc.setFillColor(255, 255, 255);
+      doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(12);
+      doc.text(
+        "MANTENIMIENTO",
+        M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
+        y + 45,
+        { align: 'center' }
+      );
 
-// Textos del lado derecho
-doc.setFontSize(10);
-doc.setTextColor(255, 255, 255); // ⚪ Blanco
-doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
-doc.text(`Versión: 01`, W - M - 100, y + 22);
-
-
-// Mover cursor después del encabezado
-y += 90;
+      // Textos del lado derecho
+      doc.setFontSize(10);
+      doc.setTextColor(255, 255, 255); // ⚪ Blanco
+      doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
+      doc.text(`Versión: 01`, W - M - 100, y + 22);
 
 
-
-  // --- CONTENIDO GENERAL ---
-  const campos = [
-    ["Código", v('codigo')], ["Planta", v('planta')],["Equipo", v('equipo')], 
-    ["Fecha Inicio", fmtFecha(v('fechaInicio'))], ["Fecha Fin", fmtFecha(v('fechaFin'))],
-    ["Mantenimiento", v('tipoMantenimiento')], ["Técnico", v('ejecutor')], ["Tiempo", v('tiempo')]
-  ];
-
-  doc.setFontSize(11);
-  doc.setTextColor(...gray);
-  for (const [k, val] of campos) {
-    doc.setFont('helvetica', 'bold'); doc.text(`${k}:`, M, y);
-    doc.setFont('helvetica', 'normal'); doc.text(String(val || '-'), M + 110, y);
-    y += 20; if (y > H - 150) { doc.addPage(); y = M; }
-  }
-
-  addSec("Daños encontrados", v('danos'));
-  addSec("Trabajo ejecutado", v('trabajo'));
-  addSec("Repuestos utilizados / recomendados", v('repuestos'));
-  addSec("Herramientas utilizadas", v('herramientas'));
-
-  // --- FOTOS ---
-  if (imagesData.length > 0) {
-    doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
-    doc.text("Registro fotográfico", M, y + 10); y += 20;
-    let x = M; const size = 120, gap = 12;
-    for (const img of imagesData) {
-      if (x + size > W - M) { x = M; y += size + gap; }
-      if (y + size > H - 120) { doc.addPage(); y = M; }
-      doc.addImage(img, 'JPEG', x, y, size, size);
-      x += size + gap;
-    } y += size + 20;
-  }
-
- // --- FIRMAS ---
-const se = document.getElementById('sigEjecutor').toDataURL();
-const sc = document.getElementById('sigCoordinador').toDataURL();
-const fw = 150, fh = 70;
-const fy = H - 150;
-
-doc.setDrawColor(180, 180, 180);
-
-// Dibujar líneas bajo las firmas
-doc.line(M, fy + fh + 5, M + fw, fy + fh + 5);
-doc.line(W - M - fw, fy + fh + 5, W - M, fy + fh + 5);
-
-// Agregar las imágenes de las firmas
-doc.addImage(se, 'PNG', M, fy, fw, fh);
-doc.addImage(sc, 'PNG', W - M - fw, fy, fw, fh);
-
-// Títulos (Ejecutor y Supervisor)
-doc.setFontSize(10);
-doc.setFont('helvetica', 'bold');
-doc.setTextColor(0, 0, 0); // 🔹 Asegurar color negro
-doc.text("Técnico Mantenimiento", M + fw / 2, fy + fh + 18, { align: 'center' });
-doc.text("Supervisor", W - M - fw / 2, fy + fh + 18, { align: 'center' });
-
-// 🔹 Mostrar los nombres reales del ejecutor y supervisor debajo
-doc.setFont('helvetica', 'normal');
-doc.setFontSize(9);
-doc.setTextColor(0, 0, 0); // 🔹 Mantener negro
-
-const nombreEjecutor = document.getElementById("ejecutor").value || "-";
-const plantaActual = document.getElementById("planta").value;
-const nombreSupervisor = supervisores[plantaActual.toUpperCase()] || "No asignado";
-
-// Mostrar nombres debajo de los títulos
-doc.text(nombreEjecutor, M + fw / 2, fy + fh + 30, { align: 'center' });
-doc.text(nombreSupervisor, W - M - fw / 2, fy + fh + 30, { align: 'center' });
+      // Mover cursor después del encabezado
+      y += 90;
 
 
-  const blob = doc.output('blob');
-  return new File([blob], 'informe.pdf', { type: 'application/pdf' });
 
-  // --- FUNCIONES AUXILIARES ---
-  function v(id) { return document.getElementById(id).value; }
-  function fmtFecha(f) {
-    if (!f) return '';
-    const d = new Date(f);
-    return d.toLocaleString().replace(',', '');
-  }
-  function addSec(t, txt) {
-    if (!txt) return;
-    y += 10;
-    doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
-    doc.text(t, M, y); y += 12;
-    doc.setFont('helvetica', 'normal'); doc.setTextColor(...gray);
-    const lines = doc.splitTextToSize(txt, W - M * 2);
-    doc.text(lines, M, y + 8);
-    y += lines.length * 14 + 10;
-  }
-  async function getBase64FromUrl(url) {
-    const res = await fetch(url);
-    const blob = await res.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.readAsDataURL(blob);
-    });
-  }
-}
+      // --- CONTENIDO GENERAL ---
+      const campos = [
+        ["Código", v('codigo')], ["Planta", v('planta')], ["Equipo", v('equipo')],
+        ["Fecha Inicio", fmtFecha(v('fechaInicio'))], ["Fecha Fin", fmtFecha(v('fechaFin'))],
+        ["Mantenimiento", v('tipoMantenimiento')], ["Técnico", v('ejecutor')], ["Tiempo", v('tiempo')]
+      ];
 
-// -------------------------
-// VALIDAR CAMPOS OBLIGATORIOS
-// -------------------------
-function validarFormulario() {
-  const camposObligatorios = [
-    'codigo', 'planta', 'area', 'equipo',
-    'fechaInicio', 'fechaFin', 'tipoMantenimiento',
-    'ejecutor', 'danos', 'trabajo'
-  ];
+      doc.setFontSize(11);
+      doc.setTextColor(...gray);
+      for (const [k, val] of campos) {
+        doc.setFont('helvetica', 'bold'); doc.text(`${k}:`, M, y);
+        doc.setFont('helvetica', 'normal'); doc.text(String(val || '-'), M + 110, y);
+        y += 20; if (y > H - 150) { doc.addPage(); y = M; }
+      }
 
-  let primeroFaltante = null;
-  let faltantes = [];
+      addSec("Daños encontrados", v('danos'));
+      addSec("Trabajo ejecutado", v('trabajo'));
+      addSec("Repuestos utilizados / recomendados", v('repuestos'));
+      addSec("Herramientas utilizadas", v('herramientas'));
 
-  camposObligatorios.forEach(id => {
-    const campo = document.getElementById(id);
-    if (!campo || !campo.value.trim()) {
-      faltantes.push(id);
-      campo.style.border = '2px solid red';
-      if (!primeroFaltante) primeroFaltante = campo;
-    } else {
-      campo.style.border = ''; // limpiar si está correcto
+      // --- FOTOS ---
+      if (imagesData.length > 0) {
+        doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
+        doc.text("Registro fotográfico", M, y + 10); y += 20;
+        let x = M; const size = 120, gap = 12;
+        for (const img of imagesData) {
+          if (x + size > W - M) { x = M; y += size + gap; }
+          if (y + size > H - 120) { doc.addPage(); y = M; }
+          doc.addImage(img, 'JPEG', x, y, size, size);
+          x += size + gap;
+        } y += size + 20;
+      }
+
+      // --- FIRMAS ---
+      const se = document.getElementById('sigEjecutor').toDataURL();
+      const sc = document.getElementById('sigCoordinador').toDataURL();
+      const fw = 150, fh = 70;
+      const fy = H - 150;
+
+      doc.setDrawColor(180, 180, 180);
+
+      // Dibujar líneas bajo las firmas
+      doc.line(M, fy + fh + 5, M + fw, fy + fh + 5);
+      doc.line(W - M - fw, fy + fh + 5, W - M, fy + fh + 5);
+
+      // Agregar las imágenes de las firmas
+      doc.addImage(se, 'PNG', M, fy, fw, fh);
+      doc.addImage(sc, 'PNG', W - M - fw, fy, fw, fh);
+
+      // Títulos (Ejecutor y Supervisor)
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 0, 0); // 🔹 Asegurar color negro
+      doc.text("Técnico Mantenimiento", M + fw / 2, fy + fh + 18, { align: 'center' });
+      doc.text("Supervisor", W - M - fw / 2, fy + fh + 18, { align: 'center' });
+
+      // 🔹 Mostrar los nombres reales del ejecutor y supervisor debajo
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(0, 0, 0); // 🔹 Mantener negro
+
+      const nombreEjecutor = document.getElementById("ejecutor").value || "-";
+      const plantaActual = document.getElementById("planta").value;
+      const nombreSupervisor = supervisores[plantaActual.toUpperCase()] || "No asignado";
+
+      // Mostrar nombres debajo de los títulos
+      doc.text(nombreEjecutor, M + fw / 2, fy + fh + 30, { align: 'center' });
+      doc.text(nombreSupervisor, W - M - fw / 2, fy + fh + 30, { align: 'center' });
+
+
+      const blob = doc.output('blob');
+      return new File([blob], 'informe.pdf', { type: 'application/pdf' });
+
+      // --- FUNCIONES AUXILIARES ---
+      function v(id) { return document.getElementById(id).value; }
+      function fmtFecha(f) {
+        if (!f) return '';
+        const d = new Date(f);
+        return d.toLocaleString().replace(',', '');
+      }
+      function addSec(t, txt) {
+        if (!txt) return;
+        y += 10;
+        doc.setFont('helvetica', 'bold'); doc.setTextColor(...accent);
+        doc.text(t, M, y); y += 12;
+        doc.setFont('helvetica', 'normal'); doc.setTextColor(...gray);
+        const lines = doc.splitTextToSize(txt, W - M * 2);
+        doc.text(lines, M, y + 8);
+        y += lines.length * 14 + 10;
+      }
+      async function getBase64FromUrl(url) {
+        const res = await fetch(url);
+        const blob = await res.blob();
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+      }
     }
-  });
 
-  // Validar firma del ejecutor
-  const sigCanvas = document.getElementById('sigEjecutor');
-  const vacia = sigCanvas.getContext('2d')
-    .getImageData(0, 0, sigCanvas.width, sigCanvas.height)
-    .data.some(v => v !== 255); // detecta si está vacía
+    // -------------------------
+    // VALIDAR CAMPOS OBLIGATORIOS
+    // -------------------------
+    function validarFormulario() {
+      const camposObligatorios = [
+        'codigo', 'planta', 'area', 'equipo',
+        'fechaInicio', 'fechaFin', 'tipoMantenimiento',
+        'ejecutor', 'danos', 'trabajo'
+      ];
 
-  if (!vacia) {
-    faltantes.push('sigEjecutor');
-    sigCanvas.style.border = '2px solid red';
-    if (!primeroFaltante) primeroFaltante = sigCanvas;
-  } else {
-    sigCanvas.style.border = '';
-  }
+      let primeroFaltante = null;
+      let faltantes = [];
 
-  if (faltantes.length > 0) {
-    alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
-    primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return false;
-  }
+      camposObligatorios.forEach(id => {
+        const campo = document.getElementById(id);
+        if (!campo || !campo.value.trim()) {
+          faltantes.push(id);
+          campo.style.border = '2px solid red';
+          if (!primeroFaltante) primeroFaltante = campo;
+        } else {
+          campo.style.border = ''; // limpiar si está correcto
+        }
+      });
 
-  return true;
-}
+      // Validar firma del ejecutor
+      const sigCanvas = document.getElementById('sigEjecutor');
+      const vacia = sigCanvas.getContext('2d')
+        .getImageData(0, 0, sigCanvas.width, sigCanvas.height)
+        .data.some(v => v !== 255); // detecta si está vacía
 
-// -------------------------
-// VALIDAR CAMPOS OBLIGATORIOS
-// -------------------------
-function validarFormulario() {
-  const camposObligatorios = [
-    'codigo', 'planta', 'area', 'equipo',
-    'fechaInicio', 'fechaFin', 'tipoMantenimiento',
-    'ejecutor', 'danos', 'trabajo'
-  ];
+      if (!vacia) {
+        faltantes.push('sigEjecutor');
+        sigCanvas.style.border = '2px solid red';
+        if (!primeroFaltante) primeroFaltante = sigCanvas;
+      } else {
+        sigCanvas.style.border = '';
+      }
 
-  let primeroFaltante = null;
-  let faltantes = [];
+      if (faltantes.length > 0) {
+        alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
+        primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
 
-  camposObligatorios.forEach(id => {
-    const campo = document.getElementById(id);
-    if (!campo || !campo.value.trim()) {
-      faltantes.push(id);
-      campo.style.border = '2px solid red';
-      if (!primeroFaltante) primeroFaltante = campo;
-    } else {
-      campo.style.border = ''; // limpiar si está correcto
+      return true;
     }
-  });
 
-  // Validar firma del ejecutor (detecta si está vacía)
-  const sigCanvas = document.getElementById('sigEjecutor');
-  const ctx = sigCanvas.getContext('2d');
-  const pixels = ctx.getImageData(0, 0, sigCanvas.width, sigCanvas.height).data;
-  const hayTinta = pixels.some(v => v !== 255);
-  if (!hayTinta) {
-    faltantes.push('sigEjecutor');
-    sigCanvas.style.border = '2px solid red';
-    if (!primeroFaltante) primeroFaltante = sigCanvas;
-  } else {
-    sigCanvas.style.border = '';
+    // -------------------------
+    // VALIDAR CAMPOS OBLIGATORIOS
+    // -------------------------
+    function validarFormulario() {
+      const camposObligatorios = [
+        'codigo', 'planta', 'area', 'equipo',
+        'fechaInicio', 'fechaFin', 'tipoMantenimiento',
+        'ejecutor', 'danos', 'trabajo'
+      ];
+
+      let primeroFaltante = null;
+      let faltantes = [];
+
+      camposObligatorios.forEach(id => {
+        const campo = document.getElementById(id);
+        if (!campo || !campo.value.trim()) {
+          faltantes.push(id);
+          campo.style.border = '2px solid red';
+          if (!primeroFaltante) primeroFaltante = campo;
+        } else {
+          campo.style.border = ''; // limpiar si está correcto
+        }
+      });
+
+      // Validar firma del ejecutor (detecta si está vacía)
+      const sigCanvas = document.getElementById('sigEjecutor');
+      const ctx = sigCanvas.getContext('2d');
+      const pixels = ctx.getImageData(0, 0, sigCanvas.width, sigCanvas.height).data;
+      const hayTinta = pixels.some(v => v !== 255);
+      if (!hayTinta) {
+        faltantes.push('sigEjecutor');
+        sigCanvas.style.border = '2px solid red';
+        if (!primeroFaltante) primeroFaltante = sigCanvas;
+      } else {
+        sigCanvas.style.border = '';
+      }
+
+      if (faltantes.length > 0) {
+        alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
+        primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+
+      return true;
+    }
+
+    // -------------------------
+    // DESCARGAR PDF
+    // -------------------------
+    async function descargarPDF() {
+      if (!validarFormulario()) return; // detener si falta algo
+      const f = await generarPDF();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(f);
+      a.download = 'informe_mantenimiento.pdf';
+      a.click();
+    }
+
+    // -------------------------
+    // COMPARTIR PDF
+    // -------------------------
+    async function compartirPDF() {
+      if (!validarFormulario()) return; // detener si falta algo
+      const file = await generarPDF();
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ title: 'Informe de mantenimiento', files: [file] });
+      } else {
+        alert('Tu navegador no admite compartir archivos. Usa "Descargar PDF".');
+      }
+    }
+
+document.addEventListener("DOMContentLoaded", () => {
+  let contador = 0;
+  const btnNuevo = document.getElementById("nuevoFormulario");
+  const contenedorContador = document.getElementById("contadorContainer");
+  const pestañasAbiertas = {};
+
+  const params = new URLSearchParams(window.location.search);
+  const instanciaActual = params.get("instancia");
+
+  // -------------------------
+  // SI ESTAMOS DENTRO DE UNA INSTANCIA
+  // -------------------------
+  if (contenedorContador) {
+    if (instanciaActual && instanciaActual !== "null") {
+      // Mostrar número de instancia
+      const etiqueta = document.createElement("div");
+      etiqueta.classList.add("btn");
+      etiqueta.textContent = `#${instanciaActual}`;
+      etiqueta.style.marginLeft = "10px";
+      contenedorContador.appendChild(etiqueta);
+
+      // Botón de "Inicio"
+      const btnInicio = document.createElement("button");
+      btnInicio.textContent = "Inicio";
+      btnInicio.classList.add("btn");
+      btnInicio.style.marginLeft = "10px";
+      btnInicio.style.background = "#2c2c2c";
+      btnInicio.style.color = "#fff";
+      btnInicio.onclick = () => {
+        window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
+      };
+      contenedorContador.appendChild(btnInicio);
+
+      // 🔹 OCULTAR el botón "Nuevo" en instancias
+      if (btnNuevo) btnNuevo.style.display = "none";
+    } else {
+      // 🔹 Mostrar el botón solo en la página principal
+      if (btnNuevo) btnNuevo.style.display = "inline-block";
+    }
   }
 
-  if (faltantes.length > 0) {
-    alert('⚠️ Faltan campos por llenar. Por favor completa los resaltados.');
-    primeroFaltante.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return false;
-  }
+  // -------------------------
+  // CREAR NUEVAS INSTANCIAS (solo si hay botón visible)
+  // -------------------------
+  if (btnNuevo && btnNuevo.style.display !== "none") {
+    btnNuevo.addEventListener("click", (e) => {
+      e.preventDefault();
+      contador++;
+      const id = contador;
 
-  return true;
-}
+      const recuadro = document.createElement("div");
+      recuadro.classList.add("contador-item");
+      recuadro.textContent = id;
+      recuadro.dataset.id = id;
+      contenedorContador.appendChild(recuadro);
 
-// -------------------------
-// DESCARGAR PDF
-// -------------------------
-async function descargarPDF() {
-  if (!validarFormulario()) return; // detener si falta algo
-  const f = await generarPDF();
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(f);
-  a.download = 'informe_mantenimiento.pdf';
-  a.click();
-}
-
-// -------------------------
-// COMPARTIR PDF
-// -------------------------
-async function compartirPDF() {
-  if (!validarFormulario()) return; // detener si falta algo
-  const file = await generarPDF();
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    await navigator.share({ title: 'Informe de mantenimiento', files: [file] });
-  } else {
-    alert('Tu navegador no admite compartir archivos. Usa "Descargar PDF".');
-  }
-}
-
-
-// -------------------------
-// GESTIÓN DE PESTAÑAS DINÁMICAS 
-// -------------------------
-let contador = 0;
-const btnNuevo = document.getElementById("nuevoFormulario");
-const contenedorContador = document.getElementById("contadorContainer");
-const pestañasAbiertas = {};
-
-// 🔒 Evitar que se registre el listener más de una vez
-if (!btnNuevo.dataset.listenerAdded) {
-  btnNuevo.dataset.listenerAdded = "true";
-
-  btnNuevo.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    contador++;
-    const id = contador;
-
-    // Crear recuadro numerado
-    const recuadro = document.createElement("div");
-    recuadro.classList.add("contador-item");
-    recuadro.textContent = id;
-    recuadro.dataset.id = id;
-    contenedorContador.appendChild(recuadro);
-
-    // 🟢 Abrir solo una pestaña
-    if (!pestañasAbiertas[id] || pestañasAbiertas[id].closed) {
-      pestañasAbiertas[id] = window.open(
+      const nuevaPestaña = window.open(
         `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
         `_blank`
       );
-    } else {
-      pestañasAbiertas[id].focus();
-    }
+      pestañasAbiertas[id] = nuevaPestaña;
 
-    // 🖱️ Click izquierdo -> enfocar pestaña existente
-    recuadro.addEventListener("click", () => {
-      const pestaña = pestañasAbiertas[id];
-      if (pestaña && !pestaña.closed) {
-        pestaña.focus();
-      } else {
-        const confirmar = confirm(`La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`);
-        if (confirmar) {
-          pestañasAbiertas[id] = window.open(
-            `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
-            `_blank`
-          );
-        } else {
+      recuadro.addEventListener("click", () => {
+        const pestaña = pestañasAbiertas[id];
+        if (pestaña && !pestaña.closed) pestaña.focus();
+        else {
+          const confirmar = confirm(`La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`);
+          if (confirmar) {
+            pestañasAbiertas[id] = window.open(
+              `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
+              `_blank`
+            );
+          } else {
+            recuadro.remove();
+            delete pestañasAbiertas[id];
+          }
+        }
+      });
+
+      const checkClosed = setInterval(() => {
+        if (nuevaPestaña.closed) {
+          clearInterval(checkClosed);
           recuadro.remove();
           delete pestañasAbiertas[id];
+          console.log(`Instancia ${id} cerrada`);
         }
-      }
+      }, 1000);
     });
-
-    // 🖱️ Click derecho -> cerrar pestaña
-    recuadro.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-      const confirmar = confirm(`¿Deseas cerrar la pestaña ${id}?`);
-      if (confirmar) {
-        if (pestañasAbiertas[id] && !pestañasAbiertas[id].closed) {
-          pestañasAbiertas[id].close();
-        }
-        recuadro.remove();
-        delete pestañasAbiertas[id];
-      }
-    });
-  });
-}
-// -------------------------
-// DATOS DE PLANTAS, ÁREAS Y EQUIPOS
-// -------------------------
-const datosPlantas = {
-
-  GRANOS: {
-    "Área de Tolvas": [
-      "tolvas 1",
-      "tolvas 2",
-      "tolvas 3",
-      "tolvas 4",
-      "tolvas 5"
-    ],
-    "Área de Empaque": [
-      "TEDMAD",
-      "TECNOPACK",
-      "INNA 1",
-      "INNA 2",
-      "ROSDAN"
-    ],
-    "Área de compresores": [
-      "Compresor GA22",
-      "Compresor GX11",
-      "secador de aire 1",
-      "secador de aire 2"
-    ]
-  },
-
-  ASEO: {
-    "Área de Disco": [
-      "Laminadora",
-      "Cortadora",
-      "Tornillo Compactador",
-      "Mezcladora",
-      "Chiller"
-    ],
-    "Área Doypack": [
-      "Envasadora",
-      "Dosificadora",
-      "Selladora"
-    ],
-    "Área Líquidos": [
-      "Llenadora de Líquidos",
-      "Etiquetadora",
-      "Rotativa",
-      "Encintadora"
-    ],
-    "Área Viscosos": [
-      "Llenadora de Viscosos",
-      "Etiquetadora",
-      "Rotativa",
-      "Codificadora"
-    ],
-    "Área de Crema": [
-      "Llenadora de Crema"
-    ],
-    "Área Varsol": [
-      "Llenadora Varsol",
-      "Etiquetadora",
-      "Codificadora"
-    ],
-    "Área Hipoclorito": [
-      "Llenadora",
-      "Tapadora"
-    ],
-    "Área Compresores": [
-      "Compresor GA22",
-      "Compresor GX7"
-    ]
-  },
-
-  ALIMENTOS: {
-    "Área de Envasado": [
-      "Envasadora Tecmar",
-      "Estuchadora",
-      "Encintadora",
-      "Envasadora Sopas",
-      "Envasadora Gelatinas",
-      "Estuchadora de Gelatinas",
-      "Envasadora Tecnopack",
-      "Envasadora Tecnotock",
-      "Selladora Manual",
-      "Doypack",
-      "Envasadora de Panela",
-      "Tedmaq",
-      "Multipack",
-      "Estuchadora Rotativa",
-      "Nutri Baby"
-    ],
-    "Área de Mezclas": [
-      "Ciclón",
-      "Mezcladora Tecmar",
-      "Mezcladora Sopas",
-      "Mezcladora Gelatinas",
-      "Mezcladora Tecnopack",
-      "Mezcladora Tecnotock",
-      "Mezcladora Doypack",
-      "Mezcladora Hojuelas"
-    ],
-
-    "Área Compresores": [
-      "Compresor GA22",
-      "Compresor GX7"
-    ]
-  },
-
-  AGUAS: {
-    "Área de Empacadora": [
-      "Llenadora de Agua",
-      "Etiquetadora",
-      "Empacadora",
-      "Codificadora",
-      "Bandas",
-      "Posicionador de Botellas",
-      "Clorinador",
-      "Compresor GA26",
-      "Caldera",
-      "Bomba de Salida Tanque 20 Mil",
-      "Osmosis"
-    ],
-    "Área de Tanques": [
-      "Tanque 50 Mil",
-      "Tanque 20 Mil",
-      "Tanque 10 Mil",
-      "Tanque 5 Mil"
-    ],
-    "Área de Nitrógeno": [
-      "Tanque de Nitrógeno",
-      "PETAR"
-    ]
   }
-};
-
-// -------------------------
-// REFERENCIAS DEL DOM
-// -------------------------
-const plantaSelect = document.getElementById("planta");
-const areaSelect = document.getElementById("area");
-const equipoSelect = document.getElementById("equipo");
-
-
-
-// 🎨 Cambiar fondo según planta
-function cambiarFondo() {
-  const contenedor = document.getElementById("contenedorPrincipal");
-  const planta = plantaSelect.value;
-
-  const fondos = {
-    "GRANOS": "url('https://mre-site-makro-colombia-test-webapp-slot.azurewebsites.net/imagesProducts/medias/913263_1_239.webp')",
-    "ASEO": "url('https://organizacioncardenas.com/wp-content/uploads/2022/11/detergentelavado-e1678672244584-793x1024.png')",
-    "ALIMENTOS": "url('https://www.delaabuelaconamor.com/wp-content/uploads/2022/07/avena-hojuela-500g.png')",
-    "AGUAS": "url('https://media.surtiplaza.co/dimen/7707335286316.png')"
-  };
-
-  // Aplica el color de fondo correspondiente o un neutro por defecto
-  contenedor.style.background = fondos[planta] || "#f6f9fc";
-}
-
-// -------------------------
-// CAMBIO DE PLANTA
-// -------------------------
-plantaSelect.addEventListener("change", () => {
-  const planta = plantaSelect.value;
-  const areas = Object.keys(datosPlantas[planta] || {});
-
-  // Limpiar selects
-  areaSelect.innerHTML = '<option disabled selected>Seleccione un área</option>';
-  equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
-
-  // Llenar áreas según planta
-  areas.forEach(area => {
-    const option = document.createElement("option");
-    option.value = area;
-    option.textContent = area;
-    areaSelect.appendChild(option);
-  });
-
-  // 👉 Cambiar fondo según la planta seleccionada
-  cambiarFondo();
-
-  // ✅ Recalcular tiempo si ya hay fechas seleccionadas
-  calcTiempo();
-
-  // 🧑‍💼 Mostrar supervisor asociado a la planta
-  mostrarSupervisor(planta);
 });
 
-// -------------------------
-// CAMBIO DE ÁREA
-// -------------------------
-areaSelect.addEventListener("change", () => {
-  const planta = plantaSelect.value;
-  const area = areaSelect.value;
-  const equipos = datosPlantas[planta]?.[area] || [];
+    // -------------------------
+    // DATOS DE PLANTAS, ÁREAS Y EQUIPOS
+    // -------------------------
+    const datosPlantas = {
 
-  // Limpiar equipos
-  equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
+      GRANOS: {
+        "Área de Tolvas": [
+          "tolvas 1",
+          "tolvas 2",
+          "tolvas 3",
+          "tolvas 4",
+          "tolvas 5"
+        ],
+        "Área de Empaque": [
+          "TEDMAD",
+          "TECNOPACK",
+          "INNA 1",
+          "INNA 2",
+          "ROSDAN"
+        ],
+        "Área de compresores": [
+          "Compresor GA22",
+          "Compresor GX11",
+          "secador de aire 1",
+          "secador de aire 2"
+        ]
+      },
 
-  // Llenar equipos según área
-  equipos.forEach(equipo => {
-    const option = document.createElement("option");
-    option.value = equipo;
-    option.textContent = equipo;
-    equipoSelect.appendChild(option);
-  });
-});
+      ASEO: {
+        "Área de Disco": [
+          "Laminadora",
+          "Cortadora",
+          "Tornillo Compactador",
+          "Mezcladora",
+          "Chiller"
+        ],
+        "Área Doypack": [
+          "Envasadora",
+          "Dosificadora",
+          "Selladora"
+        ],
+        "Área Líquidos": [
+          "Llenadora de Líquidos",
+          "Etiquetadora",
+          "Rotativa",
+          "Encintadora"
+        ],
+        "Área Viscosos": [
+          "Llenadora de Viscosos",
+          "Etiquetadora",
+          "Rotativa",
+          "Codificadora"
+        ],
+        "Área de Crema": [
+          "Llenadora de Crema"
+        ],
+        "Área Varsol": [
+          "Llenadora Varsol",
+          "Etiquetadora",
+          "Codificadora"
+        ],
+        "Área Hipoclorito": [
+          "Llenadora",
+          "Tapadora"
+        ],
+        "Área Compresores": [
+          "Compresor GA22",
+          "Compresor GX7"
+        ]
+      },
+
+      ALIMENTOS: {
+        "Área de Envasado": [
+          "Envasadora Tecmar",
+          "Estuchadora",
+          "Encintadora",
+          "Envasadora Sopas",
+          "Envasadora Gelatinas",
+          "Estuchadora de Gelatinas",
+          "Envasadora Tecnopack",
+          "Envasadora Tecnotock",
+          "Selladora Manual",
+          "Doypack",
+          "Envasadora de Panela",
+          "Tedmaq",
+          "Multipack",
+          "Estuchadora Rotativa",
+          "Nutri Baby"
+        ],
+        "Área de Mezclas": [
+          "Ciclón",
+          "Mezcladora Tecmar",
+          "Mezcladora Sopas",
+          "Mezcladora Gelatinas",
+          "Mezcladora Tecnopack",
+          "Mezcladora Tecnotock",
+          "Mezcladora Doypack",
+          "Mezcladora Hojuelas"
+        ],
+
+        "Área Compresores": [
+          "Compresor GA22",
+          "Compresor GX7"
+        ]
+      },
+
+      AGUAS: {
+        "Área de Empacadora": [
+          "Llenadora de Agua",
+          "Etiquetadora",
+          "Empacadora",
+          "Codificadora",
+          "Bandas",
+          "Posicionador de Botellas",
+          "Clorinador",
+          "Compresor GA26",
+          "Caldera",
+          "Bomba de Salida Tanque 20 Mil",
+          "Osmosis"
+        ],
+        "Área de Tanques": [
+          "Tanque 50 Mil",
+          "Tanque 20 Mil",
+          "Tanque 10 Mil",
+          "Tanque 5 Mil"
+        ],
+        "Área de Nitrógeno": [
+          "Tanque de Nitrógeno",
+          "PETAR"
+        ]
+      }
+    };
+
+    // -------------------------
+    // REFERENCIAS DEL DOM
+    // -------------------------
+    const plantaSelect = document.getElementById("planta");
+    const areaSelect = document.getElementById("area");
+    const equipoSelect = document.getElementById("equipo");
 
 
-// -------------------------
-// SUPERVISORES POR PLANTA
-// -------------------------
-const supervisores = {
-  "ALIMENTOS": "PINZON GUEVARA WILLIAM ORLANDO",
-  "ASEO": "RUEDA TOVAR JORGE CRISTIAN",
-  "GRANOS": "LEAL HERRERA JORGE ANDRES",
-  "AGUAS": "HENAO BEDOYA MARIA CRISTINA"
-};
 
-// -------------------------
-// MOSTRAR SUPERVISOR
-// -------------------------
-function mostrarSupervisor(planta) {
-  const supervisor = supervisores[planta.toUpperCase()] || "No asignado";
-  const supervisorLabel = document.getElementById("supervisor");
-  if (!supervisorLabel) return;
-  supervisorLabel.textContent = `👤 Supervisor: ${supervisor}`;
-}
+    // 🎨 Cambiar fondo según planta
+    function cambiarFondo() {
+      const contenedor = document.getElementById("contenedorPrincipal");
+      const planta = plantaSelect.value;
+
+      const fondos = {
+        "GRANOS": "url('https://mre-site-makro-colombia-test-webapp-slot.azurewebsites.net/imagesProducts/medias/913263_1_239.webp')",
+        "ASEO": "url('https://organizacioncardenas.com/wp-content/uploads/2022/11/detergentelavado-e1678672244584-793x1024.png')",
+        "ALIMENTOS": "url('https://www.delaabuelaconamor.com/wp-content/uploads/2022/07/avena-hojuela-500g.png')",
+        "AGUAS": "url('https://media.surtiplaza.co/dimen/7707335286316.png')"
+      };
+
+      // Aplica el color de fondo correspondiente o un neutro por defecto
+      contenedor.style.background = fondos[planta] || "#f6f9fc";
+    }
+
+    // -------------------------
+    // CAMBIO DE PLANTA
+    // -------------------------
+    plantaSelect.addEventListener("change", () => {
+      const planta = plantaSelect.value;
+      const areas = Object.keys(datosPlantas[planta] || {});
+
+      // Limpiar selects
+      areaSelect.innerHTML = '<option disabled selected>Seleccione un área</option>';
+      equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
+
+      // Llenar áreas según planta
+      areas.forEach(area => {
+        const option = document.createElement("option");
+        option.value = area;
+        option.textContent = area;
+        areaSelect.appendChild(option);
+      });
+
+      // 👉 Cambiar fondo según la planta seleccionada
+      cambiarFondo();
+
+      // ✅ Recalcular tiempo si ya hay fechas seleccionadas
+      calcTiempo();
+
+      // 🧑‍💼 Mostrar supervisor asociado a la planta
+      mostrarSupervisor(planta);
+    });
+
+    // -------------------------
+    // CAMBIO DE ÁREA
+    // -------------------------
+    areaSelect.addEventListener("change", () => {
+      const planta = plantaSelect.value;
+      const area = areaSelect.value;
+      const equipos = datosPlantas[planta]?.[area] || [];
+
+      // Limpiar equipos
+      equipoSelect.innerHTML = '<option disabled selected>Seleccione un equipo</option>';
+
+      // Llenar equipos según área
+      equipos.forEach(equipo => {
+        const option = document.createElement("option");
+        option.value = equipo;
+        option.textContent = equipo;
+        equipoSelect.appendChild(option);
+      });
+    });
+
+
+    // -------------------------
+    // SUPERVISORES POR PLANTA
+    // -------------------------
+    const supervisores = {
+      "ALIMENTOS": "PINZON GUEVARA WILLIAM ORLANDO",
+      "ASEO": "RUEDA TOVAR JORGE CRISTIAN",
+      "GRANOS": "LEAL HERRERA JORGE ANDRES",
+      "AGUAS": "HENAO BEDOYA MARIA CRISTINA"
+    };
+
+    // -------------------------
+    // MOSTRAR SUPERVISOR
+    // -------------------------
+    function mostrarSupervisor(planta) {
+      const supervisor = supervisores[planta.toUpperCase()] || "No asignado";
+      const supervisorLabel = document.getElementById("supervisor");
+      if (!supervisorLabel) return;
+      supervisorLabel.textContent = `👤 Supervisor: ${supervisor}`;
+    }
 
 
 
 
 
-</script>
-    </body>
+  </script>
+</body>
+
+
 </html>
+
 
