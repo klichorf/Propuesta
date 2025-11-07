@@ -849,80 +849,71 @@
     }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // -------------------------
-  // REFERENCIAS GLOBALES
-  // -------------------------
   let contador = 0;
   const btnNuevo = document.getElementById("nuevoFormulario");
   const contenedorContador = document.getElementById("contadorContainer");
-  const pestañasAbiertas = {}; // Guardar referencias de las pestañas abiertas
+  const pestañasAbiertas = {};
 
-  // -------------------------
-  // DETECTAR INSTANCIA ACTUAL
-  // -------------------------
   const params = new URLSearchParams(window.location.search);
   const instanciaActual = params.get("instancia");
 
   // -------------------------
-  // NAVEGACIÓN ENTRE INSTANCIAS
+  // SI ESTAMOS DENTRO DE UNA INSTANCIA
   // -------------------------
   if (contenedorContador) {
     if (instanciaActual && instanciaActual !== "null") {
-      // 🔹 Mostrar número de instancia
+      // Mostrar número de instancia
       const etiqueta = document.createElement("div");
       etiqueta.classList.add("btn");
       etiqueta.textContent = `#${instanciaActual}`;
       etiqueta.style.marginLeft = "10px";
       contenedorContador.appendChild(etiqueta);
 
-      // 🔹 Botón "Inicio" (solo en instancias)
+      // Botón de "Inicio"
       const btnInicio = document.createElement("button");
       btnInicio.textContent = "Inicio";
       btnInicio.classList.add("btn");
       btnInicio.style.marginLeft = "10px";
       btnInicio.style.background = "#2c2c2c";
       btnInicio.style.color = "#fff";
-
       btnInicio.onclick = () => {
         window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
       };
-
       contenedorContador.appendChild(btnInicio);
 
-      // 🔹 Ocultar el botón "Nuevo" dentro de una instancia
+      // 🔹 OCULTAR el botón "Nuevo" en instancias
       if (btnNuevo) btnNuevo.style.display = "none";
+    } else {
+      // 🔹 Mostrar el botón solo en la página principal
+      if (btnNuevo) btnNuevo.style.display = "inline-block";
     }
   }
 
   // -------------------------
-  // GESTIÓN DE PESTAÑAS DINÁMICAS (solo en página principal)
+  // CREAR NUEVAS INSTANCIAS (solo si hay botón visible)
   // -------------------------
-  if (btnNuevo && (!instanciaActual || instanciaActual === "null")) {
+  if (btnNuevo && btnNuevo.style.display !== "none") {
     btnNuevo.addEventListener("click", (e) => {
       e.preventDefault();
       contador++;
       const id = contador;
 
-      // Crear recuadro numerado
       const recuadro = document.createElement("div");
       recuadro.classList.add("contador-item");
       recuadro.textContent = id;
       recuadro.dataset.id = id;
       contenedorContador.appendChild(recuadro);
 
-      // Abrir nueva pestaña con parámetro
       const nuevaPestaña = window.open(
         `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
         `_blank`
       );
       pestañasAbiertas[id] = nuevaPestaña;
 
-      // Clic en recuadro → volver a esa pestaña
       recuadro.addEventListener("click", () => {
         const pestaña = pestañasAbiertas[id];
-        if (pestaña && !pestaña.closed) {
-          pestaña.focus();
-        } else {
+        if (pestaña && !pestaña.closed) pestaña.focus();
+        else {
           const confirmar = confirm(`La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`);
           if (confirmar) {
             pestañasAbiertas[id] = window.open(
@@ -936,7 +927,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Detectar cuando la pestaña se cierre
       const checkClosed = setInterval(() => {
         if (nuevaPestaña.closed) {
           clearInterval(checkClosed);
@@ -1186,5 +1176,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </html>
+
 
 
