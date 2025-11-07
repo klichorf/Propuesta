@@ -858,21 +858,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const pestañasAbiertas = {}; // Guardar referencias de las pestañas abiertas
 
   // -------------------------
-  // NAVEGACIÓN ENTRE INSTANCIAS
+  // DETECTAR INSTANCIA ACTUAL
   // -------------------------
   const params = new URLSearchParams(window.location.search);
   const instanciaActual = params.get("instancia");
 
+  // -------------------------
+  // NAVEGACIÓN ENTRE INSTANCIAS
+  // -------------------------
   if (contenedorContador) {
     if (instanciaActual && instanciaActual !== "null") {
-      // 🔹 Muestra el número de la instancia
+      // 🔹 Mostrar número de instancia
       const etiqueta = document.createElement("div");
       etiqueta.classList.add("btn");
       etiqueta.textContent = `#${instanciaActual}`;
       etiqueta.style.marginLeft = "10px";
       contenedorContador.appendChild(etiqueta);
 
-      // 🔹 Botón "Inicio" SOLO cuando estás dentro de una instancia
+      // 🔹 Botón "Inicio" (solo en instancias)
       const btnInicio = document.createElement("button");
       btnInicio.textContent = "Inicio";
       btnInicio.classList.add("btn");
@@ -885,13 +888,16 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       contenedorContador.appendChild(btnInicio);
+
+      // 🔹 Ocultar el botón "Nuevo" dentro de una instancia
+      if (btnNuevo) btnNuevo.style.display = "none";
     }
   }
 
   // -------------------------
-  // GESTIÓN DE PESTAÑAS DINÁMICAS
+  // GESTIÓN DE PESTAÑAS DINÁMICAS (solo en página principal)
   // -------------------------
-  if (btnNuevo) {
+  if (btnNuevo && (!instanciaActual || instanciaActual === "null")) {
     btnNuevo.addEventListener("click", (e) => {
       e.preventDefault();
       contador++;
@@ -934,7 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const checkClosed = setInterval(() => {
         if (nuevaPestaña.closed) {
           clearInterval(checkClosed);
-          recuadro.remove(); // 🔹 Remueve el recuadro del contador
+          recuadro.remove();
           delete pestañasAbiertas[id];
           console.log(`Instancia ${id} cerrada`);
         }
@@ -1180,4 +1186,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </html>
+
 
