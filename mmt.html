@@ -848,6 +848,8 @@
       }
     }
 
+
+    
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const instanciaActual = params.get("instancia");
@@ -927,6 +929,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+    const btnNuevo = document.getElementById("nuevoFormulario");
+const params = new URLSearchParams(window.location.search);
+const instanciaActual = params.get("instancia");
+
+// Si la URL tiene el parámetro ?instancia=, ocultar el botón "Nuevo"
+if (instanciaActual) {
+  btnNuevo.style.display = "none";
+}
 
     // -------------------------
     // DATOS DE PLANTAS, ÁREAS Y EQUIPOS
@@ -1165,6 +1177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </html>
+
 
 
 
