@@ -849,50 +849,37 @@
     }
 
 document.addEventListener("DOMContentLoaded", () => {
-  let contador = 0;
-  const btnNuevo = document.getElementById("nuevoFormulario");
-  const contenedorContador = document.getElementById("contadorContainer");
-  const pestañasAbiertas = {};
-
   const params = new URLSearchParams(window.location.search);
   const instanciaActual = params.get("instancia");
+  const btnNuevo = document.getElementById("nuevoFormulario");
+  const contenedorContador = document.getElementById("contadorContainer");
+  let contador = 0;
+  const pestañasAbiertas = {};
 
-  // -------------------------
-  // SI ESTAMOS DENTRO DE UNA INSTANCIA
-  // -------------------------
-  if (contenedorContador) {
-    if (instanciaActual && instanciaActual !== "null") {
-      // Mostrar número de instancia
-      const etiqueta = document.createElement("div");
-      etiqueta.classList.add("btn");
-      etiqueta.textContent = `#${instanciaActual}`;
-      etiqueta.style.marginLeft = "10px";
-      contenedorContador.appendChild(etiqueta);
+  // 🔹 Mostrar botón "Inicio" y ocultar "Nuevo" si estamos en una instancia
+  if (instanciaActual && instanciaActual !== "null") {
+    if (btnNuevo) btnNuevo.style.display = "none";
 
-      // Botón de "Inicio"
-      const btnInicio = document.createElement("button");
-      btnInicio.textContent = "Inicio";
-      btnInicio.classList.add("btn");
-      btnInicio.style.marginLeft = "10px";
-      btnInicio.style.background = "#2c2c2c";
-      btnInicio.style.color = "#fff";
-      btnInicio.onclick = () => {
-        window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
-      };
-      contenedorContador.appendChild(btnInicio);
+    const etiqueta = document.createElement("div");
+    etiqueta.classList.add("btn");
+    etiqueta.textContent = `#${instanciaActual}`;
+    etiqueta.style.marginLeft = "10px";
+    contenedorContador.appendChild(etiqueta);
 
-      // 🔹 OCULTAR el botón "Nuevo" en instancias
-      if (btnNuevo) btnNuevo.style.display = "none";
-    } else {
-      // 🔹 Mostrar el botón solo en la página principal
-      if (btnNuevo) btnNuevo.style.display = "inline-block";
-    }
+    const btnInicio = document.createElement("button");
+    btnInicio.textContent = "Inicio";
+    btnInicio.classList.add("btn");
+    btnInicio.style.marginLeft = "10px";
+    btnInicio.style.background = "#2c2c2c";
+    btnInicio.style.color = "#fff";
+    btnInicio.onclick = () => {
+      window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
+    };
+    contenedorContador.appendChild(btnInicio);
   }
 
-  // -------------------------
-  // CREAR NUEVAS INSTANCIAS (solo si hay botón visible)
-  // -------------------------
-  if (btnNuevo && btnNuevo.style.display !== "none") {
+  // 🔹 Si estamos en la página principal, mostrar el botón "Nuevo"
+  if (btnNuevo && (!instanciaActual || instanciaActual === "null")) {
     btnNuevo.addEventListener("click", (e) => {
       e.preventDefault();
       contador++;
@@ -906,7 +893,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const nuevaPestaña = window.open(
         `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
-        `_blank`
+        "_blank"
       );
       pestañasAbiertas[id] = nuevaPestaña;
 
@@ -914,11 +901,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const pestaña = pestañasAbiertas[id];
         if (pestaña && !pestaña.closed) pestaña.focus();
         else {
-          const confirmar = confirm(`La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`);
+          const confirmar = confirm(
+            `La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`
+          );
           if (confirmar) {
             pestañasAbiertas[id] = window.open(
               `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
-              `_blank`
+              "_blank"
             );
           } else {
             recuadro.remove();
@@ -1176,5 +1165,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </html>
+
 
 
