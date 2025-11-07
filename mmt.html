@@ -851,6 +851,9 @@
 
     
 document.addEventListener("DOMContentLoaded", () => {
+  // -------------------------
+  // REFERENCIAS GLOBALES
+  // -------------------------
   const params = new URLSearchParams(window.location.search);
   const instanciaActual = params.get("instancia");
   const btnNuevo = document.getElementById("nuevoFormulario");
@@ -858,87 +861,134 @@ document.addEventListener("DOMContentLoaded", () => {
   let contador = 0;
   const pestañasAbiertas = {};
 
-  // 🔹 Mostrar botón "Inicio" y ocultar "Nuevo" si estamos en una instancia
+  // -------------------------
+  // FUNCIONES PARA GESTIÓN GLOBAL DE INSTANCIAS
+  // -------------------------
+
+  // 🔹 Actualiza el contador visible en pantalla
+  function actualizarContador() {
+    const abiertas = JSON.parse(localStorage.getItem("instanciasAbiertas") || "[]");
+
+    // Elimina contadores previos para no duplicar
+    contenedorContador.querySelectorAll(".contador-item, .contador-total").forEach((e) => e.remove());
+
+    // Crea una etiqueta con el total de instancias abiertas
+    const etiqueta = document.createElement("div");
+    etiqueta.classList.add("btn", "contador-total");
+    etiqueta.textContent = `Instancias abiertas: ${abiertas.length}`;
+    etiqueta.style.marginLeft = "10px";
+    etiqueta.style.background = "#e2e8f0";
+    etiqueta.style.color = "#000";
+    etiqueta.style.fontWeight = "600";
+    contenedorContador.appendChild(etiqueta);
+  }
+
+  // 🔹 Registra una nueva instancia en el almacenamiento local
+  function registrarInstancia(id) {
+    const abiertas = JSON.parse(localStorage.getItem("instanciasAbiertas") || "[]");
+    if (!abiertas.includes(id)) {
+      abiertas.push(id);
+      localStorage.setItem("instanciasAbiertas", JSON.stringify(abiertas));
+    }
+  }
+
+  // 🔹 Elimina una instancia cerrada o recargada del almacenamiento
+  function eliminarInstancia(id) {
+    const abiertas = JSON.parse(localStorage.getItem("instanciasAbiertas") || "[]");
+    const actualizadas = abiertas.filter((inst) => inst !== id);
+    localStorage.setItem("instanciasAbiertas", JSON.stringify(actualizadas));
+  }
+
+  // -------------------------
+  // MODO INSTANCIA (VENTANAS HIJAS)
+  // -------------------------
   if (instanciaActual && instanciaActual !== "null") {
+    // Ocultar botón "Nuevo" si estamos en una instancia
     if (btnNuevo) btnNuevo.style.display = "none";
 
+    // Mostrar número de instancia
     const etiqueta = document.createElement("div");
     etiqueta.classList.add("btn");
     etiqueta.textContent = `#${instanciaActual}`;
     etiqueta.style.marginLeft = "10px";
+    etiqueta.style.background = "#d1fae5";
+    etiqueta.style.color = "#065f46";
+    etiqueta.style.fontWeight = "bold";
     contenedorContador.appendChild(etiqueta);
 
+    // Crear botón "Inicio" para volver a la principal
     const btnInicio = document.createElement("button");
     btnInicio.textContent = "Inicio";
     btnInicio.classList.add("btn");
     btnInicio.style.marginLeft = "10px";
     btnInicio.style.background = "#2c2c2c";
     btnInicio.style.color = "#fff";
+
+    // Redirigir al archivo principal
     btnInicio.onclick = () => {
       window.location.href = "https://klichorf.github.io/Propuesta/mmt.html";
     };
+
     contenedorContador.appendChild(btnInicio);
+
+    // Registrar esta instancia en el almacenamiento local
+    registrarInstancia(instanciaActual);
+
+    // Al cerrar o actualizar la pestaña, eliminarla del registro
+    window.addEventListener("beforeunload", () => {
+      eliminarInstancia(instanciaActual);
+    });
   }
 
-  // 🔹 Si estamos en la página principal, mostrar el botón "Nuevo"
+  // -------------------------
+  // MODO PRINCIPAL (VENTANA BASE)
+  // -------------------------
   if (btnNuevo && (!instanciaActual || instanciaActual === "null")) {
+    // Mostrar el total de instancias abiertas al cargar
+    actualizarContador();
+
+    // Escuchar cambios de otras pestañas (para actualizar el contador en tiempo real)
+    window.addEventListener("storage", actualizarContador);
+
+    // -------------------------
+    // BOTÓN NUEVO → CREAR INSTANCIA
+    // -------------------------
     btnNuevo.addEventListener("click", (e) => {
       e.preventDefault();
       contador++;
-      const id = contador;
 
-      const recuadro = document.createElement("div");
-      recuadro.classList.add("contador-item");
-      recuadro.textContent = id;
-      recuadro.dataset.id = id;
-      contenedorContador.appendChild(recuadro);
+      // Generar un ID único basado en el tiempo actual
+      const id = Date.now().toString();
 
+      // Registrar la nueva instancia en el almacenamiento
+      registrarInstancia(id);
+
+      // Abrir una nueva pestaña con el parámetro de instancia
       const nuevaPestaña = window.open(
         `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
         "_blank"
       );
+
       pestañasAbiertas[id] = nuevaPestaña;
 
-      recuadro.addEventListener("click", () => {
-        const pestaña = pestañasAbiertas[id];
-        if (pestaña && !pestaña.closed) pestaña.focus();
-        else {
-          const confirmar = confirm(
-            `La pestaña ${id} está cerrada. ¿Deseas abrirla nuevamente?`
-          );
-          if (confirmar) {
-            pestañasAbiertas[id] = window.open(
-              `https://klichorf.github.io/Propuesta/mmt.html?instancia=${id}`,
-              "_blank"
-            );
-          } else {
-            recuadro.remove();
-            delete pestañasAbiertas[id];
-          }
-        }
-      });
+      // Actualizar el contador visual inmediatamente
+      actualizarContador();
 
+      // -------------------------
+      // MONITOREAR CIERRE DE PESTAÑAS
+      // -------------------------
       const checkClosed = setInterval(() => {
         if (nuevaPestaña.closed) {
           clearInterval(checkClosed);
-          recuadro.remove();
+          eliminarInstancia(id);
           delete pestañasAbiertas[id];
+          actualizarContador();
           console.log(`Instancia ${id} cerrada`);
         }
       }, 1000);
     });
   }
 });
-
-
-    const btnNuevo = document.getElementById("nuevoFormulario");
-const params = new URLSearchParams(window.location.search);
-const instanciaActual = params.get("instancia");
-
-// Si la URL tiene el parámetro ?instancia=, ocultar el botón "Nuevo"
-if (instanciaActual) {
-  btnNuevo.style.display = "none";
-}
 
     // -------------------------
     // DATOS DE PLANTAS, ÁREAS Y EQUIPOS
@@ -1177,6 +1227,7 @@ if (instanciaActual) {
 
 
 </html>
+
 
 
 
