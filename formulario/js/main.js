@@ -10,7 +10,8 @@ import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
-import {  initQRBarcode  } from "./qr.js"; 
+import { initQRScanner } from "./qr.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
     initFotos();
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarRepuestos();
     initBuscadorRepuestos();
     initBuscadorHerramientas();
-    initQRBarcode();
+    initQRScanner()
 
     const btnDescargar = document.getElementById("btnDescargar");
     const btnCompartir = document.getElementById("btnCompartir");
