@@ -1,76 +1,57 @@
-// ------------------------------------------------------
-// MÓDULO: ESCANEAR QR Y BARCODES
-// ------------------------------------------------------
+// qr.js
 export function initQRBarcode() {
+    const qrModalEl = document.getElementById("modalQR");
+    const qrElementId = "QR";       // div donde se muestra la cámara
+    const inputCodigo = document.getElementById("codigo"); // input para el resultado
+
+    let html5QrCode = null;
+
+    // Abrir modal y empezar escaneo
+    const bootstrapModal = new bootstrap.Modal(qrModalEl);
     const btnQR = document.getElementById("btnQR");
-    const modalQR = document.getElementById("modalQR");
-    const videoQR = document.getElementById("videoQR");
 
-    if (!btnQR || !modalQR || !videoQR) return;
+    btnQR.addEventListener("click", () => {
+        bootstrapModal.show();
+    });
 
-    const modal = new bootstrap.Modal(modalQR);
-    let html5QrCode;
-
-    btnQR.addEventListener("click", async () => {
-        modal.show();
-
-        // Nueva instancia de Html5Qrcode
-        html5QrCode = new Html5Qrcode(videoQR.id);
-
-        try {
-            const cameras = await Html5Qrcode.getCameras();
-            if (!cameras || cameras.length === 0) {
-                alert("No se encontró ninguna cámara disponible.");
-                return;
-            }
-
-            const cameraId = cameras[0].id;
-
-            const config = {
-                fps: 10,
-                qrbox: { width: 250, height: 250 },
-                formatsToSupport: [
-                    Html5QrcodeSupportedFormats.QR_CODE,
-                    Html5QrcodeSupportedFormats.CODE_128,
-                    Html5QrcodeSupportedFormats.CODE_39,
-                    Html5QrcodeSupportedFormats.EAN_13,
-                    Html5QrcodeSupportedFormats.EAN_8,
-                    Html5QrcodeSupportedFormats.UPC_A,
-                    Html5QrcodeSupportedFormats.UPC_E
-                ]
-            };
-
-            // Inicia escaneo de QR y barcodes
-            await html5QrCode.start(
-                cameraId,
-                config,
-                (decodedText, decodedResult) => {
-                    try {
-                        const data = JSON.parse(decodedText);
-                        if (data.codigo) document.getElementById("codigo").value = data.codigo;
-                        if (data.planta) document.getElementById("planta").value = data.planta;
-                        if (data.area) document.getElementById("area").value = data.area;
-                        if (data.equipo) document.getElementById("equipo").value = data.equipo;
-                    } catch {
-                        document.getElementById("codigo").value = decodedText.trim();
-                    } finally {
-                        html5QrCode.stop().then(() => modal.hide());
-                    }
-                },
-                (errorMessage) => {
-                    // Ignorar errores de lectura continua
-                }
-            );
-        } catch (err) {
-            alert("No se pudo acceder a la cámara. Se requiere permiso.");
-            console.error(err);
+    qrModalEl.addEventListener("shown.bs.modal", () => {
+        if (typeof Html5Qrcode === "undefined") {
+            console.error("html5-qrcode no cargado. Verifica el CDN.");
+            return;
         }
 
-        // Apagar cámara al cerrar el modal
-        modalQR.addEventListener("hidden.bs.modal", () => {
-            html5QrCode?.stop().catch(() => {});
-        }, { once: true });
+        html5QrCode = new Html5Qrcode(qrElementId);
+
+        Html5Qrcode.getCameras()
+            .then(devices => {
+                if (!devices || !devices.length) {
+                    alert("No se detectó ninguna cámara.");
+                    return;
+                }
+
+                const cameraId = devices[0].id;
+
+                html5QrCode.start(
+                    cameraId,
+                    { fps: 10, qrbox: 250 },
+                    decodedText => {
+                        inputCodigo.value = decodedText;
+                        // cerrar modal automáticamente
+                        html5QrCode.stop().then(() => bootstrapModal.hide());
+                    },
+                    errorMessage => {
+                        // solo consola, no interfiere
+                        console.warn("QR no detectado:", errorMessage);
+                    }
+                );
+            })
+            .catch(err => console.error("Error al obtener cámaras:", err));
+    });
+
+    qrModalEl.addEventListener("hidden.bs.modal", () => {
+        if (html5QrCode) {
+            html5QrCode.stop().catch(() => {});
+        }
     });
 }
-
 
