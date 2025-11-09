@@ -1,19 +1,24 @@
-// qr.js
-export function initQRBarcode() {
+// -------------------------
+// MÓDULO QR / BARCODE
+// -------------------------
+
+let lastQR = ""; // guardamos el último código escaneado
+
+function initQRBarcode() {
     const qrModalEl = document.getElementById("modalQR");
     const qrElementId = "QR";       // div donde se muestra la cámara
-    const inputCodigo = document.getElementById("codigo"); // input para el resultado
-
-    let html5QrCode = null;
-
-    // Abrir modal y empezar escaneo
-    const bootstrapModal = new bootstrap.Modal(qrModalEl);
+    const inputCodigo = document.getElementById("codigo");
     const btnQR = document.getElementById("btnQR");
 
-    btnQR.addEventListener("click", () => {
-        bootstrapModal.show();
-    });
+    if (!qrModalEl || !qrElementId || !btnQR || !inputCodigo) return;
 
+    let html5QrCode = null;
+    const bootstrapModal = new bootstrap.Modal(qrModalEl);
+
+    // Abrir modal al hacer clic
+    btnQR.addEventListener("click", () => bootstrapModal.show());
+
+    // Iniciar cámara cuando se abre modal
     qrModalEl.addEventListener("shown.bs.modal", () => {
         if (typeof Html5Qrcode === "undefined") {
             console.error("html5-qrcode no cargado. Verifica el CDN.");
@@ -33,25 +38,34 @@ export function initQRBarcode() {
 
                 html5QrCode.start(
                     cameraId,
-                    { fps: 10, qrbox: 250 },
+                    { fps: 10, qrbox: 250, formatsToSupport: [Html5QrcodeSupportedFormats.ALL_FORMATS] },
                     decodedText => {
-                        inputCodigo.value = decodedText;
-                        // cerrar modal automáticamente
+                        // Solo procesar si cambió
+                        if (decodedText !== lastQR) {
+                            lastQR = decodedText;
+                            inputCodigo.value = decodedText;
+                        }
+                        // Opcional: cerrar modal automáticamente
                         html5QrCode.stop().then(() => bootstrapModal.hide());
                     },
                     errorMessage => {
-                        // solo consola, no interfiere
-                        console.warn("QR no detectado:", errorMessage);
+                        // Ignorar errores de frame
                     }
                 );
             })
             .catch(err => console.error("Error al obtener cámaras:", err));
     });
 
+    // Detener cámara si se cierra modal
     qrModalEl.addEventListener("hidden.bs.modal", () => {
         if (html5QrCode) {
             html5QrCode.stop().catch(() => {});
         }
     });
 }
+
+// -------------------------
+// EXPORTAR
+// -------------------------
+export { initQRBarcode, lastQR };
 
