@@ -1,0 +1,439 @@
+:root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    /* 🔹 agregado para fondo de las tarjetas */
+    --accent: #d40000;
+    --muted: #444;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: rgba(226, 226, 234, 0.25);
+}
+
+/* ---------- Fondo principal ---------- */
+#contenedorPrincipal {
+    min-height: 100vh;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 1s ease-in-out;
+}
+
+/* ---------- Encabezado ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+
+  /* ✨ Efecto vidrio con mejor contraste */
+  background: rgba(0, 0, 0, 0.35); /* fondo oscuro translúcido */
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+  /* ✍️ Texto */
+  color: #fff;
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* más fuerte para contraste */
+}
+/* ---------- Información central ---------- */
+.header .info {
+    flex: 1;
+    text-align: center;
+}
+
+.header .info h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.header .info h2 {
+    margin: 2px 0 0 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ---------- Datos del lado derecho ---------- */
+.header .datos {
+    text-align: right;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ---------- Contenedor principal ---------- */
+
+
+/* ---------- Logo en el encabezado ---------- */
+.header figure {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el logo y el texto */
+  margin: 0;
+}
+
+.header figure img {
+  width: 70px;     /* Ajusta este valor según lo que se vea bien */
+  height: auto;    /* Mantiene la proporción original */
+  border-radius: 8px; /* opcional: bordes suaves */
+}
+
+.header figure figcaption {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(4px);
+    /* opcional: agrega un efecto de difuminado elegante */
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* ---------- Inputs y etiquetas ---------- */
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 0;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn.secondary {
+    background: #fff;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn2 {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 0;
+    background: var(--accent);
+    color: #022135;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* ---------- Firmas ---------- */
+.signature {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    width: 100%;
+    height: 140px;
+    touch-action: none;
+}
+
+/* ---------- Texto gris secundario ---------- */
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- Flex utilitario ---------- */
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ---------- Imágenes cargadas ---------- */
+.file-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    max-height: 100px;
+    /* 🔹 limita la altura */
+    overflow-y: auto;
+    /* 🔹 evita que expanda el layout */
+}
+
+.thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* ---------- 🔹 MEDIA QUERIES RESPONSIVAS ---------- */
+/* Tablets */
+@media (max-width: 768px) {
+    .header .info h1 {
+        font-size: 18px;
+    }
+
+    .header .info h2 {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .thumb {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header .info h1 {
+        font-size: 16px;
+    }
+
+    .header .info h2 {
+        font-size: 13px;
+    }
+
+    .header .datos {
+        font-size: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        /* 🔹 Botones ocupan todo el ancho */
+    }
+
+    .thumb {
+        width: 60px;
+        height: 60px;
+    }
+
+    .signature {
+        height: 120px;
+    }
+}
+
+
+/* 🔹 Ajuste fino para celulares muy pequeños (ej. 360px de ancho) */
+@media (max-width: 380px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    .header figure {
+        flex-direction: column;  /* Logo arriba, texto debajo */
+        align-items: center;
+        gap: 4px;
+    }
+
+    .header figure img {
+        width: 55px; /* Logo más pequeño */
+        height: auto;
+    }
+
+    .header figure figcaption {
+        font-size: 12px; /* Texto más pequeño */
+        line-height: 1.1;
+    }
+
+    .header .info h1 {
+        font-size: 15px; /* “INFORME TÉCNICO” más pequeño */
+    }
+
+    .header .info h2 {
+        font-size: 12px; /* “MANTENIMIENTO” más pequeño */
+    }
+
+    .header .datos {
+        font-size: 11px;
+    }
+}
+
+
+/* 🔹 En pantallas pequeñas, los selects y buscadores van uno debajo del otro */
+@media (max-width: 480px) {
+    .d-flex.gap-2 {
+        flex-direction: column !important; /* Coloca los elementos en columna */
+    }
+
+    .d-flex.gap-2 select,
+    .d-flex.gap-2 input {
+        width: 100% !important; /* Que ambos ocupen todo el ancho */
+        max-width: none !important;
+    }
+}
+
+
+/* 🔹 Separación adicional en pantallas pequeñas */
+@media (max-width: 480px) {
+    .d-flex.justify-content-between.mt-4 {
+        flex-direction: column; /* Pone los botones uno debajo del otro */
+        gap: 12px; /* Agrega espacio vertical entre ellos */
+    }
+
+    .d-flex.justify-content-between.mt-4 button {
+        width: 100%; /* Que cada botón ocupe todo el ancho */
+    }
+}
+
+
+
+/* Contenedor de los recuadros */
+.contador-container {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Estilo de cada recuadro */
+.contador-item {
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 22px;
+    font-size: 14px;
+}
+
+/* Contenedor de los formularios */
+#formularios {
+    margin-top: 20px;
+}
+
+.formulario {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* Contenedor principal de acciones (Nuevo + Instancias) */
+.acciones-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Contenedor del botón de instancia y volver */
+.instancia-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+/* ---------- Recuadros del contador ---------- */
+.contador-container {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.contador-item {
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 22px;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    /* Suaviza la animación */
+    cursor: pointer;
+}
+
+/* 🔹 Efecto al pasar el mouse */
+.contador-item:hover {
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+    transform: scale(1.1);
+}
+
+.is-invalid {
+    border: 2px solid #dc3545 !important;
+    background-color: #fff5f5;
+}
+.border-danger {
+    border: 2px solid #dc3545 !important;
+}
+
+/* Fondo azul inicial para botones, sin cambiar el ícono */
+.btn-fondo-azul {
+    background-color: #0d6efd; /* azul Bootstrap */
+    color: white; /* texto y borde en blanco para contraste */
+    border-color: #0d6efd; /* borde igual al fondo */
+}
+
+/* Opcional: mantener efecto hover */
+.btn-fondo-azul:hover {
+    background-color: #0b5ed7; /* azul más oscuro al pasar el mouse */
+    border-color: #0b5ed7;
+}
