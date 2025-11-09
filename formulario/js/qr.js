@@ -9,12 +9,13 @@ export function initQRBarcode() {
     if (!btnQR || !modalQR || !videoQR) return;
 
     const modal = new bootstrap.Modal(modalQR);
+    let html5QrCode;
 
     btnQR.addEventListener("click", async () => {
         modal.show();
 
-        // Nueva instancia para forzar permisos cada vez
-        const html5QrCode = new Html5Qrcode(videoQR.id);
+        // Nueva instancia de Html5Qrcode
+        html5QrCode = new Html5Qrcode(videoQR.id);
 
         try {
             const cameras = await Html5Qrcode.getCameras();
@@ -25,33 +26,10 @@ export function initQRBarcode() {
 
             const cameraId = cameras[0].id;
 
-            // Forzar permiso de cámara
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: cameraId } });
-            stream.getTracks().forEach(track => track.stop());
-
-            // Iniciar escaneo: soporta QR y varios formatos de barcode 1D
-            html5QrCode.start(
-                cameraId,
-                { fps: 10, qrbox: { width: 250, height: 250 } },
-                (decodedText, decodedResult) => {
-                    try {
-                        // Intentamos parsear JSON si es QR
-                        const data = JSON.parse(decodedText);
-                        if (data.codigo) document.getElementById("codigo").value = data.codigo;
-                        if (data.planta) document.getElementById("planta").value = data.planta;
-                        if (data.area) document.getElementById("area").value = data.area;
-                        if (data.equipo) document.getElementById("equipo").value = data.equipo;
-                    } catch {
-                        // Si no es JSON, solo texto (QR o barcode)
-                        document.getElementById("codigo").value = decodedText.trim();
-                    } finally {
-                        html5QrCode.stop().then(() => modal.hide());
-                    }
-                },
-                (errorMessage) => {
-                    // Ignorar errores de lectura continua
-                },
-                Html5QrcodeSupportedFormats = [
+            const config = {
+                fps: 10,
+                qrbox: { width: 250, height: 250 },
+                formatsToSupport: [
                     Html5QrcodeSupportedFormats.QR_CODE,
                     Html5QrcodeSupportedFormats.CODE_128,
                     Html5QrcodeSupportedFormats.CODE_39,
@@ -60,6 +38,28 @@ export function initQRBarcode() {
                     Html5QrcodeSupportedFormats.UPC_A,
                     Html5QrcodeSupportedFormats.UPC_E
                 ]
+            };
+
+            // Inicia escaneo de QR y barcodes
+            await html5QrCode.start(
+                cameraId,
+                config,
+                (decodedText, decodedResult) => {
+                    try {
+                        const data = JSON.parse(decodedText);
+                        if (data.codigo) document.getElementById("codigo").value = data.codigo;
+                        if (data.planta) document.getElementById("planta").value = data.planta;
+                        if (data.area) document.getElementById("area").value = data.area;
+                        if (data.equipo) document.getElementById("equipo").value = data.equipo;
+                    } catch {
+                        document.getElementById("codigo").value = decodedText.trim();
+                    } finally {
+                        html5QrCode.stop().then(() => modal.hide());
+                    }
+                },
+                (errorMessage) => {
+                    // Ignorar errores de lectura continua
+                }
             );
         } catch (err) {
             alert("No se pudo acceder a la cámara. Se requiere permiso.");
@@ -72,4 +72,5 @@ export function initQRBarcode() {
         }, { once: true });
     });
 }
+
 
