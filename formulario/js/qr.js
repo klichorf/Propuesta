@@ -1,57 +1,56 @@
-// -------------------------
-// MÓDULO QR / SOLO LECTURA
-// -------------------------
-
-export function initQRBarcode() {
+export function initQRScanner() {
     const btnQR = document.getElementById("btnQR");
-    const qrModalEl = document.getElementById("modalQR");
-    const qrDivId = "QR";
+    const modalEl = document.getElementById("modalQR");
     const inputCodigo = document.getElementById("codigo");
+    const qrDiv = document.getElementById("QR");
 
-    if (!btnQR || !qrModalEl || !inputCodigo) return;
+    if (!btnQR || !modalEl || !inputCodigo || !qrDiv) return;
 
-    const bootstrapModal = new bootstrap.Modal(qrModalEl);
-    let html5QrCode = null;
+    let html5QrScanner = null;
 
-    // Abrir modal al hacer clic en el botón
-    btnQR.addEventListener("click", () => bootstrapModal.show());
+    btnQR.addEventListener("click", () => {
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
 
-    // Iniciar escaneo al abrir modal
-    qrModalEl.addEventListener("shown.bs.modal", () => {
-        if (typeof Html5Qrcode === "undefined") {
-            console.error("Html5Qrcode no cargado. Verifica el CDN.");
-            return;
+        // Limpiar el div QR
+        qrDiv.innerHTML = "";
+
+        if (!html5QrScanner) {
+            html5QrScanner = new Html5Qrcode("QR");
         }
 
-        html5QrCode = new Html5Qrcode(qrDivId);
+        // Intentar usar la cámara
+        html5QrScanner.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: 250 },
+            (decodedText) => {
+                inputCodigo.value = decodedText;
+                html5QrScanner.stop();
+                modal.hide();
+            },
+            (errorMessage) => {
+                // ignoramos errores de lectura en tiempo real
+            }
+        ).catch(err => {
+            console.warn("No hay cámara disponible. Se usará selector de archivo.", err);
 
-        Html5Qrcode.getCameras()
-            .then(cameras => {
-                if (!cameras || !cameras.length) {
-                    alert("No se detectó ninguna cámara.");
-                    return;
-                }
-
-                const cameraId = cameras[0].id;
-
-                html5QrCode.start(
-                    cameraId,
-                    { fps: 10, qrbox: 250, formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] },
-                    decodedText => {
-                        inputCodigo.value = decodedText; // colocar resultado
-                        html5QrCode.stop().then(() => bootstrapModal.hide()); // detener y cerrar
-                    },
-                    errorMessage => {
-                        // ignorar errores de cada frame
+            // Alternativa: selector de archivo
+            const fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.accept = "image/*";
+            fileInput.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    try {
+                        const result = await Html5Qrcode.scanFile(file, true);
+                        inputCodigo.value = result;
+                        modal.hide();
+                    } catch (err) {
+                        console.error("Error leyendo QR desde archivo:", err);
                     }
-                );
-            })
-            .catch(err => console.error("Error al obtener cámaras:", err));
-    });
-
-    // Detener cámara si se cierra modal
-    qrModalEl.addEventListener("hidden.bs.modal", () => {
-        if (html5QrCode) html5QrCode.stop().catch(() => {});
+                }
+            };
+            fileInput.click();
+        });
     });
 }
-
