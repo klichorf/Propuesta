@@ -126,7 +126,7 @@ function initSelects() {
                 "url('https://mre-site-makro-colombia-test-webapp-slot.azurewebsites.net/imagesProducts/medias/913263_1_239.webp')",
             ASEO: "url('https://organizacioncardenas.com/wp-content/uploads/2022/11/detergentelavado-e1678672244584-793x1024.png')",
             ALIMENTOS:
-                "url('https://www.delaabuelaconamor.com/wp-content/uploads/2022/07/avena-hojuela-500g.png')",
+                "url('img/BUNUELO.png')",
             AGUAS: "url('https://media.surtiplaza.co/dimen/7707335286316.png')",
         };
         contenedor.style.background = fondos[plantaSelect.value] || "#f6f9fc";
