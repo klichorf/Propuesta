@@ -23,26 +23,27 @@ body {
     transition: background-image 1s ease-in-out;
 }
 
-/* ---------- Encabezado ---------- */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
 
-  /* ✨ Efecto vidrio con mejor contraste */
-  background: rgba(0, 0, 0, 0.35); /* fondo oscuro translúcido */
+  /* 🔹 Gradiente de izquierda a derecha: claro → oscuro */
+  background: linear-gradient(to right, #dce6e9, #1c1c3c); 
+  /* Si quieres más suave: rgba(78,115,223,0.85) → rgba(28,28,60,0.85) */
+  
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 
-  /* ✍️ Texto */
   color: #fff;
   font-family: "Poppins", "Inter", system-ui, sans-serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* más fuerte para contraste */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 /* ---------- Información central ---------- */
 .header .info {
     flex: 1;
@@ -437,3 +438,12 @@ textarea {
     background-color: #0b5ed7; /* azul más oscuro al pasar el mouse */
     border-color: #0b5ed7;
 }
+
+
+footer p strong {
+    color: #022135; /* o el color que quieras */
+    font-weight: 600;
+}
+
+
+
