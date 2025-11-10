@@ -12,7 +12,7 @@ import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
 import { initQRScanner } from "./qr.js";
 
-
+ 
 document.addEventListener("DOMContentLoaded", () => {
     initFotos();
     initFirmas();
