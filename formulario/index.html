@@ -53,34 +53,21 @@
                 </legend>
 
 
-                <!-- QR-->
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="codigo" class="form-label"># Activo</label>
                         <input id="codigo" type="text" class="form-control" placeholder="FO-1600-041" />
                     </div>
-
                     <div class="col-md-6 d-flex align-items-end">
                         <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
                             <i class="bi bi-qr-code-scan"></i>
                         </button>
                     </div>
                 </div>
+
+                    <!-- Contenedor para la cámara -->
+                    <div id="QR" style="width: 100%; height: 300px; border-radius: 8px; margin-top: 10px;"></div>
                 
-                <!-- Modal para el escáner QR -->
-                <div class="modal fade" id="modalQR" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content text-center">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Escanear código QR</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <video id="videoQR" style="width: 100%; border-radius: 8px" autoplay></video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <p id="supervisor" class="text-muted mt-3">
                     👤 Supervisor:
                     <span class="d-none d-sm-inline">(selecciona una planta)</span>
@@ -305,6 +292,7 @@
 
 
 </html>
+
 
 
 
