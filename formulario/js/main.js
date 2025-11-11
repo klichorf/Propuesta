@@ -1,5 +1,5 @@
 // ------------------------------------------------------
-// MÓDULO PRINCIPAL: INICIALIZACIÓN Y EVENTOS
+// MÓDULO PRINCIPAL: INICIALIZACIÓN
 // ------------------------------------------------------
 import { initFotos } from "./fotos.js";
 import { initFirmas } from "./firmas.js";
@@ -11,40 +11,16 @@ import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
 import { initQRScanner } from "./qr.js";
+import { initBotones } from "./botones.js"; // 👈 nuevo módulo
 
- 
 document.addEventListener("DOMContentLoaded", () => {
-    initFotos();
-    initFirmas();
-    initSelects();
-    initTiempo();
-    cargarRepuestos();
-    initBuscadorRepuestos();
-    initBuscadorHerramientas();
-    initQRScanner()
-
-    const btnDescargar = document.getElementById("btnDescargar");
-    const btnCompartir = document.getElementById("btnCompartir");
-
-    btnDescargar.addEventListener("click", async () => {
-        if (!validarFormulario()) return;
-        const file = await generarPDF();
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(file);
-        a.download = "informe_mantenimiento.pdf";
-        a.click();
-    });
-
-    btnCompartir.addEventListener("click", async () => {
-        if (!validarFormulario()) return;
-        const file = await generarPDF();
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-                title: "Informe de mantenimiento",
-                files: [file],
-            });
-        } else {
-            mostrarAlerta("Tu navegador no admite compartir archivos.", "danger");
-        }
-    });
+    try { initFotos(); } catch(e) {}
+    try { initFirmas(); } catch(e) {}
+    try { initSelects(); } catch(e) {}
+    try { initTiempo(); } catch(e) {}
+    try { cargarRepuestos(); } catch(e) {}
+    try { initBuscadorRepuestos(); } catch(e) {}
+    try { initBuscadorHerramientas(); } catch(e) {}
+    try { initQRScanner(); } catch(e) {}
+    try { initBotones(validarFormulario, generarPDF); } catch(e) {}
 });
