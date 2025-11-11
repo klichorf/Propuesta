@@ -1,5 +1,5 @@
 // ------------------------------------------------------
-// MÓDULO: GENERACIÓN DE PDF (Versión profesional con encabezado actualizado)
+// MÓDULO: GENERACIÓN DE PDF (Versión profesional con segunda hoja para fotos)
 // ------------------------------------------------------
 import { imagesData } from "./fotos.js";
 import { supervisores } from "./selects.js";
@@ -13,64 +13,63 @@ export async function generarPDF() {
 
   // Colores corporativos
   const primary = [0, 70, 140];
-  const accent = [200, 0, 0]; // rojo elegante
+  const accent = [200, 0, 0];
   const gray = [60, 60, 60];
   const lightGray = [220, 220, 220];
   let y = M;
 
   // ------------------------------------------------------
-  // ENCABEZADO NUEVO
+  // ENCABEZADO (FUNCIÓN REUTILIZABLE)
   // ------------------------------------------------------
-  const logo = await getBase64FromUrl("./img/logo.png");
-  const logoW = 60;
-  doc.addImage(logo, "PNG", M, y, logoW, 40);
+  async function addEncabezado() {
+    const logo = await getBase64FromUrl("./img/logo.png");
+    const logoW = 60;
 
-  // 🔴 Rectángulo rojo principal
-  doc.setFillColor(...accent);
-  doc.rect(M + logoW + 10, y, W - (M * 2) - logoW - 10, 40, 'F');
+    doc.addImage(logo, "PNG", M, M, logoW, 40);
 
-  // 🟡 Texto “ORGANIZACIÓN CÁRDENAS S.A.S”
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(16);
-  doc.setTextColor(30, 30, 30);
-  const nombreEmpresa = "ORGANIZACIÓN CÁRDENAS S.A.S";
-  doc.text(
-    nombreEmpresa,
-    M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-    y - 10,
-    { align: 'center' }
-  );
+    // 🔴 Rectángulo rojo principal
+    doc.setFillColor(...accent);
+    doc.rect(M + logoW + 10, M, W - (M * 2) - logoW - 10, 40, 'F');
 
-  // 🔹 Texto principal “INFORME TÉCNICO”
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(255, 255, 255);
-  doc.text(
-    "INFORME TÉCNICO",
-    M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-    y + 20,
-    { align: 'center' }
-  );
+    // 🟡 Nombre empresa
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(30, 30, 30);
+    const nombreEmpresa = "ORGANIZACIÓN CÁRDENAS S.A.S";
+    doc.text(nombreEmpresa, W / 2 + 20, M - 10, { align: 'center' });
 
-  // ⚪ Línea blanca inferior (MANTENIMIENTO)
-  doc.setFillColor(255, 255, 255);
-  doc.rect(M + logoW + 10, y + 30, W - (M * 2) - logoW - 10, 20, 'F');
-  doc.setTextColor(0, 0, 0);
-  doc.setFontSize(12);
-  doc.text(
-    "MANTENIMIENTO",
-    M + logoW + 20 + (W - M * 2 - logoW - 10) / 2,
-    y + 45,
-    { align: 'center' }
-  );
+    // 🔹 Texto principal
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(255, 255, 255);
+    doc.text("INFORME TÉCNICO", W / 2 + 20, M + 20, { align: 'center' });
 
-  // Textos del lado derecho
-  doc.setFontSize(10);
-  doc.setTextColor(255, 255, 255);
-  doc.text(`Código: FO-1600-041`, W - M - 100, y + 10);
-  doc.text(`Versión: 01`, W - M - 100, y + 22);
+    // ⚪ Línea blanca inferior
+    doc.setFillColor(255, 255, 255);
+    doc.rect(M + logoW + 10, M + 30, W - (M * 2) - logoW - 10, 20, 'F');
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
+    doc.text("MANTENIMIENTO", W / 2 + 20, M + 45, { align: 'center' });
 
-  // Mover cursor después del encabezado
+    // Textos derecho
+    doc.setFontSize(10);
+    doc.setTextColor(255, 255, 255);
+    doc.text(`Código: FO-1600-041`, W - M - 100, M + 10);
+    doc.text(`Versión: 01`, W - M - 100, M + 22);
+  }
+
+  // ------------------------------------------------------
+  // PIE DE PÁGINA (FUNCIÓN REUTILIZABLE)
+  // ------------------------------------------------------
+  function addPie() {
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text("Código: FO-1600-041  |  Versión: 01", W / 2, H - 20, { align: "center" });
+  }
+
+  // Dibujar encabezado inicial
+  await addEncabezado();
   y += 90;
 
   // ------------------------------------------------------
@@ -112,30 +111,7 @@ export async function generarPDF() {
   addSec("Herramientas utilizadas", v("herramientas"));
 
   // ------------------------------------------------------
-  // REGISTRO FOTOGRÁFICO
-  // ------------------------------------------------------
-  if (imagesData.length > 0) {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.setTextColor(...primary);
-    doc.text("Registro fotográfico", M, y + 10);
-    y += 25;
-
-    let x = M;
-    const size = 120, gap = 12;
-    for (const img of imagesData) {
-      if (x + size > W - M) {
-        x = M;
-        y += size + gap;
-      }
-      doc.addImage(img, "JPEG", x, y, size, size);
-      x += size + gap;
-    }
-    y += size + 25;
-  }
-
-  // ------------------------------------------------------
-  // FIRMAS
+  // FIRMAS (primera hoja)
   // ------------------------------------------------------
   const se = document.getElementById("sigEjecutor").toDataURL();
   const sc = document.getElementById("sigCoordinador").toDataURL();
@@ -162,10 +138,43 @@ export async function generarPDF() {
   // ------------------------------------------------------
   // PIE DE PÁGINA
   // ------------------------------------------------------
-  doc.setFont("helvetica", "italic");
-  doc.setFontSize(9);
-  doc.setTextColor(120);
-  doc.text("Código: FO-1600-041  |  Versión: 01", W / 2, H - 20, { align: "center" });
+  addPie();
+
+  // ------------------------------------------------------
+  // NUEVA PÁGINA: REGISTRO FOTOGRÁFICO
+  // ------------------------------------------------------
+  if (imagesData.length > 0) {
+    doc.addPage();
+    await addEncabezado();
+    y = M + 90;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...primary);
+    doc.text("Registro fotográfico", M, y);
+    y += 25;
+
+    let x = M;
+    const size = 120, gap = 12;
+
+    for (const img of imagesData) {
+      if (x + size > W - M) {
+        x = M;
+        y += size + gap;
+      }
+      // Evitar que las imágenes se salgan de la página
+      if (y + size > H - 100) {
+        addPie();
+        doc.addPage();
+        await addEncabezado();
+        y = M + 90;
+      }
+      doc.addImage(img, "JPEG", x, y, size, size);
+      x += size + gap;
+    }
+
+    addPie();
+  }
 
   // ------------------------------------------------------
   // EXPORTAR PDF
@@ -201,6 +210,9 @@ export async function generarPDF() {
   }
 }
 
+// ------------------------------------------------------
+// FUNCIÓN AUXILIAR PARA OBTENER LOGO
+// ------------------------------------------------------
 async function getBase64FromUrl(url) {
   const res = await fetch(url);
   const blob = await res.blob();
@@ -210,3 +222,4 @@ async function getBase64FromUrl(url) {
     reader.readAsDataURL(blob);
   });
 }
+
