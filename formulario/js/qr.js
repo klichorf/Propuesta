@@ -10,20 +10,7 @@ export function initQRScanner() {
     let html5QrScanner = new Html5Qrcode("QR");
     let scannerRunning = false;
 
-    // -------------------- Cambiar icono al hover --------------------
-    const icon = closeBtn.querySelector("i");
-
-    closeBtn.addEventListener("mouseenter", () => {
-        icon.classList.remove("bi-x-square");
-        icon.classList.add("bi-x-circle");
-    });
-
-    closeBtn.addEventListener("mouseleave", () => {
-        icon.classList.remove("bi-x-circle");
-        icon.classList.add("bi-x-square");
-    });
-
-    // -------------------- Botón para abrir el QR --------------------
+    // -------------------- Abrir escáner --------------------
     btnQR.addEventListener("click", async () => {
         try {
             const devices = await Html5Qrcode.getCameras();
@@ -36,7 +23,9 @@ export function initQRScanner() {
             return;
         }
 
-        qrModal.classList.add("show");
+        // 🔹 Mostrar escáner y botón cerrar
+        qrModal.style.display = "block";
+        closeBtn.classList.remove("d-none");
 
         html5QrScanner.start(
             { facingMode: "environment" },
@@ -54,16 +43,20 @@ export function initQRScanner() {
         });
     });
 
-    // -------------------- Botón de cerrar --------------------
+    // -------------------- Botón CERRAR --------------------
     closeBtn.addEventListener("click", () => {
         stopScanner();
     });
 
+    // -------------------- Detener escáner --------------------
     function stopScanner() {
         if (scannerRunning) {
-            html5QrScanner.stop().catch(()=>{});
+            html5QrScanner.stop().catch(() => {});
             scannerRunning = false;
         }
-        qrModal.classList.remove("show");
+
+        // 🔹 Ocultar escáner y botón cerrar
+        qrModal.style.display = "none";
+        closeBtn.classList.add("d-none");
     }
 }
