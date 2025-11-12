@@ -52,26 +52,32 @@
                     </section>
                 </legend>
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="codigo" class="form-label"># Activo</label>
-                        <input id="codigo" type="text" class="form-control" placeholder="FO-1600-041" />
+                 <!-- 🔹escanner-->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="codigo" class="form-label">#
+                                Activo</label>
+                            <input id="codigo" type="text" class="form-control"
+                                placeholder="FO-1600-041" />
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button id="btnQR" type="button"
+                                class="btn btn-outline-secondary w-100">
+                                <i class="bi bi-qr-code-scan"></i> Escanear
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-6 d-flex align-items-end">
-                        <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
-                            <i class="bi bi-qr-code-scan"></i>
-                        </button>
+
+                    <!-- 🔹 Botón CERRAR (oculto al inicio) -->
+                    <button id="closeQR"
+                        class="btn btn-danger w-100 d-none mt-3">
+                        Cerrar
+                    </button>
+
+                    <!-- 🔹 Contenedor para la cámara tipo modal -->
+                    <div id="QR-modal" class="mt-3" style="display: none;">
+                        <div id="QR" class="border rounded p-2"></div>
                     </div>
-                </div>
-
-                <button id="closeQR" class="btn btn-outline-secondary w-100">
-                    <i class="bi bi-x-square" style="color: #f2f5f4"></i>
-                </button>
-
-                <!-- Contenedor para la cámara tipo modal -->
-                <div id="QR-modal" style="margin-top: 5%">
-                    <div id="QR"></div>
-                </div>
             </fieldset>
             <p id="supervisor" class="text-muted mt-3">
                 👤 Supervisor:
@@ -296,6 +302,7 @@
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
+
 
 
 
