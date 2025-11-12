@@ -37,24 +37,49 @@ export function validarFormulario() {
 
         let vacio = false;
 
-        if (c.tagName === "SELECT") {
-            // Si el valor es vacío o nulo, marcar como inválido
+        if (id === "fotos") {
+            // 🔸 Comprobamos si hay fotos desde cualquiera de los dos inputs
+            const fotos = document.getElementById("fotos");
+            const fotosTomar = document.getElementById("fotosTomar");
+            vacio = (!fotos.files.length && !fotosTomar.files.length);
+        } else if (c.tagName === "SELECT") {
             vacio = !c.value || c.selectedIndex === 0;
         } else {
             vacio = !c.value.trim();
         }
 
-        if (vacio) {
-            c.classList.add("is-invalid");
-            if (c.tagName === "SELECT") {
-                c.style.border = "2px solid #dc3545";
-            }
-            faltantes.push(id);
-            if (!primero) primero = c;
+if (vacio) {
+    c.classList.add("is-invalid");
+
+    if (c.tagName === "SELECT") {
+        c.style.border = "2px solid #dc3545";
+    }
+
+    faltantes.push(id);
+
+    if (!primero) {
+        if (id === "fotos") {
+            // 🔹 Referencia al fieldset visible
+            const fieldsetFotos = document.getElementById("fieldsetFotos");
+            primero = fieldsetFotos;
+
+            // 🔹 Borde rojo temporal
+            fieldsetFotos.style.transition = "border 0.5s ease";
+            fieldsetFotos.style.border = "2px solid #dc3545";
+
+            // 🔹 Restaurar borde después de unos segundos
+            setTimeout(() => {
+                fieldsetFotos.style.border = "";
+            }, 2000);
         } else {
-            c.classList.remove("is-invalid");
-            if (c.tagName === "SELECT") c.style.border = "";
+            primero = c;
         }
+    }
+} else {
+    c.classList.remove("is-invalid");
+    if (c.tagName === "SELECT") c.style.border = "";
+}
+
     });
 
     // 🔹 Verificar firma del ejecutor
@@ -109,7 +134,7 @@ export function validarFormulario() {
 document.addEventListener("DOMContentLoaded", () => {
     const campos = document.querySelectorAll(
         "#codigo, #planta, #area, #equipo, #fechaInicio, #fechaFin, #tipoMantenimiento, #ejecutor, #danos, #trabajo, #repuestos, #herramientas,#fotos"
- );
+    );
 
     campos.forEach((campo) => {
         // 🔹 INPUT / TEXTAREA
@@ -123,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 campo.classList.remove("is-invalid");
                 if (campo.tagName === "SELECT") campo.style.border = "";
             }
-            
+
         });
     });
 });
