@@ -16,7 +16,8 @@ const firebaseConfig = {
 
 // Inicializar Firebase y Firestore
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
+
 
 // ------------------------------------------------------
 // CONTROL DE ENVÍO

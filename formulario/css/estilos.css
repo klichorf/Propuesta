@@ -446,4 +446,25 @@ footer p strong {
 }
 
 
+.modal-dialog {
+    max-width: 90% !important;
+    max-height: 90vh !important;
+}
+
+.modal-content {
+    height: 90vh;
+    overflow-y: auto;
+}
+
+
+body.modal-open {
+    overflow: auto !important;
+    padding-right: 0 !important; /* evita salto de scroll */
+}
+
+.modal-backdrop {
+    background-color: transparent !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
 
