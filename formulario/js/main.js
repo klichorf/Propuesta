@@ -11,37 +11,60 @@ import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
 import { initQRScanner } from "./qr.js";
-import { initBotones } from "./botones.js"; // 👈 nuevo módulo
+import { initBotones } from "./botones.js";
 import { verGrafico } from "./grafico.js";
 import { generarReportePlantas } from "./reportePlantas.js";
-import { cargarPlantasEnFiltro } from "./reportes.js"
+import { cargarPlantasEnFiltro } from "./reportes.js";
+import { toggleReportePlantas } from "./toggleReportePlantas.js";   // 👈 NUEVO
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    try { initFotos(); } catch (e) { }
-    try { initFirmas(); } catch (e) { }
-    try { initSelects(); } catch (e) { }
-    try { initTiempo(); } catch (e) { }
-    try { cargarRepuestos(); } catch (e) { }
-    try { initBuscadorRepuestos(); } catch (e) { }
-    try { initBuscadorHerramientas(); } catch (e) { }
-    try { initQRScanner(); } catch (e) { }
-    
-      // 🔹 Botón para abrir el gráfico de mantenimientos
+
+    // Inicializaciones seguras
+    try { initFotos(); } catch (e) {}
+    try { initFirmas(); } catch (e) {}
+    try { initSelects(); } catch (e) {}
+    try { initTiempo(); } catch (e) {}
+    try { cargarRepuestos(); } catch (e) {}
+    try { initBuscadorRepuestos(); } catch (e) {}
+    try { initBuscadorHerramientas(); } catch (e) {}
+    try { initQRScanner(); } catch (e) {}
+    try { initBotones(validarFormulario, generarPDF); } catch (e) {}
+
+
+    // ------------------------------------------------------
+    // BOTÓN PARA VER GRÁFICO
+    // ------------------------------------------------------
     const btnGrafico = document.getElementById("btnVerGrafico");
     if (btnGrafico) {
         btnGrafico.addEventListener("click", verGrafico);
     }
 
-    document.getElementById("btnReportePlantas").addEventListener("click", () => {
-    generarReportePlantas();
+    // ------------------------------------------------------
+    // 🔹 TOGGLE DEL MODAL DE REPORTES (MODULAR)
+    // ------------------------------------------------------
+    toggleReportePlantas(generarReportePlantas);
+
+    // ------------------------------------------------------
+    // FILTROS DEL REPORTE
+    // ------------------------------------------------------
+const modalEl = document.getElementById("modalReportePlantas");
+
+modalEl.addEventListener("shown.bs.modal", () => {
+    document.getElementById("filtroPlanta").onchange = generarReportePlantas;
+    document.getElementById("filtroFechaInicio").onchange = generarReportePlantas;
+    document.getElementById("filtroFechaFin").onchange = generarReportePlantas;
 });
 
-document.getElementById("filtroPlanta").addEventListener("change", generarReportePlantas);
-document.getElementById("filtroFechaInicio").addEventListener("change", generarReportePlantas);
-document.getElementById("filtroFechaFin").addEventListener("change", generarReportePlantas);
-window.addEventListener("DOMContentLoaded", () => {
+modalEl.addEventListener("hide.bs.modal", () => {
+    document.getElementById("filtroPlanta").onchange = null;
+    document.getElementById("filtroFechaInicio").onchange = null;
+    document.getElementById("filtroFechaFin").onchange = null;
+});
+
+
+    // ------------------------------------------------------
+    // CARGAR PLANTAS AL INICIAR
+    // ------------------------------------------------------
     cargarPlantasEnFiltro();
-});
-
-    try { initBotones(validarFormulario, generarPDF); } catch (e) { }
 });
