@@ -120,6 +120,7 @@ function mostrarReporteEnModal(reporte) {
 
     contenedor.innerHTML = html;
 
-
+    
 
 }
+
