@@ -1,6 +1,7 @@
 // ------------------------------------------------------
 // MÓDULO PRINCIPAL: INICIALIZACIÓN
 // ------------------------------------------------------
+
 import { initFotos } from "./fotos.js";
 import { initFirmas } from "./firmas.js";
 import { generarPDF } from "./pdf.js";
@@ -12,59 +13,55 @@ import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
 import { initQRScanner } from "./qr.js";
 import { initBotones } from "./botones.js";
-import { verGrafico } from "./grafico.js";
-import { generarReportePlantas } from "./reportePlantas.js";
-import { cargarPlantasEnFiltro } from "./reportes.js";
-import { toggleReportePlantas } from "./toggleReportePlantas.js";   // 👈 NUEVO
+import { generarReportePlantas } from "./reporte/reportePlantas.js";
+import { toggleReportePlantas } from "./reporte/toggleReportePlantas.js";
+import { initFiltrosReporte } from "./reporte/filtrosReporte.js";
+import { initBotonGraficoPrincipal } from "./charts/botonGrafico.js";
 
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    // Inicializaciones seguras
-    try { initFotos(); } catch (e) {}
-    try { initFirmas(); } catch (e) {}
-    try { initSelects(); } catch (e) {}
-    try { initTiempo(); } catch (e) {}
-    try { cargarRepuestos(); } catch (e) {}
-    try { initBuscadorRepuestos(); } catch (e) {}
-    try { initBuscadorHerramientas(); } catch (e) {}
-    try { initQRScanner(); } catch (e) {}
-    try { initBotones(validarFormulario, generarPDF); } catch (e) {}
+// ------------------------------------------------------
+// INICIALIZACIÓN AL CARGAR EL DOM
+// ------------------------------------------------------
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    console.log("➡️ INICIANDO DOMContentLoaded - Inicialización");
 
     // ------------------------------------------------------
-    // BOTÓN PARA VER GRÁFICO
+    // LISTA DE INICIALIZACIONES
     // ------------------------------------------------------
-    const btnGrafico = document.getElementById("btnVerGrafico");
-    if (btnGrafico) {
-        btnGrafico.addEventListener("click", verGrafico);
+    const inicializaciones = [
+        { fn: initFotos, name: "initFotos" },
+        { fn: initFirmas, name: "initFirmas" },
+        { fn: initSelects, name: "initSelects" },
+        { fn: initTiempo, name: "initTiempo" },
+        { fn: cargarRepuestos, name: "cargarRepuestos" },
+        { fn: initBuscadorRepuestos, name: "initBuscadorRepuestos" },
+        { fn: initBuscadorHerramientas, name: "initBuscadorHerramientas" },
+        { fn: initQRScanner, name: "initQRScanner" },
+        { fn: () => initBotones(validarFormulario, generarPDF), name: "initBotones" },
+        { fn: () => initFiltrosReporte(), name: "initFiltrosReporte" },
+        { fn: () => toggleReportePlantas(generarReportePlantas), name: "toggleReportePlantas" }
+    ];
+
+    // ------------------------------------------------------
+    // EJECUTAR INICIALIZACIONES CON LOGS DE DEPURACIÓN
+    // ------------------------------------------------------
+    for (const { fn, name } of inicializaciones) {
+        try {
+            console.log(`🔹 Inicializando ${name}...`);
+            await fn(); // 🔹 Usamos await por si la función es async
+            console.log(`✅ ${name} inicializado`);
+        } catch (e) {
+            console.error(`⛔ Error en ${name}:`, e);
+        }
     }
 
-    // ------------------------------------------------------
-    // 🔹 TOGGLE DEL MODAL DE REPORTES (MODULAR)
-    // ------------------------------------------------------
-    toggleReportePlantas(generarReportePlantas);
-
-    // ------------------------------------------------------
-    // FILTROS DEL REPORTE
-    // ------------------------------------------------------
-const modalEl = document.getElementById("modalReportePlantas");
-
-modalEl.addEventListener("shown.bs.modal", () => {
-    document.getElementById("filtroPlanta").onchange = generarReportePlantas;
-    document.getElementById("filtroFechaInicio").onchange = generarReportePlantas;
-    document.getElementById("filtroFechaFin").onchange = generarReportePlantas;
-});
-
-modalEl.addEventListener("hide.bs.modal", () => {
-    document.getElementById("filtroPlanta").onchange = null;
-    document.getElementById("filtroFechaInicio").onchange = null;
-    document.getElementById("filtroFechaFin").onchange = null;
-});
+        initBotonGraficoPrincipal();
 
 
-    // ------------------------------------------------------
-    // CARGAR PLANTAS AL INICIAR
-    // ------------------------------------------------------
-    cargarPlantasEnFiltro();
 });
