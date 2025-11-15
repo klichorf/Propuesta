@@ -120,9 +120,6 @@ function mostrarReporteEnModal(reporte) {
 
     contenedor.innerHTML = html;
 
-    // Mostrar modal
-    const modal = new bootstrap.Modal(document.getElementById("modalReportePlantas"));
-    modal.show();
 
 
 }
