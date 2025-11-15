@@ -74,59 +74,74 @@
                         </div>
                     </div>
 
-                    <button id="btnReportePlantas"
-                        class="btn btn-secondary"> <i class="bi bi-file-earmark-text"></i> </button>
+                                   <!-- 🔘 BOTÓN -->
+                <button id="btnReportePlantas" class="btn btn-secondary">
+                    <i class="bi bi-file-earmark-text"></i>
+                </button>
 
-                    <div class="modal fade" id="modalReportePlantas"
-                        tabindex="-1">
-                        <div
-                            class="modal-dialog modal-lg modal-dialog-scrollable">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Reporte por Planta /
-                                        Área / Equipo</h5>
-                                    <button class="btn-close"
-                                        data-bs-dismiss="modal"></button>
+                <!-- 🟦 MODAL -->
+                <div class="modal fade" id="modalReportePlantas" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">Reporte por Planta / Área / Equipo</h5>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <!-- 🔻 TOGGLE (Accordion) -->
+                                <div class="accordion mb-3" id="accordionFiltros">
+                                    <div class="accordion-item border-0 shadow-sm rounded">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button fw-semibold" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseFiltros">
+                                                Filtros del Reporte
+                                            </button>
+                                        </h2>
+
+                                        <div id="collapseFiltros" class="accordion-collapse collapse show"
+                                            data-bs-parent="#accordionFiltros">
+
+                                            <div class="accordion-body">
+
+                                                <div class="row gy-3">
+                                                    <!-- PLANTA -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold">Planta</label>
+                                                        <select id="filtroPlanta" class="form-select rounded-pill">
+                                                            <option value="">Todas</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!-- FECHA INICIO -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold">Fecha Inicio</label>
+                                                        <input type="date" id="filtroFechaInicio"
+                                                            class="form-control rounded-pill">
+                                                    </div>
+
+                                                    <!-- FECHA FIN -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold">Fecha Fin</label>
+                                                        <input type="date" id="filtroFechaFin"
+                                                            class="form-control rounded-pill">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-<div class="card shadow-sm border-0 mb-3">
-    <div class="card-body">
 
-        <h5 class="mb-3 text-primary fw-semibold">
-            Filtros del Reporte
-        </h5>
+                                <!-- 📄 CONTENIDO DEL REPORTE -->
+                                <div id="contenidoReporte"></div>
 
-        <div class="row gy-3">
-            <!-- PLANTA -->
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Planta</label>
-                <select id="filtroPlanta" class="form-select rounded-pill">
-                    <option value="">Todas</option>
-                </select>
-            </div>
-
-            <!-- FECHA INICIO -->
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Fecha Inicio</label>
-                <input type="date" id="filtroFechaInicio" class="form-control rounded-pill">
-            </div>
-
-            <!-- FECHA FIN -->
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Fecha Fin</label>
-                <input type="date" id="filtroFechaFin" class="form-control rounded-pill">
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-                                <div class="modal-body" id="contenidoReporte">
-                                    <!-- Aquí se cargará el reporte dinámico -->
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
                     <!-- 🔹escanner-->
                     <div class="row g-3">
@@ -431,4 +446,5 @@
 
 
 </html>
+
 
