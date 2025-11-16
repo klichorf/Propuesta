@@ -1,4 +1,4 @@
-import { mostrarLoader, ocultarLoader } from "./../charts/loader.js";
+import { mostrarLoader, ocultarLoader } from "../../charts/loader.js";
 
 let modalReporteInstancia = null;
 
@@ -47,3 +47,4 @@ export function toggleReportePlantas() {
 
     console.groupEnd();
 }
+
