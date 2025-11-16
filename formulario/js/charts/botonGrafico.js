@@ -1,10 +1,7 @@
 
+import { mostrarLoader, ocultarLoader } from "./loader.js";
 // ------------------------------------------------------
 // MÓDULO: BOTONES DE GRÁFICO
-// ------------------------------------------------------
-
-// ------------------------------------------------------
-// MÓDULO: BOTÓN DE GRÁFICO
 // ------------------------------------------------------
 export function initBotonGrafico(idBoton, callback) {
     const btn = document.getElementById(idBoton);
@@ -19,9 +16,6 @@ export function initBotonGrafico(idBoton, callback) {
 // ------------------------------------------------------
 // INICIALIZACIÓN DEL BOTÓN PRINCIPAL
 // ------------------------------------------------------
-// ------------------------------------------------------
-// INICIALIZACIÓN DEL BOTÓN PRINCIPAL
-// ------------------------------------------------------
 
 let modalGraficoInstancia = null;
 
@@ -30,24 +24,30 @@ export function initBotonGraficoPrincipal() {
         "btnVerGrafico",
         async () => {
 
+            try {
+                mostrarLoader();
             // 🟦 Primer gráfico
             const m1 = await import("./reportes_plantas.js");
             await m1.verGrafico();
-
             // 🟩 Segundo gráfico
             const m2 = await import("./verGraficoPlantaVsEquipo.js");
             await m2.verGraficoPlantaVsEquipo();
-
             // 🟡 Crear instancia SOLO una vez
             if (!modalGraficoInstancia) {
                 modalGraficoInstancia = new bootstrap.Modal(
                     document.getElementById("modalGrafico")
                 );
             }
-
             // 👉 Mostrar SIEMPRE que se da clic
             modalGraficoInstancia.show();
+            } catch (error) {
+                console.error(error);
+            } finally {
+                ocultarLoader();
+            }
         }
     );
 }
+
+
 
