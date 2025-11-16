@@ -467,4 +467,29 @@ body.modal-open {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+/* Overlay Loader */
+#loaderOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 9999;
+}
+
+#loaderOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loaderSpinner {
+    width: 60px;
+    height: 60px;
+}
+
 
