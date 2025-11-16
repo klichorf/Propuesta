@@ -475,21 +475,25 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
+
     backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.25s ease;
+    pointer-events: none;      /* ✔ Reemplaza visibility */
+    transition: opacity 0.25s ease;
     z-index: 9999;
 }
 
 #loaderOverlay.active {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;      /* ✔ Permite clics al activarse */
 }
 
 .loaderSpinner {
     width: 60px;
     height: 60px;
 }
+
 
 
