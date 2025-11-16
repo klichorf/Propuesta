@@ -495,5 +495,14 @@ body.modal-open {
     height: 60px;
 }
 
+#modalGrafico .modal-dialog {
+    max-width: 90vw !important;
+}
+
+#modalGrafico .modal-content {
+    min-height: 70vh;   /* evita que el modal "crezca" mientras se dibuja */
+}
+
+
 
 
