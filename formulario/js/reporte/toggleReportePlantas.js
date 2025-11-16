@@ -1,6 +1,7 @@
-// ------------------------------------------------------
-// 🔹 TOGGLE DEL MODAL DE REPORTES
-// ------------------------------------------------------
+import { mostrarLoader, ocultarLoader } from "./../charts/loader.js";
+
+let modalReporteInstancia = null;
+
 export function toggleReportePlantas() {
     console.group("%c➡️ INICIANDO toggleReportePlantas()", "color: blue; font-weight: bold;");
 
@@ -13,29 +14,37 @@ export function toggleReportePlantas() {
         return;
     }
 
-    // Intentar obtener instancia existente
-    let modal = bootstrap.Modal.getInstance(modalEl);
-    console.log("%c🔹 Instancia de modal obtenida:", "color: purple;", modal);
+    // Crear instancia solo una vez
+    if (!modalReporteInstancia) {
+        console.log("%c⚡ Creando instancia de modal (una vez)", "color: teal; font-weight: bold;");
+        modalReporteInstancia = new bootstrap.Modal(modalEl, { backdrop: "static" });
 
-    // 👉 si no existe instancia, se crea
-    if (!modal) {
-        console.log("%c⚡ Creando nueva instancia de modal con backdrop 'static'", "color: teal; font-weight: bold;");
-        modal = new bootstrap.Modal(modalEl, { backdrop: 'static' });
+        // 🔹 Cuando se muestra el modal -> ocultar loader + scroll
+        modalEl.addEventListener("shown.bs.modal", () => {
+            ocultarLoader();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     }
 
-    // Asignar evento click al botón
-    btnReporte.addEventListener("click", () => {
-        const estaAbierto = modalEl.classList.contains("show");
-        console.log("%c📌 Botón clickeado → Modal abierto:", "color: green;", estaAbierto);
+    // 🔹 Evento del botón
+    btnReporte.addEventListener("click", async () => {
+        const abierto = modalEl.classList.contains("show");
 
-        if (estaAbierto) {
-            console.log("%c🔹 Cerrando modal...", "color: orange;");
-            modal.hide();
-        } else {
-            console.log("%c🔹 Abriendo modal...", "color: orange;");
-            modal.show();
+        try {
+            mostrarLoader();
+
+            if (abierto) {
+                modalReporteInstancia.hide();
+            } else {
+                modalReporteInstancia.show();
+            }
+
+        } catch (error) {
+            console.error("❌ Error en toggleReportePlantas:", error);
+            ocultarLoader();
         }
     });
 
     console.groupEnd();
 }
+
