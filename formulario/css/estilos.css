@@ -504,5 +504,12 @@ body.modal-open {
 }
 
 
+.titulo-resaltado {
+    color: #0d6efd;           /* Azul moderno */
+    font-weight: 700;         /* Más grueso */
+    font-size: 1.3rem;        /* Un poco más grande */
+    text-shadow: 0 0 6px rgba(13, 110, 253, 0.4);  /* Brillo sutil */
+}
+
 
 
