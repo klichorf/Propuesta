@@ -1,5 +1,5 @@
-
 import { mostrarLoader, ocultarLoader } from "./loader.js";
+
 // ------------------------------------------------------
 // MÓDULO: BOTONES DE GRÁFICO
 // ------------------------------------------------------
@@ -23,23 +23,30 @@ export function initBotonGraficoPrincipal() {
     initBotonGrafico(
         "btnVerGrafico",
         async () => {
-
             try {
                 mostrarLoader();
-            // 🟦 Primer gráfico
-            const m1 = await import("./reportes_plantas.js");
-            await m1.verGrafico();
-            // 🟩 Segundo gráfico
-            const m2 = await import("./verGraficoPlantaVsEquipo.js");
-            await m2.verGraficoPlantaVsEquipo();
-            // 🟡 Crear instancia SOLO una vez
-            if (!modalGraficoInstancia) {
-                modalGraficoInstancia = new bootstrap.Modal(
-                    document.getElementById("modalGrafico")
-                );
-            }
-            // 👉 Mostrar SIEMPRE que se da clic
-            modalGraficoInstancia.show();
+
+                // 🟦 Primer gráfico
+                const m1 = await import("./reportes_plantas.js");
+                await m1.verGrafico();
+
+                // 🟩 Segundo gráfico
+                const m2 = await import("./verGraficoPlantaVsEquipo.js");
+                await m2.verGraficoPlantaVsEquipo();
+
+                // 🟡 Crear instancia SOLO una vez
+                if (!modalGraficoInstancia) {
+                    const modalEl = document.getElementById("modalGrafico");
+
+                    modalGraficoInstancia = new bootstrap.Modal(modalEl);
+                    modalEl.addEventListener("shown.bs.modal", () => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    });
+                }
+
+                // 👉 Mostrar SIEMPRE que se da clic
+                modalGraficoInstancia.show();
+
             } catch (error) {
                 console.error(error);
             } finally {
@@ -48,6 +55,7 @@ export function initBotonGraficoPrincipal() {
         }
     );
 }
+
 
 
 
