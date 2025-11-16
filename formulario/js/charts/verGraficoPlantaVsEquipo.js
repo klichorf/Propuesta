@@ -132,3 +132,5 @@ export async function verGraficoPlantaVsEquipo() {
 }
 
 document.getElementById("btnFiltrarMantenimientos").addEventListener("click", verGraficoPlantaVsEquipo);
+
+
