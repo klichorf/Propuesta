@@ -1,5 +1,5 @@
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-import { db } from "../firebase.js";
+import { db } from "../connection_db/firebase.js";
 import { mostrarLoader, ocultarLoader } from "./loader.js"; // asegúrate de importar
 
 let chartMantenimientos = null;
@@ -35,8 +35,8 @@ export async function verGrafico() {
         if (!ctx) return;
 
         // Tomar valores de los inputs
-        let fechaInicio = document.getElementById("fechaInicio").value;
-        let fechaFin = document.getElementById("fechaFin").value;
+        let fechaInicio = document.getElementById("datastart").value;
+        let fechaFin = document.getElementById("dataend").value;
 
         // Si están vacíos, usar mes actual
         if (!fechaInicio || !fechaFin) {
@@ -47,8 +47,8 @@ export async function verGrafico() {
             fechaInicio = fechaInicio || primerDia.toISOString().split("T")[0];
             fechaFin = fechaFin || ultimoDia.toISOString().split("T")[0];
 
-            document.getElementById("fechaInicio").value = fechaInicio;
-            document.getElementById("fechaFin").value = fechaFin;
+            document.getElementById("datastart").value = fechaInicio;
+            document.getElementById("dataend").value = fechaFin;
         }
 
         const registros = await obtenerRegistrosFiltrados(fechaInicio, fechaFin);
