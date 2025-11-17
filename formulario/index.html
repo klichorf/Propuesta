@@ -62,11 +62,18 @@
 
                             <div class="p-3">
                                 <!-- Filtros de fecha -->
+                            <div class="p-3">
+                                <!-- Filtros de fecha -->
                                 <div class="d-flex flex-wrap flex-lg-nowrap mb-3 gap-2">
-                                    <input type="date" id="fechaInicio" class="form-control" placeholder="Fecha inicio">
-                                    <input type="date" id="fechaFin" class="form-control" placeholder="Fecha fin">
+                                    <input type="date" id="datastart" class="form-control" placeholder="Fecha inicio">
+                                    <input type="date" id="dataend" class="form-control" placeholder="Fecha fin">
                                     <button id="btnFiltrarMantenimientos" class="btn btn-light">Filtrar</button>
                                 </div>
+                                <canvas id="graficoMantenimientos" class="mb-4"></canvas>
+                                <hr>
+                                <canvas id="graficoPlantaVsEquipo" class="mb-4"></canvas>
+
+                            </div>
                                 <canvas id="graficoMantenimientos" class="mb-4"></canvas>
                                 <hr>
                                 <canvas id="graficoPlantaVsEquipo" class="mb-4"></canvas>
@@ -432,6 +439,7 @@
 </body>
 
 </html>
+
 
 
 
