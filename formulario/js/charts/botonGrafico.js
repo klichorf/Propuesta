@@ -44,6 +44,8 @@ export function initBotonGraficoPrincipal() {
                     });
                 }
 
+               
+
                 // 👉 Mostrar SIEMPRE que se da clic
                 modalGraficoInstancia.show();
 
@@ -55,7 +57,6 @@ export function initBotonGraficoPrincipal() {
         }
     );
 }
-
 
 
 
