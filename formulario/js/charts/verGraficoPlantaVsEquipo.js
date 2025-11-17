@@ -6,7 +6,7 @@ import { mostrarLoader, ocultarLoader } from "./loader.js";
 let chartPlantaVsEquipo = null;
 
 // Colores por planta
-const plantas = ["GRANOS", "ASEO", "ALIMENTOS", "AGUAS", "OFERTAS", "LOCATIVOS"];
+const plantas = ["GRANOS", "ASEO", "ALIMENTOS", "BEBIDAS", "OFERTAS", "LOCATIVOS"];
 const colores = [
     "rgba(255, 99, 132, 0.6)",
     "rgba(54, 162, 235, 0.6)",
