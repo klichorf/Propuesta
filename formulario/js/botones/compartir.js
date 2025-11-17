@@ -1,6 +1,7 @@
 import { guardarMantenimiento } from "../connection_db/firebase.js";
 import { mostrarToast } from "../toast.js";
 import { subirAOneDrive } from "../connection_onedrive/onedrive.js";
+import { mostrarLoader, ocultarLoader } from "../charts/loader.js"; // <- import del loader
 
 export function initCompartir(validarFormulario, generarPDF) {
     const btnCompartir = document.getElementById("btnCompartir");
@@ -11,6 +12,7 @@ export function initCompartir(validarFormulario, generarPDF) {
 
             btnCompartir.disabled = true;
             btnCompartir.textContent = "Compartiendo...";
+            mostrarLoader(); // <- mostramos el loader
 
             try {
                 // 📌 Tomar valores ANTES
@@ -48,15 +50,15 @@ export function initCompartir(validarFormulario, generarPDF) {
                 // 📌 Sanitizar sin eliminar "/"
                 const sanitize = str => String(str).replace(/[\\?%*:|"<>]/g, "_");
 
-                // 📌 Rutas correctas como antes
-                const nombreArchivo = sanitize(`${planta}_${equipo}_${Date.now()}.pdf`);
+                // 📌 Rutas correctas
+                const nombreArchivo = sanitize(`${planta}/${equipo}/${Date.now()}.pdf`);
                 const rutaCarpeta = `EQUIPOS/PLANTA/${sanitize(planta)}/${sanitize(equipo)}`;
 
                 // 📌 Enviar a OneDrive
                 const { ok: oneDriveExitoso, url: urlSharePoint } =
                     await subirAOneDrive(nombreArchivo, rutaCarpeta, base64);
 
-                // 📌 Guardar SIEMPRE en Firebase
+                // 📌 Guardar en Firebase
                 await guardarMantenimiento({
                     ...data,
                     rutaArchivo: `${rutaCarpeta}/${nombreArchivo}`,
@@ -70,12 +72,17 @@ export function initCompartir(validarFormulario, generarPDF) {
                     oneDriveExitoso ? "success" : "warning"
                 );
 
+                // 📌 Limpiar formulario
+                document.getElementById("formulario").reset();
+
+
             } catch (error) {
                 console.error("🔥 Error general:", error);
                 mostrarToast("❌ Error inesperado al guardar o enviar el archivo.", "danger");
             } finally {
                 btnCompartir.disabled = false;
                 btnCompartir.textContent = "Compartir";
+                ocultarLoader(); // <- ocultamos el loader al finalizar
             }
         });
     }
