@@ -1,5 +1,5 @@
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-import { db } from "../firebase.js";
+import { db } from "../connection_db/firebase.js";
 import { mostrarLoader, ocultarLoader } from "./loader.js";
 
 
@@ -46,16 +46,16 @@ export async function verGraficoPlantaVsEquipo() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return console.error("❌ No se pudo obtener el contexto 2D");
 
-        let fechaInicio = document.getElementById("fechaInicio").value;
-        let fechaFin = document.getElementById("fechaFin").value;
+        let fechaInicio = document.getElementById("datastar").value;
+        let fechaFin = document.getElementById("dataend").value;
 
         if (!fechaInicio || !fechaFin) {
             const hoy = new Date();
             fechaInicio = fechaInicio || new Date(hoy.getFullYear(), hoy.getMonth(), 1).toISOString().split("T")[0];
             fechaFin = fechaFin || new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).toISOString().split("T")[0];
 
-            document.getElementById("fechaInicio").value = fechaInicio;
-            document.getElementById("fechaFin").value = fechaFin;
+            document.getElementById("datastart").value = fechaInicio;
+            document.getElementById("dataend").value = fechaFin;
         }
 
         const registros = await obtenerRegistrosFiltrados(fechaInicio, fechaFin);
@@ -132,5 +132,6 @@ export async function verGraficoPlantaVsEquipo() {
 }
 
 document.getElementById("btnFiltrarMantenimientos").addEventListener("click", verGraficoPlantaVsEquipo);
+
 
 
