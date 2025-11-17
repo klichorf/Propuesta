@@ -1,7 +1,3 @@
-// ------------------------------------------------------
-// MÓDULO: SUBIDA A ONEDRIVE VIA POWER AUTOMATE
-// ------------------------------------------------------
-
 import { mostrarToast } from "../toast.js";
 
 export async function subirAOneDrive(nombreArchivo, rutaCarpeta, base64) {
@@ -17,23 +13,24 @@ export async function subirAOneDrive(nombreArchivo, rutaCarpeta, base64) {
 
         if (!response.ok) {
             const texto = await response.text();
-            console.error("❌ Respuesta no OK de Power Automate:", texto);
-            throw new Error(texto);
+            console.error("❌ Respuesta no OK:", texto);
+            return { ok: false, url: "Error al enviar a OneDrive" };
         }
 
-        const json = await response.json();
+        // ⚠️ Power Automate no devuelve JSON, así que no parseamos nada
+        
+        const rutaReal = (await response.text()).trim();
 
-        // 🔹 Construir URL final tal como espera Firebase
-        const baseUrl = "https://orgcardenas-my.sharepoint.com/:f:/g/personal/jrodriguez_organizacioncardenas_com_co/EkKSzBYCyptNvoTPD19Pnu4BTvY2R1pW-1s1FdsBUDPNIg";
-        let urlSharePoint = json?.Path
-            ? `${baseUrl}${rutaCarpeta}/${nombreArchivo}`
-            : "Error al enviar a OneDrive";
+        return {
+            ok: true,
+            url: `https://orgcardenas-my.sharepoint.com/:f:/g/personal/jrodriguez_organizacioncardenas_com_co/Eo33syZaKEZEnhN3aaEHRRwBUFS-AawZ_s13Zys03BKWVA?e=7Qjvci${rutaReal}`
+        };
 
-        const ok = urlSharePoint !== "Error al enviar a OneDrive";
-
-        if (!ok) mostrarToast("⚠️ No se encontró Path en la respuesta de OneDrive.", "warning");
-
-        return { ok, url: urlSharePoint };
+        
+        /*return {
+            ok: true,
+            url: `https://orgcardenas-my.sharepoint.com/:f:/g/personal/jrodriguez_organizacioncardenas_com_co/Eo33syZaKEZEnhN3aaEHRRwBUFS-AawZ_s13Zys03BKWVA?e=7Qjvci/${rutaCarpeta}/${nombreArchivo}`
+        };*/
 
     } catch (err) {
         console.error("❌ Error OneDrive:", err);

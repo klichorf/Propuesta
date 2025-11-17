@@ -13,16 +13,10 @@ export function initCompartir(validarFormulario, generarPDF) {
             btnCompartir.textContent = "Compartiendo...";
 
             try {
+                // 📌 Tomar valores ANTES
                 const planta = document.getElementById("planta").value.trim();
                 const equipo = document.getElementById("equipo").value.trim();
                 const area = document.getElementById("area").value.trim();
-
-                if (!planta || !equipo) {
-                    mostrarToast("⚠️ Debes seleccionar la planta y el equipo.", "warning");
-                    btnCompartir.disabled = false;
-                    btnCompartir.textContent = "Compartir";
-                    return;
-                }
 
                 const data = {
                     codigo: document.getElementById("codigo").value,
@@ -40,8 +34,10 @@ export function initCompartir(validarFormulario, generarPDF) {
                     timestamp: new Date().toISOString()
                 };
 
+                // 📌 Generar PDF
                 const file = await generarPDF();
 
+                // 📌 Convertir PDF a Base64
                 const base64 = await new Promise((resolve, reject) => {
                     const reader = new FileReader();
                     reader.onload = () => resolve(reader.result.split(",")[1]);
@@ -49,20 +45,23 @@ export function initCompartir(validarFormulario, generarPDF) {
                     reader.readAsDataURL(file);
                 });
 
-                const sanitize = str => str.replace(/[\\/?%*:|"<>]/g, "_");
+                // 📌 Sanitizar sin eliminar "/"
+                const sanitize = str => String(str).replace(/[\\?%*:|"<>]/g, "_");
+
+                // 📌 Rutas correctas como antes
                 const nombreArchivo = sanitize(`${planta}_${equipo}_${Date.now()}.pdf`);
-                const rutaCarpeta = sanitize(`EQUIPOS/PLANTA_${planta}/${equipo}`);
+                const rutaCarpeta = `EQUIPOS/PLANTA/${sanitize(planta)}/${sanitize(equipo)}`;
 
-                // 🔹 Usar módulo de OneDrive
-                const { ok: oneDriveExitoso, url: urlSharePoint } = await subirAOneDrive(nombreArchivo, rutaCarpeta, base64);
+                // 📌 Enviar a OneDrive
+                const { ok: oneDriveExitoso, url: urlSharePoint } =
+                    await subirAOneDrive(nombreArchivo, rutaCarpeta, base64);
 
-                // Guardar en Firebase exactamente como antes
+                // 📌 Guardar SIEMPRE en Firebase
                 await guardarMantenimiento({
                     ...data,
                     rutaArchivo: `${rutaCarpeta}/${nombreArchivo}`,
                     urlSharePoint
                 });
-
 
                 mostrarToast(
                     oneDriveExitoso
