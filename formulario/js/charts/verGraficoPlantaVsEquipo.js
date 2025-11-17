@@ -46,7 +46,7 @@ export async function verGraficoPlantaVsEquipo() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return console.error("❌ No se pudo obtener el contexto 2D");
 
-        let fechaInicio = document.getElementById("datastar").value;
+        let fechaInicio = document.getElementById("datastart").value;
         let fechaFin = document.getElementById("dataend").value;
 
         if (!fechaInicio || !fechaFin) {
@@ -132,6 +132,8 @@ export async function verGraficoPlantaVsEquipo() {
 }
 
 document.getElementById("btnFiltrarMantenimientos").addEventListener("click", verGraficoPlantaVsEquipo);
+
+
 
 
 
