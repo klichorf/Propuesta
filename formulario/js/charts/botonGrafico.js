@@ -28,11 +28,11 @@ export function initBotonGraficoPrincipal() {
 
                
                 // 🟦 Primer gráfico
-                const m1 = await import("/Propuesta/formulario/js/charts/reportes_plantas.js");
+                const m1 = await import("./reportes_plantas.js");
                 await m1.verGrafico();
                 
                 // 🟩 Segundo gráfico
-                const m2 = await import("/Propuesta/formulario/js/charts/verGraficoPlantaVsEquipo.js");
+                const m2 = await import("./verGraficoPlantaVsEquipo.js");
                 await m2.verGraficoPlantaVsEquipo();
 
                 // 🟡 Crear instancia SOLO una vez
@@ -58,6 +58,7 @@ export function initBotonGraficoPrincipal() {
         }
     );
 }
+
 
 
 
