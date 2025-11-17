@@ -1,4 +1,6 @@
 import { mostrarLoader, ocultarLoader } from "./loader.js";
+import { verGrafico } from "./reportes_plantas.js";
+import { verGraficoPlantaVsEquipo } from "./verGraficoPlantaVsEquipo.js";
 
 // ------------------------------------------------------
 // MÓDULO: BOTONES DE GRÁFICO
@@ -13,50 +15,37 @@ export function initBotonGrafico(idBoton, callback) {
     console.log(`🔹 Evento agregado al botón ${idBoton}`);
 }
 
-// ------------------------------------------------------
-// INICIALIZACIÓN DEL BOTÓN PRINCIPAL
-// ------------------------------------------------------
-
 let modalGraficoInstancia = null;
 
 export function initBotonGraficoPrincipal() {
-    initBotonGrafico(
-        "btnVerGrafico",
-        async () => {
-            try {
-                mostrarLoader();
+    initBotonGrafico("btnVerGrafico", async () => {
+        try {
+            mostrarLoader();
 
-               
-                // 🟦 Primer gráfico
-                const m1 = await import("../charts/reportes_plantas.js");
-                await m1.verGrafico();
-                
-                // 🟩 Segundo gráfico
-                const m2 = await import("../charts/verGraficoPlantaVsEquipo.js");
-                await m2.verGraficoPlantaVsEquipo();
+            // 🟦 Primer gráfico
+            await verGrafico();
 
-                // 🟡 Crear instancia SOLO una vez
-                if (!modalGraficoInstancia) {
-                    const modalEl = document.getElementById("modalGrafico");
+            // 🟩 Segundo gráfico
+            await verGraficoPlantaVsEquipo();
 
-                    modalGraficoInstancia = new bootstrap.Modal(modalEl);
-                    modalEl.addEventListener("shown.bs.modal", () => {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    });
-                }
+            // 🟡 Abrir modal
+            if (!modalGraficoInstancia) {
+                const modalEl = document.getElementById("modalGrafico");
 
-               
-
-                // 👉 Mostrar SIEMPRE que se da clic
-                modalGraficoInstancia.show();
-
-            } catch (error) {
-                console.error(error);
-            } finally {
-                ocultarLoader();
+                modalGraficoInstancia = new bootstrap.Modal(modalEl);
+                modalEl.addEventListener("shown.bs.modal", () => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
             }
+
+            modalGraficoInstancia.show();
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            ocultarLoader();
         }
-    );
+    });
 }
 
 
