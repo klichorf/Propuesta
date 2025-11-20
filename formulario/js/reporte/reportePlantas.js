@@ -38,6 +38,9 @@ export async function generarReportePlantas() {
     console.log(`%c📊 Registros después de filtrar: ${registros.length}`, "color: green;");
     console.groupEnd();
 
+    // 👉 ACTUALIZAR CONTADOR DE INFORMES
+    document.getElementById("totalInformesReporte").textContent = registros.length;
+
     // Validar resultados después de filtrar
     console.groupCollapsed("%c🔹 Validando resultados filtrados...", "color: orange;");
     validarResultados(registros, "No hay resultados con los filtros aplicados.", "no-results");

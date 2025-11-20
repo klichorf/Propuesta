@@ -53,6 +53,9 @@ export async function verGrafico() {
 
         const registros = await obtenerRegistrosFiltrados(fechaInicio, fechaFin);
 
+        // 👉 Mostrar total de informes
+        document.getElementById("totalInformes").textContent = registros.length;
+
         if (chartMantenimientos) chartMantenimientos.destroy();
 
         if (registros.length === 0) {

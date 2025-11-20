@@ -56,9 +56,14 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title titulo-resaltado">Mantenimientos por mes</h5>
+                                <h5 class="modal-title titulo-resaltado">Total Mantenimientos
+                                    <span id="totalInformes">0</span>
+                                </h5>
                                 <button class="btn-close" data-bs-dismiss="modal"></button>
+
                             </div>
+
+
 
 
                             <div class="p-3">
@@ -82,19 +87,16 @@
                     <i class="bi bi-file-earmark-text"></i>
                 </button>
 
-                <!-- 🟦 MODAL -->
+                <!-- 🟦 MODAL REPORTE-->
                 <div class="modal fade" id="modalReportePlantas" tabindex="-1" data-bs-focus="false">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
-
                             <div class="modal-header">
-                                <h5 class="modal-title">Reporte por Planta /
-                                    Área / Equipo</h5>
+                                <h5 class="modal-title  text-primary mt-3" > TOTAL REPORTES:
+                                    <span id="totalInformesReporte">0</span></h5>
                                 <button class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-
                             <div class="modal-body">
-
                                 <!-- 🔻 TOGGLE (Accordion) -->
                                 <div class="accordion mb-3" id="accordionFiltros">
                                     <div class="accordion-item border-0 shadow-sm rounded">
@@ -423,7 +425,7 @@
         <div class="spinner-border text-primary loaderSpinner"></div>
     </div>
 
-        <div id="loaderOverlay2">
+    <div id="loaderOverlay2">
         <div class="loader2-container">
             <span id="loaderProgress2">Preparando...</span>
             <!-- BOTONES DE ACCIÓN -->
@@ -433,7 +435,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 
