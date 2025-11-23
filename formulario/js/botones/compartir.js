@@ -130,6 +130,8 @@ export function initCompartir(validarFormulario, generarPDF) {
 
                 document.getElementById("supervisor").textContent = "👤 Supervisor:";
                 document.getElementById("formulario").reset();
+                // 🔥 Desplazar al inicio del formulario
+                window.scrollTo({ top: 0, behavior: "smooth" });
 
                 limpiarFirma("sigEjecutor");
                 limpiarFirma("sigCoordinador");

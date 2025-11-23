@@ -27,19 +27,30 @@ function initFirma(id) {
     const c = document.getElementById(id);
     if (!c) return;
 
-    const ctx = c.getContext("2d");
+    // --- ARREGLA EL DESFASE EN PANTALLAS GRANDES ---
+    const rect = c.getBoundingClientRect();
+    c.width = rect.width;
+    c.height = rect.height;
+
+    const ctx = c.getContext("2d", { willReadFrequently: true });
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, c.width, c.height);
 
     let dibujando = false;
     let lx, ly;
 
-    function pos(e) {
-        const r = c.getBoundingClientRect();
-        const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-        const y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
-        return { x, y };
-    }
+function pos(e) {
+    const r = c.getBoundingClientRect();
+
+    const scaleX = c.width / r.width;
+    const scaleY = c.height / r.height;
+
+    const x = ((e.touches ? e.touches[0].clientX : e.clientX) - r.left) * scaleX;
+    const y = ((e.touches ? e.touches[0].clientY : e.clientY) - r.top) * scaleY;
+
+    return { x, y };
+}
+
 
     c.addEventListener("pointerdown", (e) => {
         dibujando = true;
@@ -61,7 +72,6 @@ function initFirma(id) {
 
     window.addEventListener("pointerup", () => (dibujando = false));
 }
-
 // ------------------------------------------------------
 // FUNCIÓN PARA LIMPIAR UNA FIRMA
 // ------------------------------------------------------
