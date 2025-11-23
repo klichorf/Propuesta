@@ -17,9 +17,29 @@ import { toggleReportePlantas } from "./reporte/toggleReportePlantas.js";
 import { initFiltrosReporte } from "./reporte/filtrosReporte.js";
 import { initBotonGraficoPrincipal } from "./charts/botonGrafico.js";
 import { initBotones } from "./botones/botones.js";
+import { obtenerRegistros } from "./reporte/obtenerRegistros.js";
+import { generarHojaDeVida } from "./lifesheet/generarHojaDeVida.js";
 
 
 
+
+// ------------------------------------------------------
+// HACER DISPONIBLE abrirHojaDeVida() PARA LOS BOTONES
+// ------------------------------------------------------
+
+
+window.abrirHojaDeVida = async function (btn) {
+    const planta = btn.dataset.planta;
+    const area = btn.dataset.area;
+    const equipo = btn.dataset.equipo;
+
+    try {
+        const registros = await obtenerRegistros();
+        generarHojaDeVida(registros, planta, area, equipo);
+    } catch (err) {
+        console.error("Error al abrir hoja de vida:", err);
+    }
+};
 // ------------------------------------------------------
 // INICIALIZACIÓN AL CARGAR EL DOM
 // ------------------------------------------------------

@@ -40,3 +40,6 @@ export function subirAOneDriveConProgreso(nombreArchivo, rutaCarpeta, base64, on
         xhr.send(cuerpo);
     });
 }
+
+
+

@@ -15,20 +15,32 @@ export function mostrarReporteEnModal(reporte) {
     let html = "";
 
     Object.keys(reporte).forEach(planta => {
-        console.groupCollapsed(`%c🏭 Planta: ${planta}`, "color: green; font-weight: bold;");
         html += `<h4 class="mt-3 text-primary">PLANTA: ${planta}</h4>`;
 
         Object.keys(reporte[planta]).forEach(area => {
-            console.groupCollapsed(`%c🟢 Área: ${area}`, "color: teal;");
             html += `<h5 class="ms-3 text-success">Área: ${area}</h5>`;
 
             Object.keys(reporte[planta][area]).forEach(equipo => {
-                console.groupCollapsed(`%c⚙️ Equipo: ${equipo}`, "color: orange;");
-                html += `<div class="ms-4 mb-2"><strong>Equipo:</strong> ${equipo}</div>`;
 
+                // 🟦 NOMBRE DEL EQUIPO + BOTÓN HOJA DE VIDA
+                html += `
+                    <div class="ms-4 mb-2 d-flex align-items-center justify-content-between">
+                        <div><strong>Equipo:</strong> ${equipo}</div>
+
+                        <!-- 📄 BOTÓN PARA ABRIR HOJA DE VIDA -->
+                        <button 
+                            class="btn btn-outline-primary btn-sm"
+                            data-planta="${planta}"
+                            data-area="${area}"
+                            data-equipo="${equipo}"
+                            onclick="abrirHojaDeVida(this)">
+                            📄 Hoja de Vida
+                        </button>
+                    </div>
+                `;
+
+                // 🟦 REGISTROS DEL EQUIPO
                 reporte[planta][area][equipo].forEach(reg => {
-                    console.log("%c🔹 Registro:", "color: navy;", reg);
-
                     html += `
                         <div class="ms-5 mb-3 border-start ps-3">
                             <div><b>Tipo:</b> ${reg.tipoMantenimiento}</div>
@@ -41,14 +53,8 @@ export function mostrarReporteEnModal(reporte) {
                         </div>
                     `;
                 });
-
-                console.groupEnd(); // Equipo
             });
-
-            console.groupEnd(); // Área
         });
-
-        console.groupEnd(); // Planta
     });
 
     contenedor.innerHTML = html;

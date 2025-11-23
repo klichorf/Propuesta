@@ -155,3 +155,6 @@ export function initCompartir(validarFormulario, generarPDF) {
         });
     }
 }
+
+
+
