@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Técnico - Mantenimiento</title>
+    <!-- Ícono -->
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./libs/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons.css">
+
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="css/estilos.css" />
+
+</head>
+
+<body class="bg-light">
+    <!-- ---------- ENCABEZADO ---------- -->
+    <header class="header py-3">
+        <div class="container d-flex align-items-center justify-content-between">
+            <figure class="m-0 d-flex align-items-center">
+                <img src="img/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
+                <figcaption class="fw-bold text-uppercase">
+                    ORGANIZACIÓN<br />CÁRDENAS S.A.S
+                </figcaption>
+            </figure>
+
+            <div class="text-end">
+                <h1 class="h3 mb-0">INFORME TÉCNICO</h1>
+                <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+    <main id="contenedorPrincipal" class="container my-4">
+
+
+
+        <!-- Formulario -->
+        <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+
+                                <!-- SECCIÓN: TÉCNICO EJECUTOR -->
+            <div class="mt-3">
+                <label for="ejecutor" class="fw-bold text-primary border-bottom pb-2 mb-3" style="margin-bottom: 8%;">Técnico
+                    Mantenimiento</label>
+                <select id="ejecutor" class="form-select">
+                    <option disabled selected>Seleccione Técnico</option>
+                    <option>JORGE LEONARDO RODRIGUEZ</option>
+                    <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                    <option>QUEVEDO LADINO MARIO</option>
+                    <option>SARMIENTO ATENCIO DANILO</option>
+                    <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+                    <option>JHON ANDRES QUINTERO</option>
+                    <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+                </select>
+            </div>
+            <!-- SECCIÓN: PLANTA Y COMPRESOR -->
+            <fieldset class="mb-4 border rounded p-3">
+                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+                    Selección de Planta y Compresor
+                </legend>
+
+                <div class="row g-3">
+                    <!-- SELECT PLANTA -->
+                    <div class="col-md-6">
+                        <label for="selectPlanta" class="form-label">Planta</label>
+                        <select id="selectPlanta" class="form-select">
+                            <option value="">Seleccione una planta...</option>
+                            <option value="PLANTA ALIMENTOS">PLANTA ALIMENTOS</option>
+                            <option value="PLANTA ASEO">PLANTA ASEO</option>
+                            <option value="PLANTA BEBIDAS">PLANTA BEBIDAS</option>
+                            <option value="PLANTA GRANO">PLANTA GRANO</option>
+                        </select>
+                    </div>
+
+                    <!-- SELECT COMPRESOR (CARGA AUTOMÁTICA) -->
+                    <div class="col-md-6">
+                        <label for="selectCompresor" class="form-label">Compresor</label>
+                        <select id="selectCompresor" class="form-select" disabled>
+                            <option value="">Seleccione un compresor...</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <!-- CHECKLIST AUTOMÁTICA -->
+<fieldset id="fieldsetChecklist" class="mb-4 border rounded p-3 d-none">
+    <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+        Checklist de Mantenimiento
+    </legend>
+
+    <div id="contenedorChecklist"></div>
+</fieldset>
+
+
+            <!-- REGISTRO FOTOGRÁFICO -->
+            <fieldset id="fieldsetFotos" class="mb-4 border rounded p-3">
+                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+                    Registro Fotográfico
+                </legend>
+
+                <div class="d-flex gap-2">
+                    <!-- Tomar foto con cámara -->
+                    <input id="fotosTomar" type="file" accept="image/*" capture="environment" class="d-none" />
+                    <label for="fotosTomar" class="btn btn-light d-flex align-items-center gap-2">
+                        <i class="bi bi-camera fs-4"></i>
+                    </label>
+
+                    <!-- Seleccionar desde galería -->
+                    <input id="fotos" type="file" accept="image/*" multiple class="d-none" />
+                    <label for="fotos" class="btn btn-light d-flex align-items-center gap-2">
+                        <i class="bi bi-image fs-4"></i>
+                    </label>
+                </div>
+
+                <div id="thumbs" class="d-flex flex-wrap gap-2 mt-2"></div>
+            </fieldset>
+
+            <!-- FIRMAS -->
+            <fieldset class="mb-4">
+                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+                    Firmas
+                </legend>
+                <div class="mb-3">
+                    <label class="form-label">Firma Técnico
+                        Mantenimiento</label>
+                    <canvas id="sigEjecutor" class="signature" willReadFrequently="true"></canvas>
+                    <button type="button" class="btn btn-outline-secondary mt-2 rounded">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Firma
+                        Supervisor/Operario</label>
+                    <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
+                    <button type="button" class="btn btn-outline-secondary mt-2 rounded">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </fieldset>
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="d-flex justify-content-between mt-4">
+                <button id="btnDescargar" type="button" class="btn btn-outline-primary">
+                    <i class="bi bi-download"></i>
+                </button>
+                <button id="btnCompartir" type="button" class="btn btn-success">
+                    <i class="bi bi-share"></i>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- ---------- FOOTER ---------- -->
+
+    <footer class="text-center py-3 mt-4 border-top">
+        <p id="estado" class="text-muted small mb-0"></p>
+        <p class="text-muted small mb-0">
+            Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
+        </p>
+    </footer>
+
+    <!-- Bootstrap -->
+
+    <script src="./libs/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="./libs/chart.umd.min.js"></script>
+
+    <!-- Chart.js DataLabels -->
+    <script src="./libs/chartjs-plugin-datalabels.min.js"></script>
+
+    <!-- jsPDF -->
+    <script src="./libs/jspdf.umd.min.js"></script>
+
+    <!-- HTML5 QR -->
+    <script src="./libs/html5-qrcode.min.js"></script>
+
+    <!-- MAIN -->
+
+    <script type="module" src="./js/main.js"></script>
+
+    <!-- Loader global -->
+    <div id="loaderOverlay">
+        <div class="spinner-border text-primary loaderSpinner"></div>
+    </div>
+
+    <div id="loaderOverlay2">
+        <div class="loader2-container">
+            <span id="loaderProgress2">Preparando...</span>
+
+            <div class="progressBar2">
+                <div class="progressBar2-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ------------------------------------------------------
+// LISTA DE PLANTAS Y COMPRESORES
+// ------------------------------------------------------
+const compresoresPorPlanta = {
+  "PLANTA ALIMENTOS": [
+    "COMPRESOR GARDNER DENVER L22"
+  ],
+  "PLANTA ASEO": [
+    "COMPRESOR GX 11",
+    "COMPRESOR GX 7"
+  ],
+  "PLANTA BEBIDAS": [
+    "COMPRESOR ALUP SONETTO 15",
+    "COMPRESOR GA 26"
+  ],
+  "PLANTA GRANO": [
+    "COMPRESOR GA 22",
+    "COMPRESOR GX 11P",
+    "SECADOR COMPRESOR GA22",
+    "SECADOR COMPRESOR GX11",
+    "TABLERO ELÉCTRICO COMPRESORES"
+  ]
+};
+
+// ------------------------------------------------------
+// AL CAMBIAR PLANTA → CARGAR COMPRESORES
+// ------------------------------------------------------
+document.getElementById("selectPlanta").addEventListener("change", function () {
+  const planta = this.value;
+  const selectCompresor = document.getElementById("selectCompresor");
+
+  // limpiar
+  selectCompresor.innerHTML = '<option value="">Seleccione un compresor...</option>';
+
+  if (!planta) {
+    selectCompresor.disabled = true;
+    return;
+  }
+
+  // cargar compresores correspondientes
+  compresoresPorPlanta[planta].forEach(comp => {
+    const option = document.createElement("option");
+    option.value = comp;
+    option.textContent = comp;
+    selectCompresor.appendChild(option);
+  });
+
+  selectCompresor.disabled = false;
+});
+
+    </script>
+
+
+<script>
+// ------------------------------------------------------
+// CHECKLIST POR COMPRESOR
+// ------------------------------------------------------
+const checklistCompresores = {
+  "COMPRESOR GARDNER DENVER L22": {
+    diaria: [
+      "Verificar nivel de aceite",
+      "Revisar fugas de aire",
+      "Comprobar presión de trabajo",
+      "Revisar temperatura del compresor",
+      "Comprobar ventilador",
+      "Revisar vibraciones",
+      "Verificar purgadores",
+      "Confirmar que no existan alarmas"
+    ],
+    semanal: [
+      "Revisar tensión de correas",
+      "Revisar filtro separador",
+      "Revisar conexiones eléctricas",
+      "Inspeccionar mangueras",
+      "Drenaje del tanque",
+      "Inspección visual del enfriador"
+    ],
+    mensual: [
+      "Medir corriente del motor",
+      "Revisar presión diferencial del filtro",
+      "Verificar condición del filtro de aire",
+      "Revisar válvula de mínima presión",
+      "Revisión del arrancador",
+      "Estado general de vibraciones"
+    ],
+    semestre: [
+      "Cambio de aceite",
+      "Cambio filtro de aceite",
+      "Cambio filtro separador",
+      "Limpieza profunda del radiador",
+      "Ajuste o cambio de correas",
+      "Limpieza interna del gabinete"
+    ],
+    anual: [
+      "Kit de mantenimiento completo",
+      "Prueba de megado",
+      "Revisión del secador",
+      "Verificar PLC / HMI",
+      "Cambio filtro del secador"
+    ]
+  },
+
+  "COMPRESOR GX 11": {
+    diaria: [
+      "Revisar nivel de aceite",
+      "Presión de trabajo",
+      "Temperatura",
+      "Ruido anormal",
+      "Purgadores",
+      "Vibración"
+    ],
+    semanal: [
+      "Tensión de correas",
+      "Filtro separador",
+      "Conexiones eléctricas",
+      "Enfriador"
+    ],
+    mensual: [
+      "Corriente motor",
+      "Diferencial filtro aceite",
+      "Filtro de aire",
+      "Válvula mínima"
+    ],
+    semestre: [
+      "Cambio aceite",
+      "Cambio filtros",
+      "Limpieza radiador"
+    ],
+    anual: [
+      "Kit general",
+      "Megado",
+      "Revisión secador"
+    ]
+  },
+
+  "COMPRESOR GX 7": "same_GX11",
+  "COMPRESOR GX 11P": "same_GX11",
+  "COMPRESOR ALUP SONETTO 15": "same_GX11",
+  "COMPRESOR GA 26": "same_GX11",
+  "COMPRESOR GA 22": "same_GX11",
+
+  // SECADORES
+  "SECADOR COMPRESOR GA22": {
+    diaria: [
+      "Verificar dren automático",
+      "Comprobar temperatura",
+      "Revisar alarma de humedad"
+    ],
+    semanal: [
+      "Limpiar entrada de aire",
+      "Revisión línea condensados"
+    ],
+    mensual: [
+      "Revisión intercambiador",
+      "Verificar presión de trabajo"
+    ],
+    anual: [
+      "Cambio filtro coalescente",
+      "Revisión general"
+    ]
+  },
+
+  "SECADOR COMPRESOR GX11": "SECADOR COMPRESOR GA22",
+
+  // TABLERO
+  "TABLERO ELÉCTRICO COMPRESORES": {
+    diaria: [
+      "Verificar indicadores",
+      "Revisar alarmas"
+    ],
+    semanal: [
+      "Revisión ventilación",
+      "Limpieza exterior"
+    ],
+    mensual: [
+      "Revisar contactores",
+      "Revisar térmicos",
+      "Ajuste de bornes"
+    ],
+    anual: [
+      "Limpieza profunda",
+      "Prueba de aislamiento"
+    ]
+  }
+};
+
+// ------------------------------------------------------
+// FUNCIÓN PARA GENERAR CHECKLIST
+// ------------------------------------------------------
+function generarChecklist(data) {
+  const contenedor = document.getElementById("contenedorChecklist");
+  contenedor.innerHTML = "";
+
+  const bloques = {
+    diaria: "Inspección Diaria",
+    semanal: "Inspección Semanal",
+    mensual: "Inspección Mensual",
+    semestre: "Cada 3-6 Meses",
+    anual: "Inspección Anual"
+  };
+
+  for (let categoria in bloques) {
+    if (!data[categoria]) continue;
+
+    const lista = document.createElement("div");
+    lista.className = "mb-3";
+
+    let html = `
+      <h6 class="fw-bold text-secondary mb-2">${bloques[categoria]}</h6>
+      <ul class="list-group">
+    `;
+
+    data[categoria].forEach(item => {
+      html += `
+        <li class="list-group-item">
+          <input type="checkbox" class="form-check-input me-2">
+          ${item}
+        </li>
+      `;
+    });
+
+    html += "</ul>";
+
+    lista.innerHTML = html;
+    contenedor.appendChild(lista);
+  }
+}
+
+// ------------------------------------------------------
+// MOSTRAR CHECKLIST AL SELECCIONAR COMPRESOR
+// ------------------------------------------------------
+document.getElementById("selectCompresor").addEventListener("change", function () {
+  const comp = this.value;
+  const fieldset = document.getElementById("fieldsetChecklist");
+
+  if (!comp) {
+    fieldset.classList.add("d-none");
+    return;
+  }
+
+  let data = checklistCompresores[comp];
+
+  // usar checklist del GX11 si aplica
+  if (data === "same_GX11") data = checklistCompresores["COMPRESOR GX 11"];
+
+  generarChecklist(data);
+  fieldset.classList.remove("d-none");
+});
+</script>
+
+
+</body>
+
+</html>

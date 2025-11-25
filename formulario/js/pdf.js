@@ -29,27 +29,27 @@ export async function generarPDF() {
 
     // 🔴 Rectángulo rojo principal
     doc.setFillColor(...accent);
-    doc.rect(M + logoW + 10, M, W - (M * 2) - logoW - 10, 40, 'F');
+    doc.rect(M + logoW + 10, M, W - M * 2 - logoW - 10, 40, "F");
 
     // 🟡 Nombre empresa
-    doc.setFont('helvetica', 'bold');
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
     doc.setTextColor(30, 30, 30);
     const nombreEmpresa = "ORGANIZACIÓN CÁRDENAS S.A.S";
-    doc.text(nombreEmpresa, W / 2 + 20, M - 10, { align: 'center' });
+    doc.text(nombreEmpresa, W / 2 + 20, M - 10, { align: "center" });
 
     // 🔹 Texto principal
-    doc.setFont('helvetica', 'bold');
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
     doc.setTextColor(255, 255, 255);
-    doc.text("INFORME TÉCNICO", W / 2 + 20, M + 20, { align: 'center' });
+    doc.text("INFORME TÉCNICO", W / 2 + 20, M + 20, { align: "center" });
 
     // ⚪ Línea blanca inferior
     doc.setFillColor(255, 255, 255);
-    doc.rect(M + logoW + 10, M + 30, W - (M * 2) - logoW - 10, 20, 'F');
+    doc.rect(M + logoW + 10, M + 30, W - M * 2 - logoW - 10, 20, "F");
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(12);
-    doc.text("MANTENIMIENTO", W / 2 + 20, M + 45, { align: 'center' });
+    doc.text("MANTENIMIENTO", W / 2 + 20, M + 45, { align: "center" });
 
     // Textos derecho
     doc.setFontSize(10);
@@ -65,7 +65,9 @@ export async function generarPDF() {
     doc.setFont("helvetica", "italic");
     doc.setFontSize(9);
     doc.setTextColor(120);
-    doc.text("Código: FO-1600-041  |  Versión: 01", W / 2, H - 20, { align: "center" });
+    doc.text("Código: FO-1600-041  |  Versión: 01", W / 2, H - 20, {
+      align: "center",
+    });
   }
 
   // Dibujar encabezado inicial
@@ -115,7 +117,9 @@ export async function generarPDF() {
   // ------------------------------------------------------
   const se = document.getElementById("sigEjecutor").toDataURL();
   const sc = document.getElementById("sigCoordinador").toDataURL();
-  const fw = 150, fh = 70, fy = H - 150;
+  const fw = 150,
+    fh = 70,
+    fy = H - 150;
 
   doc.addImage(se, "PNG", M, fy, fw, fh);
   doc.addImage(sc, "PNG", W - M - fw, fy, fw, fh);
@@ -123,11 +127,14 @@ export async function generarPDF() {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
   doc.setTextColor(...primary);
-  doc.text("Técnico de Mantenimiento", M + fw / 2, fy + fh + 18, { align: "center" });
+  doc.text("Técnico de Mantenimiento", M + fw / 2, fy + fh + 18, {
+    align: "center",
+  });
   doc.text("Supervisor", W - M - fw / 2, fy + fh + 18, { align: "center" });
 
   const nombreEjecutor = v("ejecutor") || "-";
-  const nombreSupervisor = supervisores[v("planta").toUpperCase()] || "No asignado";
+  const nombreSupervisor =
+    supervisores[v("planta").toUpperCase()] || "No asignado";
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
@@ -154,14 +161,21 @@ export async function generarPDF() {
     doc.text("Registro fotográfico", M, y);
     y += 25;
 
+    // ✔ Tamaño grande para 2 fotos por fila
+    const size = (W - M * 3) / 2; // calcula tamaño exacto para 2 fotos centradas
+    const gap = M; // misma separación que los márgenes
+
     let x = M;
-    const size = 120, gap = 12;
+
+    // Dibujar imágenes
 
     for (const img of imagesData) {
+      // Si ya dibujaste 2 fotos en esta fila, baja a la siguiente
       if (x + size > W - M) {
         x = M;
         y += size + gap;
       }
+
       // Evitar que las imágenes se salgan de la página
       if (y + size > H - 100) {
         addPie();
@@ -169,6 +183,7 @@ export async function generarPDF() {
         await addEncabezado();
         y = M + 90;
       }
+
       doc.addImage(img, "JPEG", x, y, size, size);
       x += size + gap;
     }
@@ -222,4 +237,3 @@ async function getBase64FromUrl(url) {
     reader.readAsDataURL(blob);
   });
 }
-
