@@ -13,7 +13,7 @@ const datosPlantas = {
       "tolvas 4",
       "tolvas 5",
     ],
-    "Área de Empaque": ["TEDMAD", "TECNOPACK", "INNA 1", "INNA 2", "ROSDAN"],
+    "Área de Empaque": ["TEDMAD M5", "TECNOPACK M1", "INNA M2", "INNA M3", "ROSDAN M4"],
     "Área de compresores": [
       "Compresor GA22",
       "Compresor GX11",
@@ -136,14 +136,14 @@ const datosPlantas = {
 
   LOCATIVOS: {
 
-    "Bodega 14B": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 15B": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 17B": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 18B": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 19B": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 8A": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 8C": ["Planta 1", "Planta 2", "Planta 3"],
-    "Bodega 5C": ["Planta 1", "Planta 2", "Planta 3"]
+    "Bodega 14B": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 15B": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 17B": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 18B": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 19B": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 8A": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 8C": ["Piso 1", "Piso 2", "Piso 3"],
+    "Bodega 5C": ["Piso 1", "Piso 2", "Piso 3"]
 
   }
 };
