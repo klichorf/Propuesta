@@ -4,7 +4,6 @@
 
 // Datos jerárquicos de plantas, áreas y equipos
 const datosPlantas = {
-
   GRANOS: {
     "Área de Tolvas": [
       "tolvas 1",
@@ -13,35 +12,40 @@ const datosPlantas = {
       "tolvas 4",
       "tolvas 5",
     ],
-    "Área de Empaque": ["TEDMAD M5", "TECNOPACK M1", "INNA M2", "INNA M3", "ROSDAN M4"],
+    "Área de Empaque": [
+      "TEDMAD M5",
+      "TECNOPACK M1",
+      "INNA M2",
+      "INNA M3",
+      "ROSDAN M4",
+    ],
     "Área de compresores": [
       "Compresor GA22",
       "Compresor GX11",
       "secador de aire 1",
       "secador de aire 2",
     ],
-    "Área Enfardadoras ":
-      [
-        "Enfardadora 1",
-        "Enfardadora 2",
-        "Banda de salida Máquina 1",
-        "Banda de salida Máquina 2",
-        "Banda de salida Máquina 3",
-        "Banda de salida Máquina 4",
-        "Banda interconexión 1-2",
-        "Banda interconexión 3-4",
-        "Banda interconexión Enfardadora 1",
-        "Banda interconexión Enfardadora 2",
-        "Banda rápida linea 1",
-        "Banda rápida linea 2"
-      ],
+    "Área Enfardadoras ": [
+      "Enfardadora 1",
+      "Enfardadora 2",
+      "Banda de salida Máquina 1",
+      "Banda de salida Máquina 2",
+      "Banda de salida Máquina 3",
+      "Banda de salida Máquina 4",
+      "Banda interconexión 1-2",
+      "Banda interconexión 3-4",
+      "Banda interconexión Enfardadora 1",
+      "Banda interconexión Enfardadora 2",
+      "Banda rápida linea 1",
+      "Banda rápida linea 2",
+    ],
 
-    "Codificadoras": [
+    Codificadoras: [
       "tedmaq codificadora ",
       "tecnopack codificadora",
       "inna 1 codificadora",
       "inna 2 codificadora",
-      "rosdan codificadora"
+      "rosdan codificadora",
     ],
   },
   ASEO: {
@@ -130,12 +134,11 @@ const datosPlantas = {
       "Horno 3",
       "Selladora 1",
       "Selladora 2",
-      "Selladora 3"
-    ]
+      "Selladora 3",
+    ],
   },
 
   LOCATIVOS: {
-
     "Bodega 14B": ["Piso 1", "Piso 2", "Piso 3"],
     "Bodega 15B": ["Piso 1", "Piso 2", "Piso 3"],
     "Bodega 17B": ["Piso 1", "Piso 2", "Piso 3"],
@@ -143,9 +146,8 @@ const datosPlantas = {
     "Bodega 19B": ["Piso 1", "Piso 2", "Piso 3"],
     "Bodega 8A": ["Piso 1", "Piso 2", "Piso 3"],
     "Bodega 8C": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 5C": ["Piso 1", "Piso 2", "Piso 3"]
-
-  }
+    "Bodega 5C": ["Piso 1", "Piso 2", "Piso 3"],
+  },
 };
 
 // Supervisores por planta
@@ -155,7 +157,7 @@ const supervisores = {
   GRANOS: "LEAL HERRERA JORGE ANDRES",
   BEBIDAS: "HENAO BEDOYA MARIA CRISTINA",
   OFERTAS: "HENAO BEDOYA MARIA CRISTINA",
-  LOCATIVOS: "RICARDO ANDRES BEJARANO"
+  LOCATIVOS: "RICARDO ANDRES BEJARANO",
 };
 
 // ------------------------------------------------------
@@ -175,8 +177,7 @@ function initSelects() {
       GRANOS:
         "url('https://mre-site-makro-colombia-test-webapp-slot.azurewebsites.net/imagesProducts/medias/913263_1_239.webp')",
       ASEO: "url('https://organizacioncardenas.com/wp-content/uploads/2022/11/detergentelavado-e1678672244584-793x1024.png')",
-      ALIMENTOS:
-        "url('img/BUNUELO.png')",
+      ALIMENTOS: "url('img/BUNUELO.png')",
       BEBIDAS: "url('https://media.surtiplaza.co/dimen/7707335286316.png')",
 
       OFERTAS:

@@ -1,476 +1,550 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Informe Técnico - Mantenimiento</title>
-    <!-- Ícono -->
-    <link rel="icon" type="image/png" href="img/favicon.svg">
-    <!-- Fuente Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="./libs/bootstrap.min.css">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons.css">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Informe Técnico - Mantenimiento</title>
+        <!-- Ícono -->
+        <link rel="icon" type="image/png" href="img/favicon.svg">
+        <!-- Fuente Poppins -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+            rel="stylesheet" />
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="./libs/bootstrap.min.css">
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet"
+            href="./libs/bootstrap-icons/bootstrap-icons.css">
 
-    <!-- Tu CSS -->
-    <link rel="stylesheet" href="css/estilos.css" />
+        <!-- Tu CSS -->
+        <link rel="stylesheet" href="css/estilos.css" />
 
-</head>
+    </head>
 
-<body class="bg-light">
-    <!-- ---------- ENCABEZADO ---------- -->
-    <header class="header py-3">
-        <div class="container d-flex align-items-center justify-content-between">
-            <figure class="m-0 d-flex align-items-center">
-                <img src="img/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
-                <figcaption class="fw-bold text-uppercase">
-                    ORGANIZACIÓN<br />CÁRDENAS S.A.S
-                </figcaption>
-            </figure>
+    <body class="bg-light">
+        <!-- ---------- ENCABEZADO ---------- -->
+        <header class="header py-3">
+            <div
+                class="container d-flex align-items-center justify-content-between">
+                <figure class="m-0 d-flex align-items-center">
+                    <img src="img/logo.png" alt="Logo de la empresa" width="70"
+                        height="70" class="me-2" />
+                    <figcaption class="fw-bold text-uppercase">
+                        ORGANIZACIÓN<br />CÁRDENAS S.A.S
+                    </figcaption>
+                </figure>
 
-            <div class="text-end">
-                <h1 class="h3 mb-0">INFORME TÉCNICO</h1>
-                <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
+                <div class="text-end">
+                    <h1 class="h3 mb-0">INFORME TÉCNICO</h1>
+                    <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
+                </div>
             </div>
-        </div>
-    </header>
 
-    <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
-    <main id="contenedorPrincipal" class="container my-4">
-        <!-- Formulario -->
-        <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+        </header>
 
-            <fieldset class="mb-4">
+        <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+        <main id="contenedorPrincipal" class="container my-4">
+            <!-- Formulario -->
+            <form id="formulario" class="card shadow p-4"
+                onsubmit="return false;">
 
-                <!-- 🔘 BOTÓN -->
-                <button id="btnVerGrafico" class="btn btn-light">
-                    <i class="bi bi-graph-up-arrow"></i>
-                </button>
-                <!-- 🟦 MODAL GRÁFICO -->
-                <div class="modal fade" id="modalGrafico" tabindex="-1" data-bs-focus="false">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title titulo-resaltado">Total Mantenimientos
-                                    <span id="totalInformes">0</span>
-                                </h5>
-                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                <fieldset class="mb-4">
 
-                            </div>
+                    <!-- 🔘 BOTÓN -->
+                    <button id="btnVerGrafico" class="btn btn-light">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </button>
+                    <!-- 🟦 MODAL GRÁFICO -->
+                    <div class="modal fade" id="modalGrafico" tabindex="-1"
+                        data-bs-focus="false">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5
+                                        class="modal-title titulo-resaltado">Total
+                                        Mantenimientos
+                                        <span id="totalInformes">0</span>
+                                    </h5>
+                                    <button class="btn-close"
+                                        data-bs-dismiss="modal"></button>
 
-
-
-
-                            <div class="p-3">
-                                <!-- Filtros de fecha -->
-                                <div class="d-flex flex-wrap flex-lg-nowrap mb-3 gap-2">
-                                    <input type="date" id="datastart" class="form-control" placeholder="Fecha inicio">
-                                    <input type="date" id="dataend" class="form-control" placeholder="Fecha fin">
-                                    <button id="btnFiltrarMantenimientos" class="btn btn-light">Filtrar</button>
                                 </div>
-                                <canvas id="graficoMantenimientos" class="mb-4"></canvas>
-                                <hr>
-                                <canvas id="graficoPlantaVsEquipo" class="mb-4"></canvas>
 
+                                <div class="p-3">
+                                    <!-- Filtros de fecha -->
+                                    <div
+                                        class="d-flex flex-wrap flex-lg-nowrap mb-3 gap-2">
+                                        <input type="date" id="datastart"
+                                            class="form-control"
+                                            placeholder="Fecha inicio">
+                                        <input type="date" id="dataend"
+                                            class="form-control"
+                                            placeholder="Fecha fin">
+                                        <button id="btnFiltrarMantenimientos"
+                                            class="btn btn-light">Filtrar</button>
+                                    </div>
+                                    <canvas id="graficoMantenimientos"
+                                        class="mb-4"></canvas>
+                                    <hr>
+                                    <canvas id="graficoPlantaVsEquipo"
+                                        class="mb-4"></canvas>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 🔘 BOTÓN -->
-                <button id="btnReportePlantas" class="btn btn-light">
-                    <i class="bi bi-file-earmark-text"></i>
-                </button>
+                    <!-- 🔘 BOTÓN -->
+                    <button id="btnReportePlantas" class="btn btn-light">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </button>
 
-                <!-- 🟦 MODAL REPORTE-->
-                <div class="modal fade" id="modalReportePlantas" tabindex="-1" data-bs-focus="false">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title  text-primary mt-3"> TOTAL REPORTES:
-                                    <span id="totalInformesReporte">0</span>
-                                </h5>
-                                <button class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- 🔻 TOGGLE (Accordion) -->
-                                <div class="accordion mb-3" id="accordionFiltros">
-                                    <div class="accordion-item border-0 shadow-sm rounded">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button fw-semibold" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseFiltros">
-                                                Filtros del Reporte
-                                            </button>
-                                        </h2>
+                    <!-- 🔘 BOTÓN VER LEVAS -->
 
-                                        <div id="collapseFiltros" class="accordion-collapse collapse show"
-                                            data-bs-parent="#accordionFiltros">
+                    <button class="btn btn-light" onclick="window.location.href='levas.html'">
+    <i class="bi bi-feather"></i>
+   
+</button>
 
-                                            <div class="accordion-body">
+                    <!-- 🟦 MODAL REPORTE-->
+                    <div class="modal fade" id="modalReportePlantas"
+                        tabindex="-1" data-bs-focus="false">
+                        <div
+                            class="modal-dialog modal-lg modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title  text-primary mt-3">
+                                        TOTAL REPORTES:
+                                        <span id="totalInformesReporte">0</span>
+                                    </h5>
+                                    <button class="btn-close"
+                                        data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 🔻 TOGGLE (Accordion) -->
+                                    <div class="accordion mb-3"
+                                        id="accordionFiltros">
+                                        <div
+                                            class="accordion-item border-0 shadow-sm rounded">
+                                            <h2 class="accordion-header">
+                                                <button
+                                                    class="accordion-button fw-semibold"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseFiltros">
+                                                    Filtros del Reporte
+                                                </button>
+                                            </h2>
 
-                                                <div class="row gy-3">
-                                                    <!-- PLANTA -->
-                                                    <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">PLANTA</label>
-                                                        <select id="filtroPlanta" class="form-select rounded-pill">
+                                            <div id="collapseFiltros"
+                                                class="accordion-collapse collapse show"
+                                                data-bs-parent="#accordionFiltros">
 
-                                                        </select>
+                                                <div class="accordion-body">
+
+                                                    <div class="row gy-3">
+                                                        <!-- PLANTA -->
+                                                        <div class="col-md-4">
+                                                            <label
+                                                                class="form-label fw-semibold">PLANTA</label>
+                                                            <select
+                                                                id="filtroPlanta"
+                                                                class="form-select rounded-pill">
+
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- FECHA INICIO -->
+                                                        <div class="col-md-4">
+                                                            <label
+                                                                class="form-label fw-semibold">Fecha
+                                                                Inicio</label>
+                                                            <input type="date"
+                                                                id="filtroFechaInicio"
+                                                                class="form-control rounded-pill">
+                                                        </div>
+
+                                                        <!-- FECHA FIN -->
+                                                        <div class="col-md-4">
+                                                            <label
+                                                                class="form-label fw-semibold">Fecha
+                                                                Fin</label>
+                                                            <input type="date"
+                                                                id="filtroFechaFin"
+                                                                class="form-control rounded-pill">
+                                                        </div>
                                                     </div>
 
-                                                    <!-- FECHA INICIO -->
-                                                    <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">Fecha
-                                                            Inicio</label>
-                                                        <input type="date" id="filtroFechaInicio"
-                                                            class="form-control rounded-pill">
-                                                    </div>
-
-                                                    <!-- FECHA FIN -->
-                                                    <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">Fecha
-                                                            Fin</label>
-                                                        <input type="date" id="filtroFechaFin"
-                                                            class="form-control rounded-pill">
-                                                    </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- 📄 CONTENIDO DEL REPORTE -->
+                                    <div id="contenidoReporte"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 🟦 MODAL HOJA DE VIDA -->
+                    <div class="modal fade" id="modalHojaVida" tabindex="-1">
+                        <div
+                            class="modal-dialog modal-xl modal-dialog-scrollable">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5
+                                        class="modal-title text-primary fw-bold">
+                                        Hoja de Vida del Equipo
+                                    </h5>
+                                    <button class="btn-close"
+                                        data-bs-dismiss="modal"></button>
                                 </div>
 
-                                <!-- 📄 CONTENIDO DEL REPORTE -->
-                                <div id="contenidoReporte"></div>
+                                <div class="modal-body">
+
+                                    <!-- Datos generales -->
+                                    <div id="datosEquipo"
+                                        class="mb-4 p-3 rounded shadow-sm bg-light"></div>
+
+                                    <!-- Historial -->
+                                    <h5
+                                        class="text-secondary fw-bold border-bottom pb-2">Historial
+                                        de Mantenimiento</h5>
+                                    <div id="historialMantenimientos"></div>
+
+                                </div>
 
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- 🟦 MODAL HOJA DE VIDA -->
-                <div class="modal fade" id="modalHojaVida" tabindex="-1">
-                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                        <div class="modal-content">
 
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary fw-bold">
-                                    Hoja de Vida del Equipo
-                                </h5>
-                                <button class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-
-                            <div class="modal-body">
-
-                                <!-- Datos generales -->
-                                <div id="datosEquipo" class="mb-4 p-3 rounded shadow-sm bg-light"></div>
-
-                                <!-- Historial -->
-                                <h5 class="text-secondary fw-bold border-bottom pb-2">Historial de Mantenimiento</h5>
-                                <div id="historialMantenimientos"></div>
-
-                            </div>
+                    <!-- 🔹escanner-->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="codigo" class="form-label">#
+                                Activo</label>
+                            <input id="codigo" type="text" class="form-control"
+                                placeholder="FO-1600-041" />
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button id="btnQR" type="button"
+                                class="btn btn-outline-secondary w-100">
+                                <i class="bi bi-qr-code-scan"></i>
+                            </button>
 
                         </div>
                     </div>
-                </div>
+                    <!-- 🔹 Contenedor para la cámara tipo modal -->
+                    <div id="QR-modal" class="mt-3" style="display: none;">
+                        <div id="QR" class="border rounded p-2"></div>
+                    </div>
+                    <!-- 🔹 Botón CERRAR (oculto al inicio) -->
+                    <button id="closeQR"
+                        class="btn btn-danger w-100 d-none mt-3">
+                        Cerrar
+                    </button>
 
-                <!-- 🔹escanner-->
+                </fieldset>
+
+                <p id="supervisor" class="text-muted mt-3">
+                    👤 Supervisor:
+                    <span class="d-none d-sm-inline">(selecciona una
+                        planta)</span>
+                    <br class="d-sm-none" />
+                    <span class="d-sm-none">(selecciona una planta)</span>
+                </p>
+
                 <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="codigo" class="form-label">#
-                            Activo</label>
-                        <input id="codigo" type="text" class="form-control" placeholder="FO-1600-041" />
+                    <div class="col-md-4">
+                        <label for="planta" class="form-label">Planta</label>
+                        <select id="planta" class="form-select">
+                            <option disabled selected>Seleccione una
+                                planta</option>
+                            <option value="GRANOS">GRANOS</option>
+                            <option value="ASEO">ASEO</option>
+                            <option value="ALIMENTOS">ALIMENTOS</option>
+                            <option value="BEBIDAS">BEBIDAS</option>
+                            <option value="OFERTAS">OFERTAS</option>
+                            <option value="LOCATIVOS">LOCATIVOS</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 d-flex align-items-end">
-                        <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
-                            <i class="bi bi-qr-code-scan"></i>
+
+                    <div class="col-md-4">
+                        <label for="area" class="form-label">Área</label>
+                        <select id="area" class="form-select">
+                            <option disabled selected>Seleccione un
+                                área</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="equipo" class="form-label">Equipo /
+                            Máquina</label>
+                        <select id="equipo" class="form-select">
+                            <option disabled selected>Seleccione un
+                                equipo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-3">
+                    <div class="col-md-6">
+                        <label for="fechaInicio" class="form-label">Fecha
+                            Inicio</label>
+                        <input id="fechaInicio" type="datetime-local"
+                            class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaFin" class="form-label">Fecha
+                            Fin</label>
+                        <input id="fechaFin" type="datetime-local"
+                            class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label for="tiempo" class="form-label">Tiempo
+                        empleado</label>
+                    <input id="tiempo" type="text" readonly class="form-control"
+                        placeholder="Se calculará automáticamente" />
+                </div>
+
+                <div class="mt-3">
+                    <label for="tipoMantenimiento" class="form-label">Tipo de
+                        mantenimiento</label>
+                    <select id="tipoMantenimiento" class="form-select">
+                        <option disabled selected>Seleccione clase</option>
+                        <option>Preventivo</option>
+                        <option>Correctivo</option>
+                        <option>Predictivo</option>
+                        <option>Ajuste Formato</option>
+                        <option>Mejora/Adecuación</option>
+                    </select>
+                </div>
+
+                <div class="mt-3">
+                    <label for="ejecutor" class="form-label">Técnico
+                        Mantenimiento</label>
+                    <select id="ejecutor" class="form-select">
+                        <option disabled selected>Seleccione Técnico</option>
+                        <option>JORGE LEONARDO RODRIGUEZ</option>
+                        <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                        <option>QUEVEDO LADINO MARIO</option>
+                        <option>SARMIENTO ATENCIO DANILO</option>
+                        <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+                        <option>JHON ANDRES QUINTERO</option>
+                        <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+                        <option>RONALD JOSE MENDOZA DASILVA </option>
+                    </select>
+                </div>
+
+                <div class="mt-3">
+                    <label for="danos" class="form-label">Daños
+                        encontrados</label>
+                    <textarea id="danos" class="form-control"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="mt-3">
+                    <label for="trabajo" class="form-label">Trabajo
+                        ejecutado</label>
+                    <textarea id="trabajo" class="form-control"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="mt-3">
+                    <label for="herramientas"
+                        class="form-label fw-bold text-primary">
+                        Herramientas utilizadas
+                    </label>
+
+                    <div class="d-flex gap-2">
+                        <!-- Selector de categoría -->
+                        <select id="categoriaHerramientas" class="form-select"
+                            style="max-width: 260px">
+                            <option value>Todas las categorías</option>
+                            <option value="Llaves fijas">Llaves fijas</option>
+                            <option value="Llaves Bristol">Llaves
+                                Bristol</option>
+                        </select>
+                        <!-- Buscador -->
+                        <div style="position: relative; flex: 1">
+                            <input type="text" id="buscadorHerramientas"
+                                class="form-control"
+                                placeholder="Buscar herramienta..." />
+                            <div id="sugerenciasHerramientas" style="
+                  position: absolute;
+                  background: white;
+                  border: 1px solid #ccc;
+                  border-radius: 6px;
+                  width: 100%;
+                  z-index: 1000;
+                "></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo donde se agregan las herramientas -->
+                    <textarea id="herramientas" class="form-control mt-2"
+                        rows="5"></textarea>
+                </div>
+
+                <div class="mt-3">
+                    <label for="repuestos"
+                        class="form-label fw-bold text-primary">Repuestos
+                        utilizados</label>
+
+                    <div class="d-flex gap-2">
+                        <!-- Selector de categoría -->
+                        <select id="categoriaRepuesto" class="form-select"
+                            style="max-width: 220px">
+                            <option value>Todas las categorías</option>
+                            <option value="Neumáticos">Neumáticos</option>
+                            <option value="Eléctricos">Eléctricos</option>
+                            <option value="Mecánicos">Mecánicos</option>
+                            <option value="Rodamientos">Rodamientos</option>
+                            <option value="Tornillería">Tornillería</option>
+                            <option value="Lubricantes y sellos">Lubricantes y
+                                sellos</option>
+                        </select>
+
+                        <!-- Buscador -->
+                        <div style="position: relative; flex: 1">
+                            <input type="text" id="buscadorRepuestos"
+                                class="form-control"
+                                placeholder="Buscar repuesto..." />
+                            <div id="sugerencias" style="
+                  position: absolute;
+                  background: white;
+                  border: 1px solid #ccc;
+                  border-radius: 6px;
+                  width: 100%;
+                  z-index: 1000;
+                "></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo donde se agregan los repuestos seleccionados -->
+                    <textarea id="repuestos" class="form-control mt-2"
+                        rows="5"></textarea>
+                </div>
+
+                <!-- REGISTRO FOTOGRÁFICO -->
+                <fieldset id="fieldsetFotos" class="mb-4 border rounded p-3">
+                    <legend
+                        class="fw-bold text-primary border-bottom pb-2 mb-3">
+                        Registro Fotográfico
+                    </legend>
+
+                    <div class="d-flex gap-2">
+                        <!-- Tomar foto con cámara -->
+                        <input id="fotosTomar" type="file" accept="image/*"
+                            capture="environment" class="d-none" />
+                        <label for="fotosTomar"
+                            class="btn btn-light d-flex align-items-center gap-2">
+                            <i class="bi bi-camera fs-4"></i>
+                        </label>
+
+                        <!-- Seleccionar desde galería -->
+                        <input id="fotos" type="file" accept="image/*" multiple
+                            class="d-none" />
+                        <label for="fotos"
+                            class="btn btn-light d-flex align-items-center gap-2">
+                            <i class="bi bi-image fs-4"></i>
+                        </label>
+                    </div>
+
+                    <div id="thumbs" class="d-flex flex-wrap gap-2 mt-2"></div>
+                </fieldset>
+
+                <!-- FIRMAS -->
+                <fieldset class="mb-4">
+                    <legend
+                        class="fw-bold text-primary border-bottom pb-2 mb-3">
+                        Firmas
+                    </legend>
+                    <div class="mb-3">
+                        <label class="form-label">Firma Técnico
+                            Mantenimiento</label>
+                        <canvas id="sigEjecutor" class="signature"
+                            willReadFrequently="true"></canvas>
+                        <button type="button"
+                            class="btn btn-outline-secondary mt-2 rounded">
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>
-                </div>
-                <!-- 🔹 Contenedor para la cámara tipo modal -->
-                <div id="QR-modal" class="mt-3" style="display: none;">
-                    <div id="QR" class="border rounded p-2"></div>
-                </div>
-                <!-- 🔹 Botón CERRAR (oculto al inicio) -->
-                <button id="closeQR" class="btn btn-danger w-100 d-none mt-3">
-                    Cerrar
-                </button>
 
-            </fieldset>
+                    <div class="mb-3">
+                        <label class="form-label">Firma
+                            Supervisor/Operario</label>
+                        <canvas id="sigCoordinador" class="signature"
+                            willReadFrequently="true"></canvas>
+                        <button type="button"
+                            class="btn btn-outline-secondary mt-2 rounded">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </fieldset>
+                <!-- BOTONES DE ACCIÓN -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button id="btnDescargar" type="button"
+                        class="btn btn-outline-primary">
+                        <i class="bi bi-download"></i>
+                    </button>
+                    <button id="btnCompartir" type="button"
+                        class="btn btn-success">
+                        <i class="bi bi-share"></i>
+                    </button>
+                </div>
+            </form>
+        </main>
 
-            <p id="supervisor" class="text-muted mt-3">
-                👤 Supervisor:
-                <span class="d-none d-sm-inline">(selecciona una
-                    planta)</span>
-                <br class="d-sm-none" />
-                <span class="d-sm-none">(selecciona una planta)</span>
+        <!-- ---------- FOOTER ---------- -->
+
+        <footer class="text-center py-3 mt-4 border-top">
+            <p id="estado" class="text-muted small mb-0"></p>
+            <p class="text-muted small mb-0">
+                Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
             </p>
+        </footer>
 
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <label for="planta" class="form-label">Planta</label>
-                    <select id="planta" class="form-select">
-                        <option disabled selected>Seleccione una
-                            planta</option>
-                        <option value="GRANOS">GRANOS</option>
-                        <option value="ASEO">ASEO</option>
-                        <option value="ALIMENTOS">ALIMENTOS</option>
-                        <option value="BEBIDAS">BEBIDAS</option>
-                        <option value="OFERTAS">OFERTAS</option>
-                        <option value="LOCATIVOS">LOCATIVOS</option>
-                    </select>
+        <!-- Bootstrap -->
+
+        <script src="./libs/bootstrap.bundle.min.js"></script>
+
+        <!-- Chart.js -->
+        <script src="./libs/chart.umd.min.js"></script>
+
+        <!-- Chart.js DataLabels -->
+        <script src="./libs/chartjs-plugin-datalabels.min.js"></script>
+
+        <!-- jsPDF -->
+        <script src="./libs/jspdf.umd.min.js"></script>
+
+        <!-- HTML5 QR -->
+        <script src="./libs/html5-qrcode.min.js"></script>
+
+        <!-- MAIN -->
+
+        <script type="module" src="./js/main.js"></script>
+
+        <!-- Loader global -->
+        <div id="loaderOverlay">
+            <div class="spinner-border text-primary loaderSpinner"></div>
+        </div>
+
+        <div id="loaderOverlay2">
+            <div class="loader2-container">
+                <span id="loaderProgress2">Preparando...</span>
+
+                <div class="progressBar2">
+                    <div class="progressBar2-fill"></div>
                 </div>
-
-                <div class="col-md-4">
-                    <label for="area" class="form-label">Área</label>
-                    <select id="area" class="form-select">
-                        <option disabled selected>Seleccione un
-                            área</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4">
-                    <label for="equipo" class="form-label">Equipo /
-                        Máquina</label>
-                    <select id="equipo" class="form-select">
-                        <option disabled selected>Seleccione un
-                            equipo</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row g-3 mt-3">
-                <div class="col-md-6">
-                    <label for="fechaInicio" class="form-label">Fecha
-                        Inicio</label>
-                    <input id="fechaInicio" type="datetime-local" class="form-control" required />
-                </div>
-                <div class="col-md-6">
-                    <label for="fechaFin" class="form-label">Fecha
-                        Fin</label>
-                    <input id="fechaFin" type="datetime-local" class="form-control" />
-                </div>
-            </div>
-
-            <div class="mt-3">
-                <label for="tiempo" class="form-label">Tiempo
-                    empleado</label>
-                <input id="tiempo" type="text" readonly class="form-control"
-                    placeholder="Se calculará automáticamente" />
-            </div>
-
-            <div class="mt-3">
-                <label for="tipoMantenimiento" class="form-label">Tipo de
-                    mantenimiento</label>
-                <select id="tipoMantenimiento" class="form-select">
-                    <option disabled selected>Seleccione clase</option>
-                    <option>Preventivo</option>
-                    <option>Correctivo</option>
-                    <option>Predictivo</option>
-                    <option>Ajuste Formato</option>
-                    <option>Mejora/Adecuación</option>
-                </select>
-            </div>
-
-            <div class="mt-3">
-                <label for="ejecutor" class="form-label">Técnico
-                    Mantenimiento</label>
-                <select id="ejecutor" class="form-select">
-                    <option disabled selected>Seleccione Técnico</option>
-                    <option>JORGE LEONARDO RODRIGUEZ</option>
-                    <option>PINEDA AGUDELO YONATAN STIVEN</option>
-                    <option>QUEVEDO LADINO MARIO</option>
-                    <option>SARMIENTO ATENCIO DANILO</option>
-                    <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
-                    <option>JHON ANDRES QUINTERO</option>
-                    <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
-                    <option>RONALD JOSE MENDOZA DASILVA </option>
-                </select>
-            </div>
-
-            <div class="mt-3">
-                <label for="danos" class="form-label">Daños
-                    encontrados</label>
-                <textarea id="danos" class="form-control" rows="3"></textarea>
-            </div>
-
-            <div class="mt-3">
-                <label for="trabajo" class="form-label">Trabajo
-                    ejecutado</label>
-                <textarea id="trabajo" class="form-control" rows="3"></textarea>
-            </div>
-
-            <div class="mt-3">
-                <label for="herramientas" class="form-label fw-bold text-primary">
-                    Herramientas utilizadas
-                </label>
-
-                <div class="d-flex gap-2">
-                    <!-- Selector de categoría -->
-                    <select id="categoriaHerramientas" class="form-select" style="max-width: 260px">
-                        <option value>Todas las categorías</option>
-                        <option value="Llaves fijas">Llaves fijas</option>
-                        <option value="Llaves Bristol">Llaves
-                            Bristol</option>
-                    </select>
-                    <!-- Buscador -->
-                    <div style="position: relative; flex: 1">
-                        <input type="text" id="buscadorHerramientas" class="form-control"
-                            placeholder="Buscar herramienta..." />
-                        <div id="sugerenciasHerramientas" style="
-                  position: absolute;
-                  background: white;
-                  border: 1px solid #ccc;
-                  border-radius: 6px;
-                  width: 100%;
-                  z-index: 1000;
-                "></div>
-                    </div>
-                </div>
-
-                <!-- Campo donde se agregan las herramientas -->
-                <textarea id="herramientas" class="form-control mt-2" rows="5"></textarea>
-            </div>
-
-            <div class="mt-3">
-                <label for="repuestos" class="form-label fw-bold text-primary">Repuestos
-                    utilizados</label>
-
-                <div class="d-flex gap-2">
-                    <!-- Selector de categoría -->
-                    <select id="categoriaRepuesto" class="form-select" style="max-width: 220px">
-                        <option value>Todas las categorías</option>
-                        <option value="Neumáticos">Neumáticos</option>
-                        <option value="Eléctricos">Eléctricos</option>
-                        <option value="Mecánicos">Mecánicos</option>
-                        <option value="Rodamientos">Rodamientos</option>
-                        <option value="Tornillería">Tornillería</option>
-                        <option value="Lubricantes y sellos">Lubricantes y
-                            sellos</option>
-                    </select>
-
-                    <!-- Buscador -->
-                    <div style="position: relative; flex: 1">
-                        <input type="text" id="buscadorRepuestos" class="form-control"
-                            placeholder="Buscar repuesto..." />
-                        <div id="sugerencias" style="
-                  position: absolute;
-                  background: white;
-                  border: 1px solid #ccc;
-                  border-radius: 6px;
-                  width: 100%;
-                  z-index: 1000;
-                "></div>
-                    </div>
-                </div>
-
-                <!-- Campo donde se agregan los repuestos seleccionados -->
-                <textarea id="repuestos" class="form-control mt-2" rows="5"></textarea>
-            </div>
-
-            <!-- REGISTRO FOTOGRÁFICO -->
-            <fieldset id="fieldsetFotos" class="mb-4 border rounded p-3">
-                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
-                    Registro Fotográfico
-                </legend>
-
-                <div class="d-flex gap-2">
-                    <!-- Tomar foto con cámara -->
-                    <input id="fotosTomar" type="file" accept="image/*" capture="environment" class="d-none" />
-                    <label for="fotosTomar" class="btn btn-light d-flex align-items-center gap-2">
-                        <i class="bi bi-camera fs-4"></i>
-                    </label>
-
-                    <!-- Seleccionar desde galería -->
-                    <input id="fotos" type="file" accept="image/*" multiple class="d-none" />
-                    <label for="fotos" class="btn btn-light d-flex align-items-center gap-2">
-                        <i class="bi bi-image fs-4"></i>
-                    </label>
-                </div>
-
-                <div id="thumbs" class="d-flex flex-wrap gap-2 mt-2"></div>
-            </fieldset>
-
-            <!-- FIRMAS -->
-            <fieldset class="mb-4">
-                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
-                    Firmas
-                </legend>
-                <div class="mb-3">
-                    <label class="form-label">Firma Técnico
-                        Mantenimiento</label>
-                    <canvas id="sigEjecutor" class="signature" willReadFrequently="true"></canvas>
-                    <button type="button" class="btn btn-outline-secondary mt-2 rounded">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Firma
-                        Supervisor/Operario</label>
-                    <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
-                    <button type="button" class="btn btn-outline-secondary mt-2 rounded">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>
-            </fieldset>
-            <!-- BOTONES DE ACCIÓN -->
-            <div class="d-flex justify-content-between mt-4">
-                <button id="btnDescargar" type="button" class="btn btn-outline-primary">
-                    <i class="bi bi-download"></i>
-                </button>
-                <button id="btnCompartir" type="button" class="btn btn-success">
-                    <i class="bi bi-share"></i>
-                </button>
-            </div>
-        </form>
-    </main>
-
-    <!-- ---------- FOOTER ---------- -->
-
-    <footer class="text-center py-3 mt-4 border-top">
-        <p id="estado" class="text-muted small mb-0"></p>
-        <p class="text-muted small mb-0">
-            Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
-        </p>
-    </footer>
-
-    <!-- Bootstrap -->
-
-    <script src="./libs/bootstrap.bundle.min.js"></script>
-
-    <!-- Chart.js -->
-    <script src="./libs/chart.umd.min.js"></script>
-
-    <!-- Chart.js DataLabels -->
-    <script src="./libs/chartjs-plugin-datalabels.min.js"></script>
-
-    <!-- jsPDF -->
-    <script src="./libs/jspdf.umd.min.js"></script>
-
-    <!-- HTML5 QR -->
-    <script src="./libs/html5-qrcode.min.js"></script>
-
-    <!-- MAIN -->
-
-    <script type="module" src="./js/main.js"></script>
-
-    <!-- Loader global -->
-    <div id="loaderOverlay">
-        <div class="spinner-border text-primary loaderSpinner"></div>
-    </div>
-
-    <div id="loaderOverlay2">
-        <div class="loader2-container">
-            <span id="loaderProgress2">Preparando...</span>
-
-            <div class="progressBar2">
-                <div class="progressBar2-fill"></div>
             </div>
         </div>
-    </div>
 
-</body>
+    </body>
 
 </html>
