@@ -6,7 +6,7 @@ import { initFotos } from "./fotos.js";
 import { initFirmas } from "./firmas.js";
 import { generarPDF } from "./pdf.js";
 import { validarFormulario } from "./validarFormulario.js";
-import { initSelects } from "./selects.js";
+import { initSelects } from "./initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";

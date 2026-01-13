@@ -59,8 +59,13 @@ export function initCompartir(validarFormulario, generarPDF) {
                 // 📌 Sanitizar sin eliminar "/"
                 const sanitize = str => String(str).replace(/[\\?%*:|"<>]/g, "_");
 
-                // 📌 Rutas correctas
-                const nombreArchivo = sanitize(`${planta}/${equipo}/${Date.now()}.pdf`);
+                // 📌 Rutas 
+                const tipoMantenimiento = document
+                    .getElementById("tipoMantenimiento")
+                    .value
+                    .trim();
+
+                const nombreArchivo = sanitize(`${planta}/${equipo}/${tipoMantenimiento}.pdf`);
                 const rutaCarpeta = `EQUIPOS/PLANTA/${sanitize(planta)}/${sanitize(equipo)}`;
 
                 // 📌 Subir con PROGRESO REAL

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>QR Activos - Lote</title>
+
+    <!-- Librería QR -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 20px;
+    }
+
+    .qr-item {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+
+    .qr {
+      margin-bottom: 8px;
+    }
+
+    .codigo {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Estilo impresión */
+    @media print {
+      body {
+        margin: 0;
+      }
+
+      .qr-item {
+        border: 1px solid #000;
+      }
+    }
+  </style>
+  </head>
+
+  <body>
+
+    <h2>QR de Activos</h2>
+
+    <div class="grid" id="contenedorQR"></div>
+
+    <script>
+const codigos = [
+ "AS-COM-01",
+  "AS-COM-02",
+  "AS-SEC-01",
+  "AS-SEC-02",
+  "AS-VEN-01",
+  "AS-VEN-02",
+
+  "AS-ENV-01",
+  "AS-ENV-02",
+  "AS-ENV-03",
+  "AS-ENV-04",
+  "AS-ENV-05",
+  "AS-ENV-06",
+  "AS-ENV-07",
+  "AS-ENV-08",
+  "AS-ENV-09",
+
+  "AS-MAQ-01",
+
+  "AS-TAN-01",
+  "AS-TAN-02",
+  "AS-TAN-03",
+  "AS-TAN-04",
+  "AS-TAN-05",
+  "AS-TAN-06",
+  "AS-TAN-07",
+  "AS-TAN-08",
+  "AS-TAN-09",
+  "AS-TAN-10",
+
+  "AS-LOC-01",
+  "AS-LOC-02",
+  "AS-LOC-03",
+  "AS-LOC-04",
+  "AS-LOC-05",
+  "AS-LOC-06",
+  "AS-LOC-07",
+  "AS-LOC-08",
+  "AS-LOC-09",
+  "AS-LOC-10",
+  "AS-LOC-11",
+  "AS-LOC-12",
+  "AS-LOC-13",
+  "AS-LOC-14",
+  "AS-LOC-15"
+];
+
+const contenedor = document.getElementById("contenedorQR");
+
+codigos.forEach(codigo => {
+  const item = document.createElement("div");
+  item.className = "qr-item";
+
+  const qrDiv = document.createElement("div");
+  qrDiv.className = "qr";
+
+  const label = document.createElement("div");
+  label.className = "codigo";
+  label.textContent = codigo;
+
+  item.appendChild(qrDiv);
+  item.appendChild(label);
+  contenedor.appendChild(item);
+
+  new QRCode(qrDiv, {
+    text: codigo,
+    width: 120,
+    height: 120,
+    correctLevel: QRCode.CorrectLevel.H
+  });
+});
+</script>
+
+  </body>
+</html>

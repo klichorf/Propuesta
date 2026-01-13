@@ -200,9 +200,15 @@ export async function generarPDF() {
   // ------------------------------------------------------
   // FUNCIONES INTERNAS
   // ------------------------------------------------------
-  function v(id) {
-    return document.getElementById(id).value;
+function v(id) {
+  const el = document.getElementById(id);
+  if (!el) return "";
+  // Si es un select, tomar el texto de la opción seleccionada
+  if (el.tagName === "SELECT") {
+    return el.selectedOptions[0]?.text || "";
   }
+  return el.value;
+}
 
   function fmtFecha(f) {
     return f ? new Date(f).toLocaleString().replace(",", "") : "";
