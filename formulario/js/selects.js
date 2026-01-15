@@ -167,6 +167,25 @@ ASEO: {
 
 ALIMENTOS: {
 
+    "Áreas Locativas": [
+    { codigo: "AL-LOC-01", nombre: "Portón Ingreso" },
+    { codigo: "AL-LOC-02", nombre: "Puerta Ingreso" },
+    { codigo: "AL-LOC-03", nombre: "Puerta General" },
+    { codigo: "AL-LOC-04", nombre: "Oficinas Piso 1" },
+    { codigo: "AL-LOC-05", nombre: "Oficinas Piso 2" },
+    { codigo: "AL-LOC-06", nombre: "Poseta Lava Traperos" },
+    { codigo: "AL-LOC-07", nombre: "Lavamanos Ingreso Bodega" },
+    { codigo: "AL-LOC-08", nombre: "Canaletas Eléctricas" },
+    { codigo: "AL-LOC-09", nombre: "Medidores de Energía" },
+    { codigo: "AL-LOC-10", nombre: "Medidor de Gas" },
+    { codigo: "AL-LOC-11", nombre: "Red de Agua Potable" },
+    { codigo: "AL-LOC-12", nombre: "Iluminación de Bodega" },
+    { codigo: "AL-LOC-13", nombre: "Red Interna de 110V Admin" },
+    { codigo: "AL-LOC-14", nombre: "Medidores de Agua" },
+    { codigo: "AL-LOC-15", nombre: "Cubiertas" },
+    { codigo: "AL-LOC-16", nombre: "Pintura de Pisos o Paredes" }
+  ],
+
   "Área de Compresores": [
     { codigo: "AL-COM-01", nombre: "Compresor Garden Denver" },
     { codigo: "AL-SEC-01", nombre: "Secador de Aire" },
