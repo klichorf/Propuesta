@@ -3,11 +3,13 @@ import { mostrarToast } from "../toast.js";
 import { subirAOneDriveConProgreso } from "../connection_onedrive/onedrive.js";
 import { limpiarFirma } from "../firmas.js";
 import { imagesData } from "../fotos.js";
-import { mostrarLoadercompartir, ocultarLoadercomoartir } from "../connection_onedrive/loader.js";
+import {
+  mostrarLoadercompartir,
+  ocultarLoadercomoartir
+} from "../connection_onedrive/loader.js";
 
 export function initCompartir(validarFormulario, generarPDF) {
   const btnCompartir = document.getElementById("btnCompartir");
-
   if (!btnCompartir) return;
 
   btnCompartir.addEventListener("click", async () => {
@@ -26,7 +28,9 @@ export function initCompartir(validarFormulario, generarPDF) {
       const planta = document.getElementById("planta").value.trim();
       const equipo = document.getElementById("equipo").value.trim();
       const area = document.getElementById("area").value.trim();
-      const tipoMantenimiento = document.getElementById("tipoMantenimiento").value.trim();
+      const tipoMantenimiento = document
+        .getElementById("tipoMantenimiento")
+        .value.trim();
 
       const data = {
         codigo: document.getElementById("codigo").value,
@@ -45,7 +49,7 @@ export function initCompartir(validarFormulario, generarPDF) {
       };
 
       // --------------------------------------------------
-      // 1️⃣ CREAR REGISTRO EN FIREBASE
+      // 1️⃣ GUARDAR EN FIREBASE
       // --------------------------------------------------
       const idMantenimiento = await guardarMantenimiento(data);
 
@@ -59,31 +63,27 @@ export function initCompartir(validarFormulario, generarPDF) {
       if (loaderTexto) loaderTexto.textContent = "Generando PDF...";
       const file = await generarPDF();
 
-      // Convertir a Base64
-      const base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(",")[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
+      const base64 = await convertirArchivoABase64(file);
 
       // --------------------------------------------------
-      // 3️⃣ RUTAS Y NOMBRE DEL ARCHIVO
+      // 3️⃣ NOMBRE Y RUTA DEL ARCHIVO
       // --------------------------------------------------
-      const sanitize = str => String(str).replace(/[\\?%*:|"<>]/g, "_");
+      const sanitize = str =>
+        String(str).replace(/[\\?%*:|"<>]/g, "_");
 
       const nombreArchivo = sanitize(
-        `${planta}/${equipo}/${tipoMantenimiento}_${idMantenimiento}.pdf`
+        `${tipoMantenimiento}_${idMantenimiento}.pdf`
       );
 
-      const rutaCarpeta = `EQUIPOS/PLANTA/${sanitize(planta)}/${sanitize(equipo)}`;
+
+      const rutaCarpeta = `Documentos/PLANTA/EQUIPOS/${sanitize(planta)}/${sanitize(equipo)}`;
 
       // --------------------------------------------------
-      // 4️⃣ SUBIR A ONEDRIVE CON PROGRESO
+      // 4️⃣ SUBIR A ONEDRIVE CON PROGRESO + TIMEOUT
       // --------------------------------------------------
       if (loaderTexto) loaderTexto.textContent = "Subiendo a OneDrive...";
 
-      const limiteTiempo = new Promise((_, reject) =>
+      const timeout = new Promise((_, reject) =>
         setTimeout(() => reject(new Error("timeout-onedrive")), 15000)
       );
 
@@ -93,18 +93,19 @@ export function initCompartir(validarFormulario, generarPDF) {
           rutaCarpeta,
           base64,
           porcentaje => {
-            if (loaderTexto)
+            if (loaderTexto) {
               loaderTexto.textContent = `Subiendo a OneDrive: ${porcentaje}%`;
+            }
 
             const fill = document.querySelector(".progressBar2-fill");
             if (fill) fill.style.width = `${porcentaje}%`;
           }
         ),
-        limiteTiempo
+        timeout
       ]);
 
       // --------------------------------------------------
-      // 5️⃣ ACTUALIZAR FIREBASE CON ARCHIVO
+      // 5️⃣ ACTUALIZAR FIREBASE CON URL
       // --------------------------------------------------
       await actualizarMantenimiento(idMantenimiento, {
         rutaArchivo: `${rutaCarpeta}/${nombreArchivo}`,
@@ -117,7 +118,7 @@ export function initCompartir(validarFormulario, generarPDF) {
       );
 
       // --------------------------------------------------
-      // LIMPIEZA
+      // LIMPIEZA FINAL
       // --------------------------------------------------
       document.getElementById("formulario").reset();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -131,11 +132,28 @@ export function initCompartir(validarFormulario, generarPDF) {
 
     } catch (error) {
       console.error("🔥 Error:", error);
-      mostrarToast("❌ Error al guardar o subir el archivo", "danger");
+
+      if (error.message === "timeout-onedrive") {
+        mostrarToast("⏱️ Tiempo de espera agotado al subir a OneDrive", "warning");
+      } else {
+        mostrarToast("❌ Error al guardar o subir el archivo", "danger");
+      }
     } finally {
       btnCompartir.disabled = false;
       btnCompartir.textContent = "Compartir";
       ocultarLoadercomoartir();
     }
+  });
+}
+
+// --------------------------------------------------
+// UTILIDAD: CONVERTIR ARCHIVO A BASE64
+// --------------------------------------------------
+function convertirArchivoABase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
 }
