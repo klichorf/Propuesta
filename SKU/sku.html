@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Técnico - Mantenimiento</title>
+    <!-- Ícono -->
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./libs/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons.css">
+
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="css/estilos.css" />
+
+</head>
+
+<body class="bg-light">
+    <!-- ---------- ENCABEZADO ---------- -->
+    <header class="header py-3">
+        <div class="container d-flex align-items-center justify-content-between">
+            <figure class="m-0 d-flex align-items-center">
+                <img src="img/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
+                <figcaption class="fw-bold text-uppercase">
+                    ORGANIZACIÓN<br />CÁRDENAS S.A.S
+                </figcaption>
+            </figure>
+
+            <div class="text-end">
+                <h1 class="h3 mb-0">INGRESO</h1>
+                <h2 class="h5 text-secondary">SKU</h2>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+    <main id="contenedorPrincipal" class="container my-4">
+        <!-- Formulario -->
+        <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+
+            <div class="mt-3">
+                <label for="ejecutor" class="form-label">Monta cargista</label>
+                <select id="ejecutor" class="form-select">
+                    <option disabled selected>Seleccione Técnico</option>
+                    <option>JORGE LEONARDO RODRIGUEZ</option>
+                    <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                    <option>QUEVEDO LADINO MARIO</option>
+                    <option>SARMIENTO ATENCIO DANILO</option>
+                    <option>DIEGO ALEJANDRO ALARCON HERNANDEZ</option>
+                    <option>JHON ANDRES QUINTERO</option>
+                    <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+                    <option>RONALD JOSE MENDOZA DASILVA </option>
+                    <option>ESNEIDER QUINTERO LOZANO</option>
+                </select>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">SKU</label>
+                    <input id="codigo" type="text" class="form-control" placeholder="Escanea SKU" />
+                </div>
+
+                <div class="col-md-6 d-flex align-items-end">
+                    <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
+                        <i class="bi bi-qr-code-scan"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="QR-modal" class="mt-3" style="display:none;">
+                <div id="QR" class="border rounded p-2"></div>
+            </div>
+
+            <button id="closeQR" class="btn btn-danger w-100 d-none mt-3">Cerrar</button>
+
+            <div class="alert alert-primary mt-2" id="labelLote" style="display:none;">
+                <strong>📦 Lote escaneado:</strong>
+                <span id="labelLoteValor"></span>
+            </div>
+
+            
+
+            <hr>
+            <!-- Lote -->
+            <input id="inputLote" class="form-control mb-2" placeholder="Lote generado" disabled style="margin-top: auto;">
+            <input id="material" class="form-control mb-2" placeholder="Material" disabled>
+            <input id="descripcion" class="form-control mb-2" placeholder="Descripción" disabled>
+            <input id="marca" class="form-control mb-2" placeholder="Marca" disabled>
+            <input id="presentacion" class="form-control mb-2" placeholder="Presentación" disabled>
+            <input id="infopacas" class="form-control mb-2" placeholder="Número de pacas" disabled>
+            <input id="infoUnidades"class="form-control mb-2" placeholder="Unidades por paca" disabled>
+            <input id="pacas" type="number"class="form-control mb-2" placeholder="Pacas producidas" min="0"
+                onkeydown="if(event.key === '-') event.preventDefault();">
+
+            <input id="sueltas" type="number" class="form-control mb-2" placeholder="Unidades sueltas (opcional)"
+                min="0" onkeydown="if(event.key === '-') event.preventDefault();">
+
+
+
+            <input id="totalUnidades" type="number" class="form-control mb-2" placeholder="Total unidades" disabled>
+            <button id="btnGuardarProduccion" class="btn btn-success w-100">
+                Guardar Producción
+            </button>
+
+        </form>
+    </main>
+
+    <!-- ---------- FOOTER ---------- -->
+
+    <footer class="text-center py-3 mt-4 border-top">
+        <p id="estado" class="text-muted small mb-0"></p>
+        <p class="text-muted small mb-0">
+            Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
+        </p>
+    </footer>
+
+    <!-- Bootstrap -->
+
+    <script src="./libs/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="./libs/chart.umd.min.js"></script>
+
+    <!-- Chart.js DataLabels -->
+    <script src="./libs/chartjs-plugin-datalabels.min.js"></script>
+
+    <!-- jsPDF -->
+    <script src="./libs/jspdf.umd.min.js"></script>
+
+    <!-- HTML5 QR -->
+    <script src="./libs/html5-qrcode.min.js"></script>
+
+    <!-- MAIN -->
+
+    <script type="module" src="./js/sku/main.js"></script>
+
+    <!-- Loader global -->
+    <div id="loaderOverlay">
+        <div class="spinner-border text-primary loaderSpinner"></div>
+    </div>
+
+    <div id="loaderOverlay2">
+        <div class="loader2-container">
+            <span id="loaderProgress2">Preparando...</span>
+
+            <div class="progressBar2">
+                <div class="progressBar2-fill"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
