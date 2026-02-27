@@ -21,3 +21,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+
+
+
+import { descargarExcelPorFecha } from "../reportes/reporteSKU.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnDescargarExcel = document.getElementById("btnDescargarExcel");
+
+  if (btnDescargarExcel) {
+    btnDescargarExcel.addEventListener("click", async () => {
+      const inicio = document.getElementById("fechaInicio").value;
+      const fin = document.getElementById("fechaFin").value;
+
+      if (!inicio || !fin) {
+        alert("Selecciona un rango de fechas");
+        return;
+      }
+
+      await descargarExcelPorFecha(inicio, fin);
+    });
+  }
+});

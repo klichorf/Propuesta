@@ -1,13 +1,18 @@
 // js/funciones.js
 import { materiales } from "../sku/datos.js";
-import { db } from "./firebase.js"; // 👈 ajusta la ruta si tu archivo se llama diferente
+import { db } from "./firebase.js"; 
 import {
   collection,
   addDoc,
   updateDoc,
   doc,
-  serverTimestamp
+  serverTimestamp,
+  query,        
+  where,        
+  getDocs       
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+
 import { mostrarToast } from "../toast.js";
 
 let guardando = false;
@@ -50,7 +55,10 @@ export async function guardarProduccion(data) {
 
   guardando = true;
   try {
-    const lote = await generarLote();
+    const lote =
+  document.getElementById("labelLoteValor")?.innerText ||
+  document.getElementById("inputLote")?.value ||
+  "SIN LOTE";
 
     const ref = await addDoc(collection(db, "sku"), {
       ...data,
@@ -82,4 +90,20 @@ export async function actualizarProduccion(id, data) {
     console.error("❌ Error al actualizar:", error);
     mostrarToast("Error al actualizar producción", "danger");
   }
+}
+
+
+
+export async function obtenerTotalUnidadesPorSKU(sku) {
+  const q = query(collection(db, "sku"), where("sku", "==", sku));
+  const snap = await getDocs(q);
+
+  let total = 0;
+
+  snap.forEach(d => {
+    const data = d.data();
+    total += Number(data.unidades || 0);  // 👈 CAMPO REAL
+  });
+
+  return total;
 }

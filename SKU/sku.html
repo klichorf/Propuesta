@@ -44,7 +44,8 @@
         <form id="formulario" class="card shadow p-4" onsubmit="return false;">
 
             <div class="mt-3">
-                <label for="ejecutor" class="form-label">Monta cargista</label>
+                <label for="ejecutor" class="form-label">Monta
+                    cargista</label>
                 <select id="ejecutor" class="form-select">
                     <option disabled selected>Seleccione Técnico</option>
                     <option>JORGE LEONARDO RODRIGUEZ</option>
@@ -83,29 +84,56 @@
                 <span id="labelLoteValor"></span>
             </div>
 
-            
-
+            <div class="alert alert-info mt-2">
+                📊 Total acumulado por SKU:
+                <strong><span id="totalAcumulado">0</span></strong>
+            </div>
             <hr>
             <!-- Lote -->
-            <input id="inputLote" class="form-control mb-2" placeholder="Lote generado" disabled style="margin-top: auto;">
+            <input id="inputLote" class="form-control mb-2" placeholder="Lote generado" disabled
+                style="margin-top: auto;">
             <input id="material" class="form-control mb-2" placeholder="Material" disabled>
             <input id="descripcion" class="form-control mb-2" placeholder="Descripción" disabled>
             <input id="marca" class="form-control mb-2" placeholder="Marca" disabled>
             <input id="presentacion" class="form-control mb-2" placeholder="Presentación" disabled>
             <input id="infopacas" class="form-control mb-2" placeholder="Número de pacas" disabled>
-            <input id="infoUnidades"class="form-control mb-2" placeholder="Unidades por paca" disabled>
-            <input id="pacas" type="number"class="form-control mb-2" placeholder="Pacas producidas" min="0"
+            <input id="infoUnidades" class="form-control mb-2" placeholder="Unidades por paca" disabled>
+            <input id="pacas" type="number" class="form-control mb-2" placeholder="Pacas producidas" min="0"
                 onkeydown="if(event.key === '-') event.preventDefault();">
 
             <input id="sueltas" type="number" class="form-control mb-2" placeholder="Unidades sueltas (opcional)"
                 min="0" onkeydown="if(event.key === '-') event.preventDefault();">
 
-
-
             <input id="totalUnidades" type="number" class="form-control mb-2" placeholder="Total unidades" disabled>
             <button id="btnGuardarProduccion" class="btn btn-success w-100">
                 Guardar Producción
             </button>
+
+
+            <!-- 📥 Reporte Excel de ingresos SKU -->
+            <section class="card shadow p-4 mt-4">
+                <h5 class="mb-3">
+                    <i class="bi bi-file-earmark-excel"></i> Descargar reporte de ingresos
+                </h5>
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Desde</label>
+                        <input type="date" id="fechaInicio" class="form-control">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Hasta</label>
+                        <input type="date" id="fechaFin" class="form-control">
+                    </div>
+
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="btnDescargarExcel" class="btn btn-success w-100">
+                            <i class="bi bi-download"></i> Descargar Excel
+                        </button>
+                    </div>
+                </div>
+            </section>
 
         </form>
     </main>
@@ -135,6 +163,10 @@
     <!-- HTML5 QR -->
     <script src="./libs/html5-qrcode.min.js"></script>
 
+
+    <!--EXCEL  -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
     <!-- MAIN -->
 
     <script type="module" src="./js/sku/main.js"></script>
@@ -155,6 +187,5 @@
     </div>
 
 </body>
-
 
 </html>

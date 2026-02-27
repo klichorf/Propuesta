@@ -1,54 +1,108 @@
 // js/funciones.js
-
 import { materiales } from "../sku/datos.js";
+import { db } from "../connection_db/firebase.js"; 
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  serverTimestamp,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { mostrarToast } from "../toast.js";
 
-/**
- * Busca un material por SKU o por código de material
- */
+let guardando = false;
+
 export function buscarMaterial(codigo) {
-  if (!codigo) return null;
-
-  const normalizado = codigo.toString().trim();
-
-  return (
-    materiales.find(m =>
-      m.sku === normalizado || m.material === normalizado
-    ) || null
+  return materiales.find(m =>
+    m.material === codigo.trim() ||
+    m.sku === codigo.trim()
   );
 }
 
-/**
- * Muestra la información del material en el formulario
- */
 export function mostrarInfo(material) {
+  const contenedor = document.getElementById("infoMaterial");
+
   if (!material) {
-    console.warn("Material no encontrado");
-    limpiarCampos();
+    contenedor.classList.remove("d-none");
+    contenedor.classList.replace("alert-info", "alert-danger");
+    contenedor.innerHTML = "❌ SKU / Material no encontrado";
     return;
   }
 
-  const $texto = document.getElementById("texto");
-  const $marca = document.getElementById("marca");
-  const $presentacion = document.getElementById("presentacion");
-  const $subgrupo = document.getElementById("subgrupo");
-  const $pacas = document.getElementById("pacas");
-  const $unidades = document.getElementById("unidades");
+  document.getElementById("m_material").textContent = material.material;
+  document.getElementById("m_texto").textContent = material.texto;
+  document.getElementById("m_subgrupo").textContent = material.subgrupo;
+  document.getElementById("m_presentacion").textContent = material.presentacion;
+  document.getElementById("m_sku").textContent = material.sku;
+  document.getElementById("m_marca").textContent = material.marca;
+  document.getElementById("m_pacas").textContent = material.pacas;
+  document.getElementById("m_unidades").textContent = material.unidades;
 
-  if ($texto) $texto.value = material.texto || "";
-  if ($marca) $marca.value = material.marca || "";
-  if ($presentacion) $presentacion.value = material.presentacion || "";
-  if ($subgrupo) $subgrupo.value = material.subgrupo || "";
-  if ($pacas) $pacas.value = material.pacas || "";
-  if ($unidades) $unidades.value = material.unidades || "";
+  contenedor.classList.remove("d-none", "alert-danger");
+  contenedor.classList.add("alert-info");
 }
 
 /**
- * Limpia los campos si no se encuentra el material
+ * Guarda producción en Firestore (colección: sku)
  */
-function limpiarCampos() {
-  const ids = ["texto", "marca", "presentacion", "subgrupo", "pacas", "unidades"];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = "";
+export async function guardarProduccion(data) {
+  if (guardando) return null;
+  guardando = true;
+
+  try {
+    const lote =
+      document.getElementById("labelLoteValor")?.innerText ||
+      document.getElementById("inputLote")?.value ||
+      "SIN LOTE";
+
+    const ref = await addDoc(collection(db, "sku"), {
+      ...data,
+      lote,
+      fecha: serverTimestamp()
+    });
+
+    mostrarToast(`✅ Producción guardada (Lote ${lote})`, "success");
+    return ref.id;
+
+  } catch (error) {
+    console.error("❌ Error Firebase:", error);
+    mostrarToast("Error al guardar producción", "danger");
+    return null;
+
+  } finally {
+    setTimeout(() => (guardando = false), 1200);
+  }
+}
+
+/**
+ * Actualiza un registro de producción por id (opcional)
+ */
+export async function actualizarProduccion(id, data) {
+  try {
+    await updateDoc(doc(db, "sku", id), data);
+    mostrarToast("✏️ Producción actualizada", "info");
+  } catch (error) {
+    console.error("❌ Error al actualizar:", error);
+    mostrarToast("Error al actualizar producción", "danger");
+  }
+}
+
+/**
+ * 🔥 Total acumulado por SKU
+ */
+export async function obtenerTotalUnidadesPorSKU(sku) {
+  const q = query(collection(db, "sku"), where("sku", "==", sku));
+  const snap = await getDocs(q);
+
+  let total = 0;
+
+  snap.forEach(d => {
+    const data = d.data();
+    total += Number(data.unidades || 0);  // 👈 CAMPO REAL
   });
+
+  return total;
 }
