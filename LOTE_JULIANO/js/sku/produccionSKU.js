@@ -10,9 +10,9 @@ export function initQRProduccion() {
   const labelLote = document.getElementById("labelLote");
   const labelLoteValor = document.getElementById("labelLoteValor");
   const qrPrint = document.getElementById("qrPrint");
-  const btnImprimirQR = document.getElementById("btnImprimirQR");
+ 
 
-  if (!inputCodigo || !consecutivoInput || !inputLote || !qrPrint || !btnImprimirQR) {
+  if (!inputCodigo || !consecutivoInput || !inputLote || !qrPrint ) {
     console.error("❌ No se encontraron elementos del formulario de QR");
     return;
   }
@@ -61,7 +61,4 @@ export function initQRProduccion() {
   consecutivoInput.addEventListener("change", generar);
   inputCodigo.addEventListener("change", generar);
 
-  btnImprimirQR.addEventListener("click", () => {
-    window.print();
-  });
 }
