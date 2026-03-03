@@ -2,6 +2,412 @@
 
 
 export const materiales = [
+
+    [
+  {
+    material: "1001060025",
+    texto: "FRIJOL MARITZA NIMA 500GX10",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+
+  
+  {
+    material: "1001200035",
+    texto: "MAIZ PETO TRILLADO MARITZA 3000GX1",
+    subgrupo: "MAIZ",
+    presentacion: 3000,
+    sku: "8000300021",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 1
+  },
+  {
+    material: "1001200040",
+    texto: "MAIZ PETO TRILLADO MARITZA 12.5KGX1",
+    subgrupo: "MAIZ",
+    presentacion: 12500,
+    sku: "8000300021",
+    marca: "MARITZA",
+    pacas: 100,
+    unidades: 1
+  },
+  {
+    material: "1001200055",
+    texto: "MAIZ PETO TRILLADO MARITZA 3000GX5",
+    subgrupo: "MAIZ",
+    presentacion: 3000,
+    sku: "8000300021",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 5
+  },
+  {
+    material: "1001210100",
+    texto: "MAIZ PIRA ARO 500G X 25",
+    subgrupo: "MAIZ",
+    presentacion: 500,
+    sku: "8000300019",
+    marca: "MAQUILA GRANO",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001210290",
+    texto: "MAIZ PIRA ARO X 1000G X 12",
+    subgrupo: "MAIZ",
+    presentacion: 1000,
+    sku: "8000300019",
+    marca: "MAQUILA GRANO",
+    pacas: 84,
+    unidades: 12
+  },
+  {
+    material: "1001210330",
+    texto: "MAIZ PETO ARO X 1000G X 12",
+    subgrupo: "MAIZ",
+    presentacion: 1000,
+    sku: "8000300021",
+    marca: "MAQUILA GRANO",
+    pacas: 84,
+    unidades: 12
+  },
+  {
+    material: "1001210340",
+    texto: "MAIZ PETO ARO X 500G X 25",
+    subgrupo: "MAIZ",
+    presentacion: 500,
+    sku: "8000300021",
+    marca: "MAQUILA GRANO",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001210345",
+    texto: "MAIZ PETO ARO X 12500G X 1",
+    subgrupo: "MAIZ",
+    presentacion: 12500,
+    sku: "8000300021",
+    marca: "MAQUILA GRANO",
+    pacas: 100,
+    unidades: 1
+  },
+  {
+    material: "1001210405",
+    texto: "MAIZ PIRA ARO X 3000GX5UN",
+    subgrupo: "MAIZ",
+    presentacion: 3000,
+    sku: "8000300019",
+    marca: "MAQUILA GRANO",
+    pacas: 80,
+    unidades: 5
+  },
+  {
+    material: "1001210415",
+    texto: "MAIZ PETO ARO X 3000GX5UN",
+    subgrupo: "MAIZ",
+    presentacion: 3000,
+    sku: "8000300021",
+    marca: "MAQUILA GRANO",
+    pacas: 80,
+    unidades: 5
+  },
+  {
+    material: "1001210010",
+    texto: "ALPISTE MARITZA 460GX10",
+    subgrupo: "SEMILLAS",
+    presentacion: 460,
+    sku: "8000300020",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001210015",
+    texto: "ALPISTE MARITZA 460GX25",
+    subgrupo: "SEMILLAS",
+    presentacion: 460,
+    sku: "8000300020",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001210025",
+    texto: "MIXTURA MARITZA 460GX10",
+    subgrupo: "SEMILLAS",
+    presentacion: 460,
+    sku: "8000300024",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001210030",
+    texto: "MIXTURA MARITZA 460GX25",
+    subgrupo: "SEMILLAS",
+    presentacion: 460,
+    sku: "8000300024",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001010055",
+    texto: "LENTEJA MARITZA CORRIENTE 50KGX1",
+    subgrupo: "LENTEJA",
+    presentacion: 50000,
+    sku: "8000300004",
+    marca: "MARITZA",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001030050",
+    texto: "FRIJOL MARITZA BOLA ROJA 50KGX1",
+    subgrupo: "FRIJOL",
+    presentacion: 50000,
+    sku: "8000300010",
+    marca: "MARITZA",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001060050",
+    texto: "FRIJOL MARITZA NIMA 50KGX1",
+    subgrupo: "FRIJOL",
+    presentacion: 50000,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001080050",
+    texto: "FRIJOL MARITZA CARGAMANTO 50KGX1",
+    subgrupo: "FRIJOL",
+    presentacion: 50000,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001100035",
+    texto: "FRIJOL MARITZA CARAOTA 50KGX1",
+    subgrupo: "FRIJOL",
+    presentacion: 50000,
+    sku: "8000300014",
+    marca: "MARITZA",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001100055",
+    texto: "FRIJOL MARITZA CARAOTA 3000GX5",
+    subgrupo: "FRIJOL",
+    presentacion: 3000,
+    sku: "8000300014",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 5
+  }
+,
+  {
+    material: "1001060030",
+    texto: "FRIJOL MARITZA NIMA 500GX25",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001060035",
+    texto: "FRIJOL MARITZA NIMA 1000GX12",
+    subgrupo: "FRIJOL",
+    presentacion: 1000,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 84,
+    unidades: 12
+  },
+  {
+    material: "1001060045",
+    texto: "FRIJOL MARITZA NIMA 12,5KX1",
+    subgrupo: "FRIJOL",
+    presentacion: 12500,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 100,
+    unidades: 1
+  },
+  {
+    material: "1001060055",
+    texto: "FRIJOL MARITZA NIMA 3000GX5",
+    subgrupo: "FRIJOL",
+    presentacion: 3000,
+    sku: "8000300008",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 5
+  },
+  {
+    material: "1001070015",
+    texto: "FRIJOL MARITZA RADICAL 454GX10",
+    subgrupo: "FRIJOL",
+    presentacion: 454,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001070020",
+    texto: "FRIJOL MARITZA RADICAL 454GX25",
+    subgrupo: "FRIJOL",
+    presentacion: 454,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001070025",
+    texto: "FRIJOL MARITZA RADICAL 500GX10",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001070030",
+    texto: "FRIJOL MARITZA RADICAL 500GX25",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001070035",
+    texto: "FRIJOL MARITZA RADICAL 1000GX12",
+    subgrupo: "FRIJOL",
+    presentacion: 1000,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 84,
+    unidades: 12
+  },
+  {
+    material: "1001070045",
+    texto: "FRIJOL MARITZA RADICAL 12,5KX1",
+    subgrupo: "FRIJOL",
+    presentacion: 12500,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 100,
+    unidades: 1
+  },
+  {
+    material: "1001070050",
+    texto: "FRIJOL MARITZA RADICAL 50KGX1",
+    subgrupo: "FRIJOL",
+    presentacion: 50000,
+    sku: "8000300009",
+    marca: "MARITZA GRANEL",
+    pacas: 1,
+    unidades: 1
+  },
+  {
+    material: "1001070055",
+    texto: "FRIJOL MARITZA RADICAL 3000GX5",
+    subgrupo: "FRIJOL",
+    presentacion: 3000,
+    sku: "8000300009",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 5
+  },
+  {
+    material: "1001080015",
+    texto: "FRIJOL MARITZA CARGAMANTO 454GX25",
+    subgrupo: "FRIJOL",
+    presentacion: 454,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001080020",
+    texto: "FRIJOL MARITZA CARGAMANTO 454GX10",
+    subgrupo: "FRIJOL",
+    presentacion: 454,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001080025",
+    texto: "FRIJOL MARITZA CARGAMANTO 500GX10",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 270,
+    unidades: 10
+  },
+  {
+    material: "1001080030",
+    texto: "FRIJOL MARITZA CARGAMANTO 500GX25",
+    subgrupo: "FRIJOL",
+    presentacion: 500,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 105,
+    unidades: 25
+  },
+  {
+    material: "1001080035",
+    texto: "FRIJOL MARITZA CARGAMANTO 1000GX12",
+    subgrupo: "FRIJOL",
+    presentacion: 1000,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 84,
+    unidades: 12
+  },
+  {
+    material: "1001080040",
+    texto: "FRIJOL MARITZA CARGAMANTO 3000GX1",
+    subgrupo: "FRIJOL",
+    presentacion: 3000,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 80,
+    unidades: 1
+  },
+  {
+    material: "1001080045",
+    texto: "FRIJOL MARITZA CARGAMANTO 12,5KX1",
+    subgrupo: "FRIJOL",
+    presentacion: 12500,
+    sku: "8000300007",
+    marca: "MARITZA",
+    pacas: 100,
+    unidades: 1
+  }
+],
     {
         material: "1001220041",
         texto: "ARROZ PARA SECO BLANCO MARITZA 500GX25",

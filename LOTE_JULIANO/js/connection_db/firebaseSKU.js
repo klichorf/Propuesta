@@ -1,4 +1,4 @@
-// js/funciones.js
+// connection_db/firebaseSKU.js
 import { materiales } from "../sku/datos.js";
 import { db } from "./firebase.js"; // 👈 ajusta la ruta si tu archivo se llama diferente
 import {
@@ -9,6 +9,7 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 import { mostrarToast } from "../toast.js";
+import { generarLoteLocal } from "../sku/lote.js";
 
 let guardando = false;
 
@@ -42,19 +43,36 @@ export function mostrarInfo(material) {
   contenedor.classList.add("alert-info");
 }
 
+
+
 /**
- * Guarda producción en Firestore (colección: sku)
+ * Actualiza un registro de producción por id (opcional)
  */
+export async function actualizarProduccion(id, data) {
+  try {
+    await updateDoc(doc(db, "lote", id), data);
+    mostrarToast("✏️ Producción actualizada", "info");
+  } catch (error) {
+    console.error("❌ Error al actualizar:", error);
+    mostrarToast("Error al actualizar producción", "danger");
+  }
+}
+
+
+
+
+// js/connection_db/firebaseSKU.js
+
 export async function guardarProduccion(data) {
   if (guardando) return null;
 
   guardando = true;
   try {
-    const lote = await generarLote();
+    const lote = await generarLoteLocal(); // asegúrate que esta función exista
 
-    const ref = await addDoc(collection(db, "sku"), {
+    const ref = await addDoc(collection(db, "lote"), {
       ...data,
-      lote: lote, // 👈 aquí se guarda el lote
+      lote,
       fecha: serverTimestamp()
     });
 
@@ -70,18 +88,4 @@ export async function guardarProduccion(data) {
     setTimeout(() => (guardando = false), 1200);
   }
 }
-
-/**
- * Actualiza un registro de producción por id (opcional)
- */
-export async function actualizarProduccion(id, data) {
-  try {
-    await updateDoc(doc(db, "sku", id), data);
-    mostrarToast("✏️ Producción actualizada", "info");
-  } catch (error) {
-    console.error("❌ Error al actualizar:", error);
-    mostrarToast("Error al actualizar producción", "danger");
-  }
-}
-
 

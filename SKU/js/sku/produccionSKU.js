@@ -25,8 +25,7 @@ export function initProduccionSKU() {
 
   async function buscarYMostrar(codigo) {
     materialActual = materiales.find(m =>
-      m.material === codigo.trim() ||
-      m.sku === codigo.trim()
+      m.material === codigo.trim()
     );
 
     if (!materialActual) {
