@@ -3,7 +3,7 @@
 
 export const materiales = [
 
-    [
+    
   {
     material: "1001060025",
     texto: "FRIJOL MARITZA NIMA 500GX10",
@@ -407,7 +407,7 @@ export const materiales = [
     pacas: 100,
     unidades: 1
   }
-],
+,
     {
         material: "1001220041",
         texto: "ARROZ PARA SECO BLANCO MARITZA 500GX25",
