@@ -1,4 +1,4 @@
-import { guardarMantenimiento, actualizarMantenimiento } from "../connection_db/firebase.js";
+import { guardarMantenimiento } from "../connection_db/firebase.js";
 import { mostrarToast } from "../toast.js";
 import { subirAOneDriveConProgreso } from "../connection_onedrive/onedrive.js";
 import { limpiarFirma } from "../firmas.js";
@@ -23,7 +23,7 @@ export function initCompartir(validarFormulario, generarPDF) {
 
     try {
       // --------------------------------------------------
-      // DATOS DEL FORMULARIO
+      // 1️⃣ DATOS DEL FORMULARIO
       // --------------------------------------------------
       const planta = document.getElementById("planta").value.trim();
       const equipo = document.getElementById("equipo").value.trim();
@@ -49,20 +49,10 @@ export function initCompartir(validarFormulario, generarPDF) {
       };
 
       // --------------------------------------------------
-      // 1️⃣ GUARDAR EN FIREBASE
-      // --------------------------------------------------
-      const idMantenimiento = await guardarMantenimiento(data);
-
-      if (!idMantenimiento) {
-        throw new Error("No se pudo crear el mantenimiento");
-      }
-
-      // --------------------------------------------------
       // 2️⃣ GENERAR PDF
       // --------------------------------------------------
       if (loaderTexto) loaderTexto.textContent = "Generando PDF...";
       const file = await generarPDF();
-
       const base64 = await convertirArchivoABase64(file);
 
       // --------------------------------------------------
@@ -72,45 +62,46 @@ export function initCompartir(validarFormulario, generarPDF) {
         String(str).replace(/[\\?%*:|"<>]/g, "_");
 
       const nombreArchivo = sanitize(
-        `${tipoMantenimiento}_${idMantenimiento}.pdf`
+        `${tipoMantenimiento}_${Date.now()}.pdf`
       );
-
 
       const rutaCarpeta = `Documentos/PLANTA/EQUIPOS/${sanitize(planta)}/${sanitize(equipo)}`;
 
       // --------------------------------------------------
-      // 4️⃣ SUBIR A ONEDRIVE CON PROGRESO + TIMEOUT
+      // 4️⃣ SUBIR A SHAREPOINT (PRIMERO)
       // --------------------------------------------------
-      if (loaderTexto) loaderTexto.textContent = "Subiendo a OneDrive...";
+      if (loaderTexto) loaderTexto.textContent = "Preparando...";
 
-      const timeout = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("timeout-onedrive")), 15000)
+      const resultado = await subirAOneDriveConProgreso(
+        nombreArchivo,
+        rutaCarpeta,
+        base64,
+        porcentaje => {
+          if (loaderTexto) {
+            loaderTexto.textContent = `Subiendo a SharePoint: ${porcentaje}%`;
+          }
+
+          const fill = document.querySelector(".progressBar2-fill");
+          if (fill) fill.style.width = `${porcentaje}%`;
+        }
       );
 
-      const resultado = await Promise.race([
-        subirAOneDriveConProgreso(
-          nombreArchivo,
-          rutaCarpeta,
-          base64,
-          porcentaje => {
-            if (loaderTexto) {
-              loaderTexto.textContent = `Subiendo a OneDrive: ${porcentaje}%`;
-            }
-
-            const fill = document.querySelector(".progressBar2-fill");
-            if (fill) fill.style.width = `${porcentaje}%`;
-          }
-        ),
-        timeout
-      ]);
+      if (!resultado?.ok || !resultado?.url) {
+        throw new Error("sharepoint-fallo");
+      }
 
       // --------------------------------------------------
-      // 5️⃣ ACTUALIZAR FIREBASE CON URL
+      // 5️⃣ GUARDAR EN FIREBASE (DESPUÉS)
       // --------------------------------------------------
-      await actualizarMantenimiento(idMantenimiento, {
+      const idMantenimiento = await guardarMantenimiento({
+        ...data,
         rutaArchivo: `${rutaCarpeta}/${nombreArchivo}`,
         urlSharePoint: resultado.url
       });
+
+      if (!idMantenimiento) {
+        throw new Error("firebase-fallo");
+      }
 
       mostrarToast(
         `✅ Mantenimiento guardado correctamente · ID: ${idMantenimiento}`,
@@ -118,7 +109,7 @@ export function initCompartir(validarFormulario, generarPDF) {
       );
 
       // --------------------------------------------------
-      // LIMPIEZA FINAL
+      // 6️⃣ LIMPIEZA FINAL
       // --------------------------------------------------
       document.getElementById("formulario").reset();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -133,11 +124,12 @@ export function initCompartir(validarFormulario, generarPDF) {
     } catch (error) {
       console.error("🔥 Error:", error);
 
-      if (error.message === "timeout-onedrive") {
-        mostrarToast("⏱️ Tiempo de espera agotado al subir a OneDrive", "warning");
+      if (error.message === "sharepoint-fallo") {
+        mostrarToast("❌ Error al subir el archivo a SharePoint", "danger");
       } else {
-        mostrarToast("❌ Error al guardar o subir el archivo", "danger");
+        mostrarToast("❌ Error al guardar el mantenimiento", "danger");
       }
+
     } finally {
       btnCompartir.disabled = false;
       btnCompartir.textContent = "Compartir";
