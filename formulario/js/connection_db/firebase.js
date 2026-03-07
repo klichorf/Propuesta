@@ -7,8 +7,10 @@ import {
   collection,
   addDoc,
   updateDoc,
+  deleteDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
 import { mostrarToast } from "../toast.js";
 
 const firebaseConfig = {
@@ -53,5 +55,17 @@ export async function actualizarMantenimiento(id, data) {
     await updateDoc(doc(db, "mantenimientos", id), data);
   } catch (error) {
     console.error("❌ Error al actualizar:", error);
+  }
+}
+
+// ------------------------------------------------------
+// ELIMINAR MANTENIMIENTO
+// ------------------------------------------------------
+export async function eliminarMantenimiento(id) {
+  try {
+    await deleteDoc(doc(db, "mantenimientos", id));
+    console.log("🗑️ Mantenimiento eliminado:", id);
+  } catch (error) {
+    console.error("❌ Error al eliminar mantenimiento:", error);
   }
 }
