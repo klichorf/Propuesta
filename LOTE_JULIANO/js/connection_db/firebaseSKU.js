@@ -1,6 +1,6 @@
 // connection_db/firebaseSKU.js
 import { materiales } from "../sku/datos.js";
-import { db } from "./firebase.js"; // 👈 ajusta la ruta si tu archivo se llama diferente
+import { db } from "./firebase.js"; 
 import {
   collection,
   addDoc,

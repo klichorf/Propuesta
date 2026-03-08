@@ -3,8 +3,8 @@ import { initProduccionSKU } from "./produccionSKU.js";
 import { initQRProduccion } from "./qrProduccion.js";
 
 
+
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log("➡️ INICIANDO DOMContentLoaded - SKU");
 
   const inicializaciones = [
     { fn: initProduccionSKU, name: "initProduccionSKU" },

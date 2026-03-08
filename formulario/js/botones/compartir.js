@@ -53,7 +53,6 @@ export function initCompartir(validarFormulario, generarPDF) {
         }
       );
 
-      // ✔ ahora sí termina realmente
       if (resultado.ok && resultado.url) {
         // Mostrar finalización
       loaderTexto ? loaderTexto.textContent = "Finalizando..." : null;
