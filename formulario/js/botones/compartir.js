@@ -47,7 +47,7 @@ export function initCompartir(validarFormulario, generarPDF) {
         rutaCarpeta,
         base64,
         (porcentaje) => {
-          const progresoVisual = Math.min(porcentaje, 98); // nunca llega a 100 hasta el final
+          const progresoVisual = Math.min(porcentaje, 99); // nunca llega a 100 hasta el final
           loaderTexto ? loaderTexto.textContent = `Subiendo a SharePoint: ${progresoVisual}%` : null;
           fill ? fill.style.width = `${progresoVisual}%` : null;
         }
@@ -55,16 +55,20 @@ export function initCompartir(validarFormulario, generarPDF) {
 
       // ✔ ahora sí termina realmente
       if (resultado.ok && resultado.url) {
-        // Mostrar "Finalizando..." un instante antes de llegar a 100%
-        loaderTexto ? loaderTexto.textContent = "Finalizando..." : null;
+        // Mostrar finalización
+      loaderTexto ? loaderTexto.textContent = "Finalizando..." : null;
+      
+      await new Promise(resolve => setTimeout(resolve, 400));
+      
+      // Mostrar 100%
+      fill ? fill.style.width = "100%" : null;
+      loaderTexto ? loaderTexto.textContent = "Subiendo a SharePoint: 100%" : null;
+      
+      // pequeño tiempo para que el usuario lo vea
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Dar un pequeño delay para que el usuario lo perciba
-        await new Promise(resolve => setTimeout(resolve, 800)); // 0.8 segundos
-
-        // Ahora sí completar la barra y mostrar el mensaje
-        fill ? fill.style.width = "100%" : null;
-        loaderTexto ? loaderTexto.textContent = "Completado" : null;
-
+      loaderTexto ? loaderTexto.textContent = "Completado" : null;
+        
         mostrarToast(`✅ Mantenimiento guardado correctamente · ID: ${idMantenimiento}`, "success");
         limpiarFormulario();
       } else {
@@ -87,4 +91,5 @@ export function initCompartir(validarFormulario, generarPDF) {
       ocultarLoadercomoartir();
     }
   });
+
 }
