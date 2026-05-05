@@ -15,7 +15,7 @@ export function validarFormulario() {
         "trabajo",
         "repuestos",
         "herramientas",
-        "fotos",
+       // "fotos",
     ];
 
     let faltantes = [];

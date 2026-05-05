@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cronograma de Mantenimiento</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons.css">
+</head>
+
+<body class="bg-light">
+
+<div class="container py-4">
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold text-primary">
+            📅 Cronograma de Mantenimiento
+        </h3>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCronograma">
+            ➕ Nuevo Mantenimiento
+        </button>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- FILTROS (REUTILIZADOS) -->
+    <!-- ========================================= -->
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <!-- Estado -->
+                <div class="col-md-3">
+                    <label class="form-label">Estado</label>
+                    <select id="filtroEstadoCrono" class="form-select">
+                        <option value="TODOS">Todos</option>
+                        <option value="PENDIENTE">Pendiente</option>
+                        <option value="EN_PROCESO">En proceso</option>
+                        <option value="FINALIZADO">Finalizado</option>
+                    </select>
+                </div>
+
+                <!-- Fecha -->
+                <div class="col-md-3">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" id="filtroFechaCrono" class="form-control">
+                </div>
+
+                <!-- Botón -->
+                <div class="col-md-3 d-flex align-items-end">
+                    <button id="btnFiltrarCrono" class="btn btn-outline-primary w-100">
+                        🔍 Filtrar
+                    </button>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button id="btnLimpiarFiltroCrono" class="btn btn-outline-secondary w-100">
+                        ♻ Limpiar
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- TABLA -->
+    <!-- ========================================= -->
+    <div class="card shadow">
+        <div class="card-body">
+            <div id="tablaCronograma"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- MODAL CRUD -->
+<!-- ========================================= -->
+<div class="modal fade" id="modalCronograma">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title text-primary fw-bold">
+                    Programar Mantenimiento
+                </h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" id="cronoId">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label>Equipo</label>
+                        <input type="text" id="cronoEquipo" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Área</label>
+                        <input type="text" id="cronoArea" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Fecha Inicio</label>
+                        <input type="datetime-local" id="cronoInicio" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Fecha Fin</label>
+                        <input type="datetime-local" id="cronoFin" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Tipo</label>
+                        <select id="cronoTipo" class="form-select">
+                            <option>Preventivo</option>
+                            <option>Correctivo</option>
+                            <option>Mejora</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Criticidad</label>
+                        <select id="cronoCriticidad" class="form-select">
+                            <option value="ALTA">Alta</option>
+                            <option value="MEDIA">Media</option>
+                            <option value="BAJA">Baja</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="btnGuardarCrono" class="btn btn-primary">
+                    💾 Guardar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ========================================= -->
+<!-- SCRIPTS -->
+<!-- ========================================= -->
+
+<script src="./libs/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { initCronograma } from "./js/cronograma/uiCronograma.js";
+import { initEventosCronograma } from "./js/cronograma/uiCronograma.js";
+import { obtenerCronograma } from "./js/cronograma/cronograma.js";
+
+// INIT
+document.addEventListener("DOMContentLoaded", async () => {
+    await initCronograma();
+    initEventosCronograma();
+    initFiltros();
+});
+
+// =========================================
+// FILTROS (REUTILIZANDO TU LÓGICA)
+// =========================================
+function initFiltros() {
+
+    const btnFiltrar = document.getElementById("btnFiltrarCrono");
+    const btnLimpiar = document.getElementById("btnLimpiarFiltroCrono");
+
+    btnFiltrar.addEventListener("click", async () => {
+
+        const estado = document.getElementById("filtroEstadoCrono").value;
+        const fecha = document.getElementById("filtroFechaCrono").value;
+
+        const data = await obtenerCronograma();
+
+        const filtrado = data.filter(item => {
+
+            let cumpleEstado = estado === "TODOS" || item.estado === estado;
+
+            let cumpleFecha = true;
+            if (fecha) {
+                const f = new Date(item.fechaInicio).toISOString().split("T")[0];
+                cumpleFecha = f === fecha;
+            }
+
+            return cumpleEstado && cumpleFecha;
+        });
+
+        renderTabla(filtrado);
+    });
+
+    btnLimpiar.addEventListener("click", async () => {
+        document.getElementById("filtroEstadoCrono").value = "TODOS";
+        document.getElementById("filtroFechaCrono").value = "";
+
+        await initCronograma();
+    });
+}
+
+// =========================================
+// RENDER MANUAL (usa tu misma lógica)
+// =========================================
+function renderTabla(data) {
+    const contenedor = document.getElementById("tablaCronograma");
+
+    if (!data.length) {
+        contenedor.innerHTML = `<p class="text-muted">Sin resultados</p>`;
+        return;
+    }
+
+    contenedor.innerHTML = `
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Área</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.map(item => `
+                    <tr>
+                        <td>${item.equipo}</td>
+                        <td>${item.area}</td>
+                        <td>${new Date(item.fechaInicio).toLocaleString()}</td>
+                        <td>${new Date(item.fechaFin).toLocaleString()}</td>
+                        <td>${item.estado}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
+}
+
+</script>
+
+</body>
+</html>

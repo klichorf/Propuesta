@@ -15,10 +15,19 @@ export async function obtenerRegistros() {
 
         console.log("📥 Documentos obtenidos:", snapshot.size);
 
-        const registros = snapshot.docs.map(doc => {
-            console.log("🔸 Documento leído:", doc.id, doc.data());
-            return doc.data();
-        });
+const registros = snapshot.docs.map(doc => {
+
+    const data = doc.data();
+
+    const registro = {
+        id: doc.id, // 👈 AQUÍ ESTÁ LA CLAVE
+        ...data
+    };
+
+    console.log("🔸 Documento leído:", registro);
+
+    return registro;
+});
 
         console.log("✅ Registros mapeados:", registros.length);
         console.log("📄 Resultado final de obtenerRegistros():", registros);

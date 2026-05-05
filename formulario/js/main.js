@@ -19,9 +19,26 @@ import { initBotonGraficoPrincipal } from "./charts/botonGrafico.js";
 import { initBotones } from "./botones/botones.js";
 import { obtenerRegistros } from "./reporte/obtenerRegistros.js";
 import { generarHojaDeVida } from "./lifesheet/generarHojaDeVida.js";
+import { generarReporteIntervenciones } from "./reporte/reporteIntervenciones.js";
+import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
+import { cambiarEstado, eliminarCronograma } from "./cronograma/cronograma.js";
+import { initCronograma, initEventosCronograma } from "./cronograma/uiCronograma.js";
 
+// hacer accesible desde botones HTML
+window.iniciar = async (id) => {
+    await cambiarEstado(id, "EN_PROCESO");
+    await initCronograma();
+};
 
+window.finalizar = async (id) => {
+    await cambiarEstado(id, "FINALIZADO");
+    await initCronograma();
+};
 
+window.eliminarCrono = async (id) => {
+    await eliminarCronograma(id);
+    await initCronograma();
+};
 
 // ------------------------------------------------------
 // HACER DISPONIBLE abrirHojaDeVida() PARA LOS BOTONES
@@ -66,7 +83,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         { fn: () => initBotones(validarFormulario, generarPDF), name: "initBotones" },
         { fn: () => initFiltrosReporte(), name: "initFiltrosReporte" },
         { fn: () => toggleReportePlantas(generarReportePlantas), name: "toggleReportePlantas" },
-
+        { fn: () => toggleReportePlantas(generarReporteIntervenciones), name: "toggleReporteIntervenciones" },
+        { fn: () => initFiltrosIntervenciones(), name: "initFiltrosIntervenciones" },
+        { fn: () => initCronograma(), name: "initCronograma" },
+        { fn: () => initEventosCronograma(), name: "initEventosCronograma" },
     ];
 
     // ------------------------------------------------------

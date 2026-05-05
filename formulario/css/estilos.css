@@ -581,3 +581,23 @@ body.modal-open {
     font-size: 1.3rem;        /* Un poco más grande */
     text-shadow: 0 0 6px rgba(13, 110, 253, 0.4);  /* Brillo sutil */
 }
+
+
+/* 🔥 Forzar modal a pantalla completa REAL */
+#modalReporteIntervenciones .modal-dialog {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100vh !important;
+    margin: 0 !important;
+}
+
+#modalReporteIntervenciones .modal-content {
+    height: 100vh !important;
+    border-radius: 0 !important;
+}
+
+/* 🔥 El body ocupa todo */
+#modalReporteIntervenciones .modal-body {
+    height: calc(100vh - 70px); /* resta header */
+    overflow-y: auto;
+}
