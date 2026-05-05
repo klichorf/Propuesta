@@ -7,9 +7,11 @@ import { transformarRegistros } from "./transformarRegistros.js";
 import { generarResumenIntervenciones } from "./resumenIntervenciones.js";
 import { calcularTotalMinutos, calcularTotalHoras } from "./totalesIntervenciones.js";
 import { mostrarReporteIntervenciones } from "./mostrarReporteIntervenciones.js";
-
+import { mostrarLoader,ocultarLoader } from "../charts/loader.js";
 
 export async function generarReporteIntervenciones() {
+
+    mostrarLoader();
 
     console.group("📊 REPORTE INTERVENCIONES");
 
@@ -105,4 +107,5 @@ export async function generarReporteIntervenciones() {
     modal.show();
 
     console.groupEnd();
+    ocultarLoader()
 }
