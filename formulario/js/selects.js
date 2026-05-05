@@ -100,7 +100,8 @@ const datosPlantas = {
       { codigo: "GR-LOC-12", nombre: "Iluminacion de bodega" },
       { codigo: "GR-LOC-13", nombre: "Red interna 110V admin" },
       { codigo: "GR-LOC-14", nombre: "Medidores de agua" },
-      { codigo: "GR-LOC-15", nombre: "Cubiertas" }
+      { codigo: "GR-LOC-15", nombre: "Cubiertas" },
+      { codigo: "GR-LOC-16", nombre: "Pintura de pisos o paredes" }
     ]
 
   },
