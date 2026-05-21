@@ -288,7 +288,8 @@ const datosPlantas = {
       { codigo: "BE-BOM-03", nombre: "Bomba rinser carbonatado" },
       { codigo: "BE-BOM-04", nombre: "Bomba alimentación jarabes" },
       { codigo: "BE-BOM-05", nombre: "Bomba llenadora carbonatado" },
-      { codigo: "BE-BOM-06", nombre: "Bomba llenado tanque 5000 L" }
+      { codigo: "BE-BOM-06", nombre: "Bomba llenado tanque 5000 L" },
+      { codigo: "BE-NIT-01", nombre: "Generador de Nitrógeno" },
     ],
 
     "Suministro de botella": [

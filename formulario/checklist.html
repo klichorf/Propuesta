@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Técnico - Mantenimiento</title>
+    <!-- Ícono -->
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./libs/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons.css">
+
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="css/estilos.css" />
+
+</head>
+
+<body class="bg-light">
+    <!-- ---------- ENCABEZADO ---------- -->
+    <header class="header py-3">
+        <div class="container d-flex align-items-center justify-content-between">
+            <figure class="m-0 d-flex align-items-center">
+                <img src="img/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
+                <figcaption class="fw-bold text-uppercase">
+                    ORGANIZACIÓN<br />CÁRDENAS S.A.S
+                </figcaption>
+            </figure>
+
+            <div class="text-end">
+                <h1 class="h3 mb-0">Checklist Preoperativo</h1>
+                <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+    <main id="contenedorPrincipal" class="container my-4">
+        <!-- Formulario -->
+        <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+
+          
+
+
+
+            <div class="mt-3">
+                <label for="ejecutor" class="form-label">Técnico
+                    Mantenimiento</label>
+                <select id="ejecutor" class="form-select">
+                    <option disabled selected>Seleccione Técnico</option>
+                    <option>JORGE LEONARDO RODRIGUEZ</option>
+                    <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                    <option>QUEVEDO LADINO MARIO</option>
+                    <option>JULIAN ANDRES ALAVAREZ AHUMADA</option>
+                    <option>NESTOR LEONARDO RODRIGUEZ </option>
+                    <option>ESNEIDER QUINTERO LOZANO</option>
+                    <Option>GERARDO MARIÑO</Option>
+                </select>
+            </div>
+
+
+            <!-- ========================================= -->
+<!-- ✅ CHECKLIST PREOPERATIVO -->
+<!-- ========================================= -->
+
+<fieldset class="mb-4 border rounded p-3">
+
+    <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+        <i class="bi bi-check2-square"></i>
+        Checklist Preoperativo
+    </legend>
+
+<!-- CABECERA -->
+<div class="row g-3 mb-4">
+
+    <!-- PLANTA -->
+    <div class="col-md-3">
+
+        <label class="form-label">
+            Planta
+        </label>
+
+        <select
+            id="plantaChecklist"
+            class="form-select">
+
+            <option value="">
+                Seleccione planta
+            </option>
+
+            <option value="BEBIDAS">
+                BEBIDAS
+            </option>
+
+            <option value="ASEO">
+                ASEO
+            </option>
+
+            <option value="ALIMENTOS">
+                ALIMENTOS
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- SEMANA -->
+    <div class="col-md-3">
+
+        <label class="form-label">
+            Semana
+        </label>
+
+        <input
+            id="semanaActual"
+            type="text"
+            class="form-control bg-light"
+            readonly>
+
+    </div>
+
+    <!-- FECHA -->
+    <div class="col-md-3">
+
+        <label class="form-label">
+            Fecha
+        </label>
+
+        <input
+            id="fechaActual"
+            type="text"
+            class="form-control bg-light"
+            readonly>
+
+    </div>
+
+    <!-- TURNO -->
+    <div class="col-md-3">
+
+        <label class="form-label">
+            Turno
+        </label>
+
+        <select
+            class="form-select">
+
+            <option>DÍA</option>
+            <option>NOCHE</option>
+
+        </select>
+
+    </div>
+
+</div>
+    <!-- PROGRESO -->
+    <div class="mb-4">
+
+        <div class="d-flex justify-content-between">
+
+            <small class="text-muted">
+                Cumplimiento
+            </small>
+
+            <small id="txtProgreso"
+                class="fw-bold text-primary">
+                0%
+            </small>
+
+        </div>
+
+        <div class="progress mt-1"
+            style="height: 8px;">
+
+            <div id="barraProgreso"
+                class="progress-bar"
+                style="width:0%">
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- CHECKLIST DINÁMICO -->
+<div
+    id="contenedorChecklist"
+    class="accordion">
+</div>
+
+</fieldset>    
+     
+
+   
+
+   
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="d-flex justify-content-between mt-4">
+                <button id="btnDescargar" type="button" class="btn btn-outline-primary">
+                    <i class="bi bi-download"></i>
+                </button>
+                <button id="btnCompartir" type="button" class="btn btn-success">
+                    <i class="bi bi-share"></i>
+                </button>
+            </div>
+        </form>
+    </main>
+
+
+
+    <!-- ---------- FOOTER ---------- -->
+
+    <footer class="text-center py-3 mt-4 border-top">
+        <p id="estado" class="text-muted small mb-0"></p>
+        <p class="text-muted small mb-0">
+            Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
+        </p>
+    </footer>
+
+    <!-- Bootstrap -->
+
+    <script src="./libs/bootstrap.bundle.min.js"></script>
+
+<script
+type="module"
+src="./js/checklist/main.checklist.js">
+</script>
+
+
+
+    <!-- Loader global -->
+    <div id="loaderOverlay">
+        <div class="spinner-border text-primary loaderSpinner"></div>
+    </div>
+
+    <div id="loaderOverlay2">
+        <div class="loader2-container">
+            <span id="loaderProgress2">Preparando...</span>
+
+            <div class="progressBar2">
+                <div class="progressBar2-fill"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+

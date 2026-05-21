@@ -11,6 +11,8 @@ export function mostrarReporteIntervenciones({ resumen, totales }) {
 
         let lista = resumen[tipo] || [];
 
+
+
         // 🔹 ordenar por fecha
         lista = lista.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 

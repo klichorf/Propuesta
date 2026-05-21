@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         { fn: () => initFiltrosIntervenciones(), name: "initFiltrosIntervenciones" },
         { fn: () => initCronograma(), name: "initCronograma" },
         { fn: () => initEventosCronograma(), name: "initEventosCronograma" },
+       
     ];
 
     // ------------------------------------------------------
