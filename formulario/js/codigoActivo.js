@@ -9,11 +9,14 @@ function initCodigoActivo() {
 
     equipoSelect.addEventListener("change", () => {
 
-        // obtiene el código seleccionado
-        const codigoSeleccionado = equipoSelect.value;
+        // obtener código del equipo seleccionado
+        const codigo = equipoSelect.value;
 
-        // lo coloca en #activo
-        codigoInput.value = codigoSeleccionado;
+        // actualizar input #activo
+        codigoInput.value = codigo;
+
+        // reutilizar lógica existente
+        codigoInput.dispatchEvent(new Event("input"));
 
     });
 
