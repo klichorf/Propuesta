@@ -601,3 +601,18 @@ body.modal-open {
     height: calc(100vh - 70px); /* resta header */
     overflow-y: auto;
 }
+
+
+.drop-zone {
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.drop-zone.dragover {
+    background: #e8f4ff;
+    border-color: #0d6efd;
+}
