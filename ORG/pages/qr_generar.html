@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador QR - Código</title>
+
+    <!-- Librería QR -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #QR-generado {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h3>Generar QR</h3>
+
+    <input id="codigo" placeholder="Ej: GR-COM-01">
+
+    <button onclick="generarQR()">Generar QR</button>
+
+    <div id="QR-generado"></div>
+</div>
+
+<script>
+function generarQR() {
+    const codigo = document.getElementById("codigo").value.trim();
+    const qrContainer = document.getElementById("QR-generado");
+
+    if (!codigo) {
+        alert("Ingrese un código");
+        return;
+    }
+
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer, {
+        text: codigo,
+        width: 220,
+        height: 220,
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
+</script>
+
+</body>
+</html>
