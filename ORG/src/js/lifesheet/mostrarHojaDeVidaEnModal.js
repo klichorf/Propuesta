@@ -1,3 +1,5 @@
+import { normalizarUrlSharePoint } from "../services/onedrive/sharepointUrls.js";
+
 export function mostrarHojaDeVidaEnModal(registros, info) {
 
     const modal = new bootstrap.Modal(document.getElementById("modalHojaVida"));
@@ -24,6 +26,8 @@ export function mostrarHojaDeVidaEnModal(registros, info) {
     registros
         .sort((a, b) => a.fechaInicio.localeCompare(b.fechaInicio)) // cronológico
         .forEach((r, i) => {
+            const urlArchivo = normalizarUrlSharePoint(r.rutaArchivo);
+            const urlSharePoint = normalizarUrlSharePoint(r.urlSharePoint);
 
             contenedor.innerHTML += `
                 <div class="card mb-3 shadow-sm">
@@ -40,13 +44,13 @@ export function mostrarHojaDeVidaEnModal(registros, info) {
                         <p class="mb-1"><strong>Repuestos:</strong> ${r.repuestos ?? "—"}</p>
                         <p class="mb-1"><strong>Herramientas:</strong> ${r.herramientas ?? "—"}</p>
 
-                        ${r.rutaArchivo ? `
-                            <a href="${r.rutaArchivo}" class="btn btn-sm btn-outline-secondary mt-2" target="_blank">
+                        ${urlArchivo ? `
+                            <a href="${urlArchivo}" class="btn btn-sm btn-outline-secondary mt-2" target="_blank">
                                 📄 Ver PDF
                             </a>` : ""}
 
-                        ${r.urlSharePoint ? `
-                            <a href="${r.urlSharePoint}" class="btn btn-sm btn-outline-primary mt-2 ms-1" target="_blank">
+                        ${urlSharePoint ? `
+                            <a href="${urlSharePoint}" class="btn btn-sm btn-outline-primary mt-2 ms-1" target="_blank">
                                 📷 Evidencias
                             </a>` : ""}
 

@@ -122,11 +122,11 @@ export function mostrarReporteIntervenciones({ resumen, totales }) {
                         </thead>
                         <tbody>
                             ${lista.map(r => `
-                                <tr style="cursor:pointer"
-                                    onclick="abrirDetalle('${r.id}')">
-
+                                <tr>
                                     <td>${r.fecha}</td>
-                                    <td>${r.id || "-"}</td>
+                                    <td>
+                                        ${r.id ? `<button type="button" class="btn btn-link btn-sm p-0 fw-semibold" title="Ver y descargar informe" onclick="abrirDetalle('${r.id}')">${r.id}</button>` : "-"}
+                                    </td>
                                     <td>${r.equipo}</td>
                                     <td>${r.area}</td>
                                     <td>${Math.round(r.minutos)}</td>

@@ -1,9 +1,10 @@
-import { guardarMantenimiento, eliminarMantenimiento } from "../services/firebase/firebase.js";
+import { guardarMantenimiento, actualizarMantenimiento, eliminarMantenimiento } from "../services/firebase/firebase.js";
 import { mostrarToast } from "../toast.js";
 import { subirAOneDriveConProgreso } from "../services/onedrive/onedrive.js";
 import { mostrarLoadercompartir, ocultarLoadercomoartir } from "../services/onedrive/loader.js";
 import { sanitize, convertirArchivoABase64, FirebaseError, SharePointError } from "./utils.js";
 import { obtenerDatosFormulario, limpiarFormulario } from "./datosFormulario.js";
+import { normalizarUrlSharePoint } from "../services/onedrive/sharepointUrls.js";
 
 
 
@@ -54,6 +55,13 @@ export function initCompartir(validarFormulario, generarPDF) {
       );
 
       if (resultado.ok && resultado.url) {
+        await actualizarMantenimiento(idMantenimiento, {
+          urlSharePoint: normalizarUrlSharePoint(resultado.url),
+          nombreArchivoSharePoint: nombreArchivo,
+          rutaCarpetaSharePoint: rutaCarpeta,
+          accionSharePoint: resultado.accion || "subido"
+        });
+
         // Mostrar finalización
       loaderTexto ? loaderTexto.textContent = "Finalizando..." : null;
       
@@ -92,3 +100,6 @@ export function initCompartir(validarFormulario, generarPDF) {
   });
 
 }
+
+
+

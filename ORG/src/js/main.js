@@ -24,6 +24,7 @@ import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
 import { cambiarEstado, eliminarCronograma } from "./cronograma/cronograma.js";
 import { initCronograma, initEventosCronograma } from "./cronograma/uiCronograma.js";
 import { initCodigoActivo } from "./codigoActivo.js";
+import { abrirDetalleIntervencion } from "./reporte/detalleIntervencion.js";
 // hacer accesible desde botones HTML
 window.iniciar = async (id) => {
     await cambiarEstado(id, "EN_PROCESO");
@@ -39,6 +40,8 @@ window.eliminarCrono = async (id) => {
     await eliminarCronograma(id);
     await initCronograma();
 };
+
+window.abrirDetalle = abrirDetalleIntervencion;
 
 // ------------------------------------------------------
 // HACER DISPONIBLE abrirHojaDeVida() PARA LOS BOTONES
@@ -107,3 +110,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 });
+
+
