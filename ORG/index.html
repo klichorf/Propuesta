@@ -13,9 +13,37 @@
     <link rel="stylesheet" href="./vendor/bootstrap.min.css">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css">
-
+    
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="src/styles/estilos.css" />
+    <!-- =====================================================
+     ESTILOS DEL SISTEMA
+     ===================================================== -->
+
+<link rel="stylesheet" href="src/styles/variables.css">
+
+<link rel="stylesheet" href="src/styles/layout.css">
+
+<link rel="stylesheet" href="src/styles/header.css">
+
+<link rel="stylesheet" href="src/styles/formulario.css">
+
+<link rel="stylesheet" href="src/styles/botones.css">
+
+<link rel="stylesheet" href="src/styles/modales.css">
+
+<link rel="stylesheet" href="src/styles/firmas.css">
+
+<link rel="stylesheet" href="src/styles/fotografias.css">
+
+<link rel="stylesheet" href="src/styles/loaders.css">
+
+<link rel="stylesheet" href="src/styles/reportes.css">
+
+<link rel="stylesheet" href="src/styles/componentes.css">
+
+<link rel="stylesheet" href="src/styles/responsive.css">
+
+<link rel="stylesheet" href="src/styles/calendario.css">
 
 </head>
 
@@ -24,10 +52,10 @@
     <header class="header py-3">
         <div class="container d-flex align-items-center justify-content-between">
             <figure class="m-0 d-flex align-items-center">
-                <img src="src/assets/images/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
+                
                 <figcaption class="fw-bold text-uppercase">
                     ORGANIZACIÓN<br />CÁRDENAS S.A.S
-                </figcaption>
+                </figcaption>  <img src="src/assets/images/favicon.svg" alt="Logo de la empresa" width="70" height="70" class="me-2" />
             </figure>
 
             <div class="text-end">
@@ -249,12 +277,32 @@
                         <option disabled selected>Seleccione un
                             equipo</option>
                     </select>
+                  
                     <div id="vistaFotoActivo" class="activo-foto mt-3 d-none">
-                        <div class="small text-muted mb-2" id="estadoFotoActivo">Foto del activo</div>
-                        <img id="imagenActivoSeleccionado" class="img-fluid rounded border d-none" alt="Foto del activo seleccionado">
-                        <a id="linkFotoActivo" class="btn btn-sm btn-outline-primary mt-2 d-none" target="_blank" rel="noopener">
-                            <i class="bi bi-box-arrow-up-right"></i> Ver foto en SharePoint
-                        </a>
+
+                        <!-- Título -->
+                        <div id="estadoFotoActivo" class="small text-muted mb-2">
+                            FOTO DEL ACTIVO
+                        </div>
+
+                        <!-- Skeleton mientras carga -->
+                        <div id="skeletonFotoActivo" class="skeleton-foto">
+
+                            <div class="skeleton-imagen"></div>
+
+                            <div class="skeleton-line skeleton-line-lg"></div>
+
+                            <div class="skeleton-line skeleton-line-sm"></div>
+
+                        </div>
+
+                        <div class="contenedor-imagen-activo">
+                            <img id="imagenActivoSeleccionado" alt="Foto del activo seleccionado">
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -419,44 +467,41 @@
 
             <!-- FIRMAS -->
             <fieldset class="mb-4">
+
                 <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
                     Firmas
                 </legend>
                 <div class="mb-3">
-                    <label class="form-label">Firma Técnico
+                    <label class="form-label">Técnico
                         Mantenimiento</label>
                     <canvas id="sigEjecutor" class="signature" willReadFrequently="true"></canvas>
+                    
                     <div class="signature-tools mt-2">
                         <input id="firmaEjecutorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
                             class="d-none" data-signature-target="sigEjecutor">
-                        <label for="firmaEjecutorArchivo" class="btn btn-light">
-                            <i class="bi bi-image"></i>
-                            Insertar firma
-                        </label>
+
                         <button type="button" class="btn btn-outline-secondary rounded">
                             <i class="bi bi-trash"></i>
                         </button>
-                        <span class="signature-status" data-signature-status="sigEjecutor">Puedes firmar o insertar imagen</span>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Firma
+                    <label class="form-label">
                         Supervisor/Operario</label>
                     <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
                     <div class="signature-tools mt-2">
                         <input id="firmaCoordinadorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
                             class="d-none" data-signature-target="sigCoordinador">
-                        <label for="firmaCoordinadorArchivo" class="btn btn-light">
-                            <i class="bi bi-image"></i>
-                            Insertar firma
-                        </label>
+
                         <button type="button" class="btn btn-outline-secondary rounded">
                             <i class="bi bi-trash"></i>
                         </button>
-                        <span class="signature-status" data-signature-status="sigCoordinador">Puedes firmar o insertar imagen</span>
+                       
                     </div>
                 </div>
+
+
             </fieldset>
             <!-- BOTONES DE ACCIÓN -->
             <div class="d-flex justify-content-between mt-4">
@@ -577,4 +622,3 @@
 </body>
 
 </html>
-

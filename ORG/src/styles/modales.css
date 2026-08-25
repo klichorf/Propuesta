@@ -1,0 +1,147 @@
+.modal-dialog {
+
+    max-width:
+        min(
+            92vw,
+            1100px
+        ) !important;
+}
+
+
+.modal-content {
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.72);
+
+    border-radius:
+        var(--radius);
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+        0 28px 70px
+        rgba(20, 33, 61, 0.22);
+}
+
+
+.modal-header {
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(248, 250, 252, 0.96),
+            rgba(255, 255, 255, 0.96)
+        );
+}
+
+
+/* =====================================================
+   MODAL GRÁFICO
+   ===================================================== */
+
+#modalGrafico .modal-dialog {
+
+    max-width:
+        90vw !important;
+}
+
+
+#modalGrafico .modal-content {
+
+    min-height: 70vh;
+}
+
+
+.titulo-resaltado {
+
+    color: var(--brand);
+
+    font-weight: 700;
+
+    font-size: 1.3rem;
+
+    text-shadow:
+        0 0 6px
+        rgba(13, 110, 253, 0.4);
+}
+
+
+/* =====================================================
+   MODAL REPORTE INTERVENCIONES
+   ===================================================== */
+
+#modalReporteIntervenciones .modal-dialog {
+
+    max-width: 100% !important;
+
+    width: 100% !important;
+
+    height: 100vh !important;
+
+    margin: 0 !important;
+}
+
+
+#modalReporteIntervenciones .modal-content {
+
+    height: 100vh !important;
+
+    border-radius: 0 !important;
+}
+
+
+#modalReporteIntervenciones .modal-body {
+
+    height:
+        calc(
+            100vh - 70px
+        );
+
+    overflow-y: auto;
+}
+
+
+body.modal-open {
+
+    overflow: auto !important;
+
+    padding-right: 0 !important;
+}
+
+
+.modal-backdrop {
+
+    background-color:
+        transparent !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+}
+
+
+/* =====================================================
+   ACCORDION
+   ===================================================== */
+
+.accordion-item,
+.accordion-button {
+
+    border-radius:
+        var(--radius) !important;
+}
+
+
+.accordion-button {
+
+    color: var(--ink);
+
+    background:
+        var(--surface-soft);
+}

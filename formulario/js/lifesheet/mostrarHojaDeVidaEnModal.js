@@ -44,12 +44,6 @@ export function mostrarHojaDeVidaEnModal(registros, info) {
                             <a href="${r.rutaArchivo}" class="btn btn-sm btn-outline-secondary mt-2" target="_blank">
                                 📄 Ver PDF
                             </a>` : ""}
-
-                        ${r.urlSharePoint ? `
-                            <a href="${r.urlSharePoint}" class="btn btn-sm btn-outline-primary mt-2 ms-1" target="_blank">
-                                📷 Evidencias
-                            </a>` : ""}
-
                     </div>
                 </div>
             `;

@@ -1,0 +1,123 @@
+label,
+.form-label {
+
+    color: var(--ink);
+
+    font-size: 0.82rem;
+
+    font-weight: 700;
+
+    margin:
+        0 0 7px;
+}
+
+
+.form-control,
+.form-select,
+input,
+textarea,
+select {
+
+    min-height: 44px;
+
+    border:
+        1px solid
+        rgba(20, 33, 61, 0.14);
+
+    border-radius:
+        var(--radius) !important;
+
+    color: var(--ink);
+
+    background-color:
+        rgba(255, 255, 255, 0.92);
+
+    box-shadow:
+        0 1px 0
+        rgba(20, 33, 61, 0.04);
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+textarea.form-control,
+textarea {
+
+    min-height: 112px;
+
+    line-height: 1.55;
+}
+
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color:
+        rgba(13, 110, 253, 0.72);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(13, 110, 253, 0.13);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.row.g-3 {
+
+    --bs-gutter-x: 1rem;
+
+    --bs-gutter-y: 1rem;
+}
+
+
+#supervisor {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    width: 100%;
+
+    margin:
+        2px 0 18px !important;
+
+    padding:
+        11px 14px;
+
+    border:
+        1px solid
+        rgba(13, 110, 253, 0.16);
+
+    border-radius: var(--radius);
+
+    color: var(--ink-soft) !important;
+
+    background:
+        rgba(13, 110, 253, 0.07);
+}
+
+
+.signature-status {
+
+    min-width: 0;
+
+    color: var(--ink-soft);
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+}
+
+
