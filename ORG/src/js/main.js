@@ -24,6 +24,7 @@ import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
 import { cambiarEstado, eliminarCronograma } from "./cronograma/cronograma.js";
 import { initCronograma, initEventosCronograma } from "./cronograma/uiCronograma.js";
 import { initCodigoActivo } from "./codigoActivo.js";
+import { initFotoActivoSeleccionado } from "./activosFoto.js";
 import { abrirDetalleIntervencion } from "./reporte/detalleIntervencion.js";
 // hacer accesible desde botones HTML
 window.iniciar = async (id) => {
@@ -91,6 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         { fn: () => initCronograma(), name: "initCronograma" },
         { fn: () => initEventosCronograma(), name: "initEventosCronograma" },
         { fn: initCodigoActivo, name: "initCodigoActivo" },
+        { fn: initFotoActivoSeleccionado, name: "initFotoActivoSeleccionado" },
     ];
 
     // ------------------------------------------------------
@@ -110,5 +112,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 });
+
 
 

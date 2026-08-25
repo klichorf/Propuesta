@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario de Activos</title>
+  <link rel="icon" type="image/png" href="src/assets/images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="src/styles/estilos.css" />
+</head>
+
+<body class="bg-light app-shell">
+  <header class="header py-3">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-4">
+      <figure class="m-0 d-flex align-items-center">
+        <img src="src/assets/images/logo.png" alt="Logo de la empresa" width="70" height="70" class="me-2" />
+        <figcaption class="fw-bold text-uppercase">ORGANIZACIÓN<br />CÁRDENAS S.A.S</figcaption>
+      </figure>
+
+      <div class="text-end">
+        <h1 class="h3 mb-0">INVENTARIO DE ACTIVOS</h1>
+        <h2 class="h5 text-secondary">Registro y control CRUD</h2>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenedorPrincipal" class="container-fluid my-4 px-3 px-lg-4">
+    <section class="row g-4 align-items-start">
+      <div class="col-12 col-xl-4">
+        <form id="formActivo" class="card shadow p-4" onsubmit="return false;">
+          <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+            <h3 class="h5 text-primary fw-bold mb-0">Activo</h3>
+            <span id="modoFormulario" class="badge text-bg-primary">Nuevo</span>
+          </div>
+
+          <input type="hidden" id="activoId">
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label for="planta" class="form-label">Planta</label>
+              <select id="planta" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <option value="GRANOS">GRANOS</option>
+                <option value="ALIMENTOS">ALIMENTOS</option>
+                <option value="ASEO">ASEO</option>
+                <option value="BEBIDAS">BEBIDAS</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="areaActivo" class="form-label">Área</label>
+              <select id="areaActivo" class="form-select" required>
+                <option value="">Seleccione una planta...</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="codigo" class="form-label">Código del equipo</label>
+              <input id="codigo" class="form-control" type="text" readonly required>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="centroCosto" class="form-label">Centro de costo</label>
+              <input id="centroCosto" class="form-control" type="text" required>
+            </div>
+
+            <div class="col-12">
+              <label for="localizacion" class="form-label">Localización</label>
+              <input id="localizacion" class="form-control" type="text" required>
+            </div>
+
+            <div class="col-12">
+              <label for="maquinaEquipo" class="form-label">Máquina y/o equipo</label>
+              <select id="maquinaEquipo" class="form-select" required>
+                <option value="">Seleccione un área...</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="marca" class="form-label">Marca</label>
+              <input id="marca" class="form-control" type="text" required>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="modelo" class="form-label">Modelo</label>
+              <input id="modelo" class="form-control" type="text" required>
+            </div>
+
+            <div class="col-12">
+              <label for="serial" class="form-label">Serial</label>
+              <input id="serial" class="form-control" type="text" required>
+            </div>
+
+            <div class="col-12">
+              <label for="descripcionBasica" class="form-label">Descripción básica</label>
+              <textarea id="descripcionBasica" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="col-12">
+              <label for="valorReposicionLinea" class="form-label">Valor reposición total y línea</label>
+              <input id="valorReposicionLinea" class="form-control" type="text" placeholder="$ 0" required>
+            </div>
+
+            <div class="col-12">
+              <label for="valorReposicionTotal" class="form-label">Valor de reposición total</label>
+              <input id="valorReposicionTotal" class="form-control" type="text" placeholder="$ 0" required>
+            </div>
+
+            <div class="col-12">
+              <label for="fotoActivo" class="form-label">Foto</label>
+              <div class="d-flex flex-wrap gap-2">
+                <label class="btn btn-outline-primary mb-0" for="fotoActivo"><i class="bi bi-camera"></i> Tomar foto</label>
+                <button id="btnQuitarFoto" type="button" class="btn btn-outline-secondary"><i class="bi bi-x-circle"></i> Quitar</button>
+              </div>
+              <input id="fotoActivo" class="d-none" type="file" accept="image/*" capture="environment">
+              <img id="previewFoto" class="img-fluid rounded border mt-3 d-none" alt="Vista previa del activo">
+              <p id="fotoActual" class="text-muted small mt-2 mb-0"></p>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <button id="btnGuardarActivo" type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+            <button id="btnLimpiarActivo" type="button" class="btn btn-outline-secondary"><i class="bi bi-eraser"></i> Limpiar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-12 col-xl-8">
+        <section class="card shadow p-4">
+          <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="h5 text-primary fw-bold mb-1">Activos registrados</h3>
+              <p class="text-muted mb-0">Colección Firebase: activos</p>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+              <select id="filtroPlanta" class="form-select">
+                <option value="TODAS">TODAS LAS PLANTAS</option>
+                <option value="GRANOS">GRANOS</option>
+                <option value="ALIMENTOS">ALIMENTOS</option>
+                <option value="ASEO">ASEO</option>
+                <option value="BEBIDAS">BEBIDAS</option>
+              </select>
+              <input id="buscarActivo" class="form-control" type="search" placeholder="Buscar activo, serial, marca...">
+              <button id="btnRecargarActivos" type="button" class="btn btn-outline-primary" title="Recargar"><i class="bi bi-arrow-clockwise"></i></button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Planta</th>
+                  <th>Código</th>
+                  <th>Centro de costo</th>
+                  <th>Localización</th>
+                  <th>Máquina/equipo</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Serial</th>
+                  <th>Foto</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaActivos"></tbody>
+            </table>
+          </div>
+
+          <div id="sinActivos" class="alert alert-info d-none mb-0">No hay activos registrados con los filtros actuales.</div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-3 mt-4 border-top">
+    <p id="estado" class="text-muted small mb-0"></p>
+    <p class="text-muted small mb-0">Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong></p>
+  </footer>
+
+  <script src="./vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./src/js/main.js"></script>
+
+  <div id="loaderOverlay2">
+    <div class="loader2-container">
+      <span id="loaderProgress2">Preparando...</span>
+      <div class="progressBar2"><div class="progressBar2-fill"></div></div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+

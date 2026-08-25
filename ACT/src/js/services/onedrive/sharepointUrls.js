@@ -30,35 +30,3 @@ function obtenerRutaServidor(ruta) {
 
   return `${SHAREPOINT_SITE}/${DOCUMENT_LIBRARY}/${limpia}`;
 }
-
-export function obtenerUrlArchivoSharePoint(valor) {
-  if (!valor) return "";
-
-  const texto = String(valor).trim().replace(/\\/g, "/");
-
-  if (/^https?:\/\//i.test(texto)) {
-    try {
-      const url = new URL(texto);
-      const id = url.searchParams.get("id");
-      if (id) return codificarUrlArchivo(`${SHAREPOINT_ORIGIN}${decodeURIComponent(id)}`);
-      return texto;
-    } catch {
-      return texto;
-    }
-  }
-
-  return codificarUrlArchivo(`${SHAREPOINT_ORIGIN}${obtenerRutaServidor(texto)}`);
-}
-
-function codificarUrlArchivo(url) {
-  try {
-    const parsed = new URL(url);
-    parsed.pathname = parsed.pathname
-      .split("/")
-      .map((segmento) => encodeURIComponent(decodeURIComponent(segmento)))
-      .join("/");
-    return parsed.href;
-  } catch {
-    return url;
-  }
-}
