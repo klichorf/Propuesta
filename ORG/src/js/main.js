@@ -24,8 +24,13 @@ import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
 import { cambiarEstado, eliminarCronograma } from "./cronograma/cronograma.js";
 import { initCronograma, initEventosCronograma } from "./cronograma/uiCronograma.js";
 import { initCodigoActivo } from "./codigoActivo.js";
-import { initFotoActivoSeleccionado } from "./activosFoto.js";
+import { initFotoActivoSeleccionado} from "./activos/fotoActivoUI.js";
+
 import { abrirDetalleIntervencion } from "./reporte/detalleIntervencion.js";
+
+
+
+
 // hacer accesible desde botones HTML
 window.iniciar = async (id) => {
     await cambiarEstado(id, "EN_PROCESO");
@@ -109,6 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
         initBotonGraficoPrincipal();
+        initFotoActivoSeleccionado();
 
 
 });

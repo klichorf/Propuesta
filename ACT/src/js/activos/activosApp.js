@@ -125,7 +125,7 @@ function validarDatos(data, editando) {
 async function subirFotoActivo(data, file) {
   const extension = obtenerExtension(file.name, file.type);
   const serial = limpiarSegmento(data.codigo || data.serial || data.maquinaEquipo || "activo");
-  const nombreArchivo = sanitize(`${serial}_${Date.now()}.${extension}`);
+  const nombreArchivo = sanitize(`${serial}.${extension}`);
   const rutaCarpeta = `Documentos/PLANTA/${sanitize(data.planta)}/ACTIVOS/IMAGENES`;
   const base64 = await convertirArchivoABase64(file);
 
