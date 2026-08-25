@@ -59,7 +59,16 @@ const datosPlantas = {
       { codigo: "GR-BAN-02", nombre: "Bandas transportadoras linea 2" }
     ],
 
-    "BRADORES Y ZARANDAS": [
+
+        "AREA ESTIBADOR": [
+      { codigo: "GR-EST-01", nombre: "Estibador 1" },
+      { codigo: "GR-EST-02", nombre: "Estibador 2" },
+      { codigo: "GR-EST-03", nombre: "Estibador 3" },
+      { codigo: "GR-EST-04", nombre: "Estibador 4" },
+      { codigo: "GR-EST-05", nombre: "Estibador 5" }
+    ],
+
+    "VIBRADORES Y ZARANDAS": [
       { codigo: "GR-ZAR-01", nombre: "Zaranda 1" },
       { codigo: "GR-ZAR-02", nombre: "Zaranda 2" },
       { codigo: "GR-ZAR-03", nombre: "Zaranda 3" },
@@ -102,7 +111,18 @@ const datosPlantas = {
       { codigo: "GR-LOC-14", nombre: "Medidores de agua" },
       { codigo: "GR-LOC-15", nombre: "Cubiertas" },
       { codigo: "GR-LOC-16", nombre: "Pintura de pisos o paredes" }
-    ]
+    ],
+
+
+    "ÁREA DE TOLVAS": [
+    { codigo: "GR-TOL-01", nombre: "Tolva empacadora de granos 1" },
+    { codigo: "GR-TOL-02", nombre: "Tolva empacadora de granos 2" },
+    { codigo: "GR-TOL-03", nombre: "Tolva empacadora de granos 3" },
+    { codigo: "GR-TOL-04", nombre: "Tolva empacadora de granos 4" },
+    { codigo: "GR-TOL-05", nombre: "Tolva empacadora de granos 5" }
+],
+
+
 
   },
   ASEO: {

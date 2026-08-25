@@ -6,13 +6,94 @@
 const datosPlantas = {
   GRANOS: {
 
+    "AREA ESTIBADOR": [
+      { codigo: "GR-EST-01", nombre: "Estibador 1" },
+      { codigo: "GR-EST-02", nombre: "Estibador 2" },
+      { codigo: "GR-EST-03", nombre: "Estibador 3" },
+      { codigo: "GR-EST-04", nombre: "Estibador 4" },
+      { codigo: "GR-EST-05", nombre: "Estibador 5" }
+    ],
+
+    "ÁREA DE TOLVAS": [
+      { codigo: "GR-TOL-01", nombre: "Tolva empacadora de granos 1" },
+      { codigo: "GR-TOL-02", nombre: "Tolva empacadora de granos 2" },
+      { codigo: "GR-TOL-03", nombre: "Tolva empacadora de granos 3" },
+      { codigo: "GR-TOL-04", nombre: "Tolva empacadora de granos 4" },
+      { codigo: "GR-TOL-05", nombre: "Tolva empacadora de granos 5" }
+    ],
+
+    "AREA DE CARGADOR DE BATERIAS": [
+
+      { codigo: "GR-CAR-01", nombre: "Cargador de baterías montacargas 15B" },
+      { codigo: "GR-CAR-02", nombre: "Cargador de baterías montacargas 14B" }
+    ],
+
+    " MALLAS CLASIFICACIÓN GRANO": [
+      { codigo: "GR-ALI-01", nombre: "Alimentadora clasificadora superior 1" },
+      { codigo: "GR-ALI-02", nombre: "Alimentadora clasificadora superior 2" },
+      { codigo: "GR-ALI-03", nombre: "Alimentadora clasificadora superior 3" }
+    ],
+
+
+
     "ÁREA DE COMPRESORES": [
       { codigo: "GR-COM-01", nombre: "Compresor GA 22" },
       { codigo: "GR-COM-02", nombre: "Compresor GX 11" },
       { codigo: "GR-SEC-01", nombre: "Secador compresor GA 22" },
       { codigo: "GR-SEC-02", nombre: "Secador compresor GX 11" },
-      { codigo: "GR-AIR-01", nombre: "Red de aire comprimido" }
+      { codigo: "GR-AIR-01", nombre: "Red de aire comprimido" },
+      { codigo: "GR-AIR-01", nombre: "Tanque pulmon aire comprimido" },
+      { codigo: "GR-ESTR-04", nombre: "Estructura compresores ubicada en Bodega 15" }
     ],
+
+
+    "VARIOS": [
+    { codigo: "GR-SELL-03", nombre: "Selladora de películas plásticas de pedal de calor constante" },
+    { codigo: "GR-MON-01", nombre: "Montacargas eléctrico" },
+    { codigo: "GR-FOR-01", nombre: "Cuarto de formatos" },
+    { codigo: "GR-BAN-03", nombre: "Banda transportadora empaque manual" },
+    { codigo: "GR-ESTR-05", nombre: "Estructura para tolvas de alimentación para máquinas empacadoras" },
+    { codigo: "GR-PLA-01", nombre: "Plataforma de descargue y alimentación de tolvas" },
+    { codigo: "GR-COD-06", nombre: "Codificador de pedal" },
+    { codigo: "GR-COSE-01", nombre: "Cosedora de sacos" },
+    { codigo: "GR-SELL-04", nombre: "Selladora de pedal calor constante" },
+    { codigo: "GR-ESTR-01", nombre: "Estructura azul de 4 pisos" },
+    { codigo: "GR-ESTR-02", nombre: "Estructura amarilla de 4 pisos" },
+    { codigo: "GR-ASP-01", nombre: "Aspiradora de limpieza Vaccun Clear" },
+    { codigo: "GR-ENV-03", nombre: "Máquina envasadora volumétrica 3 posiciones" }
+],
+
+
+    "AREA ESTANTERIA PRODUCTO TERMINADO": [
+      { codigo: "GR-ESTA-01", nombre: "Estantería industrial para almacenaje 1" },
+      { codigo: "GR-ESTA-02", nombre: "Estantería industrial para almacenaje 2" },
+      { codigo: "GR-ESTA-03", nombre: "Estantería industrial para almacenaje 3" },
+      { codigo: "GR-ESTA-04", nombre: "Estantería industrial para almacenaje 4" },
+      { codigo: "GR-ESTA-05", nombre: "Estantería industrial para almacenaje 5" },
+      { codigo: "GR-ESTA-06", nombre: "Estantería industrial para almacenaje 6" },
+      { codigo: "GR-ESTA-07", nombre: "Estantería industrial para almacenaje 7" },
+      { codigo: "GR-ESTA-08", nombre: "Estantería industrial para almacenaje 8" },
+      { codigo: "GR-ESTA-09", nombre: "Estantería industrial para almacenaje 9" },
+      { codigo: "GR-ESTA-10", nombre: "Estantería industrial para almacenaje 10" },
+      { codigo: "GR-ESTA-11", nombre: "Estantería industrial para almacenaje 11" },
+      { codigo: "GR-ESTA-12", nombre: "Estantería industrial para almacenaje 12" },
+      { codigo: "GR-ESTA-13", nombre: "Estantería industrial para almacenaje 13" },
+      { codigo: "GR-ESTA-14", nombre: "Estantería industrial para almacenaje 14" },
+      { codigo: "GR-ESTA-15", nombre: "Estantería industrial para almacenaje 15" },
+      { codigo: "GR-ESTA-16", nombre: "Estantería industrial para almacenaje 16" },
+      { codigo: "GR-ESTA-17", nombre: "Estantería industrial para almacenaje 17" },
+      { codigo: "GR-ESTA-18", nombre: "Estantería industrial para almacenaje 18" },
+      { codigo: "GR-ESTA-19", nombre: "Estantería industrial para almacenaje 19" },
+      { codigo: "GR-ESTA-20", nombre: "Estantería industrial para almacenaje 20" },
+      { codigo: "GR-ESTA-21", nombre: "Estantería industrial para almacenaje 21" },
+      { codigo: "GR-ESTA-22", nombre: "Estantería industrial para almacenaje 22" },
+      { codigo: "GR-ESTA-23", nombre: "Estantería industrial para almacenaje 23" },
+      { codigo: "GR-ESTA-24", nombre: "Estantería industrial para almacenaje 24" },
+      { codigo: "GR-ESTA-25", nombre: "Estantería industrial para almacenaje 25" }
+
+    ],
+
+
 
     "ÁREA DE EMPAQUE": [
       { codigo: "GR-EMP-01", nombre: "Empacadora 1 (Tecnopack)" },
@@ -59,13 +140,16 @@ const datosPlantas = {
       { codigo: "GR-BAN-02", nombre: "Bandas transportadoras linea 2" }
     ],
 
-    "BRADORES Y ZARANDAS": [
+    "VIBRADORES Y ZARANDAS": [
       { codigo: "GR-ZAR-01", nombre: "Zaranda 1" },
       { codigo: "GR-ZAR-02", nombre: "Zaranda 2" },
       { codigo: "GR-ZAR-03", nombre: "Zaranda 3" },
       { codigo: "GR-VIB-01", nombre: "Vibrador linea 1" },
       { codigo: "GR-VIB-02", nombre: "Vibrador linea 2" },
-      { codigo: "GR-VIB-03", nombre: "Vibrador empacadora 5" }
+      { codigo: "GR-VIB-03", nombre: "Vibrador empacadora 5" },
+      { codigo: "GR-CLA-01", nombre: "Clasificadora manual Bodega 15B 1" },
+      { codigo: "GR-CLA-02", nombre: "Clasificadora manual Bodega 15B 2" },
+      { codigo: "GR-CLA-03", nombre: "Clasificadora manual Bodega 15B 3" }
     ],
 
     "SELLADO Y SERVICIOS": [
@@ -74,7 +158,7 @@ const datosPlantas = {
       { codigo: "GR-REF-01", nombre: "Red refrigeracion selladoras" },
       { codigo: "GR-DIS-01", nombre: "Red distribucion de maquinas" },
       { codigo: "GR-ILU-01", nombre: "Iluminacion de maquinas" },
-      { codigo: "GR-AIR-01", nombre: "Tanque pulmon aire comprimido" }
+
     ],
 
 
@@ -83,7 +167,7 @@ const datosPlantas = {
       { codigo: "GR-TAB-02", nombre: "Tablero electrico compresores" },
       { codigo: "GR-TAB-03", nombre: "Tablero electrico limpiadora de granos" },
 
-      ],
+    ],
 
     "LOCATIVO": [
       { codigo: "GR-LOC-01", nombre: "Porton ingreso" },
@@ -101,8 +185,17 @@ const datosPlantas = {
       { codigo: "GR-LOC-13", nombre: "Red interna 110V admin" },
       { codigo: "GR-LOC-14", nombre: "Medidores de agua" },
       { codigo: "GR-LOC-15", nombre: "Cubiertas" },
-      { codigo: "GR-LOC-16", nombre: "Pintura de pisos o paredes" }
-    ]
+      { codigo: "GR-LOC-16", nombre: "Pintura de pisos o paredes" },
+      { codigo: "GR-LOC-17", nombre: "Cerramiento Bodega 14B" },
+      { codigo: "GR-LOC-18", nombre: "Cerramiento Bodega 15B" }
+    ],
+
+    "ÁREA DE PESADO": [
+      { codigo: "GR-PES-01", nombre: "Máquina pesadora de libras 1 (2do piso, zona edificio)" },
+      { codigo: "GR-PES-02", nombre: "Máquina pesadora de libras 2 (2do piso, zona edificio)" },
+      { codigo: "GR-PES-03", nombre: "Máquina pesadora de libras 3 (2do piso, zona edificio)" },
+      { codigo: "GR-PES-04", nombre: "Máquina pesadora de libras 4 (2do piso, zona edificio)" }
+    ],
 
   },
   ASEO: {
