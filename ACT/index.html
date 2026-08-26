@@ -69,10 +69,6 @@
               <input id="codigo" class="form-control" type="text" readonly required>
             </div>
 
-            <div class="col-12 col-md-6">
-              <label for="centroCosto" class="form-label">Centro de costo</label>
-              <input id="centroCosto" class="form-control" type="text" required>
-            </div>
 
             <div class="col-12">
               <label for="localizacion" class="form-label">Localización</label>
@@ -100,15 +96,37 @@
               <textarea id="descripcionBasica" class="form-control" rows="3" required></textarea>
             </div>
 
-            <div class="col-12">
-              <label for="valorReposicionLinea" class="form-label">Valor reposición total y línea</label>
-              <input id="valorReposicionLinea" class="form-control" type="text" placeholder="$ 0" required>
-            </div>
+<div class="col-12">
+    <label for="valorReposicionLinea" class="form-label">
+        Valor reposición total y línea
+    </label>
 
-            <div class="col-12">
-              <label for="valorReposicionTotal" class="form-label">Valor de reposición total</label>
-              <input id="valorReposicionTotal" class="form-control" type="text" placeholder="$ 0" required>
-            </div>
+    <input
+        id="valorReposicionLinea"
+        class="form-control"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="$ 0"
+        required
+    >
+</div>
+
+<div class="col-12">
+    <label for="valorReposicionTotal" class="form-label">
+        Valor de reposición total
+    </label>
+
+    <input
+        id="valorReposicionTotal"
+        class="form-control"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="$ 0"
+        required
+    >
+</div>
 
             <div class="col-12">
               <label for="fotoActivo" class="form-label">Foto</label>

@@ -22,6 +22,7 @@ const datosPlantas = {
       { codigo: "GR-TOL-05", nombre: "Tolva alimentacion empacadora 5" },
       { codigo: "GR-ESTR-05", nombre: "Estructura para tolvas de alimentación" },
       { codigo: "GR-PLA-01", nombre: "Plataforma de descargue y alimentación de tolvas" },
+      { codigo: "GR-PUE-01", nombre: "Puerta deslizante zona de descargue " },
     ],
 
 
@@ -133,6 +134,7 @@ const datosPlantas = {
       { codigo: "GR-BAN-05", nombre: "Banda salida INDUMACK linea 1" },
       { codigo: "GR-BAN-06", nombre: "Banda salida INDUMACK linea 2" },
       { codigo: "GR-BAN-07", nombre: "Banda transportadora empaque manual" },
+      { codigo: "GR-BAN-08", nombre: "Banda de salida máquina TEDMAQ" },
     ],
 
     "VIBRADORES Y ZARANDAS": [

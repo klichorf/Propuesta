@@ -9,7 +9,6 @@ const campos = [
   "planta",
   "area",
   "codigo",
-  "centroCosto",
   "localizacion",
   "maquinaEquipo",
   "marca",
