@@ -13,27 +13,24 @@ const datosPlantas = {
       { codigo: "GR-EST-04", nombre: "Estibador 4" },
       { codigo: "GR-EST-05", nombre: "Estibador 5" }
     ],
-
+    
     "ÁREA DE TOLVAS": [
-      { codigo: "GR-TOL-01", nombre: "Tolva empacadora de granos 1" },
-      { codigo: "GR-TOL-02", nombre: "Tolva empacadora de granos 2" },
-      { codigo: "GR-TOL-03", nombre: "Tolva empacadora de granos 3" },
-      { codigo: "GR-TOL-04", nombre: "Tolva empacadora de granos 4" },
-      { codigo: "GR-TOL-05", nombre: "Tolva empacadora de granos 5" }
+      { codigo: "GR-TOL-01", nombre: "Tolva alimentacion empacadora 1" },
+      { codigo: "GR-TOL-02", nombre: "Tolva alimentacion empacadora 2" },
+      { codigo: "GR-TOL-03", nombre: "Tolva alimentacion empacadora 3" },
+      { codigo: "GR-TOL-04", nombre: "Tolva alimentacion empacadora 4" },
+      { codigo: "GR-TOL-05", nombre: "Tolva alimentacion empacadora 5" },
+      { codigo: "GR-ESTR-05", nombre: "Estructura para tolvas de alimentación" },
+      { codigo: "GR-PLA-01", nombre: "Plataforma de descargue y alimentación de tolvas" },
     ],
+
+
 
     "AREA DE CARGADOR DE BATERIAS": [
 
       { codigo: "GR-CAR-01", nombre: "Cargador de baterías montacargas 15B" },
       { codigo: "GR-CAR-02", nombre: "Cargador de baterías montacargas 14B" }
     ],
-
-    " MALLAS CLASIFICACIÓN GRANO": [
-      { codigo: "GR-ALI-01", nombre: "Alimentadora clasificadora superior 1" },
-      { codigo: "GR-ALI-02", nombre: "Alimentadora clasificadora superior 2" },
-      { codigo: "GR-ALI-03", nombre: "Alimentadora clasificadora superior 3" }
-    ],
-
 
 
     "ÁREA DE COMPRESORES": [
@@ -42,21 +39,21 @@ const datosPlantas = {
       { codigo: "GR-SEC-01", nombre: "Secador compresor GA 22" },
       { codigo: "GR-SEC-02", nombre: "Secador compresor GX 11" },
       { codigo: "GR-AIR-01", nombre: "Red de aire comprimido" },
-      { codigo: "GR-AIR-01", nombre: "Tanque pulmon aire comprimido" },
+      { codigo: "GR-AIR-02", nombre: "Tanque pulmon aire comprimido" },
       { codigo: "GR-ESTR-04", nombre: "Estructura compresores ubicada en Bodega 15" }
     ],
 
 
     "VARIOS": [
-    { codigo: "GR-SELL-03", nombre: "Selladora de películas plásticas de pedal de calor constante" },
+
     { codigo: "GR-MON-01", nombre: "Montacargas eléctrico" },
     { codigo: "GR-FOR-01", nombre: "Cuarto de formatos" },
-    { codigo: "GR-BAN-03", nombre: "Banda transportadora empaque manual" },
-    { codigo: "GR-ESTR-05", nombre: "Estructura para tolvas de alimentación para máquinas empacadoras" },
-    { codigo: "GR-PLA-01", nombre: "Plataforma de descargue y alimentación de tolvas" },
+
+   
+
     { codigo: "GR-COD-06", nombre: "Codificador de pedal" },
     { codigo: "GR-COSE-01", nombre: "Cosedora de sacos" },
-    { codigo: "GR-SELL-04", nombre: "Selladora de pedal calor constante" },
+
     { codigo: "GR-ESTR-01", nombre: "Estructura azul de 4 pisos" },
     { codigo: "GR-ESTR-02", nombre: "Estructura amarilla de 4 pisos" },
     { codigo: "GR-ASP-01", nombre: "Aspiradora de limpieza Vaccun Clear" },
@@ -109,13 +106,6 @@ const datosPlantas = {
       { codigo: "GR-LIM-01", nombre: "Maquina limpiadora de granos" }
     ],
 
-    "ÁREA DE TOLVAS": [
-      { codigo: "GR-TOL-01", nombre: "Tolva alimentacion empacadora 1" },
-      { codigo: "GR-TOL-02", nombre: "Tolva alimentacion empacadora 2" },
-      { codigo: "GR-TOL-03", nombre: "Tolva alimentacion empacadora 3" },
-      { codigo: "GR-TOL-04", nombre: "Tolva alimentacion empacadora 4" },
-      { codigo: "GR-TOL-05", nombre: "Tolva alimentacion empacadora 5" }
-    ],
 
     "BÁSCULAS": [
       { codigo: "GR-BAS-01", nombre: "Bascula calidad" },
@@ -136,8 +126,13 @@ const datosPlantas = {
       { codigo: "GR-TRA-03", nombre: "Banda transportadora empacadora 3" },
       { codigo: "GR-INT-01", nombre: "Banda interconexion linea 1" },
       { codigo: "GR-INT-02", nombre: "Banda interconexion linea 2" },
-      { codigo: "GR-BAN-01", nombre: "Bandas transportadoras linea 1" },
-      { codigo: "GR-BAN-02", nombre: "Bandas transportadoras linea 2" }
+      { codigo: "GR-BAN-01", nombre: "Bandas larga linea 1" },
+      { codigo: "GR-BAN-02", nombre: "Bandas larga linea 2" },
+      { codigo: "GR-BAN-03", nombre: "Banda rapida linea 1" },
+      { codigo: "GR-BAN-04", nombre: "Banda rapida linea 2" },
+      { codigo: "GR-BAN-05", nombre: "Banda salida INDUMACK linea 1" },
+      { codigo: "GR-BAN-06", nombre: "Banda salida INDUMACK linea 2" },
+      { codigo: "GR-BAN-07", nombre: "Banda transportadora empaque manual" },
     ],
 
     "VIBRADORES Y ZARANDAS": [
@@ -153,8 +148,8 @@ const datosPlantas = {
     ],
 
     "SELLADO Y SERVICIOS": [
-      { codigo: "GR-SELL-01", nombre: "Selladora manual 1" },
-      { codigo: "GR-SELL-02", nombre: "Selladora manual 2" },
+      { codigo: "GR-SELL-01", nombre: "Selladora manual M5" },
+      { codigo: "GR-SELL-02", nombre: "Selladora LINEA 2" },
       { codigo: "GR-REF-01", nombre: "Red refrigeracion selladoras" },
       { codigo: "GR-DIS-01", nombre: "Red distribucion de maquinas" },
       { codigo: "GR-ILU-01", nombre: "Iluminacion de maquinas" },
