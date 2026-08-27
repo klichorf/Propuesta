@@ -154,8 +154,7 @@ body.app-shell::before {
 
 #formulario::before {
 
-    content: "Informe tecnico";
-
+    
     display: block;
 
     margin-bottom: 18px;

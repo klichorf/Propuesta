@@ -104,6 +104,7 @@ const datosPlantas = {
       { codigo: "GR-COD-04", nombre: "Codificador empacadora 4" },
       { codigo: "GR-EMP-05", nombre: "Envasadora 5 (Tedmaq)" },
       { codigo: "GR-COD-05", nombre: "Codificador empacadora 5" },
+      { codigo: "GR-PES-05", nombre: "Multicabezal pesadora máquina TEDMAQ" },
       { codigo: "GR-LIM-01", nombre: "Maquina limpiadora de granos" }
     ],
 

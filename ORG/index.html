@@ -150,7 +150,7 @@
                                                 <div class="row gy-3">
                                                     <!-- PLANTA -->
                                                     <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">PLANTA</label>
+                                                        <label   class="form-label fw-bold text-primary" fw-bold text-primary" fw-semibold">PLANTA</label>
                                                         <select id="filtroPlanta" class="form-select rounded-pill">
 
                                                         </select>
@@ -158,7 +158,7 @@
 
                                                     <!-- FECHA INICIO -->
                                                     <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">Fecha
+                                                        <label   class="form-label fw-bold text-primary" fw-bold text-primary" fw-semibold">Fecha
                                                             Inicio</label>
                                                         <input type="date" id="filtroFechaInicio"
                                                             class="form-control rounded-pill">
@@ -166,7 +166,7 @@
 
                                                     <!-- FECHA FIN -->
                                                     <div class="col-md-4">
-                                                        <label class="form-label fw-semibold">Fecha
+                                                        <label   class="form-label fw-bold text-primary" fw-bold text-primary" fw-semibold">Fecha
                                                             Fin</label>
                                                         <input type="date" id="filtroFechaFin"
                                                             class="form-control rounded-pill">
@@ -214,11 +214,10 @@
                 </div>
 
                 <!-- 🔹escanner-->
-                <div class="row g-3">
+                <div class="row g-3" style="margin-top: 1%;" >
                     <div class="col-md-6">
-                        <label for="codigo" class="form-label">#
-                            Activo</label>
-                        <input id="codigo" type="text" class="form-control" placeholder="FO-1600-041" />
+
+                        <input id="codigo" type="text" class="form-control" placeholder=" COD : GR-COM-01" />
                     </div>
                     <div class="col-md-6 d-flex align-items-end">
                         <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
@@ -249,7 +248,7 @@
 
             <div class="row g-3">
                 <div class="col-md-4">
-                    <label for="planta" class="form-label">Planta</label>
+                    <label for="planta"   class="form-label fw-bold text-primary" fw-bold text-primary"">Planta</label>
                     <select id="planta" class="form-select">
                         <option disabled selected>Seleccione una
                             planta</option>
@@ -263,7 +262,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="area" class="form-label">Área</label>
+                    <label for="area"   class="form-label fw-bold text-primary" fw-bold text-primary"">Área</label>
                     <select id="area" class="form-select">
                         <option disabled selected>Seleccione un
                             área</option>
@@ -271,7 +270,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="equipo" class="form-label">Equipo /
+                    <label for="equipo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Equipo /
                         Máquina</label>
                     <select id="equipo" class="form-select">
                         <option disabled selected>Seleccione un
@@ -309,26 +308,26 @@
 
             <div class="row g-3 mt-3">
                 <div class="col-md-6">
-                    <label for="fechaInicio" class="form-label">Fecha
+                    <label for="fechaInicio"   class="form-label fw-bold text-primary" fw-bold text-primary"">Fecha
                         Inicio</label>
                     <input id="fechaInicio" type="datetime-local" class="form-control" required />
                 </div>
                 <div class="col-md-6">
-                    <label for="fechaFin" class="form-label">Fecha
+                    <label for="fechaFin"   class="form-label fw-bold text-primary" fw-bold text-primary"">Fecha
                         Fin</label>
                     <input id="fechaFin" type="datetime-local" class="form-control" />
                 </div>
             </div>
 
             <div class="mt-3">
-                <label for="tiempo" class="form-label">Tiempo
+                <label for="tiempo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Tiempo
                     empleado</label>
                 <input id="tiempo" type="text" readonly class="form-control"
                     placeholder="Se calculará automáticamente" />
             </div>
 
             <div class="mt-3">
-                <label for="tipoMantenimiento" class="form-label">Tipo de
+                <label for="tipoMantenimiento"   class="form-label fw-bold text-primary" fw-bold text-primary"">Tipo de
                     mantenimiento</label>
                 <select id="tipoMantenimiento" class="form-select">
                     <option disabled selected>Seleccione clase</option>
@@ -341,7 +340,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="ejecutor" class="form-label">Técnico
+                <label for="ejecutor"   class="form-label fw-bold text-primary" fw-bold text-primary"">Técnico
                     Mantenimiento</label>
                 <select id="ejecutor" class="form-select">
                     <option disabled selected>Seleccione Técnico</option>
@@ -357,19 +356,19 @@
             </div>
 
             <div class="mt-3">
-                <label for="danos" class="form-label">Daños
+                <label for="danos"   class="form-label fw-bold text-primary" fw-bold text-primary"">Daños
                     encontrados</label>
                 <textarea id="danos" class="form-control" rows="3"></textarea>
             </div>
 
             <div class="mt-3">
-                <label for="trabajo" class="form-label">Trabajo
+                <label for="trabajo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Trabajo
                     ejecutado</label>
                 <textarea id="trabajo" class="form-control" rows="3"></textarea>
             </div>
 
             <div class="mt-3">
-                <label for="herramientas" class="form-label fw-bold text-primary">
+                <label for="herramientas"   class="form-label fw-bold text-primary" fw-bold text-primary" fw-bold text-primary">
                     Herramientas utilizadas
                 </label>
 
@@ -401,7 +400,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="repuestos" class="form-label fw-bold text-primary">Repuestos
+                <label for="repuestos"   class="form-label fw-bold text-primary" fw-bold text-primary" fw-bold text-primary">Repuestos
                     utilizados</label>
 
                 <div class="d-flex gap-2">
@@ -438,9 +437,9 @@
 
             <!-- REGISTRO FOTOGRÁFICO -->
             <fieldset id="fieldsetFotos" class="mb-4 border rounded p-3">
-                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+                <div class="fw-bold text-primary border-bottom pb-2 mb-3">
                     Registro Fotográfico
-                </legend>
+                </div>
 
                 <div class="d-flex gap-2">
                     <!-- Tomar foto con cámara -->
@@ -468,11 +467,11 @@
             <!-- FIRMAS -->
             <fieldset class="mb-4">
 
-                <legend class="fw-bold text-primary border-bottom pb-2 mb-3">
+                <div class="fw-bold text-primary border-bottom pb-2 mb-3">
                     Firmas
-                </legend>
+                </div>
                 <div class="mb-3">
-                    <label class="form-label">Técnico
+                    <label   class="form-label fw-bold text-primary" fw-bold text-primary"">Técnico
                         Mantenimiento</label>
                     <canvas id="sigEjecutor" class="signature" willReadFrequently="true"></canvas>
                     
@@ -487,8 +486,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">
-                        Supervisor/Operario</label>
+                    <label   class="form-label fw-bold text-primary" fw-bold text-primary"">
+                    Supervisor </label>
                     <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
                     <div class="signature-tools mt-2">
                         <input id="firmaCoordinadorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
