@@ -401,7 +401,7 @@
       <div id="qrcode" style="margin-top:15px;"></div>
 
       <p id="supervisor" style="font-weight:600; color:#021321; margin-top:10px; margin-bottom: 20px;">
-        👤 Supervisor: (selecciona una planta)
+      Supervisor: (selecciona una planta)
       </p>
 
       <label>Planta</label>
@@ -1164,7 +1164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const supervisor = supervisores[planta.toUpperCase()] || "No asignado";
       const supervisorLabel = document.getElementById("supervisor");
       if (!supervisorLabel) return;
-      supervisorLabel.textContent = `👤 Supervisor: ${supervisor}`;
+      supervisorLabel.textContent = ` ${supervisor}`;
     }
 
 

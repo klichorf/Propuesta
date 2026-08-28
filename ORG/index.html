@@ -217,7 +217,7 @@
                 <div class="row g-3" style="margin-top: 1%;" >
                     <div class="col-md-6">
 
-                        <input id="codigo" type="text" class="form-control" placeholder="GR-COM-01" />
+                        <input id="codigo" type="text" class="form-control" placeholder="CODIGO" />
                     </div>
                     <div class="col-md-6 d-flex align-items-end">
                         <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
@@ -241,7 +241,7 @@
 
             <div class="row g-3">
                 <div class="col-md-4">
-                    <label for="planta"   class="form-label fw-bold text-primary" fw-bold text-primary"">Planta</label>
+                    <label for="planta"   class="form-label fw-bold text-primary-emphasis" >Planta</label>
                     <select id="planta" class="form-select">
                         <option disabled selected></option>
                         <option value="GRANOS">GRANOS</option>
@@ -254,14 +254,14 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="area"   class="form-label fw-bold text-primary" fw-bold text-primary"">Área</label>
+                    <label for="area"   class="form-label fw-bold text-primary-emphasis" >Área</label>
                     <select id="area" class="form-select">
                         <option disabled selected></option>
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label for="equipo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Equipo</label>
+                    <label for="equipo"   class="form-label fw-bold text-primary-emphasis" >Equipo</label>
                     <select id="equipo" class="form-select">
                         <option disabled selected></option>
                     </select>
@@ -297,26 +297,26 @@
 
             <div class="row g-3 mt-3">
                 <div class="col-md-6">
-                    <label for="fechaInicio"   class="form-label fw-bold text-primary" fw-bold text-primary"">Fecha
+                    <label for="fechaInicio"   class="form-label fw-bold text-primary-emphasis" >Fecha
                         Inicio</label>
                     <input id="fechaInicio" type="datetime-local" class="form-control" required />
                 </div>
                 <div class="col-md-6">
-                    <label for="fechaFin"   class="form-label fw-bold text-primary" fw-bold text-primary"">Fecha
+                    <label for="fechaFin"   class="form-label fw-bold text-primary-emphasis" >Fecha
                         Fin</label>
                     <input id="fechaFin" type="datetime-local" class="form-control" />
                 </div>
             </div>
 
             <div class="mt-3">
-                <label for="tiempo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Tiempo
+                <label for="tiempo"   class="form-label fw-bold text-primary-emphasis" "">Tiempo
                     empleado</label>
                 <input id="tiempo" type="text" readonly class="form-control"
                     placeholder="Se calculará automáticamente" />
             </div>
 
             <div class="mt-3">
-                <label for="tipoMantenimiento"   class="form-label fw-bold text-primary" fw-bold text-primary"">Tipo de
+                <label for="tipoMantenimiento"   class="form-label fw-bold text-primary-emphasis" >Tipo de
                     mantenimiento</label>
                 <select id="tipoMantenimiento" class="form-select">
                     <option disabled selected></option>
@@ -329,7 +329,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="ejecutor"   class="form-label fw-bold text-primary" fw-bold text-primary"">Técnico
+                <label for="ejecutor"   class="form-label fw-bold text-primary-emphasis" >Técnico
                     Mantenimiento</label>
                 <select id="ejecutor" class="form-select">
                     <option disabled selected></option>
@@ -345,19 +345,19 @@
             </div>
 
             <div class="mt-3">
-                <label for="danos"   class="form-label fw-bold text-primary" fw-bold text-primary"">Daños
+                <label for="danos"   class="form-label fw-bold text-primary-emphasis" >Daños
                     encontrados</label>
                 <textarea id="danos" class="form-control" rows="3"></textarea>
             </div>
 
             <div class="mt-3">
-                <label for="trabajo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Trabajo
+                <label for="trabajo"   class="form-label fw-bold text-primary-emphasis" >Trabajo
                     ejecutado</label>
                 <textarea id="trabajo" class="form-control" rows="3"></textarea>
             </div>
 
             <div class="mt-3">
-                <label for="herramientas"   class="form-label fw-bold text-primary" fw-bold text-primary" fw-bold text-primary">
+                <label for="herramientas"   class="form-label fw-bold text-primary-emphasis">
                     Herramientas utilizadas
                 </label>
 
@@ -389,7 +389,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="repuestos"   class="form-label fw-bold text-primary" fw-bold text-primary" fw-bold text-primary">Repuestos
+                <label for="repuestos"   class="form-label fw-bold text-primary-emphasis" >Repuestos
                     utilizados</label>
 
                 <div class="d-flex gap-2">
@@ -426,7 +426,7 @@
 
             <!-- REGISTRO FOTOGRÁFICO -->
             <fieldset id="fieldsetFotos" class="mb-4 border rounded p-3">
-                <div class="fw-bold text-primary border-bottom pb-2 mb-3">
+                <div class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
                     Registro Fotográfico
                 </div>
 
@@ -456,11 +456,11 @@
             <!-- FIRMAS -->
             <fieldset class="mb-4">
 
-                <div class="fw-bold text-primary border-bottom pb-2 mb-3">
+                <div class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
                     Firmas
                 </div>
                 <div class="mb-3">
-                    <label   class="form-label fw-bold text-primary" fw-bold text-primary"">Técnico
+                    <label   class="form-label fw-bold text-primary-emphasis">Técnico
                         Mantenimiento</label>
                     <canvas id="sigEjecutor" class="signature" willReadFrequently="true"></canvas>
                     
@@ -475,13 +475,13 @@
                 </div>
 
                 <div class="mb-3">
-            <p id="supervisor" class="form-label fw-bold text-primary" fw-bold text-primary>
+            <label id="supervisor" class="form-label fw-bold text-primary-emphasis">
                 
                 Supervisor:
                 <span class="d-none d-sm-inline"></span>
                 <br class="d-sm-none" />
                 <span class="d-sm-none"></span>
-            </p>
+            </label>
                     <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
                     <div class="signature-tools mt-2">
                         <input id="firmaCoordinadorArchivo" type="file" accept="image/png,image/jpeg,image/webp"

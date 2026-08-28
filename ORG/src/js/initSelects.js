@@ -29,7 +29,7 @@ function initSelects() {
 
     if (supervisorLabel) {
       supervisorLabel.textContent =
-        "👤 Supervisor: " + (supervisores[planta] || "No asignado");
+        (supervisores[planta] || "No asignado");
     }
   });
 
