@@ -217,7 +217,7 @@
                 <div class="row g-3" style="margin-top: 1%;" >
                     <div class="col-md-6">
 
-                        <input id="codigo" type="text" class="form-control" placeholder=" COD : GR-COM-01" />
+                        <input id="codigo" type="text" class="form-control" placeholder="GR-COM-01" />
                     </div>
                     <div class="col-md-6 d-flex align-items-end">
                         <button id="btnQR" type="button" class="btn btn-outline-secondary w-100">
@@ -237,21 +237,13 @@
 
             </fieldset>
 
-            <p id="supervisor" class="text-muted mt-3">
-                <i class="bi bi-person-badge"></i>
-                Supervisor:
-                <span class="d-none d-sm-inline">(selecciona una
-                    planta)</span>
-                <br class="d-sm-none" />
-                <span class="d-sm-none">(selecciona una planta)</span>
-            </p>
+
 
             <div class="row g-3">
                 <div class="col-md-4">
                     <label for="planta"   class="form-label fw-bold text-primary" fw-bold text-primary"">Planta</label>
                     <select id="planta" class="form-select">
-                        <option disabled selected>Seleccione una
-                            planta</option>
+                        <option disabled selected></option>
                         <option value="GRANOS">GRANOS</option>
                         <option value="ASEO">ASEO</option>
                         <option value="ALIMENTOS">ALIMENTOS</option>
@@ -264,17 +256,14 @@
                 <div class="col-md-4">
                     <label for="area"   class="form-label fw-bold text-primary" fw-bold text-primary"">Área</label>
                     <select id="area" class="form-select">
-                        <option disabled selected>Seleccione un
-                            área</option>
+                        <option disabled selected></option>
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <label for="equipo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Equipo /
-                        Máquina</label>
+                    <label for="equipo"   class="form-label fw-bold text-primary" fw-bold text-primary"">Equipo</label>
                     <select id="equipo" class="form-select">
-                        <option disabled selected>Seleccione un
-                            equipo</option>
+                        <option disabled selected></option>
                     </select>
                   
                     <div id="vistaFotoActivo" class="activo-foto mt-3 d-none">
@@ -330,7 +319,7 @@
                 <label for="tipoMantenimiento"   class="form-label fw-bold text-primary" fw-bold text-primary"">Tipo de
                     mantenimiento</label>
                 <select id="tipoMantenimiento" class="form-select">
-                    <option disabled selected>Seleccione clase</option>
+                    <option disabled selected></option>
                     <option>Preventivo</option>
                     <option>Correctivo</option>
                     <option>Predictivo</option>
@@ -343,7 +332,7 @@
                 <label for="ejecutor"   class="form-label fw-bold text-primary" fw-bold text-primary"">Técnico
                     Mantenimiento</label>
                 <select id="ejecutor" class="form-select">
-                    <option disabled selected>Seleccione Técnico</option>
+                    <option disabled selected></option>
                     <option>JORGE LEONARDO RODRIGUEZ</option>
                     <option>PINEDA AGUDELO YONATAN STIVEN</option>
                     <option>QUEVEDO LADINO MARIO</option>
@@ -479,21 +468,26 @@
                         <input id="firmaEjecutorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
                             class="d-none" data-signature-target="sigEjecutor">
 
-                        <button type="button" class="btn btn-outline-secondary rounded">
+                        <button type="button" class="btn btn-outline-primary">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label   class="form-label fw-bold text-primary" fw-bold text-primary"">
-                    Supervisor </label>
+            <p id="supervisor" class="form-label fw-bold text-primary" fw-bold text-primary>
+                
+                Supervisor:
+                <span class="d-none d-sm-inline"></span>
+                <br class="d-sm-none" />
+                <span class="d-sm-none"></span>
+            </p>
                     <canvas id="sigCoordinador" class="signature" willReadFrequently="true"></canvas>
                     <div class="signature-tools mt-2">
                         <input id="firmaCoordinadorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
                             class="d-none" data-signature-target="sigCoordinador">
 
-                        <button type="button" class="btn btn-outline-secondary rounded">
+                        <button type="button" class="btn btn-outline-primary">
                             <i class="bi bi-trash"></i>
                         </button>
                        
@@ -507,7 +501,7 @@
                 <button id="btnDescargar" type="button" class="btn btn-outline-primary">
                     <i class="bi bi-download"></i>
                 </button>
-                <button id="btnCompartir" type="button" class="btn btn-success">
+                <button id="btnCompartir" type="button" class="btn btn-outline-primary">
                     <i class="bi bi-share"></i>
                 </button>
             </div>
