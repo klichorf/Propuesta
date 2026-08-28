@@ -480,27 +480,18 @@ const datosPlantas = {
   },
 
 
-  OFERTAS: {
-    "Área de Producción": [
-      "Horno 1",
-      "Horno 2",
-      "Horno 3",
-      "Selladora 1",
-      "Selladora 2",
-      "Selladora 3",
-    ],
-  },
+OFERTAS: {
+  "Área de Producción": [
+    { codigo: "OF-HOR-01", nombre: "Horno 1" },
+    { codigo: "OF-HOR-02", nombre: "Horno 2" },
+    { codigo: "OF-HOR-03", nombre: "Horno 3" },
+    { codigo: "OF-SEL-01", nombre: "Selladora 1" },
+    { codigo: "OF-SEL-02", nombre: "Selladora 2" },
+    { codigo: "OF-SEL-03", nombre: "Selladora 3" }
+  ],
+},
 
-  LOCATIVOS: {
-    "Bodega 14B": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 15B": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 17B": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 18B": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 19B": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 8A": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 8C": ["Piso 1", "Piso 2", "Piso 3"],
-    "Bodega 5C": ["Piso 1", "Piso 2", "Piso 3"],
-  },
+
 };
 
 // Supervisores por planta
