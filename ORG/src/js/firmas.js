@@ -343,16 +343,6 @@ async function validarOperadorDesdeFormulario() {
     // DESHABILITAR BOTÓN
     // ----------------------------------------------
 
-    if (btn) {
-
-        btn.disabled = true;
-
-        btn.innerHTML = `
-            <span class="spinner-border spinner-border-sm me-2"></span>
-            Validando...
-        `;
-
-    }
 
 
     try {
@@ -480,7 +470,7 @@ async function validarOperadorDesdeFormulario() {
             btn.disabled = false;
 
             btn.innerHTML = `
-                <i class="bi bi-fingerprint fs-1"></i>
+                <i class="bi bi-fingerprint fs-5"></i>
             
             `;
 

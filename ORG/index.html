@@ -742,41 +742,47 @@
 
                             </div>
 
-                            <!-- CONTRASEÑA -->
-                            <div class="mb-3">
+<!-- CONTRASEÑA + VALIDAR -->
+<div class="mb-3">
 
-                                <label
-                                    for="passwordOperador"
-                                    class="form-label">
-                                    Contraseña
-                                </label>
+    <label
+        for="passwordOperador"
+        class="form-label">
+        Contraseña
+    </label>
 
-                                <div class="password-operador">
+    <div class="d-flex gap-2">
 
-                                    <input
-                                        type="password"
-                                        id="passwordOperador"
-                                        class="form-control"
-                                        autocomplete="off"
-                                        placeholder="Contraseña">
+        <!-- CONTRASEÑA -->
+        <div class="password-operador flex-grow-1">
 
-                                </div>
+            <input
+                type="password"
+                id="passwordOperador"
+                class="form-control"
+                autocomplete="off"
+                placeholder="Contraseña">
 
-                            </div>
 
-                            <!-- VALIDAR -->
-                            <div class="mb-3">
 
-                                <button
-                                    type="button"
-                                    id="btnValidarOperador"
-                                    class="btn btn-primary w-100">
+        </div>
 
-                                    <i class="bi bi-fingerprint fs-1"></i>
+                               <!-- VALIDAR -->
+        <button
+            type="button"
+            id="btnValidarOperador"
+            class="btn btn-primary px-3"
+            title="Validar operador"
+            aria-label="Validar operador">
+            <i class="bi bi-fingerprint fs-5"></i>
 
-                                </button>
+        </button>
 
-                            </div>
+ 
+
+    </div>
+
+</div>
 
                             <!-- ESTADO -->
                             <div
