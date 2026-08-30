@@ -3,14 +3,13 @@
 // ------------------------------------------------------
 
 import { initFotos } from "./fotos.js";
-import { initFirmas } from "./firmas.js";
+import { initFirmas ,actualizarTecnicoPorCorreo } from "./firmas.js";
 import { generarPDF } from "./pdf.js";
 import { validarFormulario } from "./validarFormulario.js";
 import { initSelects } from "./initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
-import { initBuscadorHerramientas } from "./buscadorHerramintas.js";
 import { initQRScanner } from "./qr.js";
 import { generarReportePlantas } from "./reporte/reportePlantas.js";
 import { toggleReportePlantas } from "./reporte/toggleReportePlantas.js";
@@ -27,6 +26,53 @@ import { initCodigoActivo } from "./codigoActivo.js";
 import { initFotoActivoSeleccionado} from "./activos/fotoActivoUI.js";
 
 import { abrirDetalleIntervencion } from "./reporte/detalleIntervencion.js";
+
+// ------------------------------------------------------
+// CONTROL GLOBAL DE FOCO EN MODALES BOOTSTRAP
+// ------------------------------------------------------
+
+function configurarFocoModales() {
+
+    document.querySelectorAll(".modal").forEach(modal => {
+
+        // Evita registrar el evento más de una vez
+        if (modal.dataset.focoConfigurado === "true") {
+            return;
+        }
+
+        modal.dataset.focoConfigurado = "true";
+
+
+        // --------------------------------------------------
+        // ANTES DE OCULTAR EL MODAL
+        // --------------------------------------------------
+
+        modal.addEventListener(
+            "hide.bs.modal",
+            () => {
+
+                const elementoActivo =
+                    document.activeElement;
+
+                // Si el elemento enfocado pertenece al modal,
+                // quitamos el foco antes de que Bootstrap
+                // coloque aria-hidden="true".
+
+                if (
+                    elementoActivo &&
+                    modal.contains(elementoActivo)
+                ) {
+
+                    elementoActivo.blur();
+
+                }
+
+            }
+        );
+
+    });
+
+}
 
 
 
@@ -74,20 +120,25 @@ window.abrirHojaDeVida = async function (btn) {
 
 
 
-document.addEventListener("DOMContentLoaded", async () => {
-    console.log("➡️ INICIANDO DOMContentLoaded - Inicialización");
+export async function inicializarAplicacion(correoUsuario = "") {
 
-    // ------------------------------------------------------
-    // LISTA DE INICIALIZACIONES
-    // ------------------------------------------------------
+    console.log("➡️ INICIANDO APLICACIÓN - Inicialización");
+
+    // ---------------------------------------------
+    // CONFIGURAR FOCO DE TODOS LOS MODALES
+    // ---------------------------------------------
+
+    configurarFocoModales();
+
+
     const inicializaciones = [
         { fn: initFotos, name: "initFotos" },
-        { fn: initFirmas, name: "initFirmas" },
+        { fn: () => initFirmas(correoUsuario),name: "initFirmas"},
         { fn: initSelects, name: "initSelects" },
         { fn: initTiempo, name: "initTiempo" },
         { fn: cargarRepuestos, name: "cargarRepuestos" },
         { fn: initBuscadorRepuestos, name: "initBuscadorRepuestos" },
-        { fn: initBuscadorHerramientas, name: "initBuscadorHerramientas" },
+        
         { fn: initQRScanner, name: "initQRScanner" },
         { fn: () => initBotones(validarFormulario, generarPDF), name: "initBotones" },
         { fn: () => initFiltrosReporte(), name: "initFiltrosReporte" },
@@ -97,27 +148,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         { fn: () => initCronograma(), name: "initCronograma" },
         { fn: () => initEventosCronograma(), name: "initEventosCronograma" },
         { fn: initCodigoActivo, name: "initCodigoActivo" },
-        { fn: initFotoActivoSeleccionado, name: "initFotoActivoSeleccionado" },
+        { fn: initFotoActivoSeleccionado, name: "initFotoActivoSeleccionado" }
     ];
 
-    // ------------------------------------------------------
-    // EJECUTAR INICIALIZACIONES CON LOGS DE DEPURACIÓN
-    // ------------------------------------------------------
     for (const { fn, name } of inicializaciones) {
+
         try {
+
             console.log(`🔹 Inicializando ${name}...`);
-            await fn(); // 🔹 Usamos await por si la función es async
+
+            await fn();
+
             console.log(`✅ ${name} inicializado`);
+
         } catch (e) {
+
             console.error(`⛔ Error en ${name}:`, e);
+
         }
     }
 
-        initBotonGraficoPrincipal();
-        initFotoActivoSeleccionado();
+    initBotonGraficoPrincipal();
 
+   
 
-});
+    console.log("✅ APLICACIÓN COMPLETAMENTE INICIALIZADA");
+}
 
+// ------------------------------------------------------
+// ACTUALIZAR TÉCNICO AL CAMBIAR DE CUENTA
+// ------------------------------------------------------
+
+export function actualizarTecnico(correoUsuario) {
+
+    actualizarTecnicoPorCorreo(
+        correoUsuario
+    );
+
+}
 
 

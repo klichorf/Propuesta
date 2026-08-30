@@ -10,6 +10,24 @@ import {
 let sigEjecutorData = null;
 let sigCoordinadorData = null;
 
+
+// ------------------------------------------------------
+// USUARIOS AUTORIZADOS COMO TÉCNICOS
+// ------------------------------------------------------
+
+const tecnicosPorCorreo = {
+
+    "klichorf123@hotmail.com":
+        "JORGE LEONARDO RODRIGUEZ",
+
+    "klichorf123@gmail.com":
+        "PINEDA AGUDELO YONATAN STIVEN",
+
+    // "correo.quevedo@empresa.com":
+    //     "QUEVEDO LADINO MARIO",
+
+};
+
 const firmasBaseUrl =
     new URL(
         "../assets/firmas/",
@@ -21,11 +39,10 @@ const firmasBaseUrl =
 // FUNCIÓN PRINCIPAL DE INICIALIZACIÓN
 // ------------------------------------------------------
 
-export function initFirmas() {
+export function initFirmas(correoUsuario = "") {
 
     // Inicializar las dos firmas
     initFirma("sigEjecutor");
-
     initFirma("sigCoordinador");
 
 
@@ -37,9 +54,7 @@ export function initFirmas() {
         document
             .querySelector("#sigEjecutor")
             ?.parentElement
-            .querySelector(
-                ".signature-tools button"
-            );
+            .querySelector(".signature-tools button");
 
 
     // --------------------------------------------------
@@ -50,9 +65,7 @@ export function initFirmas() {
         document
             .querySelector("#sigCoordinador")
             ?.parentElement
-            .querySelector(
-                ".signature-tools button"
-            );
+            .querySelector(".signature-tools button");
 
 
     if (btnEjecutor) {
@@ -113,7 +126,6 @@ export function initFirmas() {
                     plantaSelect.value
                 ] || "";
 
-
             cargarFirmaPersona(
                 supervisor,
                 "sigCoordinador"
@@ -121,7 +133,140 @@ export function initFirmas() {
 
         }
     );
+
+
+    // ==================================================
+    // 🔐 IDENTIFICAR TÉCNICO SEGÚN USUARIO LOGUEADO
+    // ==================================================
+
+    if (correoUsuario) {
+
+        const correoNormalizado =
+            correoUsuario
+                .trim()
+                .toLowerCase();
+
+
+        const tecnico =
+            tecnicosPorCorreo[
+                correoNormalizado
+            ];
+
+
+        if (tecnico) {
+
+            console.log(
+                "👤 Técnico identificado:",
+                tecnico
+            );
+
+
+            if (ejecutorSelect) {
+
+                // Seleccionar automáticamente
+                ejecutorSelect.value = tecnico;
+
+
+                // Cargar firma automáticamente
+                cargarFirmaPersona(
+                    tecnico,
+                    "sigEjecutor"
+                );
+
+
+                // Impedir cambiar el técnico
+                ejecutorSelect.disabled = true;
+
+            }
+
+        } else {
+
+            console.warn(
+                "⚠️ No existe un técnico asociado al correo:",
+                correoUsuario
+            );
+
+
+            if (ejecutorSelect) {
+
+                ejecutorSelect.value = "";
+                ejecutorSelect.disabled = true;
+
+            }
+
+
+            limpiarFirma("sigEjecutor");
+
+        }
+
+    }
+
 }
+
+
+// ------------------------------------------------------
+// ACTUALIZAR TÉCNICO SEGÚN USUARIO LOGUEADO
+// ------------------------------------------------------
+
+export function actualizarTecnicoPorCorreo(correoUsuario = "") {
+
+    const ejecutorSelect =
+        document.getElementById("ejecutor");
+
+    if (!ejecutorSelect) {
+        console.warn(
+            "⚠️ No se encontró el selector #ejecutor"
+        );
+        return;
+    }
+
+    const correoNormalizado =
+        correoUsuario
+            .trim()
+            .toLowerCase();
+
+    const tecnico =
+        tecnicosPorCorreo[
+            correoNormalizado
+        ];
+
+    if (tecnico) {
+
+        console.log(
+            "👤 Técnico actualizado:",
+            tecnico
+        );
+
+        // Seleccionar técnico correspondiente
+        ejecutorSelect.value = tecnico;
+
+        // Cargar su firma
+        cargarFirmaPersona(
+            tecnico,
+            "sigEjecutor"
+        );
+
+        // Bloquear selección manual
+        ejecutorSelect.disabled = true;
+
+    } else {
+
+        console.warn(
+            "⚠️ No existe técnico asociado al correo:",
+            correoUsuario
+        );
+
+        ejecutorSelect.value = "";
+
+        ejecutorSelect.disabled = true;
+
+        limpiarFirma("sigEjecutor");
+
+    }
+
+}
+
+
 
 
 // ------------------------------------------------------

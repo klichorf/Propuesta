@@ -19,13 +19,166 @@ export function obtenerDatosFormulario() {
   };
 }
 
-
 export function limpiarFormulario() {
-  document.getElementById("formulario").reset();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  limpiarFirma("sigEjecutor");
-  limpiarFirma("sigCoordinador");
-  imagesData.length = 0;
-  const thumbs = document.getElementById("thumbs");
-  if (thumbs) thumbs.innerHTML = "";
+
+    console.log("🧹 Limpiando formulario...");
+
+    // =============================================
+    // RESET GENERAL DEL FORMULARIO
+    // =============================================
+
+    const formulario =
+        document.getElementById("formulario");
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+
+    // =============================================
+    // LIMPIAR PLANTA
+    // =============================================
+
+    const planta =
+        document.getElementById("planta");
+
+    if (planta) {
+        planta.selectedIndex = 0;
+    }
+
+
+    // =============================================
+    // LIMPIAR ÁREA
+    // =============================================
+
+    const area =
+        document.getElementById("area");
+
+    if (area) {
+        area.selectedIndex = 0;
+    }
+
+
+    // =============================================
+    // LIMPIAR EQUIPO
+    // =============================================
+
+    const equipo =
+        document.getElementById("equipo");
+
+    if (equipo) {
+        equipo.selectedIndex = 0;
+    }
+
+
+    // =============================================
+    // LIMPIAR FIRMAS
+    // =============================================
+
+    limpiarFirma("sigEjecutor");
+    limpiarFirma("sigCoordinador");
+
+
+    // =============================================
+    // LIMPIAR FOTOS ADJUNTAS
+    // =============================================
+
+    imagesData.length = 0;
+
+    const thumbs =
+        document.getElementById("thumbs");
+
+    if (thumbs) {
+        thumbs.innerHTML = "";
+    }
+
+
+    // =============================================
+    // LIMPIAR INPUTS DE ARCHIVOS
+    // =============================================
+
+    document
+        .querySelectorAll(
+            '#formulario input[type="file"]'
+        )
+        .forEach(input => {
+
+            input.value = "";
+
+        });
+
+
+    // =============================================
+    // LIMPIAR FOTO DEL ACTIVO
+    // =============================================
+
+    const vistaFotoActivo =
+        document.getElementById(
+            "vistaFotoActivo"
+        );
+
+    const imagenActivo =
+        document.getElementById(
+            "imagenActivoSeleccionado"
+        );
+
+    const skeletonFotoActivo =
+        document.getElementById(
+            "skeletonFotoActivo"
+        );
+
+
+    if (imagenActivo) {
+
+        imagenActivo.src = "";
+
+        imagenActivo.removeAttribute("src");
+
+    }
+
+
+    if (vistaFotoActivo) {
+
+        vistaFotoActivo.classList.add("d-none");
+
+    }
+
+
+    if (skeletonFotoActivo) {
+
+        skeletonFotoActivo.style.display = "none";
+
+    }
+
+
+    // =============================================
+    // LIMPIAR TEXTO DEL ESTADO
+    // =============================================
+
+    const estadoFotoActivo =
+        document.getElementById(
+            "estadoFotoActivo"
+        );
+
+    if (estadoFotoActivo) {
+
+        estadoFotoActivo.textContent =
+            "FOTO DEL ACTIVO";
+
+    }
+
+
+    // =============================================
+    // VOLVER ARRIBA
+    // =============================================
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    console.log(
+        "✅ Formulario completamente limpiado"
+    );
 }

@@ -1,0 +1,52 @@
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+#loginScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f7fa;
+}
+
+.login-card {
+    width: min(420px, 92%);
+    background: #ffffff;
+
+    border-radius: 18px;
+    padding: 35px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.login-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.login-subtitle {
+    color: #6c757d;
+    margin-bottom: 25px;
+}
+
+#loginError {
+    display: none;
+}
+
+#appContent {
+    display: none;
+}
+

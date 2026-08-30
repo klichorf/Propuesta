@@ -23,7 +23,7 @@ const firebaseConfig = {
   measurementId: "G-FGNLSNKKNB"
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 let guardando = false;
