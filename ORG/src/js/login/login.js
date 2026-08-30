@@ -9,6 +9,15 @@ import {
     limpiarFormulario
 } from "../botones/datosFormulario.js";
 
+import {
+    mostrarLoadercompartir,
+    ocultarLoadercompartir
+} from "../../js/services/onedrive/loader.js";
+
+import {
+    obtenerNombreTecnico
+} from "../services/firebase/tecnicos.js";
+
 
 // =====================================================
 // ELEMENTOS DEL DOM
@@ -87,6 +96,8 @@ if (modalCerrarSesion) {
 
 async function iniciarAutenticacion() {
 
+    mostrarLoadercompartir();
+
     try {
 
         await configurarPersistencia();
@@ -114,7 +125,7 @@ async function iniciarAutenticacion() {
                     btnCerrarSesion.disabled = false;
 
                     btnCerrarSesion.innerHTML = `
-                        <i class="bi bi-box-arrow-right"></i>
+                       <i class="bi bi-door-open"></i>
                     `;
 
                 }
@@ -123,12 +134,13 @@ async function iniciarAutenticacion() {
                 // ---------------------------------------------
                 // MOSTRAR USUARIO
                 // ---------------------------------------------
-
+                const nombreTecnico =
+                obtenerNombreTecnico(user.email);
                 if (usuarioActual) {
 
-                    usuarioActual.textContent =
-                        user.email;
-
+                    mostrarSaludo(
+                nombreTecnico || user.email
+                    );
                 }
 
 
@@ -180,12 +192,16 @@ async function iniciarAutenticacion() {
                             "✅ Aplicación cargada correctamente"
                         );
 
+                        ocultarLoadercompartir();
+
                     } catch (error) {
 
                         console.error(
                             "❌ Error cargando la aplicación:",
                             error
                         );
+
+                        ocultarLoadercompartir();
 
                     }
 
@@ -331,6 +347,26 @@ async function iniciarAutenticacion() {
 
     }
 
+}
+
+
+// =====================================================
+// OBTENER SALUDO SEGÚN LA HORA
+// =====================================================
+
+function obtenerSaludo() {
+
+    const hora = new Date().getHours();
+
+    if (hora >= 5 && hora < 12) {
+        return "Buenos días";
+    }
+
+    if (hora >= 12 && hora < 19) {
+        return "Buenas tardes";
+    }
+
+    return "Buenas noches";
 }
 
 
@@ -571,3 +607,43 @@ btnConfirmarCerrarSesion?.addEventListener(
 // =====================================================
 
 iniciarAutenticacion();
+
+
+// =====================================================
+// MOSTRAR SALUDO SEGÚN LA HORA
+// =====================================================
+
+export function mostrarSaludo(nombre) {
+
+    const elemento =
+        document.getElementById("usuarioActual");
+
+    if (!elemento) return;
+
+    const hora =
+        new Date().getHours();
+
+    let saludo;
+
+    if (hora >= 5 && hora < 12) {
+
+        saludo = "Buenos días";
+
+    } else if (hora >= 12 && hora < 18) {
+
+        saludo = "Buenas tardes";
+
+    } else {
+
+        saludo = "Buenas noches";
+
+    }
+
+    const primerNombre =
+        String(nombre || "")
+            .trim()
+            .split(" ")[0];
+
+    elemento.textContent =
+        `👋 ${saludo} ,  ${primerNombre}`;
+}

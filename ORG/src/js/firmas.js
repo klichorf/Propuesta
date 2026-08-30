@@ -13,6 +13,10 @@ import {
 } from "./services/firebase/operadores.js";
 
 import {
+    obtenerNombreTecnico
+} from "./services/firebase/tecnicos.js";
+
+import {
     auth
 } from "./services/firebase/auth.js";
 
@@ -201,27 +205,13 @@ function cargarTecnicoActual() {
 
 
     // ----------------------------------------------
-    // MAPEO CORREO → TÉCNICO
+    // OBTENER TÉCNICO
     // ----------------------------------------------
 
-    const tecnicosPorCorreo = {
-
-        "klichorf123@hotmail.com":
-            "JORGE LEONARDO RODRIGUEZ"
-
-        // Agregar aquí los demás usuarios
-        //
-        // "correo@empresa.com":
-        //     "NOMBRE DEL TECNICO"
-
-    };
-
-
     const nombreTecnico =
-        tecnicosPorCorreo[
+        obtenerNombreTecnico(
             correo
-        ];
-
+        );
 
     if (!nombreTecnico) {
 
@@ -239,6 +229,15 @@ function cargarTecnicoActual() {
         "👤 Técnico identificado:",
         nombreTecnico
     );
+
+
+    const nombreTecnicoFirma =
+    document.getElementById("nombreTecnicoFirma");
+
+if (nombreTecnicoFirma) {
+    nombreTecnicoFirma.textContent =
+        nombreTecnico;
+}
 
 
     const ejecutorSelect =
@@ -417,7 +416,7 @@ async function validarOperadorDesdeFormulario() {
         if (nombre) {
 
             nombre.textContent =
-                `Operador: ${operador.nombre}`;
+               operador.nombre;
 
         }
 
@@ -481,8 +480,8 @@ async function validarOperadorDesdeFormulario() {
             btn.disabled = false;
 
             btn.innerHTML = `
-                <i class="bi bi-person-check me-1"></i>
-                Validar operador
+                <i class="bi bi-fingerprint fs-1"></i>
+            
             `;
 
         }
@@ -1270,26 +1269,11 @@ export function actualizarTecnicoPorCorreo(correo) {
     }
 
     // -----------------------------------------------
-    // RELACIÓN CORREO → TÉCNICO
+    // OBTENER TÉCNICO SEGÚN EL CORREO
     // -----------------------------------------------
 
-    const tecnicosPorCorreo = {
-
-        "klichorf123@hotmail.com":
-            "JORGE LEONARDO RODRIGUEZ",
-
-        // Ejemplo para agregar posteriormente:
-        // "otrocorreo@gmail.com":
-        //     "PINEDA AGUDELO YONATAN STIVEN",
-
-    };
-
-
     const nombreTecnico =
-        tecnicosPorCorreo[
-            correo?.trim().toLowerCase()
-        ];
-
+        obtenerNombreTecnico(correo);
 
     if (!nombreTecnico) {
 
@@ -1305,14 +1289,28 @@ export function actualizarTecnicoPorCorreo(correo) {
         return;
     }
 
-
     // -----------------------------------------------
-    // SELECCIONAR TÉCNICO
+    // SELECCIONAR TÉCNICO INTERNAMENTE
     // -----------------------------------------------
 
     ejecutorSelect.value =
         nombreTecnico;
 
+    // -----------------------------------------------
+    // MOSTRAR NOMBRE DEL TÉCNICO
+    // -----------------------------------------------
+
+    const nombreTecnicoFirma =
+        document.getElementById(
+            "nombreTecnicoFirma"
+        );
+
+    if (nombreTecnicoFirma) {
+
+        nombreTecnicoFirma.textContent =
+            nombreTecnico;
+
+    }
 
     // -----------------------------------------------
     // CARGAR FIRMA AUTOMÁTICAMENTE
@@ -1322,7 +1320,6 @@ export function actualizarTecnicoPorCorreo(correo) {
         nombreTecnico,
         "sigEjecutor"
     );
-
 
     console.log(
         "👤 Técnico identificado:",

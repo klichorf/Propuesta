@@ -50,3 +50,158 @@
     display: none;
 }
 
+
+
+/* =====================================================
+   LOADER CIRCULAR
+   ===================================================== */
+
+#loaderOverlay2 {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            248,
+            250,
+            252,
+            0.72
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease;
+
+    z-index: 10000;
+}
+
+
+#loaderOverlay2.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   CÍRCULO
+   ===================================================== */
+
+.loaderSpinner {
+
+    width: 60px;
+
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.loaderSpinner .spinner-border {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-width: 5px;
+
+    border-color:
+        var(--brand);
+
+    border-right-color:
+        var(--success);
+
+    animation:
+        spinner-border 0.8s linear infinite;
+}
+
+
+/* =====================================================
+   CAMPO CONTRASEÑA OPERADOR
+   ===================================================== */
+
+.password-operador {
+    position: relative;
+}
+
+
+/* Input */
+
+.password-operador input {
+    padding-right: 45px;
+}
+
+
+/* Botón ojo */
+
+.btn-mostrar-password {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 0;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+
+    height: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: #6c757d;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+}
+
+
+/* Efecto al pasar el mouse */
+
+.btn-mostrar-password:hover {
+
+    color: var(--brand);
+
+}
+
+
+/* Quitar borde al hacer focus */
+
+.btn-mostrar-password:focus {
+
+    outline: none;
+
+    box-shadow: none;
+
+}

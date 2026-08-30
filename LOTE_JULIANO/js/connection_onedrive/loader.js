@@ -6,7 +6,7 @@ export function mostrarLoadercompartir() {
     overlay.classList.add("active");
 }
 
-export function ocultarLoadercomoartir() {
+export function ocultarLoadercompartir() {
     const overlay = document.getElementById("loaderOverlay2");
     overlay.classList.remove("active");
 }
