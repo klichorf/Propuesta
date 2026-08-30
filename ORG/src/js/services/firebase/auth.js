@@ -9,28 +9,49 @@ import {
 
 import { app } from "./firebase.js";
 
+// =====================================================
+// AUTENTICACIÓN PRINCIPAL
+// =====================================================
+
 export const auth = getAuth(app);
 
 // Mantener la sesión iniciada en este navegador
 export async function configurarPersistencia() {
-    await setPersistence(auth, browserLocalPersistence);
+
+    await setPersistence(
+        auth,
+        browserLocalPersistence
+    );
+
 }
 
-// Iniciar sesión
-export async function iniciarSesion(email, password) {
+// Iniciar sesión principal
+export async function iniciarSesion(
+    email,
+    password
+) {
+
     return await signInWithEmailAndPassword(
         auth,
         email,
         password
     );
+
 }
 
-// Cerrar sesión
+// Cerrar sesión principal
 export async function cerrarSesion() {
+
     await signOut(auth);
+
 }
 
-// Detectar automáticamente si existe una sesión
+// Detectar sesión principal
 export function observarSesion(callback) {
-    return onAuthStateChanged(auth, callback);
+
+    return onAuthStateChanged(
+        auth,
+        callback
+    );
+
 }

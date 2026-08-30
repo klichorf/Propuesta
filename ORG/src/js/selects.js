@@ -517,8 +517,16 @@ const firmasPersonas = {
   "PINZON GUEVARA WILLIAM ORLANDO": "pinzon-guevara-william-orlando.png",
   "OLGA LILIANA BERNAL RODRIGUEZ": "olga-liliana-bernal-rodriguez.png",
   "LEAL HERRERA JORGE ANDRES": "leal-herrera-jorge-andres.png",
-  "HENAO BEDOYA MARIA CRISTINA": "henao-bedoya-maria-cristina.png",
-  "RICARDO ANDRES BEJARANO": "ricardo-andres-bejarano.png",
+  "HENAO BEDOYA MARIA CRISTINA": 
+  "henao-bedoya-maria-cristina.png",
+  
+  "RICARDO ANDRES BEJARANO":
+   "ricardo-andres-bejarano.png",
+
+
+    "OPERADOR DE PRUEBA":
+        "operador-prueba.png"
+
 };
 
 
