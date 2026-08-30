@@ -334,6 +334,13 @@ async function iniciarAutenticacion() {
 
                 }
 
+
+                // ---------------------------------------------
+                // OCULTAR LOADER
+                // ---------------------------------------------
+
+                ocultarLoadercompartir();
+
             }
 
         });
