@@ -696,25 +696,52 @@
                             class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
                             Firmas
                         </div>
-                        <div class="mb-3">
-                            <label id="nombreTecnicoFirma"
-                                class="form-label fw-bold text-primary-emphasis">Técnico
-                                Mantenimiento</label>
-                            <canvas id="sigEjecutor" class="signature"
-                                willReadFrequently="true"></canvas>
+<div class="mb-3">
 
-                            <div class="signature-tools mt-2">
-                                <input id="firmaEjecutorArchivo" type="file"
-                                    accept="image/png,image/jpeg,image/webp"
-                                    class="d-none"
-                                    data-signature-target="sigEjecutor">
+    <!-- NOMBRE + ELIMINAR -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
 
-                                <button type="button"
-                                    class="btn btn-outline-primary">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </div>
+        <label
+            id="nombreTecnicoFirma"
+            class="form-label fw-bold text-primary-emphasis mb-0">
+            Técnico Mantenimiento
+        </label>
+
+        <button
+            type="button"
+            id="btnLimpiarFirmaEjecutor"
+            class="btn btn-outline-primary "
+            title="Eliminar firma"
+            aria-label="Eliminar firma">
+
+            <i class="bi bi-trash "></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- FIRMA -->
+    <canvas
+        id="sigEjecutor"
+        class="signature"
+        willReadFrequently="true">
+    </canvas>
+
+
+    <!-- ARCHIVO DE FIRMA -->
+    <div class="signature-tools mt-2">
+
+        <input
+            id="firmaEjecutorArchivo"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            class="d-none"
+            data-signature-target="sigEjecutor">
+
+    </div>
+
+</div>
 
                         <div class="mb-3">
 
