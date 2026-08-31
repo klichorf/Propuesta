@@ -28,21 +28,29 @@ export function initQRScanner() {
     qrModal.style.display = "block";
     closeBtn.classList.remove("d-none");
 
-    scanner.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: 250 },
-      (text) => {
+    scanner
+      .start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, (text) => {
         const codigo = text.trim();
+
         inputCodigo.value = codigo;
+
+        inputCodigo.dispatchEvent(
+          new Event("input", {
+            bubbles: true,
+          }),
+        );
 
         if (!seleccionarPorCodigo(codigo)) {
           alert("⚠️ Código no registrado");
+        } else {
+          // Código válido
+          console.log("✅ Código QR válido:", codigo);
         }
 
         detener();
-      }
-    ).then(() => activo = true)
-     .catch(() => detener());
+      })
+      .then(() => (activo = true))
+      .catch(() => detener());
   });
 
   // -------------------- Cerrar escáner --------------------

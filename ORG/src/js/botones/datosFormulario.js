@@ -13,7 +13,6 @@ export function obtenerDatosFormulario() {
     ejecutor: document.getElementById("ejecutor").value,
     danos: document.getElementById("danos").value,
     trabajo: document.getElementById("trabajo").value,
-    herramientas: document.getElementById("herramientas").value,
     repuestos: document.getElementById("repuestos").value,
     timestamp: new Date().toISOString()
   };
