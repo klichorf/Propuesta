@@ -1,5 +1,5 @@
 // onedrive.js
-import { SharePointError } from "../../botones/utils.js";
+
 
 export function subirAOneDriveConProgreso(nombreArchivo, rutaCarpeta, base64, onProgress) {
   return new Promise((resolve, reject) => {

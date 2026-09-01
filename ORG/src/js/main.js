@@ -5,7 +5,7 @@
 import { initFotos } from "./fotos.js";
 import { initFirmas ,actualizarTecnicoPorCorreo } from "./firmas.js";
 import { generarPDF } from "./pdf.js";
-import { validarFormulario, } from "./validarFormulario.js"; 
+import { validarFormulario } from "./validarFormulario.js";
 import { initSelects } from "./initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
@@ -186,4 +186,5 @@ export function actualizarTecnico(correoUsuario) {
     );
 
 }
+
 

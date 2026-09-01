@@ -96,7 +96,8 @@ if (modalCerrarSesion) {
 
 async function iniciarAutenticacion() {
 
-    mostrarLoadercompartir();
+  console.log("🔵 [LOGIN] Mostrando loader inicial");
+mostrarLoadercompartir();
 
     try {
 

@@ -3,7 +3,7 @@
 // ------------------------------------------------------
 
 import { initDescargar } from "./descargar.js";
-import { initCompartir } from "./compartir.js";   // ✔️ IMPORTA LA FUNCIÓN CORRECTA
+import { initCompartir } from "./compartir/compartir.js";   // ✔️ IMPORTA LA FUNCIÓN CORRECTA
 import { crearCronograma } from "../cronograma/cronograma.js";
 
 
