@@ -3,29 +3,42 @@
 // ------------------------------------------------------
 
 import { initFotos } from "./fotos.js";
-import { initFirmas ,actualizarTecnicoPorCorreo } from "./firmas.js";
+import {
+    initFirmas,
+    actualizarTecnicoPorCorreo
+} from "./firmas.js";
+
 import { generarPDF } from "./pdf.js";
-import { validarFormulario } from "./validarFormulario.js";
+import { validarFormulario } from "./validación/validarFormulario.js";
 import { initSelects } from "./initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initQRScanner } from "./qr.js";
-import { generarReportePlantas } from "./reporte/reportePlantas.js";
 import { toggleReportePlantas } from "./reporte/toggleReportePlantas.js";
 import { initFiltrosReporte } from "./reporte/filtrosReporte.js";
 import { initBotonGraficoPrincipal } from "./charts/botonGrafico.js";
 import { initBotones } from "./botones/botones.js";
 import { obtenerRegistros } from "./reporte/obtenerRegistros.js";
 import { generarHojaDeVida } from "./lifesheet/generarHojaDeVida.js";
-import { generarReporteIntervenciones } from "./reporte/reporteIntervenciones.js";
 import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
-import { cambiarEstado, eliminarCronograma } from "./cronograma/cronograma.js";
-import { initCronograma, initEventosCronograma } from "./cronograma/uiCronograma.js";
+import {
+    cambiarEstado,
+    eliminarCronograma
+} from "./cronograma/cronograma.js";
+import {
+    initCronograma,
+    initEventosCronograma
+} from "./cronograma/uiCronograma.js";
 import { initCodigoActivo } from "./codigoActivo.js";
-import { initFotoActivoSeleccionado} from "./activos/fotoActivoUI.js";
+import {
+    initFotoActivoSeleccionado
+} from "./activos/fotoActivoUI.js";
 
-import { abrirDetalleIntervencion } from "./reporte/detalleIntervencion.js";
+import {
+    abrirDetalleIntervencion
+} from "./reporte/detalleIntervencion.js";
+
 
 // ------------------------------------------------------
 // CONTROL GLOBAL DE FOCO EN MODALES BOOTSTRAP
@@ -42,138 +55,163 @@ function configurarFocoModales() {
 
         modal.dataset.focoConfigurado = "true";
 
-
         // --------------------------------------------------
         // ANTES DE OCULTAR EL MODAL
         // --------------------------------------------------
 
-        modal.addEventListener(
-            "hide.bs.modal",
-            () => {
+        modal.addEventListener("hide.bs.modal", () => {
 
-                const elementoActivo =
-                    document.activeElement;
+            const elementoActivo = document.activeElement;
 
-                // Si el elemento enfocado pertenece al modal,
-                // quitamos el foco antes de que Bootstrap
-                // coloque aria-hidden="true".
+            // Si el elemento enfocado pertenece al modal,
+            // quitamos el foco antes de que Bootstrap
+            // coloque aria-hidden="true".
 
-                if (
-                    elementoActivo &&
-                    modal.contains(elementoActivo)
-                ) {
-
-                    elementoActivo.blur();
-
-                }
-
+            if (
+                elementoActivo &&
+                modal.contains(elementoActivo)
+            ) {
+                elementoActivo.blur();
             }
-        );
-
+        });
     });
-
 }
 
 
+// ------------------------------------------------------
+// FUNCIONES DISPONIBLES DESDE HTML
+// ------------------------------------------------------
 
-
-// hacer accesible desde botones HTML
 window.iniciar = async (id) => {
+
     await cambiarEstado(id, "EN_PROCESO");
     await initCronograma();
+
 };
+
 
 window.finalizar = async (id) => {
+
     await cambiarEstado(id, "FINALIZADO");
     await initCronograma();
+
 };
 
+
 window.eliminarCrono = async (id) => {
+
     await eliminarCronograma(id);
     await initCronograma();
+
 };
+
 
 window.abrirDetalle = abrirDetalleIntervencion;
 
-// ------------------------------------------------------
-// HACER DISPONIBLE abrirHojaDeVida() PARA LOS BOTONES
-// ------------------------------------------------------
 
+// ------------------------------------------------------
+// HACER DISPONIBLE abrirHojaDeVida()
+// PARA LOS BOTONES HTML
+// ------------------------------------------------------
 
 window.abrirHojaDeVida = async function (btn) {
+
     const planta = btn.dataset.planta;
     const area = btn.dataset.area;
     const equipo = btn.dataset.equipo;
 
     try {
+
         const registros = await obtenerRegistros();
-        generarHojaDeVida(registros, planta, area, equipo);
-    } catch (err) {
-        console.error("Error al abrir hoja de vida:", err);
+
+        generarHojaDeVida(
+            registros,
+            planta,
+            area,
+            equipo
+        );
+
+    } catch (error) {
+
+        console.error(
+            "❌ Error al abrir hoja de vida:",
+            error
+        );
     }
 };
+
+
 // ------------------------------------------------------
-// INICIALIZACIÓN AL CARGAR EL DOM
+// INICIALIZACIÓN DE LA APLICACIÓN
 // ------------------------------------------------------
-
-
-
-
 
 export async function inicializarAplicacion(correoUsuario = "") {
 
-    console.log("➡️ INICIANDO APLICACIÓN - Inicialización");
+    console.log(
+        "➡️ INICIANDO APLICACIÓN - Inicialización"
+    );
 
-    // ---------------------------------------------
-    // CONFIGURAR FOCO DE TODOS LOS MODALES
-    // ---------------------------------------------
+    // --------------------------------------------------
+    // CONFIGURAR FOCO DE LOS MODALES
+    // --------------------------------------------------
 
     configurarFocoModales();
 
 
-    const inicializaciones = [
-        { fn: initFotos, name: "initFotos" },
-        { fn: () => initFirmas(correoUsuario),name: "initFirmas"},
-        { fn: initSelects, name: "initSelects" },
-        { fn: initTiempo, name: "initTiempo" },
-        { fn: cargarRepuestos, name: "cargarRepuestos" },
-        { fn: initBuscadorRepuestos, name: "initBuscadorRepuestos" },
-        
-        { fn: initQRScanner, name: "initQRScanner" },
-        { fn: () => initBotones(validarFormulario, generarPDF), name: "initBotones" },
-        { fn: () => initFiltrosReporte(), name: "initFiltrosReporte" },
-        { fn: () => toggleReportePlantas(generarReportePlantas), name: "toggleReportePlantas" },
-        { fn: () => toggleReportePlantas(generarReporteIntervenciones), name: "toggleReporteIntervenciones" },
-        { fn: () => initFiltrosIntervenciones(), name: "initFiltrosIntervenciones" },
-        { fn: () => initCronograma(), name: "initCronograma" },
-        { fn: () => initEventosCronograma(), name: "initEventosCronograma" },
-        { fn: initCodigoActivo, name: "initCodigoActivo" },
-        { fn: initFotoActivoSeleccionado, name: "initFotoActivoSeleccionado" }
-    ];
+    // --------------------------------------------------
+    // INICIALIZACIONES PRINCIPALES
+    // --------------------------------------------------
 
-    for (const { fn, name } of inicializaciones) {
+    await Promise.all([
 
-        try {
+        initFotos(),
 
-            console.log(`🔹 Inicializando ${name}...`);
+        initFirmas(correoUsuario),
 
-            await fn();
+        initSelects(),
 
-            console.log(`✅ ${name} inicializado`);
+        initTiempo(),
 
-        } catch (e) {
+        cargarRepuestos(),
 
-            console.error(`⛔ Error en ${name}:`, e);
+        initBuscadorRepuestos(),
 
-        }
-    }
+        initQRScanner(),
+
+        initBotones(
+            validarFormulario,
+            generarPDF
+        ),
+
+        initFiltrosReporte(),
+
+        toggleReportePlantas(),
+
+        initFiltrosIntervenciones(),
+
+        initCronograma(),
+
+        initEventosCronograma(),
+
+        initCodigoActivo(),
+
+        initFotoActivoSeleccionado()
+
+    ]);
+
+
+    // --------------------------------------------------
+    // GRÁFICO PRINCIPAL
+    // --------------------------------------------------
 
     initBotonGraficoPrincipal();
 
-   
 
-    console.log("✅ APLICACIÓN COMPLETAMENTE INICIALIZADA");
+    console.log(
+        "✅ APLICACIÓN COMPLETAMENTE INICIALIZADA"
+    );
 }
+
 
 // ------------------------------------------------------
 // ACTUALIZAR TÉCNICO AL CAMBIAR DE CUENTA
@@ -186,5 +224,3 @@ export function actualizarTecnico(correoUsuario) {
     );
 
 }
-
-
