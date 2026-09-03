@@ -2,7 +2,6 @@
 // MÓDULO: GENERACIÓN DE PDF (Versión profesional con segunda hoja para fotos)
 // ------------------------------------------------------
 import { imagesData } from "./fotos.js";
-import { supervisores } from "./selects.js";
 import { assetPaths } from "./config/assetPaths.js";
 
 export async function generarPDF() {
@@ -131,17 +130,17 @@ export async function generarPDF() {
   doc.text("Técnico de Mantenimiento", M + fw / 2, fy + fh + 18, {
     align: "center",
   });
-  doc.text("Supervisor", W - M - fw / 2, fy + fh + 18, { align: "center" });
+  doc.text("Operador", W - M - fw / 2, fy + fh + 18, { align: "center" });
 
   const nombreEjecutor = v("ejecutor") || "-";
-  const nombreSupervisor =
-    supervisores[v("planta").toUpperCase()] || "No asignado";
+  const nombreOperador =
+    document.getElementById("nombreOperador")?.textContent?.trim() || "-";
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.setTextColor(...gray);
   doc.text(nombreEjecutor, M + fw / 2, fy + fh + 30, { align: "center" });
-  doc.text(nombreSupervisor, W - M - fw / 2, fy + fh + 30, { align: "center" });
+  doc.text(nombreOperador, W - M - fw / 2, fy + fh + 30, { align: "center" });
 
   // ------------------------------------------------------
   // PIE DE PÁGINA

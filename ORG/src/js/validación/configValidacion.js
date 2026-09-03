@@ -23,6 +23,6 @@ export const FIRMAS_OBLIGATORIAS = [
     },
     {
         id: "sigCoordinador",
-        nombre: "firmaSupervisor",
+        nombre: "firmaOperador",
     },
 ];

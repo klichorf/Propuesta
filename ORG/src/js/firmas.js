@@ -4,13 +4,17 @@
 // ------------------------------------------------------
 
 import {
-    firmasPersonas,
-    supervisores
+    firmasPersonas
 } from "./selects.js";
 
 import {
     validarOperador
 } from "./services/firebase/operadores.js";
+
+import {
+    mostrarLoadercompartir,
+    ocultarLoadercompartir
+} from "./services/onedrive/loader.js";
 
 import {
     obtenerNombreTecnico
@@ -193,7 +197,7 @@ function cargarTecnicoActual() {
             "⚠️ No existe usuario autenticado"
         );
 
-        return;
+        return Promise.resolve(false);
 
     }
 
@@ -343,7 +347,18 @@ async function validarOperadorDesdeFormulario() {
     // DESHABILITAR BOTÓN
     // ----------------------------------------------
 
+    mostrarLoaderValidacionOperador();
 
+    if (btn) {
+
+        btn.disabled =
+            true;
+
+        btn.innerHTML = `
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        `;
+
+    }
 
     try {
 
@@ -421,8 +436,8 @@ async function validarOperadorDesdeFormulario() {
         // CARGAR FIRMA
         // ------------------------------------------
 
-        cargarFirmaPersona(
-            operador.nombre,
+        await cargarFirmaOperador(
+            operador,
             "sigCoordinador"
         );
 
@@ -464,6 +479,8 @@ async function validarOperadorDesdeFormulario() {
 
 
     } finally {
+
+        ocultarLoadercompartir();
 
         if (btn) {
 
@@ -916,11 +933,95 @@ function cargarFirmaPersona(
     }
 
 
-    dibujarFirmaDesdeUrl(
+    return dibujarFirmaDesdeUrl(
         `${firmasBaseUrl}${archivoFirma}`,
         idCanvas,
         archivoFirma
     );
+
+}
+
+
+// ======================================================
+// CARGAR FIRMA DE OPERADOR
+// ======================================================
+
+function cargarFirmaOperador(
+    operador,
+    idCanvas
+) {
+
+    if (operador?.firma) {
+
+        const urlFirma =
+            construirUrlFirma(
+                operador.firma
+            );
+
+
+        return dibujarFirmaDesdeUrl(
+            urlFirma,
+            idCanvas,
+            operador.firma
+        );
+
+    }
+
+
+    return cargarFirmaPersona(
+        operador?.nombre,
+        idCanvas
+    );
+
+}
+
+
+// ======================================================
+// MOSTRAR LOADER EN VALIDACIÓN DE OPERADOR
+// ======================================================
+
+function mostrarLoaderValidacionOperador() {
+
+    const loaderTexto =
+        document.getElementById(
+            "loaderProgress2"
+        );
+
+
+    if (loaderTexto) {
+
+        loaderTexto.textContent =
+            "Validando operador...";
+
+    }
+
+
+    mostrarLoadercompartir();
+
+}
+
+
+// ======================================================
+// CONSTRUIR URL DE FIRMA
+// ======================================================
+
+function construirUrlFirma(firma) {
+
+    const firmaTexto =
+        String(firma).trim();
+
+
+    if (
+        /^https?:\/\//i.test(firmaTexto) ||
+        firmaTexto.startsWith("data:")
+    ) {
+
+        return firmaTexto;
+
+    }
+
+
+    return `${firmasBaseUrl}${firmaTexto}`;
 
 }
 
@@ -943,13 +1044,15 @@ function dibujarFirmaDesdeUrl(
 
     if (!c) {
 
-        return;
+        return Promise.resolve(false);
 
     }
 
 
-    const img =
-        new Image();
+    return new Promise((resolve) => {
+
+        const img =
+            new Image();
 
 
     img.onload =
@@ -964,6 +1067,8 @@ function dibujarFirmaDesdeUrl(
             c.classList.remove(
                 "border-danger"
             );
+
+            resolve(true);
 
         };
 
@@ -981,11 +1086,15 @@ function dibujarFirmaDesdeUrl(
                 idCanvas
             );
 
+            resolve(false);
+
         };
 
 
     img.src =
         url;
+
+    });
 
 }
 
