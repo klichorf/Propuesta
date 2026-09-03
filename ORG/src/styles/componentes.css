@@ -110,3 +110,31 @@
         2px solid
         #dc3545 !important;
 }
+
+
+.repuestos-search {
+
+    position: relative;
+}
+
+
+#sugerencias {
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    border:
+        1px solid
+        #ccc;
+
+    border-radius: 6px;
+
+    background: white;
+}

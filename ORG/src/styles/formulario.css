@@ -121,3 +121,15 @@ select:focus {
 }
 
 
+.qr-section-row {
+
+    margin-top: 1%;
+}
+
+
+.qr-modal-panel {
+
+    display: none;
+}
+
+

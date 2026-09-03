@@ -141,25 +141,6 @@
 
             </div>
 
-            <!-- =============================================
-         LOADER GLOBAL
-         ============================================= -->
-
-            <div
-                id="loaderOverlay2"
-                aria-hidden="true">
-
-                <div class="loaderSpinner">
-
-                    <div
-                        class="spinner-border"
-                        role="status"
-                        aria-label="Cargando"></div>
-
-                </div>
-
-            </div>
-
         </div>
 
         <!-- APLICACIÓN -->
@@ -313,10 +294,7 @@
                                                             <div
                                                                 class="col-md-4">
                                                                 <label
-                                                                    class="form-label fw-bold text-primary"
-                                                                    fw-bold
-                                                                    text-primary"
-                                                                    fw-semibold">PLANTA</label>
+                                                                    class="form-label fw-bold text-primary">PLANTA</label>
                                                                 <select
                                                                     id="filtroPlanta"
                                                                     class="form-select rounded-pill">
@@ -328,10 +306,7 @@
                                                             <div
                                                                 class="col-md-4">
                                                                 <label
-                                                                    class="form-label fw-bold text-primary"
-                                                                    fw-bold
-                                                                    text-primary"
-                                                                    fw-semibold">Fecha
+                                                                    class="form-label fw-bold text-primary">Fecha
                                                                     Inicio</label>
                                                                 <input
                                                                     type="date"
@@ -343,10 +318,7 @@
                                                             <div
                                                                 class="col-md-4">
                                                                 <label
-                                                                    class="form-label fw-bold text-primary"
-                                                                    fw-bold
-                                                                    text-primary"
-                                                                    fw-semibold">Fecha
+                                                                    class="form-label fw-bold text-primary">Fecha
                                                                     Fin</label>
                                                                 <input
                                                                     type="date"
@@ -402,7 +374,7 @@
                         </div>
 
                         <!-- 🔹escanner-->
-                        <div class="row g-3" style="margin-top: 1%;">
+                        <div class="row g-3 qr-section-row">
                             <div class="col-md-6">
 
                                 <input id="codigo" type="text"
@@ -417,7 +389,7 @@
                             </div>
                         </div>
                         <!-- 🔹 Contenedor para la cámara tipo modal -->
-                        <div id="QR-modal" class="mt-3" style="display: none;">
+                        <div id="QR-modal" class="mt-3 qr-modal-panel">
                             <div id="QR" class="border rounded p-2"></div>
                         </div>
                         <!-- 🔹 Botón CERRAR (oculto al inicio) -->
@@ -544,8 +516,7 @@
 
                     <div class="mt-3">
                         <label for="tiempo"
-                            class="form-label fw-bold text-primary-emphasis"
-                            "">Tiempo
+                            class="form-label fw-bold text-primary-emphasis">Tiempo
                             empleado</label>
                         <input id="tiempo" type="text" readonly
                             class="form-control"
@@ -619,9 +590,7 @@
                             </div>
 
                             <!-- Buscador -->
-                            <div
-                                class="flex-grow-1"
-                                style="position: relative;">
+                            <div class="flex-grow-1 repuestos-search">
 
                                 <input
                                     type="text"
@@ -629,18 +598,7 @@
                                     class="form-control"
                                     placeholder="Buscar repuesto..." />
 
-                                <div
-                                    id="sugerencias"
-                                    style="
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    background: white;
-                    border: 1px solid #ccc;
-                    border-radius: 6px;
-                    width: 100%;
-                    z-index: 1000;
-                "></div>
+                                <div id="sugerencias"></div>
 
                             </div>
 
@@ -952,7 +910,7 @@
 
         <!-- MAIN -->
 
-        <script type="module" src="./src/js/login/login.js"></script>
+        <script type="module" src="./src/js/app.js"></script>
 
         <!-- Loader global -->
         <div id="loaderOverlay">
