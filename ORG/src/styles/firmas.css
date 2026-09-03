@@ -151,3 +151,9 @@
 
     margin-bottom: 0;
 }
+
+
+.signature-readonly {
+    pointer-events: none;
+    cursor: default;
+}

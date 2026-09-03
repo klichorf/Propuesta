@@ -76,9 +76,7 @@ export async function validarOperador(cedula, password) {
       id: documento.id,
       cedula: operador.Cédula,
       nombre: operador.Nombre,
-      firma: operador.Firma,
-      uid: operador.uid,
-    };
+       };
   } catch (error) {
     console.error("❌ Error validando operador:", error);
 
