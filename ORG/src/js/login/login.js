@@ -111,16 +111,19 @@ async function manejarUsuarioAutenticado(user) {
 
     mostrarBotonCerrarSesionActivo(btnCerrarSesion);
 
-    const nombreTecnico =
-        obtenerNombreTecnico(user.email);
+const nombreTecnico =
+    obtenerNombreTecnico(user.email);
 
-    if (usuarioActual) {
+const primerNombre =
+    obtenerPrimerNombre(nombreTecnico);
 
-        mostrarSaludo(
-            nombreTecnico || user.email
-        );
+if (usuarioActual) {
 
-    }
+    mostrarSaludo(
+        primerNombre
+    );
+
+}
 
     mostrarAplicacion(
         loginScreen,
@@ -379,6 +382,29 @@ function esperarCierreModal(modalCerrarSesion) {
         );
 
     });
+}
+
+
+// =====================================================
+// OBTENER PRIMER NOMBRE
+// =====================================================
+
+function obtenerPrimerNombre(nombreCompleto) {
+
+    if (!nombreCompleto) {
+        return "Usuario";
+    }
+
+    const nombre =
+        nombreCompleto
+            .trim()
+            .split(/\s+/)[0];
+
+    return (
+        nombre.charAt(0).toUpperCase() +
+        nombre.slice(1).toLowerCase()
+    );
+
 }
 
 

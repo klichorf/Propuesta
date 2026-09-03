@@ -5,16 +5,27 @@
 
 const tecnicosPorCorreo = {
 
+    // =====================================================
+    // TÉCNICOS
+    // =====================================================
+
     "klichorf123@hotmail.com":
         "JORGE LEONARDO RODRIGUEZ",
 
     "klichorf123@gmail.com":
         "PINEDA AGUDELO YONATAN STIVEN",
 
-    // Agregar aquí los demás técnicos
-    //
-    // "otrocorreo@empresa.com":
-    //     "NOMBRE DEL TECNICO"
+    "gchaparro@organizacioncardenas.com.co":
+        "GERARDO MARIÑO",
+
+    "lgrodriguez@organizacioncardenas.com.co":
+        "NESTOR LEONARDO RODRIGUEZ",
+
+    "yspineda@organizacioncardenas.com.co":
+        "PINEDA AGUDELO YONATAN STIVEN",
+
+    "ascuervo@organizacioncardenas.com.co":
+        "ANGELO STIVEN CUERVO BELTRAN"
 
 };
 
