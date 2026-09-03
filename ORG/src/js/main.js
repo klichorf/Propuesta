@@ -10,6 +10,9 @@ import {
 
 import { generarPDF } from "./pdf.js";
 import { validarFormulario } from "./validación/validarFormulario.js";
+import {
+    iniciarValidacionTiempoReal
+} from "./validación/validacionTiempoReal.js";
 import { initSelects } from "./initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
@@ -198,6 +201,9 @@ export async function inicializarAplicacion(correoUsuario = "") {
         initFotoActivoSeleccionado()
 
     ]);
+
+
+    iniciarValidacionTiempoReal();
 
 
     // --------------------------------------------------

@@ -30,6 +30,12 @@ function initCodigoActivo() {
         }
 
         codigoInput.value = codigo;
+
+        codigoInput.dispatchEvent(
+            new Event("input", {
+                bubbles: true,
+            })
+        );
     });
 }
 
