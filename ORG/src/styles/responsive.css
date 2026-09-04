@@ -1,20 +1,105 @@
 /* =====================================================
-   ZONA PARA ARRASTRAR IMÁGENES
-   ===================================================== */
-
-.drop-zone {
-    display: block;
-}
-
-
-/* =====================================================
    CELULARES
    ===================================================== */
 
-@media (max-width: 576px) {
+@media (max-width: 767.98px) {
+
+    /* ================================================
+       CONTENEDOR PRINCIPAL
+       ================================================ */
+
+    fieldset {
+        width: 92%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* ================================================
+       CONTENIDO INTERNO
+       ================================================ */
+
+    .formulario-datos,
+    .formulario-fotos-firmas {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+
+    /* ================================================
+       FILAS BOOTSTRAP
+       ================================================ */
+
+    fieldset .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+
+    /* ================================================
+       COLUMNAS BOOTSTRAP
+       ================================================ */
+
+    fieldset .row > [class*="col-"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /* ================================================
+       ESCÁNER
+       ================================================ */
+
+    .qr-section-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .qr-section-row > [class*="col-"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /* ================================================
+       OCULTAR ARRASTRAR IMÁGENES
+       ================================================ */
 
     #dropZone {
         display: none;
     }
 
+
+    /* ================================================
+       CONTROLES DE CÓDIGO
+       ================================================ */
+
+    #codigo {
+        width: 100%;
+    }
+
+
+    /* ================================================
+       SELECTS E INPUTS
+       ================================================ */
+
+    fieldset .form-control,
+    fieldset .form-select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    /* ================================================
+       BOTONES DE ACCIÓN
+       ================================================ */
+
+    .formulario-fotos-firmas .d-flex.justify-content-between {
+        width: 100%;
+    }
+
 }
+
