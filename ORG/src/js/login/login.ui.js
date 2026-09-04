@@ -40,7 +40,7 @@ const nombres = partes.length >= 4
     : partes.join(" ");
 
 elemento.textContent =
-    `${nombres} ${"..."} ${saludo}👋  `;
+    `${nombres} ${"..."} ${saludo} 👋  `;
 
     
 }
