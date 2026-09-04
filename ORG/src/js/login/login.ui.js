@@ -4,6 +4,8 @@
 
 export function mostrarSaludo(nombre) {
 
+    console.log("👤 Nombre recibido en mostrarSaludo:", nombre);
+
     const elemento =
         document.getElementById("usuarioActual");
 
@@ -28,13 +30,19 @@ export function mostrarSaludo(nombre) {
 
     }
 
-    const primerNombre =
-        String(nombre || "")
-            .trim()
-            .split(" ")[0];
+   const partes = String(nombre || "")
+    .trim()
+    .split(/\s+/);
 
-    elemento.textContent =
-        `👋 ${saludo} ,  ${primerNombre}`;
+// Apellido 1 + Apellido 2 + Primer nombre + Segundo nombre
+const nombres = partes.length >= 4
+    ? partes.slice(2).join(" ")
+    : partes.join(" ");
+
+elemento.textContent =
+    `${nombres} ${"..."} ${saludo}👋  `;
+
+    
 }
 
 

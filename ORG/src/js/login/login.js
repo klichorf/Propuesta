@@ -114,13 +114,12 @@ async function manejarUsuarioAutenticado(user) {
 const nombreTecnico =
     obtenerNombreTecnico(user.email);
 
-const primerNombre =
-    obtenerPrimerNombre(nombreTecnico);
+
 
 if (usuarioActual) {
 
     mostrarSaludo(
-        primerNombre
+        nombreTecnico
     );
 
 }

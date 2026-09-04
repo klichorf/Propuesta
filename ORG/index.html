@@ -1,550 +1,287 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Informe Técnico - Mantenimiento</title>
-        <!-- Ícono -->
-        <link rel="icon" type="image/png" href="src/assets/images/favicon.svg">
-        <!-- Fuente Poppins -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-            rel="stylesheet" />
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="./vendor/bootstrap.min.css">
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet"
-            href="./vendor/bootstrap-icons/bootstrap-icons.css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Técnico - Mantenimiento</title>
+    <!-- Ícono -->
+    <link rel="icon" type="image/png" href="src/assets/images/favicon.svg" />
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./vendor/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css" />
 
-        <!-- Tu CSS -->
-        <!-- =====================================================
+    <!-- Tu CSS -->
+    <!-- =====================================================
      ESTILOS DEL SISTEMA
      ===================================================== -->
 
-        <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/variables.css" />
 
-        <link rel="stylesheet" href="src/styles/layout.css">
+    <link rel="stylesheet" href="src/styles/layout.css" />
 
-        <link rel="stylesheet" href="src/styles/header.css">
+    <link rel="stylesheet" href="src/styles/header.css" />
 
-        <link rel="stylesheet" href="src/styles/formulario.css">
+    <link rel="stylesheet" href="src/styles/formulario.css" />
 
-        <link rel="stylesheet" href="src/styles/botones.css">
+    <link rel="stylesheet" href="src/styles/botones.css" />
 
-        <link rel="stylesheet" href="src/styles/modales.css">
+    <link rel="stylesheet" href="src/styles/modales.css" />
 
-        <link rel="stylesheet" href="src/styles/firmas.css">
+    <link rel="stylesheet" href="src/styles/firmas.css" />
 
-        <link rel="stylesheet" href="src/styles/fotografias.css">
+    <link rel="stylesheet" href="src/styles/fotografias.css" />
 
-        <link rel="stylesheet" href="src/styles/loaders.css">
+    <link rel="stylesheet" href="src/styles/loaders.css" />
 
-        <link rel="stylesheet" href="src/styles/reportes.css">
+    <link rel="stylesheet" href="src/styles/reportes.css" />
 
-        <link rel="stylesheet" href="src/styles/componentes.css">
+    <link rel="stylesheet" href="src/styles/componentes.css" />
 
-        <link rel="stylesheet" href="src/styles/responsive.css">
+    <link rel="stylesheet" href="src/styles/responsive.css" />
 
-        <link rel="stylesheet" href="src/styles/calendario.css">
+    <link rel="stylesheet" href="src/styles/calendario.css" />
 
-        <link rel="stylesheet" href="src/styles/login.css">
+    <link rel="stylesheet" href="src/styles/login.css" />
+</head>
 
-    </head>
-
-    <body class="bg-light app-shell">
-
-        <!-- =====================================================
+<body class="bg-light app-shell">
+    <!-- =====================================================
      PANTALLA DE LOGIN
      ===================================================== -->
 
-        <div id="loginScreen">
+    <div id="loginScreen">
+        <div class="login-card">
+            <div class="text-center">
+                <img src="src/assets/images/favicon.svg" alt="Organización Cárdenas" class="login-logo" />
 
-            <div class="login-card">
+                <div class="login-title">Informe Técnico</div>
 
-                <div class="text-center">
-
-                    <img
-                        src="src/assets/images/favicon.svg"
-                        alt="Organización Cárdenas"
-                        class="login-logo">
-
-                    <div class="login-title">
-                        Informe Técnico
-                    </div>
-
-                    <div class="login-subtitle">
-                        Sistema de Mantenimiento
-                    </div>
-
-                </div>
-
-                <form id="loginForm">
-
-                    <!-- CORREO -->
-
-                    <div class="mb-3">
-
-                        <label
-                            for="loginEmail"
-                            class="form-label">
-                            Correo electrónico
-                        </label>
-
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            class="form-control"
-                            placeholder="usuario@empresa.com"
-                            autocomplete="username"
-                            required>
-
-                    </div>
-
-                    <!-- CONTRASEÑA -->
-
-                    <div class="mb-3">
-
-                        <label
-                            for="loginPassword"
-                            class="form-label">
-                            Contraseña
-                        </label>
-
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            class="form-control"
-                            placeholder="Contraseña"
-                            autocomplete="current-password"
-                            required>
-
-                    </div>
-
-                    <!-- ERROR -->
-
-                    <div
-                        id="loginError"
-                        class="alert alert-danger"
-                        role="alert"></div>
-
-                    <!-- BOTÓN LOGIN -->
-
-                    <button
-                        type="submit"
-                        id="btnLogin"
-                        class="btn btn-primary w-100">
-                        Iniciar sesión
-                    </button>
-
-                </form>
-
+                <div class="login-subtitle">Sistema de Mantenimiento</div>
             </div>
 
-        </div>
+            <form id="loginForm">
+                <!-- CORREO -->
 
-        <!-- APLICACIÓN -->
-        <div id="appContent">
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">
+                        Correo electrónico
+                    </label>
 
-            <!-- ---------- ENCABEZADO ---------- -->
-            <header class="header py-3">
-                <div
-                    class="container d-flex align-items-center justify-content-between">
-                    <figure class="m-0 d-flex align-items-center">
-
-                        <figcaption class="fw-bold text-uppercase">
-                            ORGANIZACIÓN<br />CÁRDENAS S.A.S
-                        </figcaption> <img src="src/assets/images/favicon.svg"
-                            alt="Logo de la empresa" width="70"
-                            height="70" class="me-2" />
-                    </figure>
-
-                    <div class="text-end">
-                        <h1 class="h3 mb-0">INFORME TÉCNICO</h1>
-                        <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
-                    </div>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="usuario@empresa.com"
+                        autocomplete="username" required />
                 </div>
 
-            </header>
+                <!-- CONTRASEÑA -->
 
-            <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
-            <main id="contenedorPrincipal" class="container my-4">
-                <!-- Formulario -->
-                <form id="formulario" class="card shadow p-4"
-                    onsubmit="return false;">
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">
+                        Contraseña </label>
 
-                    <div
-                        class="d-flex justify-content-between align-items-center w-100 px-3 mb-3 border-bottom">
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña"
+                        autocomplete="current-password" required />
+                </div>
 
-                        <span id="usuarioActual"
-                            class="fw-semibold text-primary-emphasis"></span>
+                <!-- ERROR -->
 
-                        <button id="btnCerrarSesion"
-                            type="button"
-                            class="btn btn-danger m-2"
+                <div id="loginError" class="alert alert-danger" role="alert"></div>
+
+                <!-- BOTÓN LOGIN -->
+
+                <button type="submit" id="btnLogin" class="btn btn-primary w-100">
+                    Iniciar sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN -->
+    <div id="appContent">
+        <!-- ---------- ENCABEZADO ---------- -->
+        <header class="header py-3">
+            <div class="container d-flex align-items-center justify-content-between">
+                <figure class="m-0 d-flex align-items-center">
+                    <figcaption class="fw-bold text-uppercase">
+                        ORGANIZACIÓN<br />CÁRDENAS S.A.S
+                    </figcaption>
+                    <img src="src/assets/images/favicon.svg" alt="Logo de la empresa" width="70" height="70"
+                        class="me-2" />
+                </figure>
+
+                <div class="text-end">
+                    <h1 class="h3 mb-0">INFORME TÉCNICO</h1>
+                    <h2 class="h5 text-secondary">MANTENIMIENTO</h2>
+                </div>
+            </div>
+        </header>
+
+        <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+        <main id="contenedorPrincipal" class="container my-4">
+            <!-- Formulario -->
+            <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+
+                <fieldset>
+
+                    <!--SALUDO -->
+                    <div class="d-flex justify-content-between align-items-center w-100 px-3 mb-3 border-bottom">
+                        <span id="usuarioActual" class="fw-semibold text-primary-emphasis"></span>
+
+                        <button id="btnCerrarSesion" type="button" class="btn btn-danger m-2 me-4"
                             title="Cerrar sesión">
-
                             <i class="bi bi-box-arrow-right"></i>
-
                         </button>
-
                     </div>
 
-                    <fieldset class="mb-4">
+                    <!-- 🔘 BOTÓN -->
+                    <button id="btnVerGrafico" type="button" class="btn btn-light" title="Ver gráfico">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </button>
 
-                        <!-- 🔘 BOTÓN -->
-                        <button id="btnVerGrafico" type="button"
-                            class="btn btn-light" title="Ver gráfico">
-                            <i class="bi bi-graph-up-arrow"></i>
-                        </button>
-                        <!-- 🟦 MODAL GRÁFICO -->
-                        <div class="modal fade" id="modalGrafico" tabindex="-1"
-                            data-bs-focus="false">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5
-                                            class="modal-title titulo-resaltado">Total
-                                            Mantenimientos
-                                            <span id="totalInformes">0</span>
-                                        </h5>
-                                        <button class="btn-close"
-                                            data-bs-dismiss="modal"></button>
+                    <!-- 🔘 BOTÓN -->
+                    <button id="btnReportePlantas" type="button" class="btn btn-light" title="Reporte por plantas">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </button>
 
-                                    </div>
+                    <!-- 🟪 BOTÓN VER REPORTE INTERVENCIONES -->
+                    <button id="btnReporteIntervenciones" type="button" class="btn btn-primary"
+                        title="Reporte de intervenciones">
+                        <i class="bi bi-bar-chart-line"></i>
+                    </button>
 
-                                    <div class="p-3">
-                                        <!-- Filtros de fecha -->
-                                        <div
-                                            class="d-flex flex-wrap flex-lg-nowrap mb-3 gap-2">
-                                            <input type="date" id="datastart"
-                                                class="form-control"
-                                                placeholder="Fecha inicio">
-                                            <input type="date" id="dataend"
-                                                class="form-control"
-                                                placeholder="Fecha fin">
-                                            <button
-                                                id="btnFiltrarMantenimientos"
-                                                class="btn btn-light">Filtrar</button>
-                                        </div>
-                                        <canvas id="graficoMantenimientos"
-                                            class="mb-4"></canvas>
-                                        <hr>
-                                        <canvas id="graficoPlantaVsEquipo"
-                                            class="mb-4"></canvas>
+                    <!-- 🔹escanner-->
+                    <div class="row g-3 qr-section-row mb-1">
+                        <div class="col-md-6">
+                            <input id="codigo" type="text" class="form-control" placeholder="CODIGO" />
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button id="btnQR" type="button" class="btn btn-outline-secondary w-100 mb-1">
+                                <i class="bi bi-qr-code-scan"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 🔹 Contenedor para la cámara tipo modal -->
+                    <div id="QR-modal" class="mt-3 qr-modal-panel">
+                        <div id="QR" class="border rounded p-2"></div>
+                    </div>
+                    <!-- 🔹 Botón CERRAR (oculto al inicio) -->
+                    <button id="closeQR" class="btn btn-fondo-azul text-white w-100 d-none mt-3">
+                        Cerrar
+                    </button>
 
-                                    </div>
-                                </div>
+                    <!-- TECNICO -->
+                    <div class="mt-3 d-none">
+                        <label for="ejecutor" class="form-label fw-bold text-primary-emphasis">
+                            Técnico Mantenimiento
+                        </label>
+
+                        <select id="ejecutor" class="form-select">
+                            <option disabled selected></option>
+                            <option>JORGE LEONARDO RODRIGUEZ</option>
+                            <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                            <option>QUEVEDO LADINO MARIO</option>
+                            <option>LUIS GABRIEL RODRUIGUEZ</option>
+                            <option>NESTOR LEONARDO RODRIGUEZ</option>
+                            <option>ESNEIDER QUINTERO LOZANO</option>
+                            <option>GERARDO MARIÑO</option>
+                            <option>ANGELO STIVEN CUERVO BELTRAN</option>
+                        </select>
+                    </div>
+
+                    <!-- PLANTA -->
+                    <div class="mt-3">
+                        <label for="planta" class="form-label fw-bold text-primary-emphasis">
+                            Planta
+                        </label>
+
+                        <select id="planta" class="form-select">
+                            <option disabled selected></option>
+                            <option value="GRANOS">GRANOS</option>
+                            <option value="ASEO">ASEO</option>
+                            <option value="ALIMENTOS">ALIMENTOS</option>
+                            <option value="BEBIDAS">BEBIDAS</option>
+                            <option value="OFERTAS">OFERTAS</option>
+                            <option value="LOCATIVOS">LOCATIVOS</option>
+                        </select>
+                    </div>
+                    <!-- EQUIPO -->
+                    <div class="mt-3">
+                        <label for="area" class="form-label fw-bold text-primary-emphasis">
+                            Área
+                        </label>
+
+                        <select id="area" class="form-select">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    <!-- AREA -->
+                    <div class="mt-3">
+                        <label for="equipo" class="form-label fw-bold text-primary-emphasis">
+                            Equipo
+                        </label>
+
+                        <select id="equipo" class="form-select">
+                            <option disabled selected></option>
+                        </select>
+
+                        <div id="vistaFotoActivo" class="activo-foto mt-3 d-none">
+                            <div id="estadoFotoActivo" class="small text-muted mb-2">
+                                FOTO DEL ACTIVO
                             </div>
-                        </div>
 
-                        <!-- 🔘 BOTÓN -->
-                        <button id="btnReportePlantas" type="button"
-                            class="btn btn-light" title="Reporte por plantas">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </button>
-
-                        <!-- 🟪 BOTÓN VER REPORTE INTERVENCIONES -->
-                        <button id="btnReporteIntervenciones" type="button"
-                            class="btn btn-primary"
-                            title="Reporte de intervenciones">
-                            <i class="bi bi-bar-chart-line"></i>
-                        </button>
-
-                        <!-- 🟦 MODAL REPORTE-->
-                        <div class="modal fade" id="modalReportePlantas"
-                            tabindex="-1" data-bs-focus="false">
-                            <div
-                                class="modal-dialog modal-lg modal-dialog-scrollable">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5
-                                            class="modal-title  text-primary mt-3">
-                                            TOTAL REPORTES:
-                                            <span
-                                                id="totalInformesReporte">0</span>
-                                        </h5>
-                                        <button class="btn-close"
-                                            data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- 🔻 TOGGLE (Accordion) -->
-                                        <div class="accordion mb-3"
-                                            id="accordionFiltros">
-                                            <div
-                                                class="accordion-item border-0 shadow-sm rounded">
-                                                <h2 class="accordion-header">
-                                                    <button
-                                                        class="accordion-button fw-semibold"
-                                                        type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseFiltros">
-                                                        Filtros del Reporte
-                                                    </button>
-                                                </h2>
-
-                                                <div id="collapseFiltros"
-                                                    class="accordion-collapse collapse show"
-                                                    data-bs-parent="#accordionFiltros">
-
-                                                    <div class="accordion-body">
-
-                                                        <div class="row gy-3">
-                                                            <!-- PLANTA -->
-                                                            <div
-                                                                class="col-md-4">
-                                                                <label
-                                                                    class="form-label fw-bold text-primary">PLANTA</label>
-                                                                <select
-                                                                    id="filtroPlanta"
-                                                                    class="form-select rounded-pill">
-
-                                                                </select>
-                                                            </div>
-
-                                                            <!-- FECHA INICIO -->
-                                                            <div
-                                                                class="col-md-4">
-                                                                <label
-                                                                    class="form-label fw-bold text-primary">Fecha
-                                                                    Inicio</label>
-                                                                <input
-                                                                    type="date"
-                                                                    id="filtroFechaInicio"
-                                                                    class="form-control rounded-pill">
-                                                            </div>
-
-                                                            <!-- FECHA FIN -->
-                                                            <div
-                                                                class="col-md-4">
-                                                                <label
-                                                                    class="form-label fw-bold text-primary">Fecha
-                                                                    Fin</label>
-                                                                <input
-                                                                    type="date"
-                                                                    id="filtroFechaFin"
-                                                                    class="form-control rounded-pill">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- 📄 CONTENIDO DEL REPORTE -->
-                                        <div id="contenidoReporte"></div>
-
-                                    </div>
-                                </div>
+                            <div id="skeletonFotoActivo" class="skeleton-foto">
+                                <div class="skeleton-imagen"></div>
+                                <div class="skeleton-line skeleton-line-lg"></div>
+                                <div class="skeleton-line skeleton-line-sm"></div>
                             </div>
-                        </div>
-                        <!-- 🟦 MODAL HOJA DE VIDA -->
-                        <div class="modal fade" id="modalHojaVida"
-                            tabindex="-1">
-                            <div
-                                class="modal-dialog modal-xl modal-dialog-scrollable">
-                                <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h5
-                                            class="modal-title text-primary fw-bold">
-                                            Hoja de Vida del Equipo
-                                        </h5>
-                                        <button class="btn-close"
-                                            data-bs-dismiss="modal"></button>
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                        <!-- Datos generales -->
-                                        <div id="datosEquipo"
-                                            class="mb-4 p-3 rounded shadow-sm bg-light"></div>
-
-                                        <!-- Historial -->
-                                        <h5
-                                            class="text-secondary fw-bold border-bottom pb-2">Historial
-                                            de Mantenimiento</h5>
-                                        <div id="historialMantenimientos"></div>
-
-                                    </div>
-
-                                </div>
+                            <div class="contenedor-imagen-activo">
+                                <img id="imagenActivoSeleccionado" alt="Foto del activo seleccionado" />
                             </div>
-                        </div>
-
-                        <!-- 🔹escanner-->
-                        <div class="row g-3 qr-section-row">
-                            <div class="col-md-6">
-
-                                <input id="codigo" type="text"
-                                    class="form-control" placeholder="CODIGO" />
-                            </div>
-                            <div class="col-md-6 d-flex align-items-end">
-                                <button id="btnQR" type="button"
-                                    class="btn btn-outline-secondary w-100">
-                                    <i class="bi bi-qr-code-scan"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                        <!-- 🔹 Contenedor para la cámara tipo modal -->
-                        <div id="QR-modal" class="mt-3 qr-modal-panel">
-                            <div id="QR" class="border rounded p-2"></div>
-                        </div>
-                        <!-- 🔹 Botón CERRAR (oculto al inicio) -->
-                        <button id="closeQR"
-                            class="btn btn-danger w-100 d-none mt-3">
-                            Cerrar
-                        </button>
-
-                        <div class="mt-3 d-none">
-
-                            <label for="ejecutor"
-                                class="form-label fw-bold text-primary-emphasis">
-                                Técnico Mantenimiento
-                            </label>
-
-                            <select id="ejecutor" class="form-select">
-                                <option disabled selected></option>
-                                <option>JORGE LEONARDO RODRIGUEZ</option>
-                                <option>PINEDA AGUDELO YONATAN STIVEN</option>
-                                <option>QUEVEDO LADINO MARIO</option>
-                                <option>LUIS GABRIEL RODRUIGUEZ</option>
-                                <option>NESTOR LEONARDO RODRIGUEZ</option>
-                                <option>ESNEIDER QUINTERO LOZANO</option>
-                                <option>GERARDO MARIÑO</option>
-                                <option>ANGELO STIVEN CUERVO BELTRAN</option>
-                            </select>
-
-                        </div>
-                    </fieldset>
-
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label for="planta"
-                                class="form-label fw-bold text-primary-emphasis">Planta</label>
-                            <select id="planta" class="form-select">
-                                <option disabled selected></option>
-                                <option value="GRANOS">GRANOS</option>
-                                <option value="ASEO">ASEO</option>
-                                <option value="ALIMENTOS">ALIMENTOS</option>
-                                <option value="BEBIDAS">BEBIDAS</option>
-                                <option value="OFERTAS">OFERTAS</option>
-                                <option value="LOCATIVOS">LOCATIVOS</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="area"
-                                class="form-label fw-bold text-primary-emphasis">Área</label>
-                            <select id="area" class="form-select">
-                                <option disabled selected></option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="equipo"
-                                class="form-label fw-bold text-primary-emphasis">Equipo</label>
-                            <select id="equipo" class="form-select">
-                                <option disabled selected></option>
-                            </select>
-
-                            <div id="vistaFotoActivo"
-                                class="activo-foto mt-3 d-none">
-
-                                <!-- Título -->
-                                <div id="estadoFotoActivo"
-                                    class="small text-muted mb-2">
-                                    FOTO DEL ACTIVO
-                                </div>
-
-                                <!-- Skeleton mientras carga -->
-                                <div id="skeletonFotoActivo"
-                                    class="skeleton-foto">
-
-                                    <div class="skeleton-imagen"></div>
-
-                                    <div
-                                        class="skeleton-line skeleton-line-lg"></div>
-
-                                    <div
-                                        class="skeleton-line skeleton-line-sm"></div>
-
-                                </div>
-
-                                <div class="contenedor-imagen-activo">
-                                    <img id="imagenActivoSeleccionado"
-                                        alt="Foto del activo seleccionado">
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="mt-3">
-                            <label for="tipoMantenimiento"
-                                class="form-label fw-bold text-primary-emphasis">Tipo
-                                de
-                                mantenimiento</label>
-                            <select id="tipoMantenimiento" class="form-select">
-                                <option disabled selected></option>
-                                <option>Preventivo</option>
-                                <option>Correctivo</option>
-                                <option>Predictivo</option>
-                                <option>Ajuste Formato</option>
-                                <option>Mejora/Adecuación</option>
-                            </select>
                         </div>
                     </div>
 
+                    <!-- TIEMPO INICIO FIN -->
                     <div class="row g-3 mt-3">
                         <div class="col-md-6">
-                            <label for="fechaInicio"
-                                class="form-label fw-bold text-primary-emphasis">Fecha
+                            <label for="fechaInicio" class="form-label fw-bold text-primary-emphasis">Fecha
                                 Inicio</label>
-                            <input id="fechaInicio" type="datetime-local"
-                                class="form-control" required />
+                            <input id="fechaInicio" type="datetime-local" class="form-control" required />
                         </div>
                         <div class="col-md-6">
-                            <label for="fechaFin"
-                                class="form-label fw-bold text-primary-emphasis">Fecha
+                            <label for="fechaFin" class="form-label fw-bold text-primary-emphasis">Fecha
                                 Fin</label>
-                            <input id="fechaFin" type="datetime-local"
-                                class="form-control" />
+                            <input id="fechaFin" type="datetime-local" class="form-control" />
                         </div>
                     </div>
 
+                    <!-- MUESTRA TIEMPO EMPLEADO -->
                     <div class="mt-3">
-                        <label for="tiempo"
-                            class="form-label fw-bold text-primary-emphasis">Tiempo
+
+                        <label for="tiempo" class="form-label fw-bold text-primary-emphasis" "">Tiempo
                             empleado</label>
-                        <input id="tiempo" type="text" readonly
-                            class="form-control"
-                            placeholder="Se calculará automáticamente" readonly
-                            disabled />
+                        <input id="tiempo" type="text" readonly class="form-control"
+                            placeholder="Se calculará automáticamente" readonly disabled />
                     </div>
-
+                    <!-- DAÑOS ENCONTRADOS -->
                     <div class="mt-3">
-                        <label for="danos"
-                            class="form-label fw-bold text-primary-emphasis">Daños
+                        <label for="danos" class="form-label fw-bold text-primary-emphasis">Daños
                             encontrados</label>
-                        <textarea id="danos" class="form-control"
-                            rows="3"></textarea>
+                        <textarea id="danos" class="form-control" rows="3"></textarea>
                     </div>
-
+                    <!-- TRABAJO EJECUTADO -->
                     <div class="mt-3">
-                        <label for="trabajo"
-                            class="form-label fw-bold text-primary-emphasis">Trabajo
+                        <label for="trabajo" class="form-label fw-bold text-primary-emphasis">Trabajo
                             ejecutado</label>
-                        <textarea id="trabajo" class="form-control"
-                            rows="3"></textarea>
+                        <textarea id="trabajo" class="form-control" rows="3"></textarea>
                     </div>
 
+                    <!-- REPUESTOS UTILIZADOS -->
                     <div class="mt-3 mb-3">
 
-                        <label
-                            for="repuestos"
-                            class="form-label fw-bold text-primary-emphasis">
+                        <label for="repuestos" class="form-label fw-bold text-primary-emphasis">
                             Repuestos utilizados
                         </label>
 
@@ -553,9 +290,7 @@
                             <!-- Selector de categoría -->
                             <div class="w-100 w-md-auto">
 
-                                <select
-                                    id="categoriaRepuesto"
-                                    class="form-select">
+                                <select id="categoriaRepuesto" class="form-select">
 
                                     <option value>
                                         Todas las categorías
@@ -592,10 +327,7 @@
                             <!-- Buscador -->
                             <div class="flex-grow-1 repuestos-search">
 
-                                <input
-                                    type="text"
-                                    id="buscadorRepuestos"
-                                    class="form-control"
+                                <input type="text" id="buscadorRepuestos" class="form-control"
                                     placeholder="Buscar repuesto..." />
 
                                 <div id="sugerencias"></div>
@@ -605,360 +337,412 @@
                         </div>
 
                         <!-- Repuestos seleccionados -->
-                        <textarea
-                            id="repuestos"
-                            class="form-control mt-2"
-                            rows="5"></textarea>
+                        <textarea id="repuestos" class="form-control mt-2" rows="5"></textarea>
 
                     </div>
-                    <!-- REGISTRO FOTOGRÁFICO -->
-                    <fieldset id="fieldsetFotos"
-                        class="mb-4 border rounded p-3">
-                        <div
-                            class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
+                </fieldset>
+
+                <fieldset class="mb-4 formulario-fotos-firmas">
+
+                    <div class=" mb-4">
+
+                        <!-- REGISTRO FOTOGRÁFICO -->
+
+                        <div class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
                             Registro Fotográfico
                         </div>
 
                         <div class="d-flex gap-2">
                             <!-- Tomar foto con cámara -->
-                            <input id="fotosTomar" type="file" accept="image/*"
-                                capture="environment" class="d-none" />
-                            <label for="fotosTomar"
-                                class="btn btn-light d-flex align-items-center gap-2">
+                            <input id="fotosTomar" type="file" accept="image/*" capture="environment" class="d-none" />
+                            <label for="fotosTomar" class="btn btn-light d-flex align-items-center gap-2">
                                 <i class="bi bi-camera fs-4"></i>
                             </label>
 
                             <!-- Seleccionar desde galería -->
-                            <input id="fotos" type="file" accept="image/*"
-                                multiple class="d-none" />
-                            <label for="fotos"
-                                class="btn btn-light d-flex align-items-center gap-2">
+                            <input id="fotos" type="file" accept="image/*" multiple class="d-none" />
+                            <label for="fotos" class="btn btn-light d-flex align-items-center gap-2">
                                 <i class="bi bi-image fs-4"></i>
                             </label>
                         </div>
 
                         <div id="dropZone" class="drop-zone">
                             <i class="bi bi-cloud-upload fs-3"></i>
-                            <br>
+                            <br />
                             Arrastra aquí las imágenes
                         </div>
 
-                        <div id="thumbs"
-                            class="d-flex flex-wrap gap-2 mt-2"></div>
-                    </fieldset>
+                        <div id="thumbs" class="d-flex flex-wrap gap-2 mt-2"></div>
 
+                    </div>
                     <!-- FIRMAS -->
-                    <fieldset class="mb-4">
-
-                        <div
-                            class="fw-bold text-primary-emphasis border-bottom pb-2 mb-3">
-                            Firmas
+                    <div class="fw-bold text-primary-emphasis border-bottom pb-2 mb-2">
+                        Firmas
+                    </div>
+                    <div class="mb-3">
+                        <!-- NOMBRE  -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label id="nombreTecnicoFirma" class="form-label fw-bold text-primary-emphasis mb-0">
+                                Técnico Mantenimiento
+                            </label>
                         </div>
-<div class="mb-3">
 
-    <!-- NOMBRE  -->
-    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <!-- FIRMA -->
+                        <canvas id="sigEjecutor" class="signature signature-readonly" willReadFrequently="true">
+                        </canvas>
 
-        <label
-            id="nombreTecnicoFirma"
-            class="form-label fw-bold text-primary-emphasis mb-0">
-            Técnico Mantenimiento
-        </label>
+                        <!-- ARCHIVO DE FIRMA -->
+                        <div class="signature-tools mt-2">
+                            <input id="firmaEjecutorArchivo" type="file" accept="image/png,image/jpeg,image/webp"
+                                class="d-none" data-signature-target="sigEjecutor" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"> Usuario </label>
+
+                        <!-- NOMBRE DEL OPERADOR -->
+                        <div id="nombreOperador" class="form-label fw-bold text-primary-emphasis"></div>
+
+                        <!-- CÉDULA -->
+                        <div class="mb-3">
+                            <input type="password" id="cedulaOperador" class="form-control"
+                                autocomplete="current-password" placeholder="Cédula" />
+                        </div>
+
+                        <!-- CONTRASEÑA + VALIDAR -->
+                        <div class="mb-3">
+                            <label for="passwordOperador" class="form-label">
+                                Contraseña
+                            </label>
+
+                            <div class="d-flex gap-2">
+                                <!-- CONTRASEÑA -->
+                                <div class="password-operador flex-grow-1">
+                                    <input type="password" id="passwordOperador" class="form-control"
+                                        autocomplete="current-password" placeholder="Contraseña" />
+                                </div>
+
+                                <!-- VALIDAR -->
+                                <button type="button" id="btnValidarOperador" class="btn btn-primary px-3"
+                                    title="Validar operador" aria-label="Validar operador">
+                                    <i class="bi bi-fingerprint fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ESTADO -->
+                        <div id="estadoOperador" class="small mb-3"></div>
+
+                        <!-- FIRMA -->
+                        <canvas id="sigCoordinador" class="signature signature-readonly" willReadFrequently="true">
+                        </canvas>
+
+                        <!-- BOTONES DE ACCIÓN -->
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <!-- LIMPIAR FIRMA -->
+                            <button type="button" id="btnLimpiarFirmaCoordinador" class="btn btn-outline-primary"
+                                disabled>
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                            <!-- DESCARGAR + COMPARTIR -->
+                            <div class="d-flex gap-2">
+                                <button id="btnDescargar" type="button" class="btn btn-outline-primary"
+                                    title="Descargar">
+                                    <i class="bi bi-download"></i>
+                                </button>
+
+                                <button id="btnCompartir" type="button" class="btn btn-outline-primary"
+                                    title="Compartir">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </main>
+
+        <!-- ---------- FOOTER ---------- -->
+
+        <footer class="text-center py-3 mt-4 border-top">
+            <p id="estado" class="text-muted small mb-0"></p>
+            <p class="text-muted small mb-0">
+                Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
+            </p>
+        </footer>
 
     </div>
 
+    <!-- Bootstrap -->
 
-    <!-- FIRMA -->
-    <canvas
-        id="sigEjecutor"
-        class="signature signature-readonly"
-        willReadFrequently="true">
-    </canvas>
+    <script src="./vendor/bootstrap.bundle.min.js"></script>
 
+    <!-- Chart.js -->
+    <script src="./vendor/chart.umd.min.js"></script>
 
-    <!-- ARCHIVO DE FIRMA -->
-    <div class="signature-tools mt-2">
+    <!-- Chart.js DataLabels -->
+    <script src="./vendor/chartjs-plugin-datalabels.min.js"></script>
 
-        <input
-            id="firmaEjecutorArchivo"
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            class="d-none"
-            data-signature-target="sigEjecutor">
+    <!-- jsPDF -->
+    <script src="./vendor/jspdf.umd.min.js"></script>
 
+    <!-- HTML5 QR -->
+    <script src="./vendor/html5-qrcode.min.js"></script>
+
+    <!-- MAIN -->
+
+    <script type="module" src="./src/js/app.js"></script>
+
+    <!-- Loader global -->
+    <div id="loaderOverlay">
+        <div class="spinner-border text-primary loaderSpinner"></div>
     </div>
 
-</div>
+    <div id="loaderOverlay2">
+        <div class="loader2-container">
+            <span id="loaderProgress2">Preparando...</span>
 
-                  <div class="mb-3">
-
-    <label class="form-label">
-        Usuario
-    </label>
-
-    <!-- NOMBRE DEL OPERADOR -->
-    <div
-        id="nombreOperador"
-        class="form-label fw-bold text-primary-emphasis">
-    </div>
-
-
-    <!-- CÉDULA -->
-<!-- CÉDULA -->
-<div class="mb-3">
-
-    <input 
-        type="text" 
-        id="cedulaOperador" 
-        class="form-control" 
-        inputmode="numeric" 
-        autocomplete="off"
-        placeholder="Cédula">
-
-</div>
-
-
-    <!-- CONTRASEÑA + VALIDAR -->
-    <div class="mb-3">
-
-        <label
-            for="passwordOperador"
-            class="form-label">
-            Contraseña
-        </label>
-
-        <div class="d-flex gap-2">
-
-            <!-- CONTRASEÑA -->
-            <div class="password-operador flex-grow-1">
-
-                <input
-                    type="password"
-                    id="passwordOperador"
-                    class="form-control"
-                    autocomplete="current-password"
-                    placeholder="Contraseña">
-
+            <div class="progressBar2">
+                <div class="progressBar2-fill"></div>
             </div>
-
-
-            <!-- VALIDAR -->
-            <button
-                type="button"
-                id="btnValidarOperador"
-                class="btn btn-primary px-3"
-                title="Validar operador"
-                aria-label="Validar operador">
-
-                <i class="bi bi-fingerprint fs-5"></i>
-
-            </button>
-
         </div>
-
     </div>
 
+    <!-- ===================================================== -->
+    <!-- MODAL CONFIRMAR CIERRE DE SESIÓN -->
+    <!-- ===================================================== -->
 
-    <!-- ESTADO -->
-    <div
-        id="estadoOperador"
-        class="small mb-3">
+    <div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalCerrarSesionLabel">
+                        <i class="bi bi-box-arrow-right text-primary me-2"></i>
+                        Cerrar sesión
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="mb-2">¿Estás seguro de que deseas cerrar
+                        sesión?</p>
+
+                    <small class="text-muted">
+                        Se limpiarán las selecciones y datos del formulario
+                        actual.
+                    </small>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="btnConfirmarCerrarSesion">
+                        <i class="bi bi-box-arrow-right me-1"></i>
+                        Sí, cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- 🟦 MODAL GRÁFICO -->
+    <div class="modal fade" id="modalGrafico" tabindex="-1" data-bs-focus="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title titulo-resaltado">
+                        Total Mantenimientos
+                        <span id="totalInformes">0</span>
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-    <!-- FIRMA -->
-    <canvas
-        id="sigCoordinador"
-        class="signature signature-readonly"
-        willReadFrequently="true">
-    </canvas>
-
-</div>
-
-
-                    </fieldset>
-                    <!-- BOTONES DE ACCIÓN -->
-                    <div class="d-flex justify-content-between mt-4">
-                        <button id="btnDescargar" type="button"
-                            class="btn btn-outline-primary">
-                            <i class="bi bi-download"></i>
-                        </button>
-                        <button id="btnCompartir" type="button"
-                            class="btn btn-outline-primary">
-                            <i class="bi bi-share"></i>
+                <div class="p-3">
+                    <!-- Filtros de fecha -->
+                    <div class="d-flex flex-wrap flex-lg-nowrap mb-3 gap-2">
+                        <input type="date" id="datastart" class="form-control" placeholder="Fecha inicio" />
+                        <input type="date" id="dataend" class="form-control" placeholder="Fecha fin" />
+                        <button id="btnFiltrarMantenimientos" class="btn btn-light">
+                            Filtrar
                         </button>
                     </div>
-                </form>
-            </main>
+                    <canvas id="graficoMantenimientos" class="mb-4"></canvas>
+                    <hr />
+                    <canvas id="graficoPlantaVsEquipo" class="mb-4"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <!-- 🟪 MODAL REPORTE INTERVENCIONES -->
-            <div class="modal fade" id="modalReporteIntervenciones"
-                tabindex="-1">
-                <div
-                    class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-                    <div class="modal-content">
+    <!-- 🟦 MODAL REPORTE -->
+    <div class="modal fade" id="modalReportePlantas" tabindex="-1" data-bs-focus="false">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
 
-                        <!-- HEADER -->
-                        <div class="modal-header">
-                            <h5 class="modal-title text-primary fw-bold">
-                                Reporte de Intervenciones
-                            </h5>
-                            <span class="badge bg-primary ms-3">
-                                TOTAL: <span id="totalIntervenciones">0</span>
-                            </span>
-                            <button class="btn-close"
-                                data-bs-dismiss="modal"></button>
-                        </div>
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary mt-3">
+                        TOTAL REPORTES:
+                        <span id="totalInformesReporte">0</span>
+                    </h5>
 
-                        <!-- BODY -->
-                        <div class="modal-body">
+                    <button class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
 
-                            <!-- 🔹 FILTROS -->
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label>Planta</label>
-                                    <select id="filtroPlantaIntervencion"
-                                        class="form-select">
-                                        <option value="TODAS">TODAS</option>
-                                        <option value="BEBIDAS">BEBIDAS</option>
-                                        <option
-                                            value="ALIMENTOS">ALIMENTOS</option>
-                                        <option value="GRANOS">GRANOS</option>
-                                        <option value="ASEO">ASEO</option>
-                                    </select>
+                <div class="modal-body">
+
+                    <!-- 🔻 TOGGLE (Accordion) -->
+                    <div class="accordion mb-3" id="accordionFiltros">
+
+                        <div class="accordion-item border-0 shadow-sm rounded">
+
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFiltros">
+                                    Filtros del Reporte
+                                </button>
+                            </h2>
+
+                            <div id="collapseFiltros" class="accordion-collapse collapse show"
+                                data-bs-parent="#accordionFiltros">
+
+                                <div class="accordion-body">
+
+                                    <div class="row gy-3">
+
+                                        <!-- PLANTA -->
+                                        <div class="col-md-4">
+
+                                            <label class="form-label fw-bold text-primary">
+                                                PLANTA
+                                            </label>
+
+                                            <select id="filtroPlanta" class="form-select rounded-pill">
+                                            </select>
+
+                                        </div>
+
+                                        <!-- FECHA INICIO -->
+                                        <div class="col-md-4">
+
+                                            <label class="form-label fw-bold text-primary">
+                                                FECHA INICIO
+                                            </label>
+
+                                            <input type="date" id="filtroFechaInicio" class="form-control rounded-pill">
+
+                                        </div>
+
+                                        <!-- FECHA FIN -->
+                                        <div class="col-md-4">
+
+                                            <label class="form-label fw-bold text-primary">
+                                                FECHA FIN
+                                            </label>
+
+                                            <input type="date" id="filtroFechaFin" class="form-control rounded-pill">
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label>Fecha Inicio</label>
-                                    <input type="date"
-                                        id="filtroInicioIntervencion"
-                                        class="form-control">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label>Fecha Fin</label>
-                                    <input type="date"
-                                        id="filtroFinIntervencion"
-                                        class="form-control">
-                                </div>
                             </div>
 
-                            <!-- 🔹 CONTENIDO -->
-                            <div id="contenidoReporteIntervenciones"></div>
-
                         </div>
 
                     </div>
-                </div>
-            </div>
 
-            <!-- ---------- FOOTER ---------- -->
-
-            <footer class="text-center py-3 mt-4 border-top">
-                <p id="estado" class="text-muted small mb-0"></p>
-                <p class="text-muted small mb-0">
-                    Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong>
-                </p>
-            </footer>
-
-            <!-- Bootstrap -->
-
-            <script src="./vendor/bootstrap.bundle.min.js"></script>
-
-        </div>
-
-        <!-- Chart.js -->
-        <script src="./vendor/chart.umd.min.js"></script>
-
-        <!-- Chart.js DataLabels -->
-        <script src="./vendor/chartjs-plugin-datalabels.min.js"></script>
-
-        <!-- jsPDF -->
-        <script src="./vendor/jspdf.umd.min.js"></script>
-
-        <!-- HTML5 QR -->
-        <script src="./vendor/html5-qrcode.min.js"></script>
-
-        <!-- MAIN -->
-
-        <script type="module" src="./src/js/app.js"></script>
-
-        <!-- Loader global -->
-        <div id="loaderOverlay">
-            <div class="spinner-border text-primary loaderSpinner"></div>
-        </div>
-
-        <div id="loaderOverlay2">
-            <div class="loader2-container">
-                <span id="loaderProgress2">Preparando...</span>
-
-                <div class="progressBar2">
-                    <div class="progressBar2-fill"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================================================== -->
-        <!-- MODAL CONFIRMAR CIERRE DE SESIÓN -->
-        <!-- ===================================================== -->
-
-        <div class="modal fade" id="modalCerrarSesion" tabindex="-1"
-            aria-labelledby="modalCerrarSesionLabel"
-            aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered">
-
-                <div class="modal-content border-0 shadow">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold"
-                            id="modalCerrarSesionLabel">
-                            <i
-                                class="bi bi-box-arrow-right text-primary me-2"></i>
-                            Cerrar sesión
-                        </h5>
-
-                        <button type="button" class="btn-close"
-                            data-bs-dismiss="modal" aria-label="Cerrar">
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <p class="mb-2">
-                            ¿Estás seguro de que deseas cerrar sesión?
-                        </p>
-
-                        <small class="text-muted">
-                            Se limpiarán las selecciones y datos del formulario
-                            actual.
-                        </small>
-
-                    </div>
-
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-
-                        <button type="button" class="btn btn-primary"
-                            id="btnConfirmarCerrarSesion">
-
-                            <i class="bi bi-box-arrow-right me-1"></i>
-                            Sí, cerrar sesión
-
-                        </button>
-
-                    </div>
+                    <!-- 📄 CONTENIDO DEL REPORTE -->
+                    <div id="contenidoReporte"></div>
 
                 </div>
 
             </div>
-
         </div>
+    </div>
 
-    </body>
+    <!-- 🟦 MODAL HOJA DE VIDA -->
+    <div class="modal fade" id="modalHojaVida" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary fw-bold">
+                        Hoja de Vida del Equipo
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Datos generales -->
+                    <div id="datosEquipo" class="mb-4 p-3 rounded shadow-sm bg-light"></div>
+
+                    <!-- Historial -->
+                    <h5 class="text-secondary fw-bold border-bottom pb-2">
+                        Historial de Mantenimiento
+                    </h5>
+                    <div id="historialMantenimientos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🟪 MODAL REPORTE INTERVENCIONES -->
+    <div class="modal fade" id="modalReporteIntervenciones" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content">
+                <!-- HEADER -->
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary fw-bold">
+                        Reporte de Intervenciones
+                    </h5>
+                    <span class="badge bg-primary ms-3">
+                        TOTAL: <span id="totalIntervenciones">0</span>
+                    </span>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body">
+                    <!-- 🔹 FILTROS -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Planta</label>
+                            <select id="filtroPlantaIntervencion" class="form-select">
+                                <option value="TODAS">TODAS</option>
+                                <option value="BEBIDAS">BEBIDAS</option>
+                                <option value="ALIMENTOS">ALIMENTOS</option>
+                                <option value="GRANOS">GRANOS</option>
+                                <option value="ASEO">ASEO</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Fecha Inicio</label>
+                            <input type="date" id="filtroInicioIntervencion" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Fecha Fin</label>
+                            <input type="date" id="filtroFinIntervencion" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- 🔹 CONTENIDO -->
+                    <div id="contenidoReporteIntervenciones"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
 
 </html>
