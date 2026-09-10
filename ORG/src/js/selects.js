@@ -319,11 +319,12 @@ const datosPlantas = {
       { codigo: "AL-EMB-03", nombre: "Envasadora Doypack" },
       { codigo: "AL-EMB-04", nombre: "Envasadora de Panelada" },
       { codigo: "AL-EMB-05", nombre: "Envasadora Tedmaq Hojuelas" },
-      { codigo: "AL-EMB-06", nombre: "Envasadora Multipack Hojuelas" }
+      { codigo: "AL-EMB-06", nombre: "Envasadora Multipack Hojuelas" },
+      { codigo: "AL-SOP-01", nombre: "Envasadora de Sopas" },
     ],
 
     "Área de Empaque y Sellado": [
-      { codigo: "AL-SOP-01", nombre: "Empacadora de Sopas" },
+     
       { codigo: "AL-SEL-01", nombre: "Selladora Manual 1 Doypack" },
       { codigo: "AL-SEL-02", nombre: "Selladora Manual 2 Doypack" },
       { codigo: "AL-SEL-03", nombre: "Selladora Manual 3 Doypack" },
