@@ -1,4 +1,5 @@
-import { datosPlantas, supervisores } from "./selects.js";
+import { datosPlantas,  } from "./selects.js";  
+import { supervisores } from "./datos/supervisores.js";
 import { cambiarFondo } from "./cambiarFondo.js";
 
 function initSelects() {

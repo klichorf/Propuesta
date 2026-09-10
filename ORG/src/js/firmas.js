@@ -3,27 +3,18 @@
 // TÉCNICO + OPERADOR QUE RECIBE
 // ------------------------------------------------------
 
-import {
-    firmasPersonas
-} from "./selects.js";
+import { firmasPersonas } from "./datos/firmasPersonas.js";
+
+import { validarOperador } from "./services/firebase/operadores.js";
 
 import {
-    validarOperador
-} from "./services/firebase/operadores.js";
-
-import {
-    mostrarLoadercompartir,
-    ocultarLoadercompartir
+  mostrarLoadercompartir,
+  ocultarLoadercompartir,
 } from "./services/onedrive/loader.js";
 
-import {
-    obtenerNombreTecnico
-} from "./services/firebase/tecnicos.js";
+import { obtenerNombreTecnico } from "./services/firebase/tecnicos.js";
 
-import {
-    auth
-} from "./services/firebase/auth.js";
-
+import { auth } from "./services/firebase/auth.js";
 
 // ======================================================
 // VARIABLES
@@ -34,1402 +25,702 @@ let sigCoordinadorData = null;
 
 let operadorValidado = null;
 
-
-const firmasBaseUrl =
-    new URL(
-        "../assets/firmas/",
-        import.meta.url
-    ).href;
-
+const firmasBaseUrl = new URL("../assets/firmas/", import.meta.url).href;
 
 // ======================================================
 // INICIALIZACIÓN
 // ======================================================
 
 export function initFirmas() {
+  console.log("✍️ Inicializando gestión de firmas...");
 
-    console.log(
-        "✍️ Inicializando gestión de firmas..."
+  // --------------------------------------------------
+  // FIRMA TÉCNICO
+  // --------------------------------------------------
+
+  initFirma("sigEjecutor");
+
+  // --------------------------------------------------
+  // FIRMA OPERADOR
+  // --------------------------------------------------
+
+  initFirma("sigCoordinador");
+
+  // El canvas del operador comienza bloqueado
+
+  bloquearFirmaOperador();
+
+  // --------------------------------------------------
+  // BOTÓN LIMPIAR FIRMA TÉCNICO
+  // --------------------------------------------------
+
+  const btnEjecutor = document
+    .querySelector("#sigEjecutor")
+    ?.parentElement.querySelector(".signature-tools button");
+
+  if (btnEjecutor) {
+    btnEjecutor.addEventListener("click", () => limpiarFirma("sigEjecutor"));
+  }
+
+  // --------------------------------------------------
+  // BOTÓN LIMPIAR FIRMA OPERADOR
+  // --------------------------------------------------
+
+  const btnCoordinador = document.getElementById("btnLimpiarFirmaCoordinador");
+
+  if (btnCoordinador) {
+    btnCoordinador.addEventListener("click", () =>
+      limpiarFirma("sigCoordinador"),
     );
+  }
 
+  // --------------------------------------------------
+  // TÉCNICO AUTOMÁTICO
+  // --------------------------------------------------
 
-    // --------------------------------------------------
-    // FIRMA TÉCNICO
-    // --------------------------------------------------
+  cargarTecnicoActual();
 
-    initFirma(
-        "sigEjecutor"
+  // --------------------------------------------------
+  // VALIDACIÓN DEL OPERADOR
+  // --------------------------------------------------
+
+  const btnValidarOperador = document.getElementById("btnValidarOperador");
+
+  if (btnValidarOperador) {
+    btnValidarOperador.addEventListener(
+      "click",
+      validarOperadorDesdeFormulario,
     );
+  }
 
+  // --------------------------------------------------
+  // MOSTRAR / OCULTAR CONTRASEÑA
+  // --------------------------------------------------
 
-    // --------------------------------------------------
-    // FIRMA OPERADOR
-    // --------------------------------------------------
+  const btnMostrarPassword = document.getElementById(
+    "btnMostrarPasswordOperador",
+  );
 
-    initFirma(
-        "sigCoordinador"
-    );
+  if (btnMostrarPassword) {
+    btnMostrarPassword.addEventListener("click", alternarPasswordOperador);
+  }
 
-
-    // El canvas del operador comienza bloqueado
-
-    bloquearFirmaOperador();
-
-
-    // --------------------------------------------------
-    // BOTÓN LIMPIAR FIRMA TÉCNICO
-    // --------------------------------------------------
-
-    const btnEjecutor =
-        document
-            .querySelector(
-                "#sigEjecutor"
-            )
-            ?.parentElement
-            .querySelector(
-                ".signature-tools button"
-            );
-
-
-    if (btnEjecutor) {
-
-        btnEjecutor.addEventListener(
-            "click",
-            () =>
-                limpiarFirma(
-                    "sigEjecutor"
-                )
-        );
-
-    }
-
-
-    // --------------------------------------------------
-    // BOTÓN LIMPIAR FIRMA OPERADOR
-    // --------------------------------------------------
-
-    const btnCoordinador =
-        document.getElementById(
-            "btnLimpiarFirmaCoordinador"
-        );
-
-
-    if (btnCoordinador) {
-
-        btnCoordinador.addEventListener(
-            "click",
-            () =>
-                limpiarFirma(
-                    "sigCoordinador"
-                )
-        );
-
-    }
-
-
-    // --------------------------------------------------
-    // TÉCNICO AUTOMÁTICO
-    // --------------------------------------------------
-
-    cargarTecnicoActual();
-
-
-    // --------------------------------------------------
-    // VALIDACIÓN DEL OPERADOR
-    // --------------------------------------------------
-
-    const btnValidarOperador =
-        document.getElementById(
-            "btnValidarOperador"
-        );
-
-
-    if (btnValidarOperador) {
-
-        btnValidarOperador.addEventListener(
-            "click",
-            validarOperadorDesdeFormulario
-        );
-
-    }
-
-
-    // --------------------------------------------------
-    // MOSTRAR / OCULTAR CONTRASEÑA
-    // --------------------------------------------------
-
-    const btnMostrarPassword =
-        document.getElementById(
-            "btnMostrarPasswordOperador"
-        );
-
-
-    if (btnMostrarPassword) {
-
-        btnMostrarPassword.addEventListener(
-            "click",
-            alternarPasswordOperador
-        );
-
-    }
-
-
-    console.log(
-        "✅ Gestión de firmas inicializada"
-    );
-
+  console.log("✅ Gestión de firmas inicializada");
 }
-
 
 // ======================================================
 // TÉCNICO ACTUAL
 // ======================================================
 
 function cargarTecnicoActual() {
+  const user = auth.currentUser;
 
-    const user =
-        auth.currentUser;
+  if (!user) {
+    console.warn("⚠️ No existe usuario autenticado");
 
+    return Promise.resolve(false);
+  }
 
-    if (!user) {
+  const correo = user.email?.trim().toLowerCase();
 
-        console.warn(
-            "⚠️ No existe usuario autenticado"
-        );
+  // ----------------------------------------------
+  // OBTENER TÉCNICO
+  // ----------------------------------------------
 
-        return Promise.resolve(false);
+  const nombreTecnico = obtenerNombreTecnico(correo);
 
-    }
+  if (!nombreTecnico) {
+    console.warn("⚠️ No existe técnico asociado al correo:", correo);
 
+    return;
+  }
 
-    const correo =
-        user.email
-            ?.trim()
-            .toLowerCase();
+  console.log("👤 Técnico identificado:", nombreTecnico);
 
+  const nombreTecnicoFirma = document.getElementById("nombreTecnicoFirma");
 
-    // ----------------------------------------------
-    // OBTENER TÉCNICO
-    // ----------------------------------------------
+  if (nombreTecnicoFirma) {
+    nombreTecnicoFirma.textContent = nombreTecnico;
+  }
 
-    const nombreTecnico =
-        obtenerNombreTecnico(
-            correo
-        );
+  const ejecutorSelect = document.getElementById("ejecutor");
 
-    if (!nombreTecnico) {
+  if (ejecutorSelect) {
+    ejecutorSelect.value = nombreTecnico;
+    ejecutorSelect.disabled = true;
+  }
 
-        console.warn(
-            "⚠️ No existe técnico asociado al correo:",
-            correo
-        );
-
-        return;
-
-    }
-
-
-    console.log(
-        "👤 Técnico identificado:",
-        nombreTecnico
-    );
-
-
-    const nombreTecnicoFirma =
-    document.getElementById("nombreTecnicoFirma");
-
-if (nombreTecnicoFirma) {
-    nombreTecnicoFirma.textContent =
-        nombreTecnico;
+  cargarFirmaPersona(nombreTecnico, "sigEjecutor");
 }
-
-
-    const ejecutorSelect =
-        document.getElementById(
-            "ejecutor"
-        );
-
-
-    if (ejecutorSelect) {
-
-        ejecutorSelect.value =
-            nombreTecnico;
-                    ejecutorSelect.disabled = true;
-
-
-    }
-
-
-    cargarFirmaPersona(
-        nombreTecnico,
-        "sigEjecutor"
-    );
-
-}
-
 
 // ======================================================
 // VALIDAR OPERADOR DESDE FORMULARIO
 // ======================================================
 
 async function validarOperadorDesdeFormulario() {
+  const cedulaInput = document.getElementById("cedulaOperador");
 
-    const cedulaInput =
-        document.getElementById(
-            "cedulaOperador"
-        );
+  const passwordInput = document.getElementById("passwordOperador");
 
+  const btn = document.getElementById("btnValidarOperador");
 
-    const passwordInput =
-        document.getElementById(
-            "passwordOperador"
-        );
+  const estado = document.getElementById("estadoOperador");
 
+  const nombre = document.getElementById("nombreOperador");
 
-    const btn =
-        document.getElementById(
-            "btnValidarOperador"
-        );
+  if (!cedulaInput || !passwordInput) {
+    return;
+  }
 
+  const cedula = cedulaInput.value.trim();
 
-    const estado =
-        document.getElementById(
-            "estadoOperador"
-        );
+  const password = passwordInput.value;
 
+  // ----------------------------------------------
+  // VALIDACIÓN BÁSICA
+  // ----------------------------------------------
 
-    const nombre =
-        document.getElementById(
-            "nombreOperador"
-        );
+  if (!cedula || !password) {
+    mostrarEstadoOperador("Digite la cédula y la contraseña.", "danger");
 
+    bloquearFirmaOperador();
 
-    if (
-        !cedulaInput ||
-        !passwordInput
-    ) {
+    return;
+  }
 
-        return;
+  // ----------------------------------------------
+  // DESHABILITAR BOTÓN
+  // ----------------------------------------------
 
-    }
+  mostrarLoaderValidacionOperador();
 
+  if (btn) {
+    btn.disabled = true;
 
-    const cedula =
-        cedulaInput.value.trim();
-
-
-    const password =
-        passwordInput.value;
-
-
-    // ----------------------------------------------
-    // VALIDACIÓN BÁSICA
-    // ----------------------------------------------
-
-    if (
-        !cedula ||
-        !password
-    ) {
-
-        mostrarEstadoOperador(
-            "Digite la cédula y la contraseña.",
-            "danger"
-        );
-
-        bloquearFirmaOperador();
-
-        return;
-
-    }
-
-
-    // ----------------------------------------------
-    // DESHABILITAR BOTÓN
-    // ----------------------------------------------
-
-    mostrarLoaderValidacionOperador();
-
-    if (btn) {
-
-        btn.disabled =
-            true;
-
-        btn.innerHTML = `
+    btn.innerHTML = `
             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
         `;
+  }
 
+  try {
+    const operador = await validarOperador(cedula, password);
+
+    // ------------------------------------------
+    // OPERADOR NO VALIDADO
+    // ------------------------------------------
+
+    if (!operador) {
+      operadorValidado = null;
+
+      nombre.textContent = "";
+
+      limpiarFirma("sigCoordinador");
+
+      bloquearFirmaOperador();
+
+      mostrarEstadoOperador("Cédula o contraseña incorrecta.", "danger");
+
+      return;
     }
 
-    try {
+    // ------------------------------------------
+    // OPERADOR VALIDADO
+    // ------------------------------------------
 
-        const operador =
-            await validarOperador(
-                cedula,
-                password
-            );
+    operadorValidado = operador;
 
+    console.log("✅ Operador autorizado:", operador.nombre);
 
-        // ------------------------------------------
-        // OPERADOR NO VALIDADO
-        // ------------------------------------------
+    // Mostrar nombre
 
-        if (!operador) {
+    if (nombre) {
+      nombre.textContent = operador.nombre;
+    }
 
-            operadorValidado =
-                null;
+    mostrarEstadoOperador("Operador validado correctamente.", "success");
 
+    // ------------------------------------------
+    // CARGAR FIRMA
+    // ------------------------------------------
 
-            nombre.textContent =
-                "";
+    await cargarFirmaOperador(operador, "sigCoordinador");
 
+    // ------------------------------------------
+    // DESBLOQUEAR CANVAS
+    // ------------------------------------------
 
-            limpiarFirma(
-                "sigCoordinador"
-            );
+    desbloquearFirmaOperador();
 
+    // ------------------------------------------
+    // LIMPIAR CONTRASEÑA
+    // ------------------------------------------
 
-            bloquearFirmaOperador();
+    passwordInput.value = "";
+  } catch (error) {
+    console.error("❌ Error validando operador:", error);
 
+    operadorValidado = null;
 
-            mostrarEstadoOperador(
-                "Cédula o contraseña incorrecta.",
-                "danger"
-            );
+    bloquearFirmaOperador();
 
+    mostrarEstadoOperador("No fue posible validar el operador.", "danger");
+  } finally {
+    ocultarLoadercompartir();
 
-            return;
+    if (btn) {
+      btn.disabled = false;
 
-        }
-
-
-        // ------------------------------------------
-        // OPERADOR VALIDADO
-        // ------------------------------------------
-
-        operadorValidado =
-            operador;
-
-
-        console.log(
-            "✅ Operador autorizado:",
-            operador.nombre
-        );
-
-
-        // Mostrar nombre
-
-        if (nombre) {
-
-            nombre.textContent =
-               operador.nombre;
-
-        }
-
-
-        mostrarEstadoOperador(
-            "Operador validado correctamente.",
-            "success"
-        );
-
-
-        // ------------------------------------------
-        // CARGAR FIRMA
-        // ------------------------------------------
-
-        await cargarFirmaOperador(
-            operador,
-            "sigCoordinador"
-        );
-
-
-        // ------------------------------------------
-        // DESBLOQUEAR CANVAS
-        // ------------------------------------------
-
-        desbloquearFirmaOperador();
-
-
-        // ------------------------------------------
-        // LIMPIAR CONTRASEÑA
-        // ------------------------------------------
-
-        passwordInput.value =
-            "";
-
-
-    } catch (error) {
-
-        console.error(
-            "❌ Error validando operador:",
-            error
-        );
-
-
-        operadorValidado =
-            null;
-
-
-        bloquearFirmaOperador();
-
-
-        mostrarEstadoOperador(
-            "No fue posible validar el operador.",
-            "danger"
-        );
-
-
-    } finally {
-
-        ocultarLoadercompartir();
-
-        if (btn) {
-
-            btn.disabled = false;
-
-            btn.innerHTML = `
+      btn.innerHTML = `
                 <i class="bi bi-fingerprint fs-5"></i>
             
             `;
-
-        }
-
     }
-
+  }
 }
-
 
 // ======================================================
 // MOSTRAR / OCULTAR PASSWORD
 // ======================================================
 
 function alternarPasswordOperador() {
+  const input = document.getElementById("passwordOperador");
 
-    const input =
-        document.getElementById(
-            "passwordOperador"
-        );
+  const button = document.getElementById("btnMostrarPasswordOperador");
 
+  if (!input || !button) {
+    return;
+  }
 
-    const button =
-        document.getElementById(
-            "btnMostrarPasswordOperador"
-        );
+  const icon = button.querySelector("i");
 
+  if (input.type === "password") {
+    input.type = "text";
 
-    if (!input || !button) {
-
-        return;
-
+    if (icon) {
+      icon.className = "bi bi-eye-slash";
     }
+  } else {
+    input.type = "password";
 
-
-    const icon =
-        button.querySelector(
-            "i"
-        );
-
-
-    if (
-        input.type === "password"
-    ) {
-
-        input.type =
-            "text";
-
-
-        if (icon) {
-
-            icon.className =
-                "bi bi-eye-slash";
-
-        }
-
-    } else {
-
-        input.type =
-            "password";
-
-
-        if (icon) {
-
-            icon.className =
-                "bi bi-eye";
-
-        }
-
+    if (icon) {
+      icon.className = "bi bi-eye";
     }
-
+  }
 }
-
 
 // ======================================================
 // BLOQUEAR FIRMA OPERADOR
 // ======================================================
 
 function bloquearFirmaOperador() {
+  const canvas = document.getElementById("sigCoordinador");
 
-    const canvas =
-        document.getElementById(
-            "sigCoordinador"
-        );
+  const btnLimpiar = document.getElementById("btnLimpiarFirmaCoordinador");
 
+  if (canvas) {
+    canvas.style.pointerEvents = "none";
 
-    const btnLimpiar =
-        document.getElementById(
-            "btnLimpiarFirmaCoordinador"
-        );
+    canvas.style.opacity = "0.55";
 
+    canvas.classList.add("firma-bloqueada");
+  }
 
-    if (canvas) {
-
-        canvas.style.pointerEvents =
-            "none";
-
-        canvas.style.opacity =
-            "0.55";
-
-        canvas.classList.add(
-            "firma-bloqueada"
-        );
-
-    }
-
-
-    if (btnLimpiar) {
-
-        btnLimpiar.disabled =
-            true;
-
-    }
-
+  if (btnLimpiar) {
+    btnLimpiar.disabled = true;
+  }
 }
-
 
 // ======================================================
 // DESBLOQUEAR FIRMA OPERADOR
 // ======================================================
 
 function desbloquearFirmaOperador() {
+  const canvas = document.getElementById("sigCoordinador");
 
-    const canvas =
-        document.getElementById(
-            "sigCoordinador"
-        );
+  const btnLimpiar = document.getElementById("btnLimpiarFirmaCoordinador");
 
+  if (canvas) {
+    canvas.style.pointerEvents = "auto";
 
-    const btnLimpiar =
-        document.getElementById(
-            "btnLimpiarFirmaCoordinador"
-        );
+    canvas.style.opacity = "1";
 
+    canvas.classList.remove("firma-bloqueada");
+  }
 
-    if (canvas) {
-
-        canvas.style.pointerEvents =
-            "auto";
-
-        canvas.style.opacity =
-            "1";
-
-        canvas.classList.remove(
-            "firma-bloqueada"
-        );
-
-    }
-
-
-    if (btnLimpiar) {
-
-        btnLimpiar.disabled =
-            false;
-
-    }
-
+  if (btnLimpiar) {
+    btnLimpiar.disabled = false;
+  }
 }
-
 
 // ======================================================
 // ESTADO OPERADOR
 // ======================================================
 
-function mostrarEstadoOperador(
-    mensaje,
-    tipo
-) {
+function mostrarEstadoOperador(mensaje, tipo) {
+  const estado = document.getElementById("estadoOperador");
 
-    const estado =
-        document.getElementById(
-            "estadoOperador"
-        );
+  if (!estado) {
+    return;
+  }
 
+  estado.textContent = mensaje;
 
-    if (!estado) {
-
-        return;
-
-    }
-
-
-    estado.textContent =
-        mensaje;
-
-
-    estado.className =
-        `small mb-3 text-${tipo}`;
-
+  estado.className = `small mb-3 text-${tipo}`;
 }
-
 
 // ======================================================
 // CREAR CANVAS DE FIRMA
 // ======================================================
 
 function initFirma(id) {
+  const c = document.getElementById(id);
 
-    const c =
-        document.getElementById(
-            id
-        );
+  if (!c) {
+    console.warn(`⚠️ Canvas ${id} no encontrado`);
 
+    return;
+  }
 
-    if (!c) {
+  const rect = c.getBoundingClientRect();
 
-        console.warn(
-            `⚠️ Canvas ${id} no encontrado`
-        );
+  c.width = rect.width;
 
-        return;
+  c.height = rect.height;
 
+  const ctx = c.getContext("2d", {
+    willReadFrequently: true,
+  });
+
+  ctx.fillStyle = "#fff";
+
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  let dibujando = false;
+
+  let lx;
+  let ly;
+
+  function pos(e) {
+    const r = c.getBoundingClientRect();
+
+    const scaleX = c.width / r.width;
+
+    const scaleY = c.height / r.height;
+
+    const x = e.clientX - r.left;
+
+    const y = e.clientY - r.top;
+
+    return {
+      x: x * scaleX,
+
+      y: y * scaleY,
+    };
+  }
+
+  c.addEventListener("pointerdown", (e) => {
+    if (id === "sigCoordinador" && !operadorValidado) {
+      return;
     }
 
+    dibujando = true;
 
-    const rect =
-        c.getBoundingClientRect();
+    ({ x: lx, y: ly } = pos(e));
+  });
 
-
-    c.width =
-        rect.width;
-
-
-    c.height =
-        rect.height;
-
-
-    const ctx =
-        c.getContext(
-            "2d",
-            {
-                willReadFrequently: true
-            }
-        );
-
-
-    ctx.fillStyle =
-        "#fff";
-
-
-    ctx.fillRect(
-        0,
-        0,
-        c.width,
-        c.height
-    );
-
-
-    let dibujando =
-        false;
-
-
-    let lx;
-    let ly;
-
-
-    function pos(e) {
-
-        const r =
-            c.getBoundingClientRect();
-
-
-        const scaleX =
-            c.width /
-            r.width;
-
-
-        const scaleY =
-            c.height /
-            r.height;
-
-
-        const x =
-            (
-                e.clientX
-            ) - r.left;
-
-
-        const y =
-            (
-                e.clientY
-            ) - r.top;
-
-
-        return {
-
-            x:
-                x * scaleX,
-
-            y:
-                y * scaleY
-
-        };
-
+  c.addEventListener("pointermove", (e) => {
+    if (!dibujando) {
+      return;
     }
 
+    const { x, y } = pos(e);
 
-    c.addEventListener(
-        "pointerdown",
-        (e) => {
+    ctx.beginPath();
 
-            if (
-                id === "sigCoordinador" &&
-                !operadorValidado
-            ) {
+    ctx.moveTo(lx, ly);
 
-                return;
+    ctx.lineTo(x, y);
 
-            }
+    ctx.strokeStyle = "#000";
 
+    ctx.lineWidth = 2;
 
-            dibujando =
-                true;
+    ctx.lineCap = "round";
 
+    ctx.stroke();
 
-            ({
-                x: lx,
-                y: ly
-            } = pos(e));
+    lx = x;
 
-        }
-    );
+    ly = y;
+  });
 
+  c.addEventListener("pointerup", () => {
+    dibujando = false;
+  });
 
-    c.addEventListener(
-        "pointermove",
-        (e) => {
-
-            if (!dibujando) {
-
-                return;
-
-            }
-
-
-            const {
-                x,
-                y
-            } =
-                pos(e);
-
-
-            ctx.beginPath();
-
-
-            ctx.moveTo(
-                lx,
-                ly
-            );
-
-
-            ctx.lineTo(
-                x,
-                y
-            );
-
-
-            ctx.strokeStyle =
-                "#000";
-
-
-            ctx.lineWidth =
-                2;
-
-
-            ctx.lineCap =
-                "round";
-
-
-            ctx.stroke();
-
-
-            lx =
-                x;
-
-            ly =
-                y;
-
-        }
-    );
-
-
-    c.addEventListener(
-        "pointerup",
-        () => {
-
-            dibujando =
-                false;
-
-        }
-    );
-
-
-    c.addEventListener(
-        "pointerleave",
-        () => {
-
-            dibujando =
-                false;
-
-        }
-    );
-
+  c.addEventListener("pointerleave", () => {
+    dibujando = false;
+  });
 }
-
 
 // ======================================================
 // CARGAR FIRMA DE PERSONA
 // ======================================================
 
-function cargarFirmaPersona(
-    nombrePersona,
-    idCanvas
-) {
+function cargarFirmaPersona(nombrePersona, idCanvas) {
+  const nombreNormalizado = normalizarNombre(nombrePersona);
 
-    const nombreNormalizado =
-        normalizarNombre(
-            nombrePersona
-        );
+  const archivoFirma = firmasPersonas[nombreNormalizado];
 
+  if (!archivoFirma) {
+    console.warn("⚠️ Firma no encontrada:", nombreNormalizado);
 
-    const archivoFirma =
-        firmasPersonas[
-            nombreNormalizado
-        ];
+    limpiarFirma(idCanvas);
 
+    return;
+  }
 
-    if (!archivoFirma) {
-
-        console.warn(
-            "⚠️ Firma no encontrada:",
-            nombreNormalizado
-        );
-
-
-        limpiarFirma(
-            idCanvas
-        );
-
-
-        return;
-
-    }
-
-
-    return dibujarFirmaDesdeUrl(
-        `${firmasBaseUrl}${archivoFirma}`,
-        idCanvas,
-        archivoFirma
-    );
-
+  return dibujarFirmaDesdeUrl(
+    `${firmasBaseUrl}${archivoFirma}`,
+    idCanvas,
+    archivoFirma,
+  );
 }
-
 
 // ======================================================
 // CARGAR FIRMA DE OPERADOR
 // ======================================================
 
-function cargarFirmaOperador(
-    operador,
-    idCanvas
-) {
+function cargarFirmaOperador(operador, idCanvas) {
+  if (operador?.firma) {
+    const urlFirma = construirUrlFirma(operador.firma);
 
-    if (operador?.firma) {
+    return dibujarFirmaDesdeUrl(urlFirma, idCanvas, operador.firma);
+  }
 
-        const urlFirma =
-            construirUrlFirma(
-                operador.firma
-            );
-
-
-        return dibujarFirmaDesdeUrl(
-            urlFirma,
-            idCanvas,
-            operador.firma
-        );
-
-    }
-
-
-    return cargarFirmaPersona(
-        operador?.nombre,
-        idCanvas
-    );
-
+  return cargarFirmaPersona(operador?.nombre, idCanvas);
 }
-
 
 // ======================================================
 // MOSTRAR LOADER EN VALIDACIÓN DE OPERADOR
 // ======================================================
 
 function mostrarLoaderValidacionOperador() {
+  const loaderTexto = document.getElementById("loaderProgress2");
 
-    const loaderTexto =
-        document.getElementById(
-            "loaderProgress2"
-        );
+  if (loaderTexto) {
+    loaderTexto.textContent = "Validando operador...";
+  }
 
-
-    if (loaderTexto) {
-
-        loaderTexto.textContent =
-            "Validando operador...";
-
-    }
-
-
-    mostrarLoadercompartir();
-
+  mostrarLoadercompartir();
 }
-
 
 // ======================================================
 // CONSTRUIR URL DE FIRMA
 // ======================================================
 
 function construirUrlFirma(firma) {
+  const firmaTexto = String(firma).trim();
 
-    const firmaTexto =
-        String(firma).trim();
+  if (/^https?:\/\//i.test(firmaTexto) || firmaTexto.startsWith("data:")) {
+    return firmaTexto;
+  }
 
-
-    if (
-        /^https?:\/\//i.test(firmaTexto) ||
-        firmaTexto.startsWith("data:")
-    ) {
-
-        return firmaTexto;
-
-    }
-
-
-    return `${firmasBaseUrl}${firmaTexto}`;
-
+  return `${firmasBaseUrl}${firmaTexto}`;
 }
-
 
 // ======================================================
 // DIBUJAR FIRMA DESDE URL
 // ======================================================
 
-function dibujarFirmaDesdeUrl(
-    url,
-    idCanvas,
-    nombreArchivo
-) {
+function dibujarFirmaDesdeUrl(url, idCanvas, nombreArchivo) {
+  const c = document.getElementById(idCanvas);
 
-    const c =
-        document.getElementById(
-            idCanvas
-        );
+  if (!c) {
+    return Promise.resolve(false);
+  }
 
+  return new Promise((resolve) => {
+    const img = new Image();
 
-    if (!c) {
+    img.onload = () => {
+      dibujarImagenEnCanvas(c, img);
 
-        return Promise.resolve(false);
+      c.classList.remove("border-danger");
 
-    }
+      resolve(true);
+    };
 
+    img.onerror = () => {
+      console.error("❌ No se pudo cargar firma:", nombreArchivo);
 
-    return new Promise((resolve) => {
+      limpiarFirma(idCanvas);
 
-        const img =
-            new Image();
+      resolve(false);
+    };
 
-
-    img.onload =
-        () => {
-
-            dibujarImagenEnCanvas(
-                c,
-                img
-            );
-
-
-            c.classList.remove(
-                "border-danger"
-            );
-
-            resolve(true);
-
-        };
-
-
-    img.onerror =
-        () => {
-
-            console.error(
-                "❌ No se pudo cargar firma:",
-                nombreArchivo
-            );
-
-
-            limpiarFirma(
-                idCanvas
-            );
-
-            resolve(false);
-
-        };
-
-
-    img.src =
-        url;
-
-    });
-
+    img.src = url;
+  });
 }
-
 
 // ======================================================
 // DIBUJAR IMAGEN EN CANVAS
 // ======================================================
 
-function dibujarImagenEnCanvas(
-    c,
-    img
-) {
+function dibujarImagenEnCanvas(c, img) {
+  const ctx = c.getContext("2d", {
+    willReadFrequently: true,
+  });
 
-    const ctx =
-        c.getContext(
-            "2d",
-            {
-                willReadFrequently: true
-            }
-        );
+  ctx.clearRect(0, 0, c.width, c.height);
 
+  ctx.fillStyle = "#fff";
 
-    ctx.clearRect(
-        0,
-        0,
-        c.width,
-        c.height
-    );
+  ctx.fillRect(0, 0, c.width, c.height);
 
+  const margen = 12;
 
-    ctx.fillStyle =
-        "#fff";
+  const maxW = c.width - margen * 2;
 
+  const maxH = c.height - margen * 2;
 
-    ctx.fillRect(
-        0,
-        0,
-        c.width,
-        c.height
-    );
+  const escala = Math.min(maxW / img.width, maxH / img.height);
 
+  const ancho = img.width * escala;
 
-    const margen =
-        12;
+  const alto = img.height * escala;
 
+  const x = (c.width - ancho) / 2;
 
-    const maxW =
-        c.width -
-        margen * 2;
+  const y = (c.height - alto) / 2;
 
-
-    const maxH =
-        c.height -
-        margen * 2;
-
-
-    const escala =
-        Math.min(
-            maxW / img.width,
-            maxH / img.height
-        );
-
-
-    const ancho =
-        img.width *
-        escala;
-
-
-    const alto =
-        img.height *
-        escala;
-
-
-    const x =
-        (
-            c.width -
-            ancho
-        ) / 2;
-
-
-    const y =
-        (
-            c.height -
-            alto
-        ) / 2;
-
-
-    ctx.drawImage(
-        img,
-        x,
-        y,
-        ancho,
-        alto
-    );
-
+  ctx.drawImage(img, x, y, ancho, alto);
 }
-
 
 // ======================================================
 // NORMALIZAR NOMBRE
 // ======================================================
 
-function normalizarNombre(
-    nombrePersona = ""
-) {
-
-    return nombrePersona
-        .trim()
-        .replace(/\s+/g, " ")
-        .toUpperCase();
-
+function normalizarNombre(nombrePersona = "") {
+  return nombrePersona.trim().replace(/\s+/g, " ").toUpperCase();
 }
-
 
 // ======================================================
 // LIMPIAR FIRMA
 // ======================================================
 
 export function limpiarFirma(id) {
+  const c = document.getElementById(id);
 
-    const c =
-        document.getElementById(
-            id
-        );
+  if (!c) {
+    return;
+  }
 
+  const ctx = c.getContext("2d");
 
-    if (!c) {
+  ctx.clearRect(0, 0, c.width, c.height);
 
-        return;
+  ctx.fillStyle = "#fff";
 
-    }
+  ctx.fillRect(0, 0, c.width, c.height);
 
+  if (id === "sigEjecutor") {
+    sigEjecutorData = null;
+  }
 
-    const ctx =
-        c.getContext(
-            "2d"
-        );
-
-
-    ctx.clearRect(
-        0,
-        0,
-        c.width,
-        c.height
-    );
-
-
-    ctx.fillStyle =
-        "#fff";
-
-
-    ctx.fillRect(
-        0,
-        0,
-        c.width,
-        c.height
-    );
-
-
-    if (
-        id ===
-        "sigEjecutor"
-    ) {
-
-        sigEjecutorData =
-            null;
-
-    }
-
-
-    if (
-        id ===
-        "sigCoordinador"
-    ) {
-
-        sigCoordinadorData =
-            null;
-
-    }
-
+  if (id === "sigCoordinador") {
+    sigCoordinadorData = null;
+  }
 }
-
 
 // ======================================================
 // LIMPIAR OPERADOR
 // ======================================================
 
 export function limpiarOperador() {
+  operadorValidado = null;
 
-    operadorValidado =
-        null;
+  const cedula = document.getElementById("cedulaOperador");
 
+  const password = document.getElementById("passwordOperador");
 
-    const cedula =
-        document.getElementById(
-            "cedulaOperador"
-        );
+  const nombre = document.getElementById("nombreOperador");
 
+  if (cedula) {
+    cedula.value = "";
+  }
 
-    const password =
-        document.getElementById(
-            "passwordOperador"
-        );
+  if (password) {
+    password.value = "";
 
+    password.type = "password";
+  }
 
-    const nombre =
-        document.getElementById(
-            "nombreOperador"
-        );
+  if (nombre) {
+    nombre.textContent = "";
+  }
 
+  mostrarEstadoOperador("", "muted");
 
-    if (cedula) {
+  limpiarFirma("sigCoordinador");
 
-        cedula.value =
-            "";
-
-    }
-
-
-    if (password) {
-
-        password.value =
-            "";
-
-        password.type =
-            "password";
-
-    }
-
-
-    if (nombre) {
-
-        nombre.textContent =
-            "";
-
-    }
-
-
-    mostrarEstadoOperador(
-        "",
-        "muted"
-    );
-
-
-    limpiarFirma(
-        "sigCoordinador"
-    );
-
-
-    bloquearFirmaOperador();
-
+  bloquearFirmaOperador();
 }
-
-
-
 
 // ------------------------------------------------------
 // ACTUALIZAR TÉCNICO SEGÚN CORREO DE FIREBASE
 // ------------------------------------------------------
 
 export function actualizarTecnicoPorCorreo(correo) {
+  const ejecutorSelect = document.getElementById("ejecutor");
 
-    const ejecutorSelect =
-        document.getElementById("ejecutor");
+  if (!ejecutorSelect) {
+    console.warn("⚠️ No se encontró el select #ejecutor");
+    return;
+  }
 
-    if (!ejecutorSelect) {
-        console.warn(
-            "⚠️ No se encontró el select #ejecutor"
-        );
-        return;
-    }
+  // -----------------------------------------------
+  // OBTENER TÉCNICO SEGÚN EL CORREO
+  // -----------------------------------------------
 
-    // -----------------------------------------------
-    // OBTENER TÉCNICO SEGÚN EL CORREO
-    // -----------------------------------------------
+  const nombreTecnico = obtenerNombreTecnico(correo);
 
-    const nombreTecnico =
-        obtenerNombreTecnico(correo);
+  if (!nombreTecnico) {
+    console.warn("⚠️ No existe técnico asociado al correo:", correo);
 
-    if (!nombreTecnico) {
+    ejecutorSelect.value = "";
 
-        console.warn(
-            "⚠️ No existe técnico asociado al correo:",
-            correo
-        );
+    limpiarFirma("sigEjecutor");
 
-        ejecutorSelect.value = "";
+    return;
+  }
 
-        limpiarFirma("sigEjecutor");
+  // -----------------------------------------------
+  // SELECCIONAR TÉCNICO INTERNAMENTE
+  // -----------------------------------------------
 
-        return;
-    }
+  ejecutorSelect.value = nombreTecnico;
 
-    // -----------------------------------------------
-    // SELECCIONAR TÉCNICO INTERNAMENTE
-    // -----------------------------------------------
+  // -----------------------------------------------
+  // MOSTRAR NOMBRE DEL TÉCNICO
+  // -----------------------------------------------
 
-    ejecutorSelect.value =
-        nombreTecnico;
+  const nombreTecnicoFirma = document.getElementById("nombreTecnicoFirma");
 
-    // -----------------------------------------------
-    // MOSTRAR NOMBRE DEL TÉCNICO
-    // -----------------------------------------------
+  if (nombreTecnicoFirma) {
+    nombreTecnicoFirma.textContent = nombreTecnico;
+  }
 
-    const nombreTecnicoFirma =
-        document.getElementById(
-            "nombreTecnicoFirma"
-        );
+  // -----------------------------------------------
+  // CARGAR FIRMA AUTOMÁTICAMENTE
+  // -----------------------------------------------
 
-    if (nombreTecnicoFirma) {
+  cargarFirmaPersona(nombreTecnico, "sigEjecutor");
 
-        nombreTecnicoFirma.textContent =
-            nombreTecnico;
-
-    }
-
-    // -----------------------------------------------
-    // CARGAR FIRMA AUTOMÁTICAMENTE
-    // -----------------------------------------------
-
-    cargarFirmaPersona(
-        nombreTecnico,
-        "sigEjecutor"
-    );
-
-    console.log(
-        "👤 Técnico identificado:",
-        nombreTecnico
-    );
+  console.log("👤 Técnico identificado:", nombreTecnico);
 }
 // ======================================================
 // EXPORTAR
 // ======================================================
 
-export {
-    sigEjecutorData,
-    sigCoordinadorData,
-};
+export { sigEjecutorData, sigCoordinadorData };
