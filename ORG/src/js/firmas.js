@@ -12,7 +12,10 @@ import {
   ocultarLoadercompartir,
 } from "./services/onedrive/loader.js";
 
-import { obtenerNombreTecnico } from "./services/firebase/tecnicos.js";
+import {
+  obtenerNombreTecnico,
+  obtenerTecnico
+} from "./services/firebase/tecnicos.js";
 
 import { auth } from "./services/firebase/auth.js";
 
@@ -724,3 +727,77 @@ export function actualizarTecnicoPorCorreo(correo) {
 // ======================================================
 
 export { sigEjecutorData, sigCoordinadorData };
+
+
+
+// ======================================================
+// OBTENER DATOS DE LAS FIRMAS
+// ======================================================
+
+// ======================================================
+// OBTENER DATOS DE LAS FIRMAS
+// ======================================================
+
+// ======================================================
+// OBTENER DATOS DE LAS FIRMAS
+// ======================================================
+
+export function obtenerDatosFirmas() {
+
+    const user = auth.currentUser;
+
+    // ==================================================
+    // TÉCNICO
+    // ==================================================
+
+    const correoTecnico =
+        user?.email?.trim().toLowerCase() || "";
+
+    const tecnico =
+        obtenerTecnico(correoTecnico);
+
+    const nombreTecnico =
+        document
+            .getElementById("nombreTecnicoFirma")
+            ?.textContent
+            ?.trim() ||
+        tecnico?.nombre ||
+        "";
+
+    const cargoTecnico =
+        tecnico?.cargo ||
+        "Técnico de Mantenimiento";
+
+
+    // ==================================================
+    // OPERADOR
+    // ==================================================
+
+    const nombreOperador =
+        document
+            .getElementById("nombreOperador")
+            ?.textContent
+            ?.trim() ||
+        "";
+
+    const cargoOperador =
+        operadorValidado?.cargo ||
+        "";
+
+
+    // ==================================================
+    // DEVOLVER INFORMACIÓN
+    // ==================================================
+
+    return {
+        tecnico: {
+            nombre: nombreTecnico,
+            cargo: cargoTecnico
+        },
+
+        operador: {
+            nombre: nombreOperador,
+            cargo: cargoOperador
+        }
+    };
+}

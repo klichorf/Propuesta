@@ -20,7 +20,10 @@ export async function generarHash(texto) {
   const data = encoder.encode(texto);
   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((byte) => byte.toString(16).padStart(2, "0")).join("");
+
+  return hashArray
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 // ======================================================
@@ -28,17 +31,24 @@ export async function generarHash(texto) {
 // ======================================================
 
 export async function validarOperador(cedula, password) {
+
   const cedulaNormalizada = String(cedula).trim();
+
   if (!cedulaNormalizada || !password) {
     return null;
   }
+
   try {
+
     console.log("🔎 Buscando operador:", cedulaNormalizada);
+
     const consulta = query(
       collection(db, "operadores"),
       where("Cédula", "==", cedulaNormalizada),
     );
+
     const resultado = await getDocs(consulta);
+
     if (resultado.empty) {
       console.warn("❌ No existe operador con esa cédula");
       return null;
@@ -46,9 +56,11 @@ export async function validarOperador(cedula, password) {
 
     const documento = resultado.docs[0];
     const operador = documento.data();
+
     // ----------------------------------------------
     // VERIFICAR SI ESTÁ ACTIVO
     // ----------------------------------------------
+
     if (operador.Activo !== true) {
       console.warn("⚠️ Operador inactivo");
       return null;
@@ -66,18 +78,29 @@ export async function validarOperador(cedula, password) {
 
     if (hashIngresado !== operador.passwordHash) {
       console.warn("❌ Contraseña incorrecta");
-
       return null;
     }
 
+    // ----------------------------------------------
+    // OPERADOR VALIDADO
+    // ----------------------------------------------
+
     console.log("✅ Operador validado:", operador.Nombre);
+    console.log("💼 Cargo:", operador["CARGO ACTUAL"]);
+
+    // ----------------------------------------------
+    // DEVOLVER DATOS
+    // ----------------------------------------------
 
     return {
       id: documento.id,
       cedula: operador.Cédula,
       nombre: operador.Nombre,
-       };
+      cargo: operador["CARGO ACTUAL"] || "",
+    };
+
   } catch (error) {
+
     console.error("❌ Error validando operador:", error);
 
     throw error;

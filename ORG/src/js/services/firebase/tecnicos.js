@@ -1,31 +1,39 @@
 // ======================================================
 // TÉCNICOS DEL SISTEMA
-// CORREO FIREBASE → NOMBRE DEL TÉCNICO
+// CORREO FIREBASE → DATOS DEL TÉCNICO
 // ======================================================
 
 const tecnicosPorCorreo = {
 
-    // =====================================================
-    // TÉCNICOS
-    // =====================================================
+    "klichorf123@hotmail.com": {
+        nombre: "JORGE LEONARDO RODRIGUEZ",
+        cargo: "TÉCNICO DE MANTENIMIENTO"
+    },
 
-    "klichorf123@hotmail.com":
-        "JORGE LEONARDO RODRIGUEZ",
+    "klichorf123@gmail.com": {
+        nombre: "PINEDA AGUDELO YONATAN STIVEN",
+        cargo: "TÉCNICO DE MANTENIMIENTO II"
+    },
 
-    "klichorf123@gmail.com":
-        "PINEDA AGUDELO YONATAN STIVEN",
+    "gchaparro@organizacioncardenas.com.co": {
+        nombre: "GERARDO MARIÑO",
+        cargo: "TÉCNICO DE MANTENIMIENTO"
+    },
 
-    "gchaparro@organizacioncardenas.com.co":
-        "GERARDO MARIÑO",
+    "lgrodriguez@organizacioncardenas.com.co": {
+        nombre: "NESTOR LEONARDO RODRIGUEZ",
+        cargo: "TÉCNICO DE MANTENIMIENTO"
+    },
 
-    "lgrodriguez@organizacioncardenas.com.co":
-        "NESTOR LEONARDO RODRIGUEZ",
+    "yspineda@organizacioncardenas.com.co": {
+        nombre: "PINEDA AGUDELO YONATAN STIVEN",
+        cargo: "TÉCNICO DE MANTENIMIENTO II"
+    },
 
-    "yspineda@organizacioncardenas.com.co":
-        "PINEDA AGUDELO YONATAN STIVEN",
-
-    "ascuervo@organizacioncardenas.com.co":
-        "ANGELO STIVEN CUERVO BELTRAN"
+    "ascuervo@organizacioncardenas.com.co": {
+        nombre: "ANGELO STIVEN CUERVO BELTRAN",
+        cargo: "TÉCNICO DE MANTENIMIENTO"
+    }
 
 };
 
@@ -34,10 +42,21 @@ const tecnicosPorCorreo = {
 // OBTENER TÉCNICO POR CORREO
 // ======================================================
 
-export function obtenerNombreTecnico(correo) {
+export function obtenerTecnico(correo) {
 
     return tecnicosPorCorreo[
         correo?.trim().toLowerCase()
     ] || null;
+
+}
+
+
+// ======================================================
+// COMPATIBILIDAD CON EL CÓDIGO EXISTENTE
+// ======================================================
+
+export function obtenerNombreTecnico(correo) {
+
+    return obtenerTecnico(correo)?.nombre || null;
 
 }
