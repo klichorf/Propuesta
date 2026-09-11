@@ -1,6 +1,6 @@
 import { datosPlantas,  } from "./selects.js";  
 import { supervisores } from "./datos/supervisores.js";
-
+import { cambiarFondo } from "./cambiarFondo.js";
 
 function initSelects() {
   const plantaSelect = document.getElementById("planta");
@@ -26,7 +26,7 @@ function initSelects() {
       areaSelect.appendChild(opt);
     });
 
-  
+    cambiarFondo(planta); 
 
     if (supervisorLabel) {
       supervisorLabel.textContent =

@@ -1,3 +1,7 @@
+/* =====================================================
+   MOSTRAR SKELETON
+   ===================================================== */
+
 export function mostrarSkeletonFoto() {
 
     const contenedor =
@@ -9,13 +13,31 @@ export function mostrarSkeletonFoto() {
     const imagen =
         document.getElementById("imagenActivoSeleccionado");
 
+    const contenedorImagen =
+        document.querySelector(".contenedor-imagen-activo");
+
+
+    // Mostrar sección completa
     contenedor?.classList.remove("d-none");
 
+
+    // Mostrar skeleton
     skeleton?.classList.remove("d-none");
 
+
+    // Ocultar imagen
     imagen?.classList.add("d-none");
+
+
+    // IMPORTANTE:
+    // ocultar el contenedor vacío mientras carga
+    contenedorImagen?.classList.add("d-none");
 }
 
+
+/* =====================================================
+   OCULTAR SKELETON
+   ===================================================== */
 
 export function ocultarSkeletonFoto() {
 
@@ -26,6 +48,10 @@ export function ocultarSkeletonFoto() {
 }
 
 
+/* =====================================================
+   MOSTRAR TÍTULO
+   ===================================================== */
+
 export function mostrarTituloFoto() {
 
     const contenedor =
@@ -34,13 +60,21 @@ export function mostrarTituloFoto() {
     const estado =
         document.getElementById("estadoFotoActivo");
 
+
     contenedor?.classList.remove("d-none");
 
+
     if (estado) {
-        estado.textContent = "FOTO DEL ACTIVO";
+
+        estado.textContent =
+            "FOTO DEL ACTIVO";
     }
 }
 
+
+/* =====================================================
+   MOSTRAR ESTADO
+   ===================================================== */
 
 export function mostrarEstadoFoto(mensaje) {
 
@@ -50,13 +84,21 @@ export function mostrarEstadoFoto(mensaje) {
     const estado =
         document.getElementById("estadoFotoActivo");
 
+
     contenedor?.classList.remove("d-none");
 
+
     if (estado) {
-        estado.textContent = mensaje;
+
+        estado.textContent =
+            mensaje;
     }
 }
 
+
+/* =====================================================
+   LIMPIAR FOTO DEL ACTIVO
+   ===================================================== */
 
 export function limpiarFotoActivo() {
 
@@ -72,24 +114,43 @@ export function limpiarFotoActivo() {
     const link =
         document.getElementById("linkFotoActivo");
 
+    const contenedorImagen =
+        document.querySelector(".contenedor-imagen-activo");
+
+
+    // Ocultar sección completa
     contenedor?.classList.add("d-none");
 
+
+    // Ocultar skeleton
     ocultarSkeletonFoto();
 
+
+    // Ocultar contenedor de imagen
+    contenedorImagen?.classList.add("d-none");
+
+
+    // Restaurar título
     if (estado) {
-        estado.textContent = "FOTO DEL ACTIVO";
+
+        estado.textContent =
+            "FOTO DEL ACTIVO";
     }
 
+
+    // Limpiar imagen
     if (imagen) {
 
         imagen.onload = null;
         imagen.onerror = null;
 
-        imagen.src = "";
+        imagen.removeAttribute("src");
 
         imagen.classList.add("d-none");
     }
 
+
+    // Limpiar enlace
     if (link) {
 
         link.removeAttribute("href");
@@ -98,6 +159,10 @@ export function limpiarFotoActivo() {
     }
 }
 
+
+/* =====================================================
+   CARGAR IMAGEN
+   ===================================================== */
 
 export function cargarImagen(
     urlImagen,
@@ -116,7 +181,18 @@ export function cargarImagen(
                 "linkFotoActivo"
             );
 
+        const contenedorImagen =
+            document.querySelector(
+                ".contenedor-imagen-activo"
+            );
+
+
+        /* -------------------------------------------------
+           VALIDAR ELEMENTO
+           ------------------------------------------------- */
+
         if (!imagen) {
+
             reject(
                 new Error(
                     "No existe #imagenActivoSeleccionado"
@@ -126,35 +202,93 @@ export function cargarImagen(
             return;
         }
 
+
+        /* -------------------------------------------------
+           CONFIGURAR ENLACE
+           ------------------------------------------------- */
+
         if (link && urlVista) {
 
-            link.href = urlVista;
+            link.href =
+                urlVista;
 
             link.classList.remove("d-none");
         }
+
+
+        /* -------------------------------------------------
+           MOSTRAR ESTADO DE CARGA
+           ------------------------------------------------- */
 
         mostrarTituloFoto();
 
         mostrarSkeletonFoto();
 
-        const imagenTemporal = new Image();
+
+        /* -------------------------------------------------
+           CARGA PREVIA DE IMAGEN
+           ------------------------------------------------- */
+
+        const imagenTemporal =
+            new Image();
+
 
         imagenTemporal.onload = () => {
 
-            imagen.src = urlImagen;
+            /* ---------------------------------------------
+               ASIGNAR IMAGEN
+               --------------------------------------------- */
+
+            imagen.src =
+                urlImagen;
+
+
+            /* ---------------------------------------------
+               OCULTAR SKELETON
+               --------------------------------------------- */
 
             ocultarSkeletonFoto();
 
+
+            /* ---------------------------------------------
+               MOSTRAR IMAGEN
+               --------------------------------------------- */
+
             imagen.classList.remove("d-none");
+
+
+            /* ---------------------------------------------
+               MOSTRAR CONTENEDOR
+               --------------------------------------------- */
+
+            contenedorImagen?.classList.remove(
+                "d-none"
+            );
+
 
             resolve();
         };
+
+
+        /* -------------------------------------------------
+           ERROR DE CARGA
+           ------------------------------------------------- */
 
         imagenTemporal.onerror = () => {
 
             ocultarSkeletonFoto();
 
-            imagen.classList.add("d-none");
+
+            imagen.classList.add(
+                "d-none"
+            );
+
+
+            // Mantener oculto el contenedor
+            contenedorImagen?.classList.add(
+                "d-none"
+            );
+
 
             reject(
                 new Error(
@@ -163,6 +297,12 @@ export function cargarImagen(
             );
         };
 
-        imagenTemporal.src = urlImagen;
+
+        /* -------------------------------------------------
+           INICIAR CARGA
+           ------------------------------------------------- */
+
+        imagenTemporal.src =
+            urlImagen;
     });
 }

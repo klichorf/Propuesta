@@ -3,9 +3,7 @@
    ===================================================== */
 
 .activo-foto {
-
     width: 100%;
-
     margin-top: 12px;
 }
 
@@ -15,13 +13,9 @@
    ===================================================== */
 
 #estadoFotoActivo {
-
     font-weight: 700;
-
     color: var(--ink-soft);
-
     text-transform: uppercase;
-
     letter-spacing: 0.04em;
 }
 
@@ -30,31 +24,6 @@
    CONTENEDOR DE LA IMAGEN
    ===================================================== */
 
-.contenedor-imagen-activo {
-
-    width: 500px;
-
-    height: 280px;
-
-    max-width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        #dee2e6;
-
-    border-radius: var(--radius);
-
-    background-color:
-        #f8f9fa;
-}
 
 
 /* =====================================================
@@ -62,105 +31,105 @@
    ===================================================== */
 
 #imagenActivoSeleccionado {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: contain;
-
     display: block;
 }
 
 
 /* =====================================================
-   SKELETON
+   SKELETON FOTO DEL ACTIVO
    ===================================================== */
 
 .skeleton-foto {
-
-    width: 500px;
-
-    max-width: 100%;
-}
-
-
-.skeleton-imagen {
-
     width: 100%;
+    padding: 15px;
 
-    height: 280px;
+    background: #f8f9fa;
 
-    border-radius: var(--radius);
+    border-radius: 10px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #eeeeee 25%,
-            #dddddd 37%,
-            #eeeeee 63%
-        );
+    overflow: hidden;
 
-    background-size: 400% 100%;
-
-    animation:
-        skeleton-loading
-        1.4s ease infinite;
-}
-
-
-.skeleton-line {
-
-    height: 14px;
-
-    margin-top: 12px;
-
-    border-radius: 6px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #eeeeee 25%,
-            #dddddd 37%,
-            #eeeeee 63%
-        );
-
-    background-size: 400% 100%;
-
-    animation:
-        skeleton-loading
-        1.4s ease infinite;
-}
-
-
-.skeleton-line-lg {
-
-    width: 70%;
-}
-
-
-.skeleton-line-sm {
-
-    width: 40%;
+    border: none;
+    box-shadow: none !important;
 }
 
 
 /* =====================================================
-   ANIMACIÓN
+   BLOQUE DE IMAGEN DEL SKELETON
+   ===================================================== */
+
+.skeleton-imagen {
+    width: 100%;
+    height: 180px;
+
+    border-radius: 8px;
+
+    background: linear-gradient(
+        90deg,
+        #e9ecef 25%,
+        #f5f5f5 50%,
+        #e9ecef 75%
+    );
+
+    background-size: 200% 100%;
+
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+
+    box-shadow: none !important;
+}
+
+
+/* =====================================================
+   LÍNEAS DEL SKELETON
+   ===================================================== */
+
+.skeleton-line {
+    height: 14px;
+
+    margin-top: 12px;
+
+    border-radius: 7px;
+
+    background: linear-gradient(
+        90deg,
+        #e9ecef 25%,
+        #f5f5f5 50%,
+        #e9ecef 75%
+    );
+
+    background-size: 200% 100%;
+
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+
+    box-shadow: none !important;
+}
+
+
+.skeleton-line-lg {
+    width: 80%;
+}
+
+
+.skeleton-line-sm {
+    width: 45%;
+}
+
+
+/* =====================================================
+   ANIMACIÓN ÚNICA DEL SKELETON
    ===================================================== */
 
 @keyframes skeleton-loading {
 
     0% {
-
-        background-position:
-            100% 0;
+        background-position: 200% 0;
     }
 
     100% {
-
-        background-position:
-            0 0;
+        background-position: -200% 0;
     }
 
 }
@@ -171,6 +140,25 @@
    ===================================================== */
 
 #linkFotoActivo {
-
     margin-top: 10px;
+}
+
+
+
+.contenedor-imagen-activo {
+    display: none;
+
+    width: 500px;
+    height: 280px;
+    max-width: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 1px solid #dee2e6;
+    border-radius: var(--radius);
+
+    background-color: #f8f9fa;
 }

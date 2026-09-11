@@ -18,29 +18,13 @@ import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";
 import { initQRScanner } from "./qr.js";
-import { toggleReportePlantas } from "./reporte/toggleReportePlantas.js";
-import { initFiltrosReporte } from "./reporte/filtrosReporte.js";
-import { initBotonGraficoPrincipal } from "./charts/botonGrafico.js";
 import { initBotones } from "./botones/botones.js";
-import { obtenerRegistros } from "./reporte/obtenerRegistros.js";
-import { generarHojaDeVida } from "./lifesheet/generarHojaDeVida.js";
-import { initFiltrosIntervenciones } from "./reporte/filtrosIntervenciones.js";
-import {
-    cambiarEstado,
-    eliminarCronograma
-} from "./cronograma/cronograma.js";
-import {
-    initCronograma,
-    initEventosCronograma
-} from "./cronograma/uiCronograma.js";
 import { initCodigoActivo } from "./codigoActivo.js";
 import {
     initFotoActivoSeleccionado
 } from "./activos/fotoActivoUI.js";
 
-import {
-    abrirDetalleIntervencion
-} from "./reporte/detalleIntervencion.js";
+
 
 
 // ------------------------------------------------------
@@ -81,67 +65,7 @@ function configurarFocoModales() {
 }
 
 
-// ------------------------------------------------------
-// FUNCIONES DISPONIBLES DESDE HTML
-// ------------------------------------------------------
 
-window.iniciar = async (id) => {
-
-    await cambiarEstado(id, "EN_PROCESO");
-    await initCronograma();
-
-};
-
-
-window.finalizar = async (id) => {
-
-    await cambiarEstado(id, "FINALIZADO");
-    await initCronograma();
-
-};
-
-
-window.eliminarCrono = async (id) => {
-
-    await eliminarCronograma(id);
-    await initCronograma();
-
-};
-
-
-window.abrirDetalle = abrirDetalleIntervencion;
-
-
-// ------------------------------------------------------
-// HACER DISPONIBLE abrirHojaDeVida()
-// PARA LOS BOTONES HTML
-// ------------------------------------------------------
-
-window.abrirHojaDeVida = async function (btn) {
-
-    const planta = btn.dataset.planta;
-    const area = btn.dataset.area;
-    const equipo = btn.dataset.equipo;
-
-    try {
-
-        const registros = await obtenerRegistros();
-
-        generarHojaDeVida(
-            registros,
-            planta,
-            area,
-            equipo
-        );
-
-    } catch (error) {
-
-        console.error(
-            "❌ Error al abrir hoja de vida:",
-            error
-        );
-    }
-};
 
 
 // ------------------------------------------------------
@@ -173,6 +97,8 @@ export async function inicializarAplicacion(correoUsuario = "") {
 
         initSelects(),
 
+      
+
         initTiempo(),
 
         cargarRepuestos(),
@@ -186,16 +112,6 @@ export async function inicializarAplicacion(correoUsuario = "") {
             generarPDF
         ),
 
-        initFiltrosReporte(),
-
-        toggleReportePlantas(),
-
-        initFiltrosIntervenciones(),
-
-        initCronograma(),
-
-        initEventosCronograma(),
-
         initCodigoActivo(),
 
         initFotoActivoSeleccionado()
@@ -206,11 +122,7 @@ export async function inicializarAplicacion(correoUsuario = "") {
     iniciarValidacionTiempoReal();
 
 
-    // --------------------------------------------------
-    // GRÁFICO PRINCIPAL
-    // --------------------------------------------------
 
-    initBotonGraficoPrincipal();
 
 
     console.log(

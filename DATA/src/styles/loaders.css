@@ -1,0 +1,169 @@
+/* =====================================================
+   LOADER GENERAL
+   ===================================================== */
+
+#loaderOverlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            248,
+            250,
+            252,
+            0.72
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease;
+
+    z-index: 9999;
+}
+
+
+#loaderOverlay.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.loaderSpinner {
+
+    width: 60px;
+
+    height: 60px;
+}
+
+
+/* =====================================================
+   LOADER DE PROGRESO
+   ===================================================== */
+
+#loaderOverlay2 {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            248,
+            250,
+            252,
+            0.72
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease;
+
+    z-index: 10000;
+}
+
+
+#loaderOverlay2.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.loader2-container {
+
+    text-align: center;
+
+    background: white;
+
+    padding:
+        25px 35px;
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
+}
+
+
+#loaderProgress2 {
+
+    font-size: 1.1rem;
+
+    font-weight: bold;
+
+    color: #444;
+
+    margin-bottom: 15px;
+
+    display: block;
+}
+
+
+.progressBar2 {
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #e2e2e2;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-top: 10px;
+}
+
+
+.progressBar2-fill {
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand),
+            var(--success)
+        );
+
+    border-radius: 10px;
+
+    transition:
+        width 0.25s ease;
+}

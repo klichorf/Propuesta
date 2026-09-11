@@ -4,7 +4,7 @@
 
 import { initDescargar } from "./descargar.js";
 import { initCompartir } from "./compartir/compartir.js";   // ✔️ IMPORTA LA FUNCIÓN CORRECTA
-import { crearCronograma } from "../cronograma/cronograma.js";
+
 
 
 export function initBotones(validarFormulario, generarPDF) {
@@ -23,25 +23,6 @@ document.getElementById("btnReporteIntervenciones")
     });
 
     
-async function guardarCronograma() {
-
-    const data = {
-        equipo: document.getElementById("equipo").value,
-        area: document.getElementById("area").value,
-        planta: document.getElementById("planta").value,
-        fechaInicio: document.getElementById("fechaInicio").value,
-        fechaFin: document.getElementById("fechaFin").value,
-        tipo: document.getElementById("tipoMantenimiento").value,
-        ejecutor: document.getElementById("ejecutor").value,
-        criticidad: "MEDIA"
-    };
-
-    const ok = await crearCronograma(data);
-
-    if (ok) {
-        alert("✅ Guardado");
-    }
-}
 
 
     
