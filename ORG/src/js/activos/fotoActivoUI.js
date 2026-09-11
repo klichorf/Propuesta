@@ -11,10 +11,9 @@ import {
     mostrarTituloFoto,
     mostrarEstadoFoto,
     limpiarFotoActivo,
-    cargarImagen
+    cargarImagen,
+    actualizarInfoFoto
 } from "./fotoActivo.js";
-
-
 export function initFotoActivoSeleccionado() {
 
     const equipoSelect =
@@ -55,8 +54,15 @@ async function cargarFotoActivoSeleccionado() {
     const equipoSelect =
         document.getElementById("equipo");
 
+    const plantaSelect =
+        document.getElementById("planta");
+
+    const areaSelect =
+        document.getElementById("area");
+
+
     const planta =
-        document.getElementById("planta")?.value || "";
+        plantaSelect?.value || "";
 
     const codigoEquipo =
         equipoSelect?.value || "";
@@ -64,8 +70,16 @@ async function cargarFotoActivoSeleccionado() {
     const nombreEquipo =
         equipoSelect
             ?.selectedOptions?.[0]
-            ?.textContent || "";
+            ?.textContent
+            ?.trim() || "";
 
+    const area =
+        areaSelect?.value || "";
+
+
+    /* =================================================
+       LIMPIAR FOTO ANTERIOR
+       ================================================= */
 
     limpiarFotoActivo();
 
@@ -75,8 +89,20 @@ async function cargarFotoActivoSeleccionado() {
     }
 
 
-    // Mostrar inmediatamente el título
-    // y el skeleton
+    /* =================================================
+       ACTUALIZAR INFORMACIÓN DE LA CARD
+       ================================================= */
+
+    actualizarInfoFoto(
+        nombreEquipo,
+        area,
+        planta
+    );
+
+
+    /* =================================================
+       MOSTRAR TÍTULO Y SKELETON
+       ================================================= */
 
     mostrarTituloFoto();
 
@@ -85,9 +111,17 @@ async function cargarFotoActivoSeleccionado() {
 
     try {
 
+        /* =============================================
+           OBTENER ACTIVOS
+           ============================================= */
+
         const activos =
             await obtenerActivos();
 
+
+        /* =============================================
+           BUSCAR ACTIVO
+           ============================================= */
 
         const activo =
             activos.find(item =>
@@ -99,6 +133,10 @@ async function cargarFotoActivoSeleccionado() {
                 )
             );
 
+
+        /* =============================================
+           ACTIVO NO ENCONTRADO
+           ============================================= */
 
         if (!activo) {
 
@@ -112,11 +150,19 @@ async function cargarFotoActivoSeleccionado() {
         }
 
 
+        /* =============================================
+           OBTENER URL DE LA FOTO
+           ============================================= */
+
         const {
             urlVista,
             urlImagen
         } = obtenerUrlsFoto(activo);
 
+
+        /* =============================================
+           FOTO NO DISPONIBLE
+           ============================================= */
 
         if (!urlVista || !urlImagen) {
 
@@ -129,6 +175,10 @@ async function cargarFotoActivoSeleccionado() {
             return;
         }
 
+
+        /* =============================================
+           CARGAR IMAGEN
+           ============================================= */
 
         await cargarImagen(
             urlImagen,
@@ -143,7 +193,9 @@ async function cargarFotoActivoSeleccionado() {
             error
         );
 
+
         ocultarSkeletonFoto();
+
 
         mostrarEstadoFoto(
             "No se pudo cargar la foto."

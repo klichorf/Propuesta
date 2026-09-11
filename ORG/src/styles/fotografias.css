@@ -4,7 +4,60 @@
 
 .activo-foto {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   CARD PRINCIPAL
+   ===================================================== */
+
+.foto-activo-card {
+
+    width: 100%;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.08);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.foto-activo-card:hover {
+
+    box-shadow:
+        0 12px 32px rgba(15, 23, 42, 0.12);
+
+}
+
+
+/* =====================================================
+   ENCABEZADO
+   ===================================================== */
+
+.foto-activo-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
 }
 
 
@@ -12,11 +65,95 @@
    TÍTULO
    ===================================================== */
 
-#estadoFotoActivo {
+.foto-activo-titulo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.foto-activo-icono {
+
+    width: 52px;
+
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    color: #ffffff;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.25);
+}
+
+
+.foto-activo-title {
+
+    font-size: 18px;
+
     font-weight: 700;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+
+    color: #172554;
+
+    letter-spacing: 0.02em;
+}
+
+
+.foto-activo-subtitle {
+
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =====================================================
+   BADGE
+   ===================================================== */
+
+.foto-activo-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border-radius: 999px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
 }
 
 
@@ -24,59 +161,317 @@
    CONTENEDOR DE LA IMAGEN
    ===================================================== */
 
+.contenedor-imagen-activo {
 
+    position: relative;
 
-/* =====================================================
-   IMAGEN DEL ACTIVO
-   ===================================================== */
-
-#imagenActivoSeleccionado {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+
+    height: 320px;
+
+    max-width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: #f1f5f9;
+
+    border: 1px solid #dbe3ee;
+
+    box-shadow:
+        0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
 
 /* =====================================================
-   SKELETON FOTO DEL ACTIVO
+   IMAGEN
+   ===================================================== */
+
+#imagenActivoSeleccionado {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+/* Efecto suave al pasar el cursor */
+
+.contenedor-imagen-activo:hover
+#imagenActivoSeleccionado {
+
+    transform: scale(1.02);
+}
+
+
+/* =====================================================
+   BOTÓN VER IMAGEN
+   ===================================================== */
+
+.foto-activo-ver {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    z-index: 3;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 999px;
+
+    background: rgba(15, 23, 42, 0.78);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.foto-activo-ver:hover {
+
+    background: rgba(15, 23, 42, 0.92);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   INFORMACIÓN SOBRE LA IMAGEN
+   ===================================================== */
+
+.foto-activo-overlay {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(15, 23, 42, 0.90),
+            rgba(15, 23, 42, 0.45),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+.foto-activo-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #ffffff;
+}
+
+
+.foto-activo-info-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(6px);
+
+    font-size: 18px;
+}
+
+
+.foto-activo-info strong {
+
+    display: block;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.foto-activo-info span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* =====================================================
+   CAJA INFORMATIVA
+   ===================================================== */
+
+.foto-activo-info-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 16px;
+
+    padding: 14px 16px;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+}
+
+
+.foto-activo-info-box-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #2563eb;
+
+    font-size: 21px;
+}
+
+
+.foto-activo-info-title {
+
+    color: #172554;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.foto-activo-info-text {
+
+    margin-top: 2px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   SKELETON
    ===================================================== */
 
 .skeleton-foto {
+
     width: 100%;
-    padding: 15px;
 
-    background: #f8f9fa;
+    padding: 0;
 
-    border-radius: 10px;
+    background: transparent;
+
+    border-radius: 14px;
 
     overflow: hidden;
 
     border: none;
+
     box-shadow: none !important;
 }
 
 
-/* =====================================================
-   BLOQUE DE IMAGEN DEL SKELETON
-   ===================================================== */
+/* Imagen del skeleton */
 
 .skeleton-imagen {
+
     width: 100%;
-    height: 180px;
 
-    border-radius: 8px;
+    height: 320px;
 
-    background: linear-gradient(
-        90deg,
-        #e9ecef 25%,
-        #f5f5f5 50%,
-        #e9ecef 75%
-    );
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e9eef5 25%,
+            #f7f9fc 50%,
+            #e9eef5 75%
+        );
 
     background-size: 200% 100%;
 
-    animation: skeleton-loading 1.5s ease-in-out infinite;
+    animation:
+        skeleton-loading 1.5s
+        ease-in-out infinite;
 
     box-shadow: none !important;
 }
@@ -87,39 +482,45 @@
    ===================================================== */
 
 .skeleton-line {
+
     height: 14px;
 
     margin-top: 12px;
 
     border-radius: 7px;
 
-    background: linear-gradient(
-        90deg,
-        #e9ecef 25%,
-        #f5f5f5 50%,
-        #e9ecef 75%
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #e9eef5 25%,
+            #f7f9fc 50%,
+            #e9eef5 75%
+        );
 
     background-size: 200% 100%;
 
-    animation: skeleton-loading 1.5s ease-in-out infinite;
+    animation:
+        skeleton-loading 1.5s
+        ease-in-out infinite;
 
     box-shadow: none !important;
 }
 
 
 .skeleton-line-lg {
+
     width: 80%;
 }
 
 
 .skeleton-line-sm {
+
     width: 45%;
 }
 
 
 /* =====================================================
-   ANIMACIÓN ÚNICA DEL SKELETON
+   ANIMACIÓN SKELETON
    ===================================================== */
 
 @keyframes skeleton-loading {
@@ -136,29 +537,136 @@
 
 
 /* =====================================================
-   ENLACE SHAREPOINT
+   RESPONSIVE
    ===================================================== */
 
-#linkFotoActivo {
-    margin-top: 10px;
-}
+@media (max-width: 576px) {
+
+    .foto-activo-card {
+
+        padding: 12px;
+
+        border-radius: 15px;
+    }
 
 
+    .foto-activo-header {
 
-.contenedor-imagen-activo {
-    
+        align-items: flex-start;
 
-    width: 500px;
-    height: 280px;
-    max-width: 100%;
+        margin-bottom: 14px;
+    }
 
-    align-items: center;
-    justify-content: center;
 
-    overflow: hidden;
+    .foto-activo-icono {
 
-    border: 1px solid #dee2e6;
-    border-radius: var(--radius);
+        width: 44px;
 
-    background-color: #f8f9fa;
+        height: 44px;
+
+        border-radius: 12px;
+
+        font-size: 19px;
+    }
+
+
+    .foto-activo-title {
+
+        font-size: 16px;
+    }
+
+
+    .foto-activo-subtitle {
+
+        font-size: 11px;
+
+        line-height: 1.4;
+    }
+
+
+    .foto-activo-badge {
+
+        padding: 7px 9px;
+
+        font-size: 11px;
+    }
+
+
+    .foto-activo-badge i {
+
+        display: none;
+    }
+
+
+    .contenedor-imagen-activo {
+
+        height: 280px;
+
+        border-radius: 12px;
+    }
+
+
+    #imagenActivoSeleccionado {
+
+        border-radius: 12px;
+    }
+
+
+    .skeleton-imagen {
+
+        height: 280px;
+
+        border-radius: 12px;
+    }
+
+
+    .foto-activo-ver {
+
+        top: 10px;
+
+        right: 10px;
+
+        padding: 8px 11px;
+
+        font-size: 12px;
+    }
+
+
+    .foto-activo-overlay {
+
+        padding: 13px;
+    }
+
+
+    .foto-activo-info strong {
+
+        font-size: 14px;
+    }
+
+
+    .foto-activo-info span {
+
+        font-size: 11px;
+    }
+
+
+    .foto-activo-info-box {
+
+        padding: 11px;
+
+        gap: 9px;
+    }
+
+
+    .foto-activo-info-title {
+
+        font-size: 12px;
+    }
+
+
+    .foto-activo-info-text {
+
+        font-size: 11px;
+    }
+
 }

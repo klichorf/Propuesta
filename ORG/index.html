@@ -214,21 +214,137 @@
                             <option disabled selected></option>
                         </select>
 
-                        <div id="vistaFotoActivo" class="activo-foto mt-3 d-none">
-                            <div id="estadoFotoActivo" class="small text-muted mb-2">
-                                FOTO DEL ACTIVO
-                            </div>
+<!-- =====================================================
+     FOTO DEL ACTIVO
+     ===================================================== -->
 
-                            <div id="skeletonFotoActivo" class="skeleton-foto">
-                                <div class="skeleton-imagen"></div>
-                                <div class="skeleton-line skeleton-line-lg"></div>
-                                <div class="skeleton-line skeleton-line-sm"></div>
-                            </div>
+<div id="vistaFotoActivo" class="activo-foto mt-3 d-none">
 
-                            <div class="contenedor-imagen-activo">
-                                <img id="imagenActivoSeleccionado" alt="Foto del activo seleccionado" />
-                            </div>
-                        </div>
+    <div class="foto-activo-card">
+
+        <!-- ENCABEZADO DE LA CARD -->
+        <div class="foto-activo-header">
+
+            <div class="foto-activo-titulo">
+
+                <div class="foto-activo-icono">
+                    <i class="bi bi-camera-fill"></i>
+                </div>
+
+                <div>
+                    <div id="estadoFotoActivo" class="foto-activo-title">
+                        FOTO DEL ACTIVO
+                    </div>
+
+                    <div class="foto-activo-subtitle">
+                        Imagen de referencia del equipo seleccionado
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="foto-activo-badge">
+                <i class="bi bi-info-circle"></i>
+                Vista previa
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SKELETON
+             ================================================= -->
+
+        <div id="skeletonFotoActivo" class="skeleton-foto">
+
+            <div class="skeleton-imagen"></div>
+
+            <div class="skeleton-line skeleton-line-lg"></div>
+
+            <div class="skeleton-line skeleton-line-sm"></div>
+
+        </div>
+
+
+        <!-- =================================================
+             IMAGEN
+             ================================================= -->
+
+        <div class="contenedor-imagen-activo">
+
+            <img
+                id="imagenActivoSeleccionado"
+                alt="Foto del activo seleccionado"
+            />
+
+
+            <!-- BOTÓN VER IMAGEN -->
+            <a
+                id="linkFotoActivo"
+                class="foto-activo-ver"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <i class="bi bi-search"></i>
+                Ver imagen
+            </a>
+
+
+            <!-- INFORMACIÓN SOBRE LA FOTO -->
+            <div class="foto-activo-overlay">
+
+                <div class="foto-activo-info">
+
+                    <div class="foto-activo-info-icon">
+                        <i class="bi bi-image"></i>
+                    </div>
+
+                    <div>
+                        <strong id="infoEquipoFoto">
+                            Equipo seleccionado
+                        </strong>
+
+                        <span id="infoUbicacionFoto">
+                            Activo de mantenimiento
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             INFORMACIÓN
+             ================================================= -->
+
+        <div class="foto-activo-info-box">
+
+            <div class="foto-activo-info-box-icon">
+                <i class="bi bi-info-circle"></i>
+            </div>
+
+            <div>
+                <div class="foto-activo-info-title">
+                    Esta imagen corresponde al activo seleccionado.
+                </div>
+
+                <div class="foto-activo-info-text">
+                    Haz clic en la imagen para verla en tamaño completo.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
                     </div>
 
                     <div class="mt-3">

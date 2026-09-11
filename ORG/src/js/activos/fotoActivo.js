@@ -29,8 +29,7 @@ export function mostrarSkeletonFoto() {
     imagen?.classList.add("d-none");
 
 
-    // IMPORTANTE:
-    // ocultar el contenedor vacío mientras carga
+    // Ocultar contenedor de imagen
     contenedorImagen?.classList.add("d-none");
 }
 
@@ -97,6 +96,48 @@ export function mostrarEstadoFoto(mensaje) {
 
 
 /* =====================================================
+   ACTUALIZAR INFORMACIÓN DEL ACTIVO
+   ===================================================== */
+
+export function actualizarInfoFoto(
+    equipo = "",
+    area = "",
+    planta = ""
+) {
+
+    const infoEquipo =
+        document.getElementById("infoEquipoFoto");
+
+    const infoUbicacion =
+        document.getElementById("infoUbicacionFoto");
+
+
+    if (infoEquipo) {
+
+        infoEquipo.textContent =
+            equipo || "Equipo seleccionado";
+    }
+
+
+    if (infoUbicacion) {
+
+        const ubicacion = [
+            area,
+            planta
+                ? `Planta ${planta}`
+                : ""
+        ]
+            .filter(Boolean)
+            .join(" · ");
+
+
+        infoUbicacion.textContent =
+            ubicacion || "Activo de mantenimiento";
+    }
+}
+
+
+/* =====================================================
    LIMPIAR FOTO DEL ACTIVO
    ===================================================== */
 
@@ -116,6 +157,12 @@ export function limpiarFotoActivo() {
 
     const contenedorImagen =
         document.querySelector(".contenedor-imagen-activo");
+
+    const infoEquipo =
+        document.getElementById("infoEquipoFoto");
+
+    const infoUbicacion =
+        document.getElementById("infoUbicacionFoto");
 
 
     // Ocultar sección completa
@@ -156,6 +203,21 @@ export function limpiarFotoActivo() {
         link.removeAttribute("href");
 
         link.classList.add("d-none");
+    }
+
+
+    // Restaurar información
+    if (infoEquipo) {
+
+        infoEquipo.textContent =
+            "Equipo seleccionado";
+    }
+
+
+    if (infoUbicacion) {
+
+        infoUbicacion.textContent =
+            "Activo de mantenimiento";
     }
 }
 
@@ -254,7 +316,9 @@ export function cargarImagen(
                MOSTRAR IMAGEN
                --------------------------------------------- */
 
-            imagen.classList.remove("d-none");
+            imagen.classList.remove(
+                "d-none"
+            );
 
 
             /* ---------------------------------------------
@@ -284,7 +348,6 @@ export function cargarImagen(
             );
 
 
-            // Mantener oculto el contenedor
             contenedorImagen?.classList.add(
                 "d-none"
             );
