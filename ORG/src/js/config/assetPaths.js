@@ -3,4 +3,11 @@ const imageUrl = (fileName) =>
 
 export const assetPaths = {
 
+  images: {
+
+    // Logo utilizado en los informes PDF
+    logo: imageUrl("../../assets/images/logo.png")
+
+  }
+
 };
