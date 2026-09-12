@@ -10,23 +10,6 @@ import { initCompartir } from "./compartir/compartir.js";   // ✔️ IMPORTA LA
 export function initBotones(validarFormulario, generarPDF) {
     initDescargar(validarFormulario, generarPDF);
     initCompartir(validarFormulario, generarPDF); // ✔️ LLAMAS A LA FUNCIÓN IMPORTADA
-
-   
-document.getElementById("btnReporteIntervenciones")
-    ?.addEventListener("click", async () => {
-
-        console.log("🟢 CLICK REPORTE INTERVENCIONES");
-
-        const { generarReporteIntervenciones } = await import("../reporte/reporteIntervenciones.js");
-
-        await generarReporteIntervenciones(); // 👈 IMPORTANTE (await)
-    });
-
-    
-
-
-    
-
     }
 
 

@@ -1,4 +1,4 @@
-import { limpiarOperador } from "../firmas.js";
+import { limpiarOperador } from "../firmas/firmas.js";
 import { imagesData } from "../fotos.js";
 
 

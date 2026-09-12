@@ -6,9 +6,9 @@ import { initFotos } from "./fotos.js";
 import {
     initFirmas,
     actualizarTecnicoPorCorreo
-} from "./firmas.js";
+} from "./firmas/firmas.js";
 
-import { generarPDF } from "./pdf.js";
+import { generarPDF } from "./pdf/pdf.js";
 import { validarFormulario } from "./validación/validarFormulario.js";
 import {
     iniciarValidacionTiempoReal
