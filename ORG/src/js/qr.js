@@ -1,4 +1,4 @@
-import { seleccionarPorCodigo } from "./seleccionadorPorCodigo.js";
+import { seleccionarPorCodigo } from "./datos/logica/seleccionadorPorCodigo.js";
 
 export function initQRScanner() {
   const btnQR = document.getElementById("btnQR");

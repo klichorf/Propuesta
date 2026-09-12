@@ -13,7 +13,7 @@ import { validarFormulario } from "./validación/validarFormulario.js";
 import {
     iniciarValidacionTiempoReal
 } from "./validación/validacionTiempoReal.js";
-import { initSelects } from "./initSelects.js";
+import { initSelects } from "./datos/logica/initSelects.js";
 import { initTiempo } from "./tiempo.js";
 import { cargarRepuestos } from "./repuestos.js";
 import { initBuscadorRepuestos } from "./buscadorRepuestos.js";

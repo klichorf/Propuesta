@@ -1,4 +1,4 @@
-import { datosPlantas } from "./selects.js";
+import { datosPlantas } from "../datosPlantas.js";
 
 let actualizandoSelects = false;
 
