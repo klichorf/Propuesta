@@ -148,25 +148,3 @@ function fileToDataURL(file, max = 1024) {
 export { initFotos, imagesData };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

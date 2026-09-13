@@ -1,24 +1,21 @@
-
-
-
-import { listaRepuestos } from "./repuestos.js";
+import { listaRepuestos } from './repuestos.js';
 
 // ------------------------------------------------------
 // FUNCIÓN PRINCIPAL: INICIALIZAR BUSCADOR DE REPUESTOS
 // ------------------------------------------------------
 export function initBuscadorRepuestos() {
-  const input = document.getElementById("buscadorRepuestos");
-  const sugerencias = document.getElementById("sugerencias");
-  const textarea = document.getElementById("repuestos");
-  const categoriaSelect = document.getElementById("categoriaRepuesto");
+  const input = document.getElementById('buscadorRepuestos');
+  const sugerencias = document.getElementById('sugerencias');
+  const textarea = document.getElementById('repuestos');
+  const categoriaSelect = document.getElementById('categoriaRepuesto');
 
   if (!input || !sugerencias || !textarea) return;
 
   // 🔹 Cada vez que el usuario escribe algo...
-  input.addEventListener("input", () => {
+  input.addEventListener('input', () => {
     const valor = input.value.toLowerCase().trim();
     const categoria = categoriaSelect.value;
-    sugerencias.innerHTML = "";
+    sugerencias.innerHTML = '';
 
     if (valor.length === 0) return;
 
@@ -33,20 +30,18 @@ export function initBuscadorRepuestos() {
     }
 
     // 🔹 Filtrar por texto ingresado
-    const coincidencias = repuestosFiltrados.filter(r =>
-      r.toLowerCase().includes(valor)
-    );
+    const coincidencias = repuestosFiltrados.filter((r) => r.toLowerCase().includes(valor));
 
     // 🔹 Mostrar sugerencias
-    coincidencias.slice(0, 5).forEach(item => {
-      const div = document.createElement("div");
-      div.classList.add("sugerencia-item");
+    coincidencias.slice(0, 5).forEach((item) => {
+      const div = document.createElement('div');
+      div.classList.add('sugerencia-item');
       div.textContent = item;
 
-      div.addEventListener("click", () => {
-        textarea.value += (textarea.value ? "\n" : "") + item;
-        input.value = "";
-        sugerencias.innerHTML = "";
+      div.addEventListener('click', () => {
+        textarea.value += (textarea.value ? '\n' : '') + item;
+        input.value = '';
+        sugerencias.innerHTML = '';
       });
 
       sugerencias.appendChild(div);
@@ -54,13 +49,13 @@ export function initBuscadorRepuestos() {
   });
 
   // 🔹 Ocultar sugerencias al perder el foco
-  input.addEventListener("blur", () => {
-    setTimeout(() => (sugerencias.innerHTML = ""), 200);
+  input.addEventListener('blur', () => {
+    setTimeout(() => (sugerencias.innerHTML = ''), 200);
   });
 
   // 🔹 Limpiar sugerencias si cambia la categoría
-  categoriaSelect.addEventListener("change", () => {
-    sugerencias.innerHTML = "";
-    input.value = "";
+  categoriaSelect.addEventListener('change', () => {
+    sugerencias.innerHTML = '';
+    input.value = '';
   });
 }
