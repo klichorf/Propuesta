@@ -19,8 +19,8 @@ const firmasPersonas = {
     "QUEVEDO LADINO MARIO":
         "quevedo-ladino-mario.png",
 
-    "LUIS GABRIEL RODRUIGUEZ":
-        "luis-gabriel-rodruiguez.png",
+    "LUIS GABRIEL RODRIGUEZ":
+        "luis-gabriel-rodriguez.png",
 
     "NESTOR LEONARDO RODRIGUEZ":
         "nestor-leonardo-rodriguez.png",

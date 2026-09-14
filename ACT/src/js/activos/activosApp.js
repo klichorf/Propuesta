@@ -3,8 +3,8 @@ import { subirAOneDriveConProgreso } from "../services/onedrive/onedrive.js";
 import { normalizarUrlSharePoint } from "../services/onedrive/sharepointUrls.js";
 import { mostrarToast } from "../toast.js";
 import { sanitize, convertirArchivoABase64 } from "../botones/utils.js";
-//import { datosPlantas } from "../selects.js";
-import { datosPlantas } from "../../../../ORG/src/js/selects.js";
+
+import { datosPlantas } from "../../../../ORG/src/js/datos/datosPlantas.js";
 
 const campos = [
   "planta",

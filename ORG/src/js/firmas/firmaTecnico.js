@@ -110,6 +110,29 @@ export function cargarFirmaPersona(
     const nombreNormalizado =
         normalizarNombre(nombre);
 
+         console.log("🔎 [FIRMA] Nombre original:", nombre);
+    console.log("🔎 [FIRMA] Nombre normalizado:", nombreNormalizado);
+    console.log(
+        "🔎 [FIRMA] Existe clave:",
+        Object.prototype.hasOwnProperty.call(
+            firmasPersonas,
+            nombreNormalizado
+        )
+    );
+
+console.log(
+    "📦 [FIRMAS] firmasPersonas:",
+    firmasPersonas
+);
+
+console.log(
+    "🔑 [FIRMAS] LUIS:",
+    firmasPersonas["LUIS GABRIEL RODRIGUEZ"]
+);
+
+
+
+
     const archivo =
         firmasPersonas[nombreNormalizado];
 
