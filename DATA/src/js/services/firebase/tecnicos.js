@@ -19,7 +19,7 @@ const tecnicosPorCorreo = {
         "GERARDO MARIÑO",
 
     "lgrodriguez@organizacioncardenas.com.co":
-        "NESTOR LEONARDO RODRIGUEZ",
+        "LUIS GABRIEL RODRIGUEZ",
 
     "yspineda@organizacioncardenas.com.co":
         "PINEDA AGUDELO YONATAN STIVEN",

@@ -21,8 +21,8 @@ const tecnicosPorCorreo = {
     },
 
     "lgrodriguez@organizacioncardenas.com.co": {
-        nombre: "NESTOR LEONARDO RODRIGUEZ",
-        cargo: "TÉCNICO DE MANTENIMIENTO"
+        nombre: "LUIS GABRIEL RODRIGUEZ",
+        cargo: "TÉCNICO DE MANTENIMIENTO II"
     },
 
     "yspineda@organizacioncardenas.com.co": {
