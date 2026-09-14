@@ -1,0 +1,117 @@
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+.drop-zone {
+    display: block;
+}
+
+@media (max-width: 576px) {
+
+    #dropZone {
+        display: none;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+        max-width: none;
+    }
+
+    #contenedorPrincipal {
+        width: 100%;
+        margin-top: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    #formulario {
+        width: 100%;
+        padding: 16px !important;
+        border-radius: var(--radius);
+        box-shadow: 0 5px 20px rgba(16, 42, 67, 0.06);
+    }
+
+    .form-control,
+    .form-select,
+    input,
+    select {
+        min-height: 48px;
+    }
+
+    textarea.form-control,
+    textarea {
+        min-height: 120px;
+    }
+
+    .row.g-3 {
+        --bs-gutter-x: 0.75rem;
+        --bs-gutter-y: 0.9rem;
+    }
+
+    .contenedor-imagen-activo {
+        width: 100%;
+        height: 280px;
+        border-radius: var(--radius);
+        overflow: hidden;
+    }
+
+    #imagenActivoSeleccionado {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius);
+    }
+
+    .app-date-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+
+    .app-photo-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .app-parts-toolbar {
+        grid-template-columns: 1fr !important;
+    }
+
+    .app-photo-action {
+        min-height: 62px;
+    }
+
+    footer {
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 577px) {
+    #contenedorPrincipal {
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    #formulario {
+        padding: 14px !important;
+    }
+
+    label,
+    .form-label {
+        font-size: 0.76rem;
+    }
+
+    .btn {
+        min-height: 48px;
+    }
+
+    .app-section-card,
+    .app-asset-card {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .app-operator-fields { grid-template-columns: 1fr; }
+}

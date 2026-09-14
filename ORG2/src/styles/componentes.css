@@ -1,0 +1,848 @@
+.muted {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.flex-between {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.file-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 10px;
+
+  max-height: 100px;
+
+  overflow-y: auto;
+}
+
+.thumb {
+  width: 88px;
+
+  height: 88px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid rgba(20, 33, 61, 0.12);
+
+  object-fit: cover;
+
+  box-shadow: 0 8px 18px rgba(20, 33, 61, 0.12);
+}
+
+.drop-zone {
+  border: 1.5px dashed rgba(13, 110, 253, 0.38);
+
+  border-radius: var(--radius);
+
+  color: var(--ink-soft);
+
+  background: rgba(13, 110, 253, 0.055);
+
+  padding: 20px;
+
+  text-align: center;
+
+  margin-top: 10px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+  border-color: var(--brand);
+
+  background: rgba(13, 110, 253, 0.12);
+
+  transform: translateY(-1px);
+}
+
+.is-invalid {
+  border: 2px solid #dc3545 !important;
+
+  background-color: #fff5f5;
+}
+
+.border-danger {
+  border: 2px solid #dc3545 !important;
+}
+
+.repuestos-search {
+  position: relative;
+}
+
+#sugerencias {
+  position: absolute;
+
+  top: 100%;
+
+  left: 0;
+
+  width: 100%;
+
+  z-index: 1000;
+
+  border: 1px solid #ccc;
+
+  border-radius: 6px;
+
+  background: white;
+}
+
+/* =====================================================
+   FOTO DEL ACTIVO
+   ===================================================== */
+
+.app-asset-card {
+  margin-bottom: 16px;
+
+  padding: 16px;
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+
+  box-shadow: var(--shadow-card);
+
+  overflow: hidden;
+}
+
+/* =====================================================
+   ENCABEZADO
+   ===================================================== */
+
+.app-asset-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.app-asset-heading {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  min-width: 0;
+}
+
+.app-asset-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  color: var(--brand);
+
+  background: var(--brand-soft);
+
+  font-size: 1.1rem;
+}
+
+.app-asset-heading h3 {
+  margin: 0;
+
+  color: var(--ink);
+
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.app-asset-heading p {
+  margin: 2px 0 0;
+
+  color: var(--ink-soft);
+
+  font-size: 0.66rem;
+}
+
+.app-asset-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  flex-shrink: 0;
+
+  padding: 5px 8px;
+
+  border-radius: 8px;
+
+  color: var(--success);
+
+  background: var(--success-soft);
+
+  font-size: 0.58rem;
+  font-weight: 800;
+}
+
+.app-asset-status i {
+  font-size: 0.62rem;
+}
+
+/* =====================================================
+   IMAGEN
+   ===================================================== */
+
+.app-asset-image-wrapper {
+  overflow: hidden;
+
+  border-radius: var(--radius);
+}
+
+.app-asset-image-wrapper .contenedor-imagen-activo {
+  position: relative;
+
+  width: 100%;
+
+  height: 300px;
+
+  overflow: hidden;
+
+  border-radius: var(--radius);
+
+  background: #e9eef4;
+}
+
+.app-asset-image-wrapper #imagenActivoSeleccionado {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: var(--radius);
+}
+
+/* =====================================================
+   OVERLAY
+   ===================================================== */
+
+.app-asset-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 36px 14px 14px;
+
+  background: linear-gradient(to top, rgba(8, 25, 54, 0.88), rgba(8, 25, 54, 0));
+
+  pointer-events: none;
+}
+
+.app-asset-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #ffffff;
+}
+
+.app-asset-info-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  backdrop-filter: blur(8px);
+}
+
+.app-asset-info strong,
+.app-asset-info span {
+  display: block;
+}
+
+.app-asset-info strong {
+  font-size: 0.75rem;
+}
+
+.app-asset-info span {
+  margin-top: 2px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.6rem;
+}
+
+/* =====================================================
+   VER IMAGEN
+   ===================================================== */
+
+.app-asset-view {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 7px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  background: rgba(8, 25, 54, 0.65);
+
+  backdrop-filter: blur(8px);
+
+  font-size: 0.62rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.app-asset-view:hover {
+  color: #ffffff;
+
+  background: rgba(8, 25, 54, 0.85);
+
+  transform: translateY(-1px);
+}
+
+/* =====================================================
+   INFORMACIÓN
+   ===================================================== */
+
+.app-asset-note {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 12px;
+
+  padding: 11px;
+
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-blue);
+}
+
+.app-asset-note-icon {
+  flex: 0 0 auto;
+
+  color: var(--brand);
+
+  font-size: 0.85rem;
+}
+
+.app-asset-note strong {
+  display: block;
+
+  color: var(--ink);
+
+  font-size: 0.65rem;
+}
+
+.app-asset-note p {
+  margin: 2px 0 0;
+
+  color: var(--ink-soft);
+
+  font-size: 0.58rem;
+
+  line-height: 1.4;
+}
+
+/* =====================================================
+   SKELETON
+   ===================================================== */
+
+.app-asset-skeleton {
+  overflow: hidden;
+
+  border-radius: var(--radius);
+
+  margin-bottom: 12px;
+}
+
+/* =====================================================
+   MANTENIMIENTO
+   ===================================================== */
+
+.app-section-icon.maintenance {
+  color: #c57a00;
+
+  background: var(--warning-soft);
+}
+
+.app-maintenance-field {
+  margin-bottom: 14px;
+}
+
+.app-maintenance-field label,
+.app-textarea-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--ink);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.app-maintenance-field label i {
+  color: var(--brand);
+
+  margin-right: 4px;
+}
+
+/* =====================================================
+   FECHAS
+   ===================================================== */
+
+.app-date-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+/* =====================================================
+   TIEMPO EMPLEADO
+   ===================================================== */
+
+.app-time-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 16px;
+
+  padding: 12px;
+
+  border: 1px solid rgba(13, 110, 253, 0.12);
+
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-blue);
+}
+
+.app-time-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 40px;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 11px;
+
+  color: var(--brand);
+
+  background: var(--brand-soft);
+
+  font-size: 1rem;
+}
+
+.app-time-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.app-time-content > span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--brand-dark);
+
+  font-size: 0.58rem;
+  font-weight: 800;
+
+  letter-spacing: 0.05em;
+}
+
+.app-time-content .form-control {
+  min-height: 30px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* =====================================================
+   TEXTAREAS
+   ===================================================== */
+
+.app-textarea-field {
+  margin-top: 14px;
+}
+
+.app-textarea-field label i {
+  margin-right: 5px;
+
+  color: var(--brand);
+}
+
+.app-textarea-field:first-of-type label i {
+  color: var(--warning);
+}
+
+.app-textarea-field textarea {
+  min-height: 105px;
+
+  padding: 12px 13px;
+
+  font-size: 0.72rem;
+}
+
+/* =====================================================
+   MÓVIL
+   ===================================================== */
+
+@media (max-width: 576px) {
+  .app-asset-card {
+    padding: 14px;
+  }
+
+  .app-asset-header {
+    gap: 8px;
+  }
+
+  .app-asset-status {
+    font-size: 0.52rem;
+  }
+
+  .app-asset-image-wrapper .contenedor-imagen-activo {
+    height: 260px;
+  }
+
+  .app-date-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .app-maintenance-field {
+    margin-bottom: 13px;
+  }
+}
+
+/* =====================================================
+   FASE 4 — REPUESTOS
+   ===================================================== */
+
+.app-section-icon.parts {
+  color: #7048c8;
+  background: rgba(112, 72, 200, 0.1);
+}
+
+.app-parts-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.app-parts-category,
+.app-parts-search {
+  min-width: 0;
+}
+
+.app-parts-category label,
+.app-parts-search label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.app-parts-toolbar .app-input-icon .form-select {
+  padding-left: 40px;
+}
+
+#sugerencias {
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+}
+
+.app-selected-parts {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-soft);
+}
+
+.app-selected-parts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.app-parts-count {
+  padding: 4px 8px;
+  border-radius: 7px;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
+  font-size: 0.56rem;
+}
+
+#repuestos {
+  min-height: 120px;
+  border-color: transparent;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+/* =====================================================
+   FASE 4 — FOTOGRAFÍAS
+   ===================================================== */
+
+.app-photo-section {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.app-section-icon.photos {
+  color: #0f7a72;
+  background: rgba(15, 122, 114, 0.1);
+}
+
+.app-photo-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.app-photo-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.app-photo-action:hover {
+  border-color: rgba(13, 110, 253, 0.28);
+  background: var(--surface-blue);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-xs);
+}
+
+.app-photo-action.primary {
+  border-color: rgba(13, 110, 253, 0.16);
+  background: var(--surface-blue);
+}
+
+.app-photo-action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  color: #ffffff;
+  background: var(--brand);
+  font-size: 1rem;
+}
+
+.app-photo-action:not(.primary) .app-photo-action-icon {
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+
+.app-photo-action strong,
+.app-photo-action small {
+  display: block;
+}
+
+.app-photo-action strong {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.app-photo-action small {
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 0.58rem;
+}
+
+.app-photo-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 120px;
+  margin-top: 0;
+  border: 1.5px dashed rgba(13, 110, 253, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  background: var(--surface-blue);
+}
+
+.app-photo-dropzone i {
+  color: var(--brand);
+  font-size: 1.4rem;
+}
+
+.app-photo-dropzone strong {
+  color: var(--ink);
+  font-size: 0.7rem;
+}
+
+.app-photo-dropzone span {
+  font-size: 0.58rem;
+}
+
+.app-photo-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.app-photo-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 8px;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
+  font-size: 0.58rem;
+}
+
+.app-photo-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px !important;
+  min-height: 0;
+}
+
+.app-photo-grid:empty::before {
+  content: 'Todavía no hay fotografías';
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 0.6rem;
+}
+
+.app-photo-grid .thumb {
+  width: 100%;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.app-final-fieldset {
+  padding-top: 4px;
+}

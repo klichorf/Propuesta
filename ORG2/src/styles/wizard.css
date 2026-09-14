@@ -1,0 +1,345 @@
+/* =====================================================
+   WIZARD — 7 PASOS
+   ===================================================== */
+
+.wizard-hidden {
+  display: none !important;
+}
+
+.wizard-navigation {
+  position: sticky;
+  bottom: 10px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  gap: 8px;
+  margin: 10px 0 4px;
+  padding: 8px;
+  border: 1px solid rgba(226, 234, 243, 0.92);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 30px rgba(21, 52, 87, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.wizard-nav-button {
+  min-height: 47px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 12px !important;
+  font-size: 0.65rem !important;
+  font-weight: 700;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.wizard-nav-button:active {
+  transform: translateY(1px);
+}
+
+.wizard-nav-button-primary {
+  border: 0 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #1597ef, #0866ca) !important;
+  box-shadow: 0 8px 18px rgba(8, 126, 234, 0.2);
+}
+
+.wizard-nav-button-secondary {
+  border: 1px solid #dbe5ef !important;
+  color: #31557f !important;
+  background: #fff !important;
+}
+.wizard-nav-button:disabled {
+  opacity: 0.45;
+}
+
+.app-progress-track {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+}
+
+.app-progress-step {
+  position: relative;
+  width: 100%;
+  height: 6px !important;
+  overflow: visible;
+  background: #e7edf4 !important;
+  transition: background 0.2s ease;
+}
+
+.app-progress-step::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  transform: translate(50%, -50%);
+  border: 2px solid #e0e8f1;
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.app-progress-step.active {
+  background: #087eea !important;
+}
+
+.app-progress-step.active::after {
+  border-color: #087eea;
+  background: #087eea;
+}
+
+.app-progress-step.current::after {
+  width: 13px;
+  height: 13px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #087eea;
+}
+
+.app-progress-step:last-child::after {
+  right: 0;
+}
+
+.app-progress-labels {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.app-progress-labels span.completed {
+  color: #2672bd;
+}
+
+.app-section-card,
+.app-asset-card,
+.app-photo-section,
+.app-signatures-section {
+  animation: wizardFadeIn 0.18s ease both;
+}
+
+@keyframes wizardFadeIn {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .wizard-navigation {
+    bottom: 6px;
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+}
+
+
+/* =====================================================
+   AJUSTE FINAL — COINCIDENCIA CON LA GUÍA VISUAL
+   ===================================================== */
+
+/* La referencia utiliza una pantalla limpia por paso, no el encabezado
+   global ni la tarjeta de progreso dentro de cada pantalla. */
+.wizard-step-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  min-height: 55px;
+  margin: 0 0 10px;
+  padding: 0 2px;
+}
+
+.wizard-step-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+}
+
+.wizard-step-heading strong {
+  color: #092d62;
+  font-size: 0.84rem;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.wizard-step-heading span {
+  margin-top: 3px;
+  color: #71819a;
+  font-size: 0.53rem;
+  line-height: 1;
+}
+
+.wizard-step-back,
+.wizard-step-menu {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #082e61;
+  font-size: 1rem;
+}
+
+.wizard-step-back:active,
+.wizard-step-menu:active {
+  background: #edf4fb;
+}
+
+/* Confirmación verde de activo */
+.wizard-asset-success {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 11px;
+  padding: 12px 13px;
+  border: 1px solid #ccefe0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f1fcf7, #ebfaf4);
+}
+
+.wizard-success-icon {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #16a765;
+  font-size: 0.85rem;
+}
+
+.wizard-asset-success strong {
+  display: block;
+  color: #087a48;
+  font-size: 0.62rem;
+  line-height: 1.1;
+}
+
+.wizard-asset-success small {
+  display: block;
+  margin-top: 3px;
+  color: #43866b;
+  font-size: 0.49rem;
+}
+
+/* En los pasos del wizard el contenido debe respirar como las pantallas
+   individuales de la referencia. */
+.wizard-step-header + .wizard-hidden + .wizard-asset-success,
+.wizard-step-header + .wizard-asset-success {
+  margin-top: 0;
+}
+
+.app-asset-card {
+  border-radius: 15px !important;
+  padding: 10px !important;
+  box-shadow: 0 6px 18px rgba(23, 54, 91, 0.055) !important;
+}
+
+.app-asset-header {
+  padding: 1px 2px 6px;
+}
+
+.app-asset-heading h3 {
+  color: #0b2f63 !important;
+  font-size: 0.75rem !important;
+  font-weight: 800;
+}
+
+.app-asset-heading p {
+  color: #7a899e !important;
+}
+
+.app-asset-status {
+  color: #54708f !important;
+  background: #f1f5f9 !important;
+}
+
+.app-asset-image-wrapper .contenedor-imagen-activo {
+  height: 238px !important;
+  border-radius: 12px !important;
+}
+
+.app-asset-view {
+  font-size: 0.5rem !important;
+}
+
+/* La guía usa botones inferiores anchos, no una caja flotante adicional. */
+.wizard-navigation {
+  position: sticky;
+  bottom: calc(var(--bottom-nav-height) + 12px);
+  grid-template-columns: 1fr 1fr;
+  margin: 12px 0 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.wizard-nav-button {
+  min-height: 48px !important;
+  border-radius: 12px !important;
+}
+/* En la referencia el primer paso no muestra un botón "Anterior". */
+.wizard-navigation:has(.wizard-nav-button-secondary.is-hidden) {
+  grid-template-columns: 1fr;
+}
+
+
+
+/* =====================================================
+   AJUSTE 04 — NAVEGACIÓN DEL WIZARD
+   ===================================================== */
+.wizard-navigation:has(.wizard-nav-button-secondary:not(.is-hidden)) {
+  grid-template-columns: 1fr 1fr !important;
+}
+
+.wizard-nav-button-secondary.is-hidden {
+  visibility: visible !important;
+}
+
+
+
+/* =====================================================
+   UX — PROGRESO INTERACTIVO
+   ===================================================== */
+.app-progress-step,
+.app-progress-labels span {
+  cursor: pointer;
+  user-select: none;
+}
+
+.app-progress-step:focus-visible,
+.app-progress-labels span:focus-visible {
+  outline: 2px solid #087eea;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.app-progress-step.completed::after {
+  border-color: #087eea;
+  background: #087eea;
+}
+
+/* La navegación del wizard no debe quedar debajo de la barra inferior fija. */
+.wizard-navigation {
+  margin-bottom: calc(var(--bottom-nav-height, 76px) + 14px) !important;
+}

@@ -1,0 +1,159 @@
+/* =====================================================
+   BASE
+   ===================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  color: var(--ink);
+
+  font-family:
+    'Poppins',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  background: var(--bg);
+
+  letter-spacing: 0;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =====================================================
+   CONTENEDOR
+   ===================================================== */
+
+.container {
+  width: min(100% - 24px, 1120px);
+  max-width: 1120px;
+
+  padding: 0;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+   ===================================================== */
+
+#contenedorPrincipal {
+  min-height: auto;
+
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+
+  padding: 0;
+
+  background: transparent !important;
+}
+
+/* =====================================================
+   FORMULARIO PRINCIPAL
+   ===================================================== */
+
+#formulario {
+  position: relative;
+
+  padding: clamp(18px, 3vw, 32px) !important;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+
+  background: var(--surface);
+
+  box-shadow: var(--shadow-card);
+
+  overflow: visible;
+}
+
+/* =====================================================
+   SEPARADOR SUPERIOR
+   ===================================================== */
+
+#formulario::before {
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: var(--brand-dark);
+
+  font-size: 0.75rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+  width: min(100% - 24px, 1120px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  border-top: 1px solid var(--line) !important;
+
+  color: var(--ink-soft);
+}
+
+footer p strong {
+  color: var(--brand-dark);
+}
+
+/* =====================================================
+   ACCESIBILIDAD
+   ===================================================== */
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =====================================================
+   REDUCE MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* =====================================================
+   FASE 5 — FOOTER
+   ===================================================== */
+
+footer {
+    padding: 14px 0 22px !important;
+    border-top: 0 !important;
+}
+
+footer p {
+    font-size: 0.58rem !important;
+}
+
+footer p:first-child {
+    margin-bottom: 3px !important;
+}
+
+footer p strong {
+    font-weight: 800;
+}

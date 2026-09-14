@@ -1,0 +1,181 @@
+/* =====================================================
+   NAVEGACIÓN INFERIOR — ESTILO APP MÓVIL
+   ===================================================== */
+
+/* Reserva espacio para que el contenido nunca quede oculto
+   detrás de la barra fija. */
+body.app-shell {
+  padding-bottom: calc(var(--bottom-nav-height) + var(--bottom-nav-gap) + env(safe-area-inset-bottom));
+}
+
+.app-bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 1050;
+  width: min(calc(100% - 20px), 430px);
+  min-height: var(--bottom-nav-height);
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  padding: 7px 8px;
+  border: 1px solid rgba(224, 232, 241, 0.95);
+  border-radius: 27px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 14px 35px rgba(25, 58, 95, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.app-bottom-nav-item,
+.app-bottom-nav-add {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
+}
+
+.app-bottom-nav-item {
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #71829a;
+  cursor: pointer;
+  border-radius: 18px;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.app-bottom-nav-item i {
+  font-size: 1.42rem;
+  line-height: 1;
+}
+
+.app-bottom-nav-item span {
+  font-size: 0.58rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.app-bottom-nav-item.active {
+  color: #086dcc;
+}
+
+.app-bottom-nav-item.active span {
+  font-weight: 700;
+}
+
+.app-bottom-nav-item:active,
+.app-bottom-nav-add:active {
+  transform: scale(0.94);
+}
+
+.app-bottom-nav-add {
+  width: 58px;
+  height: 58px;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -21px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, #1498ee, #086bcf);
+  box-shadow: 0 8px 18px rgba(8, 126, 234, 0.28);
+  cursor: pointer;
+}
+
+.app-bottom-nav-add i {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+/* La navegación del wizard queda por encima de la barra inferior. */
+.wizard-navigation {
+  bottom: calc(var(--bottom-nav-height) + 17px);
+  margin-bottom: calc(var(--bottom-nav-height) + 8px);
+}
+
+@media (max-width: 576px) {
+  body.app-shell {
+    padding-bottom: calc(var(--bottom-nav-height) + 14px + env(safe-area-inset-bottom));
+  }
+
+  .app-bottom-nav {
+    width: calc(100% - 14px);
+    bottom: max(5px, env(safe-area-inset-bottom));
+    border-radius: 25px;
+  }
+
+  .app-bottom-nav-item i {
+    font-size: 1.3rem;
+  }
+
+  .app-bottom-nav-item span {
+    font-size: 0.56rem;
+  }
+
+  .app-bottom-nav-add {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+
+/* Barra inferior: misma geometría que la referencia */
+.app-bottom-nav {
+  width: min(calc(100% - 12px), 430px) !important;
+  min-height: 76px !important;
+  bottom: max(5px, env(safe-area-inset-bottom)) !important;
+  padding: 6px 7px !important;
+  border-radius: 28px !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  box-shadow: 0 12px 30px rgba(28, 60, 96, 0.17) !important;
+}
+
+.app-bottom-nav-item {
+  height: 62px !important;
+  gap: 4px !important;
+}
+
+.app-bottom-nav-item i {
+  font-size: 1.34rem !important;
+}
+
+.app-bottom-nav-item span {
+  font-size: 0.56rem !important;
+}
+
+.app-bottom-nav-add {
+  width: 56px !important;
+  height: 56px !important;
+  margin-top: -20px !important;
+}
+
+.app-bottom-nav-add i {
+  font-size: 1.7rem !important;
+}
+
+/* En pantallas grandes mantenemos la maqueta centrada como un teléfono. */
+@media (min-width: 577px) {
+  #appContent {
+    width: 100%;
+  }
+
+  #contenedorPrincipal {
+    width: 430px !important;
+    max-width: 430px !important;
+  }
+
+  .app-bottom-nav {
+    width: 430px !important;
+  }
+}
+

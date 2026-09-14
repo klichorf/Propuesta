@@ -1,0 +1,88 @@
+/* =====================================================
+   AJUSTE 02 — PERFIL Y CERRAR SESIÓN
+   ===================================================== */
+.app-bottom-nav-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 62px;
+  min-width: 0;
+}
+
+.app-profile-menu {
+  position: absolute;
+  right: -4px;
+  bottom: calc(100% + 10px);
+  width: 225px;
+  padding: 10px;
+  border: 1px solid var(--ref-line);
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 14px 35px rgba(20, 50, 85, 0.18);
+  z-index: 100;
+}
+
+.app-profile-menu[hidden] {
+  display: none !important;
+}
+
+.app-profile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 4px 9px;
+  border-bottom: 1px solid #edf1f5;
+}
+
+.app-profile-menu-avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  color: var(--ref-blue-dark);
+  background: var(--ref-blue-soft);
+}
+
+.app-profile-menu-header strong,
+.app-profile-menu-header small {
+  display: block;
+}
+
+.app-profile-menu-header strong {
+  color: var(--ref-ink);
+  font-size: 0.64rem;
+  line-height: 1.2;
+}
+
+.app-profile-menu-header small {
+  margin-top: 2px;
+  color: var(--ref-muted);
+  font-size: 0.48rem;
+}
+
+.app-profile-logout {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 10px;
+  color: #b42318;
+  background: #fff5f4;
+  font-size: 0.59rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.app-profile-logout:hover,
+.app-profile-logout:focus-visible {
+  background: #feeceb;
+}
+

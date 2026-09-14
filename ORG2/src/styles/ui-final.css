@@ -1,0 +1,759 @@
+/* =====================================================
+   FASE 6 — PULIDO FINAL DE UI / UX
+   ===================================================== */
+
+/* ---------- Escala general ---------- */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+#formulario {
+    isolation: isolate;
+}
+
+#formulario :focus-visible,
+.header :focus-visible,
+footer :focus-visible {
+    outline: 3px solid rgba(13, 110, 253, 0.22);
+    outline-offset: 2px;
+}
+
+
+/* ---------- Progreso ---------- */
+
+.app-progress-card {
+    margin-bottom: 14px;
+    padding: 13px 14px;
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow-xs);
+}
+
+.app-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.app-progress-header strong {
+    display: block;
+    margin-top: 1px;
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.app-progress-counter {
+    flex-shrink: 0;
+    padding: 5px 8px;
+    border-radius: 8px;
+    color: var(--brand-dark);
+    background: var(--brand-soft);
+    font-size: 0.56rem;
+    font-weight: 800;
+}
+
+.app-progress-track {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 11px;
+}
+
+.app-progress-step {
+    height: 4px;
+    border-radius: 99px;
+    background: #e4eaf1;
+}
+
+.app-progress-step.active {
+    background: var(--brand);
+}
+
+.app-progress-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.app-progress-labels span {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.46rem;
+    font-weight: 700;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-progress-labels span.active {
+    color: var(--brand-dark);
+}
+
+
+/* ---------- Encabezados ---------- */
+
+.app-section-header {
+    margin-bottom: 13px;
+}
+
+.app-section-header h3 {
+    line-height: 1.2;
+}
+
+.app-section-header p {
+    line-height: 1.45;
+}
+
+
+/* ---------- Cards ---------- */
+
+.app-section-card,
+.app-asset-card,
+.app-photo-section,
+.app-signatures-section {
+    transition:
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+.app-section-card:hover,
+.app-asset-card:hover,
+.app-photo-section:hover,
+.app-signatures-section:hover {
+    border-color: rgba(13, 110, 253, 0.15);
+    box-shadow: var(--shadow-soft);
+}
+
+
+/* ---------- Campos ---------- */
+
+#formulario .form-control,
+#formulario .form-select {
+    font-size: 0.69rem;
+}
+
+#formulario .form-control::placeholder {
+    color: #9aa5b4;
+    opacity: 1;
+}
+
+#formulario .form-select {
+    cursor: pointer;
+}
+
+#formulario textarea {
+    resize: vertical;
+}
+
+
+/* ---------- Botones táctiles ---------- */
+
+#formulario .btn,
+#formulario button,
+#formulario label.app-photo-action {
+    -webkit-tap-highlight-color: transparent;
+}
+
+#formulario .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+    box-shadow: none;
+}
+
+.app-qr-button,
+.app-select-card,
+.app-photo-action,
+.app-final-button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-qr-button:active,
+.app-select-card:active,
+.app-photo-action:active {
+    transform: scale(0.985);
+}
+
+
+/* ---------- Foto del activo ---------- */
+
+.app-asset-image-wrapper .contenedor-imagen-activo {
+    background:
+        linear-gradient(
+            135deg,
+            #edf2f7,
+            #dfe7ef
+        );
+}
+
+#imagenActivoSeleccionado[src=""] {
+    display: none;
+}
+
+
+/* ---------- Fotografías ---------- */
+
+.app-photo-grid img,
+.app-photo-grid .thumb {
+    object-fit: cover;
+}
+
+.app-photo-grid .thumb {
+    overflow: hidden;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.app-photo-grid .thumb:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xs);
+}
+
+
+/* ---------- Estado final ---------- */
+
+.app-final-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.app-final-card::after {
+    content: "";
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.42);
+    pointer-events: none;
+}
+
+
+/* ---------- Preferencias de movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* =====================================================
+   UI FINAL — ESTRUCTURA LIMPIA
+   ===================================================== */
+
+/* ---------- El header antiguo ya no participa ---------- */
+
+.header {
+    display: none !important;
+}
+
+
+/* ---------- Contenedor principal ---------- */
+
+#contenedorPrincipal {
+    margin-top: 0 !important;
+}
+
+
+/* =====================================================
+   CABECERA INTEGRADA DE LA APP
+   ===================================================== */
+
+.app-welcome {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 78px;
+
+    gap: 18px;
+
+    margin: 0 0 14px !important;
+    padding: 12px 4px 14px !important;
+
+    border-bottom: 1px solid #e8edf3;
+
+    box-sizing: border-box;
+}
+
+
+/* ---------- Marca ---------- */
+
+.app-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.app-brand-logo {
+    display: block;
+
+    width: 46px !important;
+    height: 46px !important;
+
+    flex: 0 0 46px;
+
+    object-fit: contain;
+}
+
+.app-brand-copy {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    color: #17345d;
+
+    font-size: 0.64rem;
+    font-weight: 800;
+
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.app-brand-copy strong {
+    font-weight: 800;
+}
+
+
+/* ---------- Usuario ---------- */
+
+.app-user-header {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    text-align: right;
+}
+
+.app-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    color: #315b89;
+
+    background: #e8eef5;
+
+    box-shadow:
+        0 2px 8px
+        rgba(20, 33, 61, 0.12);
+
+    font-size: 0.95rem;
+}
+
+.app-user-info {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.app-user-info strong {
+    display: block;
+
+    color: #17345d;
+
+    font-size: 0.67rem;
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+.app-user-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #7b8798;
+
+    font-size: 0.51rem;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* ---------- Logout ---------- */
+
+.app-welcome .app-icon-button {
+    display: none !important;
+}
+
+
+/* =====================================================
+   PROGRESO
+   ===================================================== */
+
+.app-progress-card {
+    width: 100%;
+
+    margin: 0 0 14px !important;
+    padding: 13px 14px !important;
+
+    border: 1px solid #e1e8f0 !important;
+    border-radius: 15px !important;
+
+    background: #ffffff !important;
+
+    box-shadow:
+        0 4px 16px
+        rgba(20, 33, 61, 0.045) !important;
+
+    box-sizing: border-box;
+}
+
+
+
+.app-progress-header strong {
+    display: block;
+
+    margin: 0;
+
+    color: var(--ink);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+
+
+.app-progress-track {
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 4px;
+
+    margin-top: 11px;
+}
+
+.app-progress-step {
+    width: 100%;
+    height: 4px;
+
+    border-radius: 999px;
+
+    background: #e4eaf1;
+}
+
+
+
+.app-progress-labels {
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 4px;
+
+    margin-top: 6px;
+}
+
+.app-progress-labels span {
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: 0.46rem;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    text-align: center;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+/* =====================================================
+   PRIMERA SECCIÓN — IDENTIFICAR ACTIVO
+   ===================================================== */
+
+.app-section-card {
+    display: block;
+
+    width: 100%;
+
+    margin: 0 0 14px;
+    padding: 16px !important;
+
+    border: 1px solid var(--line) !important;
+    border-radius: 18px !important;
+
+    background: #ffffff !important;
+
+    box-shadow:
+        0 5px 20px
+        rgba(20, 33, 61, 0.045) !important;
+
+    box-sizing: border-box;
+}
+
+.app-section-card .app-section-header {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: center !important;
+
+    gap: 5px !important;
+
+    margin-bottom: 0 !important;
+
+    text-align: center;
+}
+
+.app-section-card .app-section-header > .app-section-icon {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 54px !important;
+    height: 54px !important;
+
+    flex: 0 0 54px;
+
+    margin: 0 0 3px !important;
+
+    border-radius: 16px !important;
+
+    color: #0969d8 !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8f3ff,
+            #d9ebff
+        ) !important;
+
+    font-size: 1.35rem !important;
+}
+
+.app-section-card .app-section-kicker {
+    display: block;
+
+    margin: 0;
+
+    color: var(--brand-dark);
+
+    font-size: 0.52rem !important;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.app-section-card .app-section-header h3 {
+    margin: 0 !important;
+
+    color: var(--ink);
+
+    font-size: 0.95rem !important;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+.app-section-card .app-section-header p {
+    max-width: 260px;
+
+    margin: 3px auto 0 !important;
+
+    color: var(--ink-soft);
+
+    font-size: 0.60rem !important;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   BOTÓN QR PRINCIPAL
+   ===================================================== */
+
+.app-qr-button {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100%;
+
+    min-height: 50px !important;
+
+    margin-top: 13px;
+
+    padding: 10px 14px;
+
+    border: 0 !important;
+    border-radius: 14px !important;
+
+    color: #ffffff !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1494ef,
+            #0864c7
+        ) !important;
+
+    box-shadow:
+        0 8px 18px
+        rgba(13, 110, 253, 0.22) !important;
+
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-qr-button i {
+    flex: 0 0 auto;
+
+    color: #ffffff !important;
+}
+
+.app-qr-button strong {
+    color: #ffffff !important;
+
+    font-size: 0.70rem !important;
+    font-weight: 800;
+}
+
+.app-qr-button span {
+    color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.app-qr-button:active {
+    transform: scale(0.985);
+}
+
+
+/* =====================================================
+   SECCIONES RESTANTES
+   ===================================================== */
+
+.app-maintenance-section,
+.app-asset-card,
+.app-photo-section,
+.app-signatures-section {
+    box-sizing: border-box;
+
+    transition:
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+
+/* =====================================================
+   CAMPOS
+   ===================================================== */
+
+#formulario .form-control,
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   INTERACCIÓN TÁCTIL
+   ===================================================== */
+
+#formulario .btn,
+#formulario button,
+#formulario label.app-photo-action,
+.app-select-card,
+.app-photo-action,
+.app-final-button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+.app-select-card:active,
+.app-photo-action:active,
+.app-final-button:active {
+    transform: scale(0.985);
+}
+
+
+/* =====================================================
+   IMAGEN DEL ACTIVO
+   ===================================================== */
+
+
+
+
+
+
+/* =====================================================
+   FOTOGRAFÍAS
+   ===================================================== */
+
+.app-photo-grid img,
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   PANTALLAS MUY PEQUEÑAS
+   ===================================================== */
+
+
+
+/* =====================================================
+   ACCESIBILIDAD
+   ===================================================== */
+
+#formulario :focus-visible,
+footer :focus-visible {
+    outline: 3px solid rgba(13, 110, 253, 0.22);
+
+    outline-offset: 2px;
+}

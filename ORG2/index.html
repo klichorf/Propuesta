@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Técnico - Mantenimiento</title>
+    <!-- Ícono -->
+    <link rel="icon" type="image/svg+xml" href="src/assets/images/favicon.svg" />
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./vendor/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css" />
+
+    <!-- Tu CSS -->
+    <!-- =====================================================
+     ESTILOS DEL SISTEMA
+     ===================================================== -->
+
+    <link rel="stylesheet" href="src/styles/variables.css" />
+
+    <link rel="stylesheet" href="src/styles/layout.css" />
+
+    <link rel="stylesheet" href="src/styles/header.css" />
+
+    <link rel="stylesheet" href="src/styles/formulario.css" />
+
+    <link rel="stylesheet" href="src/styles/botones.css" />
+
+    <link rel="stylesheet" href="src/styles/modales.css" />
+
+    <link rel="stylesheet" href="src/styles/firmas.css" />
+
+    <link rel="stylesheet" href="src/styles/fotografias.css" />
+
+    <link rel="stylesheet" href="src/styles/loaders.css" />
+
+    <link rel="stylesheet" href="src/styles/reportes.css" />
+
+    <link rel="stylesheet" href="src/styles/componentes.css" />
+
+    <link rel="stylesheet" href="src/styles/responsive.css" />
+
+    <link rel="stylesheet" href="src/styles/calendario.css" />
+
+    <link rel="stylesheet" href="src/styles/login.css" />
+    <link rel="stylesheet" href="src/styles/ui-final.css" />
+    <link rel="stylesheet" href="src/styles/ui-reference.css" />
+  </head>
+
+  <body class="bg-light app-shell">
+    <!-- =====================================================
+     PANTALLA DE LOGIN
+     ===================================================== -->
+
+    <div id="loginScreen">
+      <div class="login-card">
+        <div class="text-center">
+          <img src="src/assets/images/favicon.svg" alt="Organización Cárdenas" class="login-logo" />
+
+          <div class="login-title">Informe Técnico</div>
+
+          <div class="login-subtitle">Sistema de Mantenimiento</div>
+        </div>
+
+        <form id="loginForm">
+          <!-- CORREO -->
+
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label"> Correo electrónico </label>
+
+            <input
+              type="email"
+              id="loginEmail"
+              class="form-control"
+              placeholder="usuario@empresa.com"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <!-- CONTRASEÑA -->
+
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label"> Contraseña </label>
+
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-control"
+              placeholder="Contraseña"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <!-- ERROR -->
+
+          <div id="loginError" class="alert alert-danger" role="alert"></div>
+
+          <!-- BOTÓN LOGIN -->
+
+          <button type="submit" id="btnLogin" class="btn btn-primary w-100">Iniciar sesión</button>
+        </form>
+      </div>
+    </div>
+    <!-- APLICACIÓN -->
+    <div id="appContent">
+      <!-- ---------- ENCABEZADO ---------- -->
+
+      <!-- ---------- CONTENIDO PRINCIPAL ---------- -->
+      <main id="contenedorPrincipal" class="container my-4">
+        <!-- Formulario -->
+        <form id="formulario" class="card shadow p-4" onsubmit="return false;">
+          <div class="app-welcome">
+            <div class="app-brand">
+              <img
+                src="src/assets/images/logo-reference.png"
+                alt="Organización Cárdenas S.A.S."
+                class="app-brand-logo"
+              />
+
+              <div class="app-brand-copy">
+                <strong>ORGANIZACIÓN</strong>
+                <strong>CÁRDENAS S.A.S</strong>
+              </div>
+            </div>
+
+            <div class="app-user-header">
+              <div class="app-user-avatar">
+                <i class="bi bi-person-fill"></i>
+              </div>
+
+              <div class="app-user-info">
+                <strong id="usuarioHeader">
+                  <span id="usuarioActual" class="fw-semibold text-primary-emphasis"></span>
+                </strong>
+
+                <span>Técnico de mantenimiento</span>
+              </div>
+            </div>
+          </div>
+
+          <fieldset>
+            <!-- =====================================================
+                         BIENVENIDA
+                         ===================================================== -->
+
+            <!-- =====================================================
+                         PROGRESO DEL INFORME
+                         ===================================================== -->
+
+            <div class="app-progress-card">
+              <div class="app-progress-header">
+                <div>
+                  <span class="app-section-kicker"> NUEVO INFORME </span>
+
+                  <strong> Identificación del activo </strong>
+                </div>
+
+                <span class="app-progress-counter"> Paso 1 de 7 </span>
+              </div>
+
+              <div class="app-progress-track" aria-label="Progreso del informe">
+                <span class="app-progress-step active" aria-current="step"></span>
+                <span class="app-progress-step"></span>
+                <span class="app-progress-step"></span>
+                <span class="app-progress-step"></span>
+                <span class="app-progress-step"></span>
+                <span class="app-progress-step"></span>
+                <span class="app-progress-step"></span>
+              </div>
+
+              <div class="app-progress-labels">
+                <span class="active">Activo</span>
+                <span>Mant.</span>
+                <span>Diagnóstico</span>
+                <span>Trabajo</span>
+                <span>Evidencia</span>
+                <span>Firma</span>
+                <span>Finalizar</span>
+              </div>
+            </div>
+
+            <!-- =====================================================
+                         IDENTIFICAR ACTIVO
+                         ===================================================== -->
+
+            <section class="app-section-card">
+              <div class="app-section-header">
+                <div class="app-section-icon">
+                  <i class="bi bi-qr-code-scan"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> IDENTIFICAR ACTIVO </span>
+
+                  <h3>Escanea el código del equipo</h3>
+
+                  <p>Usa el código QR para cargar automáticamente la información del activo.</p>
+                </div>
+              </div>
+
+              <!-- BOTÓN QR -->
+
+              <button id="btnQR" type="button" class="app-qr-button">
+                <span class="app-qr-icon">
+                  <i class="bi bi-qr-code-scan"></i>
+                </span>
+
+                <span class="app-qr-text">
+                  <strong>Escanear QR</strong>
+                  <small>Identificar equipo automáticamente</small>
+                </span>
+
+                <i class="bi bi-chevron-right app-qr-arrow"></i>
+              </button>
+
+              <!-- CÓDIGO MANUAL -->
+
+              <div class="app-field m-1">
+                <div class="app-input-icon">
+                  <input
+                    id="codigo"
+                    type="text"
+                    class="form-control"
+                    placeholder="Código del activo"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- =====================================================
+                         CÁMARA QR
+                         ===================================================== -->
+
+            <div id="QR-modal" class="mt-3 qr-modal-panel">
+              <div id="QR" class="app-qr-camera"></div>
+            </div>
+
+            <!-- BOTÓN CERRAR QR -->
+
+            <button id="closeQR" type="button" class="btn btn-fondo-azul text-white w-100 d-none mt-3">Cerrar</button>
+
+            <!-- =====================================================
+                         TÉCNICO
+                         ===================================================== -->
+
+            <div class="mt-3 d-none">
+              <label for="ejecutor" class="form-label fw-bold text-primary-emphasis"> Técnico Mantenimiento </label>
+
+              <select id="ejecutor" class="form-select">
+                <option disabled selected></option>
+                <option>JORGE LEONARDO RODRIGUEZ</option>
+                <option>PINEDA AGUDELO YONATAN STIVEN</option>
+                <option>QUEVEDO LADINO MARIO</option>
+                <option>LUIS GABRIEL RODRUIGUEZ</option>
+                <option>NESTOR LEONARDO RODRIGUEZ</option>
+                <option>ESNEIDER QUINTERO LOZANO</option>
+                <option>GERARDO MARIÑO</option>
+                <option>ANGELO STIVEN CUERVO BELTRAN</option>
+              </select>
+            </div>
+
+            <!-- =====================================================
+                         SELECCIÓN MANUAL DEL ACTIVO
+                         ===================================================== -->
+
+            <section class="app-section-card">
+              <div class="app-section-header compact">
+                <div class="app-section-icon">
+                  <i class="bi bi-diagram-3"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> SELECCIÓN MANUAL </span>
+
+                  <h3>Ubicación del activo</h3>
+
+                  <p>Selecciona dónde se encuentra el equipo.</p>
+                </div>
+              </div>
+
+              <!-- PLANTA -->
+
+              <div class="app-select-card">
+                <div class="app-select-icon plant">
+                  <i class="bi bi-buildings"></i>
+                </div>
+
+                <div class="app-select-content">
+                  <label for="planta"> Planta </label>
+
+                  <select id="planta" class="form-select">
+                    <option disabled selected>Selecciona la planta</option>
+
+                    <option value="GRANOS">GRANOS</option>
+                    <option value="ASEO">ASEO</option>
+                    <option value="ALIMENTOS">ALIMENTOS</option>
+                    <option value="BEBIDAS">BEBIDAS</option>
+                    <option value="OFERTAS">OFERTAS</option>
+                    <option value="LOCATIVOS">LOCATIVOS</option>
+                  </select>
+                </div>
+
+                <i class="bi bi-chevron-right app-select-arrow"></i>
+              </div>
+
+              <!-- ÁREA -->
+
+              <div class="app-select-card">
+                <div class="app-select-icon area">
+                  <i class="bi bi-grid"></i>
+                </div>
+
+                <div class="app-select-content">
+                  <label for="area"> Área </label>
+
+                  <select id="area" class="form-select">
+                    <option disabled selected>Selecciona el área</option>
+                  </select>
+                </div>
+
+                <i class="bi bi-chevron-right app-select-arrow"></i>
+              </div>
+
+              <!-- EQUIPO -->
+
+              <div class="app-select-card">
+                <div class="app-select-icon equipment">
+                  <i class="bi bi-gear-wide-connected"></i>
+                </div>
+
+                <div class="app-select-content">
+                  <label for="equipo"> Equipo </label>
+
+                  <select id="equipo" class="form-select">
+                    <option disabled selected>Selecciona el equipo</option>
+                  </select>
+                </div>
+
+                <i class="bi bi-chevron-right app-select-arrow"></i>
+              </div>
+            </section>
+
+            <!-- =====================================================
+                         FOTO DEL ACTIVO
+                         ===================================================== -->
+
+            <section id="vistaFotoActivo" class="activo-foto d-none">
+              <div class="app-asset-card">
+                <!-- ENCABEZADO -->
+
+                <div class="app-asset-header">
+                  <div class="app-asset-heading">
+                    <div class="app-asset-icon">
+                      <i class="bi bi-camera-fill"></i>
+                    </div>
+
+                    <div>
+                      <span class="app-section-kicker"> ACTIVO SELECCIONADO </span>
+
+                      <h3 id="estadoFotoActivo">Foto del activo</h3>
+
+                      <p>Imagen de referencia del equipo</p>
+                    </div>
+                  </div>
+
+                  <span class="app-asset-status">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Referencia
+                  </span>
+                </div>
+
+                <!-- SKELETON -->
+
+                <div id="skeletonFotoActivo" class="skeleton-foto app-asset-skeleton">
+                  <div class="skeleton-imagen"></div>
+
+                  <div class="skeleton-line skeleton-line-lg"></div>
+
+                  <div class="skeleton-line skeleton-line-sm"></div>
+                </div>
+
+                <!-- IMAGEN -->
+
+                <div class="app-asset-image-wrapper">
+                  <div class="contenedor-imagen-activo">
+                    <img id="imagenActivoSeleccionado" alt="Foto del activo seleccionado" />
+
+                    <a id="linkFotoActivo" class="app-asset-view" href="#" target="_blank" rel="noopener noreferrer">
+                      <i class="bi bi-arrows-fullscreen"></i>
+                      Ver imagen
+                    </a>
+
+                    <div class="app-asset-overlay">
+                      <div class="app-asset-info">
+                        <div class="app-asset-info-icon">
+                          <i class="bi bi-gear-wide-connected"></i>
+                        </div>
+
+                        <div>
+                          <strong id="infoEquipoFoto"> Equipo seleccionado </strong>
+
+                          <span id="infoUbicacionFoto"> Activo de mantenimiento </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INFORMACIÓN -->
+
+                <div class="app-asset-note">
+                  <div class="app-asset-note-icon">
+                    <i class="bi bi-info-circle-fill"></i>
+                  </div>
+
+                  <div>
+                    <strong> Imagen de referencia </strong>
+
+                    <p>Esta imagen corresponde al activo seleccionado.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- =====================================================
+     MANTENIMIENTO
+     ===================================================== -->
+
+            <section class="app-section-card app-maintenance-card">
+              <div class="app-section-header">
+                <div class="app-section-icon maintenance">
+                  <i class="bi bi-tools"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> MANTENIMIENTO </span>
+
+                  <h3>Información del trabajo</h3>
+
+                  <p>Registra el tipo y duración de la intervención.</p>
+                </div>
+              </div>
+
+              <!-- TIPO -->
+
+              <div class="app-maintenance-field">
+                <label for="tipoMantenimiento"> Tipo de mantenimiento </label>
+
+                <div class="app-input-icon">
+                  <i class="bi bi-wrench-adjustable"></i>
+
+                  <select id="tipoMantenimiento" class="form-select">
+                    <option value="" disabled selected>Selecciona el tipo</option>
+
+                    <option>Preventivo</option>
+
+                    <option>Correctivo</option>
+
+                    <option>Predictivo</option>
+
+                    <option>Ajuste Formato</option>
+
+                    <option>Mejora/Adecuación</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- FECHAS -->
+
+              <div class="app-date-grid">
+                <div class="app-maintenance-field">
+                  <label for="fechaInicio"> Fecha y hora de inicio </label>
+
+                  <div class="app-input-icon">
+                    <i class="bi bi-calendar-event"></i>
+
+                    <input id="fechaInicio" type="datetime-local" class="form-control" required />
+                  </div>
+                </div>
+
+                <div class="app-maintenance-field">
+                  <label for="fechaFin"> Fecha y hora de finalización </label>
+
+                  <div class="app-input-icon">
+                    <i class="bi bi-calendar-check"></i>
+
+                    <input id="fechaFin" type="datetime-local" class="form-control" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- TIEMPO -->
+
+              <div class="app-time-card">
+                <div class="app-time-icon">
+                  <i class="bi bi-stopwatch"></i>
+                </div>
+
+                <div class="app-time-content">
+                  <span> TIEMPO EMPLEADO </span>
+
+                  <input
+                    id="tiempo"
+                    type="text"
+                    readonly
+                    class="form-control"
+                    placeholder="Se calculará automáticamente"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <!-- DAÑOS -->
+
+              <div class="app-textarea-field">
+                <label for="danos">
+                  <i class="bi bi-exclamation-triangle"></i>
+                  Daños encontrados
+                </label>
+
+                <textarea
+                  id="danos"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Describe los daños o anomalías encontradas..."
+                ></textarea>
+              </div>
+
+              <!-- TRABAJO -->
+
+              <div class="app-textarea-field">
+                <label for="trabajo">
+                  <i class="bi bi-check2-circle"></i>
+                  Trabajo ejecutado
+                </label>
+
+                <textarea
+                  id="trabajo"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Describe las actividades realizadas..."
+                ></textarea>
+              </div>
+            </section>
+
+            <!-- =====================================================
+                         REPUESTOS UTILIZADOS
+                         ===================================================== -->
+
+            <section class="app-section-card app-parts-card">
+              <div class="app-section-header">
+                <div class="app-section-icon parts">
+                  <i class="bi bi-box-seam"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> REPUESTOS </span>
+
+                  <h3>Repuestos utilizados</h3>
+
+                  <p>Busca y registra los repuestos utilizados en la intervención.</p>
+                </div>
+              </div>
+
+              <div class="app-parts-toolbar">
+                <div class="app-parts-category">
+                  <label for="categoriaRepuesto"> Categoría </label>
+
+                  <div class="app-input-icon">
+                    <i class="bi bi-funnel"></i>
+
+                    <select id="categoriaRepuesto" class="form-select">
+                      <option value>Todas las categorías</option>
+
+                      <option value="Neumáticos">Neumáticos</option>
+
+                      <option value="Eléctricos">Eléctricos</option>
+
+                      <option value="Mecánicos">Mecánicos</option>
+
+                      <option value="Rodamientos">Rodamientos</option>
+
+                      <option value="Tornillería">Tornillería</option>
+
+                      <option value="Lubricantes y sellos">Lubricantes y sellos</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="app-parts-search repuestos-search">
+                  <label for="buscadorRepuestos"> Buscar repuesto </label>
+
+                  <div class="app-input-icon">
+                    <i class="bi bi-search"></i>
+
+                    <input
+                      type="text"
+                      id="buscadorRepuestos"
+                      class="form-control"
+                      placeholder="Escribe el nombre del repuesto..."
+                      autocomplete="off"
+                    />
+                  </div>
+
+                  <div id="sugerencias"></div>
+                </div>
+              </div>
+
+              <div class="app-selected-parts">
+                <div class="app-selected-parts-header">
+                  <span> Repuestos seleccionados </span>
+
+                  <span class="app-parts-count"> Lista de trabajo </span>
+                </div>
+
+                <textarea
+                  id="repuestos"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Los repuestos seleccionados aparecerán aquí..."
+                ></textarea>
+              </div>
+            </section>
+          </fieldset>
+
+          <fieldset class="mb-4 formulario-fotos-firmas app-final-fieldset">
+            <div class="app-photo-section">
+              <!-- REGISTRO FOTOGRÁFICO -->
+
+              <div class="app-section-header">
+                <div class="app-section-icon photos">
+                  <i class="bi bi-images"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> EVIDENCIA </span>
+
+                  <h3>Registro fotográfico</h3>
+
+                  <p>Agrega fotografías para documentar el trabajo realizado.</p>
+                </div>
+              </div>
+
+              <div class="app-photo-actions">
+                <!-- TOMAR FOTO -->
+
+                <input id="fotosTomar" type="file" accept="image/*" capture="environment" class="d-none" />
+
+                <label for="fotosTomar" class="app-photo-action primary">
+                  <span class="app-photo-action-icon">
+                    <i class="bi bi-camera-fill"></i>
+                  </span>
+
+                  <span>
+                    <strong>Tomar foto</strong>
+                    <small>Usar cámara</small>
+                  </span>
+                </label>
+
+                <!-- GALERÍA -->
+
+                <input id="fotos" type="file" accept="image/*" multiple class="d-none" />
+
+                <label for="fotos" class="app-photo-action">
+                  <span class="app-photo-action-icon">
+                    <i class="bi bi-images"></i>
+                  </span>
+
+                  <span>
+                    <strong>Galería</strong>
+                    <small>Seleccionar imágenes</small>
+                  </span>
+                </label>
+              </div>
+
+              <!-- DRAG & DROP -->
+
+              <div id="dropZone" class="drop-zone app-photo-dropzone">
+                <i class="bi bi-cloud-arrow-up"></i>
+
+                <strong> Agrega tus evidencias </strong>
+
+                <span> Arrastra las imágenes aquí </span>
+              </div>
+
+              <!-- MINIATURAS -->
+
+              <div class="app-photo-preview-header">
+                <span> Fotografías agregadas </span>
+
+                <span id="contadorFotos" class="app-photo-count"> 0 </span>
+              </div>
+
+              <div id="thumbs" class="app-photo-grid"></div>
+            </div>
+            <!-- =====================================================
+                         FIRMAS Y FINALIZACIÓN
+                         ===================================================== -->
+
+            <section class="app-signatures-section">
+              <div class="app-section-header">
+                <div class="app-section-icon signatures">
+                  <i class="bi bi-pen"></i>
+                </div>
+
+                <div>
+                  <span class="app-section-kicker"> VALIDACIÓN </span>
+
+                  <h3>Firmas del informe</h3>
+
+                  <p>Valida los responsables antes de finalizar el informe.</p>
+                </div>
+              </div>
+
+              <!-- =================================================
+                             FIRMA TÉCNICO
+                             ================================================= -->
+
+              <div class="app-signature-card">
+                <div class="app-signature-heading">
+                  <div class="app-signature-avatar">
+                    <i class="bi bi-person-gear"></i>
+                  </div>
+
+                  <div>
+                    <span class="app-signature-role"> EJECUTOR </span>
+
+                    <strong id="nombreTecnicoFirma"> Técnico Mantenimiento </strong>
+
+                    <small> Firma del técnico responsable </small>
+                  </div>
+
+                  <span id="estadoFirmaTecnico" class="app-signature-status pending"> Pendiente </span>
+                </div>
+
+                <div class="app-signature-canvas-wrap">
+                  <canvas id="sigEjecutor" class="signature signature-readonly" willReadFrequently="true"></canvas>
+
+                  <span class="app-signature-hint">
+                    <i class="bi bi-pen"></i>
+                    Firma registrada
+                  </span>
+                </div>
+
+                <div class="signature-tools mt-2">
+                  <input
+                    id="firmaEjecutorArchivo"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    class="d-none"
+                    data-signature-target="sigEjecutor"
+                  />
+                </div>
+              </div>
+
+              <!-- =================================================
+                             VALIDACIÓN OPERADOR
+                             ================================================= -->
+
+              <div class="app-operator-card">
+                <div class="app-operator-heading">
+                  <div class="app-signature-avatar operator">
+                    <i class="bi bi-person-check"></i>
+                  </div>
+
+                  <div>
+                    <span class="app-signature-role"> OPERADOR </span>
+
+                    <strong> Validar responsable </strong>
+
+                    <small> Ingresa tus datos para autorizar el informe </small>
+                  </div>
+                </div>
+
+                <div class="app-operator-identity">
+                  <label> Usuario </label>
+
+                  <div id="nombreOperador" class="app-operator-name"></div>
+                </div>
+
+                <div class="app-operator-fields">
+                  <div class="app-operator-field">
+                    <label for="cedulaOperador"> Cédula </label>
+
+                    <div class="app-input-icon">
+                      <i class="bi bi-person-vcard"></i>
+
+                      <input
+                        type="password"
+                        id="cedulaOperador"
+                        class="form-control"
+                        autocomplete="current-password"
+                        placeholder="Ingresa la cédula"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="app-operator-field">
+                    <label for="passwordOperador"> Contraseña </label>
+
+                    <div class="app-input-icon">
+                      <i class="bi bi-lock"></i>
+
+                      <input
+                        type="password"
+                        id="passwordOperador"
+                        class="form-control"
+                        autocomplete="current-password"
+                        placeholder="Ingresa la contraseña"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    id="btnValidarOperador"
+                    class="btn btn-primary app-validate-button"
+                    title="Validar operador"
+                    aria-label="Validar operador"
+                  >
+                    <i class="bi bi-fingerprint"></i>
+                    <span>Validar</span>
+                  </button>
+                </div>
+
+                <div id="estadoOperador" class="app-operator-status"></div>
+              </div>
+
+              <!-- =================================================
+                             FIRMA COORDINADOR
+                             ================================================= -->
+
+              <div class="app-signature-card coordinator">
+                <div class="app-signature-heading">
+                  <div class="app-signature-avatar coordinator">
+                    <i class="bi bi-person-badge"></i>
+                  </div>
+
+                  <div>
+                    <strong> Firma de aprobación </strong>
+
+                    <small> Validación final del informe </small>
+                  </div>
+
+                  <span id="estadoFirmaCoordinador" class="app-signature-status pending"> Pendiente </span>
+                </div>
+
+                <div class="app-signature-canvas-wrap">
+                  <canvas id="sigCoordinador" class="signature signature-readonly" willReadFrequently="true"></canvas>
+
+                  <span class="app-signature-hint">
+                    <i class="bi bi-shield-check"></i>
+                    Firma de aprobación
+                  </span>
+                </div>
+
+                <div class="app-signature-actions">
+                  <button
+                    type="button"
+                    id="btnLimpiarFirmaCoordinador"
+                    class="btn btn-light app-clear-signature"
+                    disabled
+                  >
+                    <i class="bi bi-eraser"></i>
+                    <span>Limpiar</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- =================================================
+                             FINALIZAR INFORME
+                             ================================================= -->
+
+              <div class="app-final-card">
+                <div class="app-final-icon">
+                  <i class="bi bi-file-earmark-check"></i>
+                </div>
+
+                <div class="app-final-content">
+                  <span> INFORME LISTO </span>
+
+                  <strong> Guarda o comparte el resultado </strong>
+
+                  <p>Genera el documento final cuando todas las validaciones estén completas.</p>
+                </div>
+              </div>
+
+              <div class="app-final-actions">
+                <button
+                  id="btnDescargar"
+                  type="button"
+                  class="btn btn-primary app-final-button"
+                  title="Descargar informe"
+                >
+                  <i class="bi bi-download"></i>
+                  <span>Descargar informe</span>
+                </button>
+
+                <button
+                  id="btnCompartir"
+                  type="button"
+                  class="btn btn-outline-primary app-final-button"
+                  title="Compartir informe"
+                >
+                  <i class="bi bi-share"></i>
+                  <span>Compartir</span>
+                </button>
+              </div>
+            </section>
+          </fieldset>
+        </form>
+      </main>
+
+      <!-- =====================================================
+             NAVEGACIÓN INFERIOR DE LA APP
+             Siempre visible mientras la aplicación está abierta.
+             ===================================================== -->
+      <nav id="appBottomNav" class="app-bottom-nav" aria-label="Navegación principal">
+        <button type="button" class="app-bottom-nav-item active" data-bottom-nav="inicio" aria-current="page">
+          <i class="bi bi-house-fill" aria-hidden="true"></i>
+          <span>Inicio</span>
+        </button>
+
+        <button type="button" class="app-bottom-nav-item" data-bottom-nav="informes">
+          <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+          <span>Informes</span>
+        </button>
+
+        <button
+          type="button"
+          id="btnNuevoInforme"
+          class="app-bottom-nav-add"
+          data-bottom-nav="nuevo"
+          aria-label="Nuevo informe"
+          title="Nuevo informe"
+        >
+          <i class="bi bi-plus-lg" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" class="app-bottom-nav-item" data-bottom-nav="activos">
+          <i class="bi bi-diagram-3" aria-hidden="true"></i>
+          <span>Activos</span>
+        </button>
+
+        <div class="app-bottom-nav-profile">
+          <button
+            type="button"
+            class="app-bottom-nav-item"
+            id="btnPerfilNav"
+            data-bottom-nav="perfil"
+            aria-expanded="false"
+            aria-controls="perfilMenu"
+          >
+            <i class="bi bi-person" aria-hidden="true"></i>
+            <span>Perfil</span>
+          </button>
+
+          <div id="perfilMenu" class="app-profile-menu" hidden>
+            <div class="app-profile-menu-header">
+              <div class="app-profile-menu-avatar">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <div>
+                <strong id="perfilNombre">Técnico</strong>
+                <small id="perfilCargo">Técnico de mantenimiento</small>
+              </div>
+            </div>
+            <button
+              id="btnCerrarSesion"
+              type="button"
+              class="app-profile-logout"
+              title="Cerrar sesión"
+              aria-label="Cerrar sesión"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+              <span style="color: black;">Cerrar sesión</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ---------- FOOTER ---------- -->
+
+      <footer class="text-center py-3 mt-4 border-top">
+        <p id="estado" class="text-muted small mb-0"></p>
+        <p class="text-muted small mb-0">Desarrollado por <strong>JORGE LEONARDO RODRIGUEZ</strong></p>
+      </footer>
+    </div>
+
+    <!-- Bootstrap -->
+
+    <script src="./vendor/bootstrap.bundle.min.js"></script>
+
+    <!-- jsPDF -->
+    <script src="./vendor/jspdf.umd.min.js"></script>
+
+    <!-- HTML5 QR -->
+    <script src="./vendor/html5-qrcode.min.js"></script>
+
+    <!-- Navegación inferior fija -->
+    <script type="module" src="./src/js/bottomNav.js"></script>
+
+    <!-- MAIN -->
+
+    <script type="module" src="./src/js/app.js"></script>
+
+    <!-- Loader global -->
+    <div id="loaderOverlay">
+      <div class="spinner-border text-primary loaderSpinner"></div>
+    </div>
+
+    <div id="loaderOverlay2">
+      <div class="loader2-container">
+        <span id="loaderProgress2">Preparando...</span>
+
+        <div class="progressBar2">
+          <div class="progressBar2-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- MODAL CONFIRMAR CIERRE DE SESIÓN -->
+    <!-- ===================================================== -->
+
+    <div
+      class="modal fade"
+      id="modalCerrarSesion"
+      tabindex="-1"
+      aria-labelledby="modalCerrarSesionLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="modalCerrarSesionLabel">
+              <i class="bi bi-box-arrow-right text-primary me-2"></i>
+              Cerrar sesión
+            </h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+
+          <div class="modal-body">
+            <p class="mb-2">¿Estás seguro de que deseas cerrar sesión?</p>
+
+            <small class="text-muted"> Se limpiarán las selecciones y datos del formulario actual. </small>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+            <button type="button" class="btn btn-primary" id="btnConfirmarCerrarSesion">
+              <i class="bi bi-box-arrow-right me-1"></i>
+              Sí, cerrar sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+/* oee.css */
+  body {
+    margin: 0;
+    font-family: system-ui, Arial, sans-serif;
+    background: #f2f2f2;
+  }
+
+  header {
+    background: #1f2937;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  input {
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .lista {
+    padding: 10px;
+  }
+
+  .item {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  }
+
+  .clasificacion {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .descripcion {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .codigo {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+  }
+
+  .planeada .codigo { background: #f59e0b; }
+  .no-planeada .codigo { background: #dc2626; }
+  .equipo .codigo { background: #6b7280; }
+  .operativo .codigo { background: #2563eb; }
+  .operativo-equipo .codigo { background: #7c3aed; }
+
+  .item {
+  cursor: pointer;
+}
+
+/* MODAL */
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: #ffffff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+  animation: aparecer .25s ease;
+}
+
+@keyframes aparecer {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-card h3 {
+  margin: 0 0 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.modal-card label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 12px;
+  display: block;
+}
+
+.modal-card input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+.modal-card input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-guardar {
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-cancelar {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.modal-card select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: white;
+}
+
+.modal-card select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+

@@ -1,0 +1,236 @@
+/* Mantenimiento: presentación tipo selector segmentado. */
+.app-maintenance-card .app-section-header {
+  display: none !important;
+}
+
+.app-maintenance-card {
+  padding: 13px !important;
+}
+
+.app-maintenance-field:first-of-type label::after {
+  content: '';
+}
+
+.app-maintenance-field:first-of-type .app-input-icon {
+  position: relative;
+}
+
+.app-maintenance-card #tipoMantenimiento {
+  min-height: 53px !important;
+  font-weight: 700;
+}
+
+.app-maintenance-card .app-date-grid {
+  margin-top: 14px;
+}
+
+.app-time-card {
+  border: 1px solid #e1e9f1 !important;
+  background: #fbfdff !important;
+}
+
+/* Diagnóstico y trabajo se presentan como tarjetas de entrada, como en la guía. */
+.app-maintenance-card .app-textarea-field {
+  margin-top: 4px;
+}
+
+.app-maintenance-card .app-textarea-field textarea {
+  min-height: 130px !important;
+  border-radius: 11px !important;
+  resize: vertical;
+}
+
+/* Repuestos */
+.app-parts-card .app-section-header {
+  display: none !important;
+}
+
+.app-parts-card {
+  padding: 12px !important;
+}
+
+.app-parts-toolbar {
+  gap: 8px !important;
+}
+
+.app-parts-category,
+.app-parts-search,
+.app-selected-parts {
+  padding: 9px;
+  border: 1px solid #e5ebf2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.app-parts-search {
+  position: relative;
+}
+
+.app-selected-parts {
+  margin-top: 8px;
+}
+
+/* Evidencia */
+.app-photo-section .app-section-header,
+.app-signatures-section > .app-section-header {
+  margin-bottom: 9px !important;
+}
+
+.app-photo-section .app-section-icon,
+.app-signatures-section .app-section-icon {
+  display: none !important;
+}
+
+.app-photo-section .app-section-header h3,
+.app-signatures-section .app-section-header h3 {
+  font-size: 0.78rem !important;
+}
+
+/* Firmas: dos tarjetas compactas como la guía. */
+.app-signature-card,
+.app-operator-card {
+  padding: 11px !important;
+  border: 1px solid #e3eaf2 !important;
+  background: #fff !important;
+  box-shadow: 0 5px 15px rgba(24, 53, 89, 0.05) !important;
+}
+
+.app-signature-canvas-wrap {
+  min-height: 118px !important;
+  border-radius: 10px !important;
+}
+
+/* Finalización */
+.app-final-card {
+  padding: 14px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: center;
+}
+
+.app-final-icon {
+  margin: 0 auto 10px;
+}
+
+.app-final-actions {
+  grid-template-columns: 1fr !important;
+}
+
+.app-final-button {
+  min-height: 48px !important;
+}
+
+
+/* =====================================================
+   AJUSTE 01 — CABECERA SUPERIOR SEGÚN REFERENCIA
+   ===================================================== */
+.app-welcome {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 92px !important;
+  padding: 10px 8px 12px !important;
+  margin: 0 0 12px !important;
+}
+
+.app-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-width: 0;
+}
+
+.app-brand-logo {
+  width: 142px !important;
+  height: auto !important;
+  max-height: 54px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  flex: 0 0 auto !important;
+}
+
+/* El texto ya está incorporado en el logotipo de la referencia. */
+.app-brand-copy {
+  display: none !important;
+}
+
+.app-user-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  flex-direction: row-reverse !important;
+  flex: 0 0 auto !important;
+}
+
+.app-user-avatar {
+  width: 38px !important;
+  height: 38px !important;
+  flex-basis: 38px !important;
+}
+
+.app-user-info {
+  text-align: right !important;
+}
+
+.app-user-info strong {
+  display: block !important;
+  font-size: 0.68rem !important;
+  line-height: 1.15 !important;
+}
+
+.app-user-info span {
+  display: block !important;
+  margin-top: 2px !important;
+  font-size: 0.5rem !important;
+  line-height: 1.15 !important;
+}
+
+@media (max-width: 380px) {
+  .app-welcome {
+    min-height: 88px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .app-brand-logo {
+    width: 132px !important;
+    max-height: 50px !important;
+  }
+
+  .app-user-avatar {
+    width: 34px !important;
+    height: 34px !important;
+    flex-basis: 34px !important;
+  }
+
+  .app-user-info strong {
+    font-size: 0.62rem !important;
+  }
+
+  .app-user-info span {
+    font-size: 0.46rem !important;
+  }
+}
+
+
+/* =====================================================
+   AJUSTE 03 — ESTADOS DE FIRMAS
+   ===================================================== */
+.app-signature-status.loaded {
+  color: #087a48 !important;
+  background: #eaf8f1 !important;
+}
+
+#sigEjecutor.signature-readonly,
+#sigEjecutor.firma-bloqueada {
+  pointer-events: none !important;
+  cursor: default !important;
+  user-select: none !important;
+}
+
+/* El estado Cargado se muestra como confirmación positiva. */
+#estadoFirmaTecnico.loaded,
+#estadoFirmaCoordinador.loaded {
+  color: #087a48 !important;
+  background: #eaf8f1 !important;
+}

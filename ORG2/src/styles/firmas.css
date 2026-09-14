@@ -1,0 +1,545 @@
+/* =====================================================
+   FASE 5 — FIRMAS Y FINALIZACIÓN
+   ===================================================== */
+
+#formulario fieldset:has(.signature) {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.app-signatures-section {
+    margin-top: 4px;
+    padding: 16px;
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+}
+
+.app-section-icon.signatures {
+    color: #7048c8;
+    background: rgba(112, 72, 200, 0.10);
+}
+
+
+/* =====================================================
+   CARD DE FIRMA
+   ===================================================== */
+
+.app-signature-card {
+    margin-top: 14px;
+    padding: 13px;
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+
+    background: var(--surface-soft);
+}
+
+.app-signature-card.coordinator {
+    margin-top: 12px;
+}
+
+.app-signature-heading,
+.app-operator-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 11px;
+}
+
+.app-signature-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 38px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    color: var(--brand);
+    background: var(--brand-soft);
+
+    font-size: 0.95rem;
+}
+
+.app-signature-avatar.operator {
+    color: var(--success);
+    background: var(--success-soft);
+}
+
+.app-signature-avatar.coordinator {
+    color: #7048c8;
+    background: rgba(112, 72, 200, 0.10);
+}
+
+.app-signature-heading > div:nth-child(2),
+.app-operator-heading > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+}
+
+.app-signature-role {
+    display: block;
+
+    margin-bottom: 1px;
+
+    color: var(--brand);
+
+    font-size: 0.56rem;
+    font-weight: 800;
+
+    letter-spacing: 0.07em;
+}
+
+.app-signature-heading strong,
+.app-operator-heading strong {
+    display: block;
+
+    color: var(--ink);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.app-signature-heading small,
+.app-operator-heading small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--ink-soft);
+
+    font-size: 0.57rem;
+}
+
+.app-signature-status {
+    flex-shrink: 0;
+
+    padding: 5px 7px;
+
+    border-radius: 7px;
+
+    font-size: 0.52rem;
+    font-weight: 800;
+}
+
+.app-signature-status.pending {
+    color: var(--warning);
+
+    background: var(--warning-soft);
+}
+
+
+/* =====================================================
+   CANVAS
+   ===================================================== */
+
+.app-signature-canvas-wrap {
+    position: relative;
+}
+
+#formulario .signature {
+    display: block;
+
+    width: 100%;
+    height: 145px;
+
+    margin-top: 0;
+
+    border: 1px solid var(--line);
+
+    border-radius: var(--radius-sm);
+
+    background: #ffffff;
+
+    box-shadow: none;
+
+    touch-action: none;
+}
+
+.app-signature-hint {
+    position: absolute;
+
+    right: 9px;
+    bottom: 8px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 4px 7px;
+
+    border-radius: 7px;
+
+    color: var(--muted);
+
+    background: rgba(255, 255, 255, 0.9);
+
+    font-size: 0.5rem;
+    font-weight: 600;
+
+    pointer-events: none;
+}
+
+.signature-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* =====================================================
+   OPERADOR
+   ===================================================== */
+
+.app-operator-card {
+    margin-top: 12px;
+    padding: 13px;
+
+    border: 1px solid rgba(13, 110, 253, 0.12);
+    border-radius: var(--radius-sm);
+
+    background: var(--surface-blue);
+}
+
+.app-operator-identity {
+    margin-bottom: 10px;
+}
+
+.app-operator-identity > label {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--ink-soft);
+
+    font-size: 0.58rem;
+    font-weight: 700;
+}
+
+.app-operator-name {
+    min-height: 32px;
+
+    padding: 7px 10px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 9px;
+
+    color: var(--ink);
+
+    background: #ffffff;
+
+    font-size: 0.66rem;
+    font-weight: 700;
+}
+
+.app-operator-fields {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr auto;
+
+    align-items: end;
+
+    gap: 9px;
+}
+
+.app-operator-field {
+    min-width: 0;
+}
+
+.app-operator-field label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--ink);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+}
+
+.app-operator-field .form-control {
+    min-height: 44px;
+}
+
+.app-validate-button {
+    min-width: 94px;
+
+    min-height: 44px;
+
+    padding: 0 12px !important;
+}
+
+.app-validate-button i {
+    margin-right: 4px;
+}
+
+.app-operator-status {
+    min-height: 18px;
+
+    margin-top: 7px;
+
+    color: var(--ink-soft);
+
+    font-size: 0.6rem;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   ACCIONES DE FIRMA
+   ===================================================== */
+
+.app-signature-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 8px;
+}
+
+.app-clear-signature {
+    min-height: 38px !important;
+
+    padding: 0 11px !important;
+
+    color: var(--danger);
+
+    border-color: rgba(220, 53, 69, 0.18);
+}
+
+.app-clear-signature:not(:disabled):hover {
+    color: #ffffff;
+
+    background: var(--danger);
+
+    border-color: var(--danger);
+}
+
+
+/* =====================================================
+   CARD FINAL
+   ===================================================== */
+
+.app-final-card {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 16px;
+    padding: 13px;
+
+    border: 1px solid rgba(19, 155, 99, 0.16);
+
+    border-radius: var(--radius-sm);
+
+    background: var(--success-soft);
+}
+
+.app-final-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 11px;
+
+    color: var(--success);
+
+    background: rgba(255, 255, 255, 0.8);
+
+    font-size: 1rem;
+}
+
+.app-final-content span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--success);
+
+    font-size: 0.56rem;
+    font-weight: 800;
+
+    letter-spacing: 0.07em;
+}
+
+.app-final-content strong {
+    display: block;
+
+    color: var(--ink);
+
+    font-size: 0.7rem;
+}
+
+.app-final-content p {
+    margin: 3px 0 0;
+
+    color: var(--ink-soft);
+
+    font-size: 0.57rem;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   BOTONES FINALES
+   ===================================================== */
+
+.app-final-actions {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+
+    gap: 9px;
+
+    margin-top: 10px;
+}
+
+.app-final-button {
+    min-height: 48px !important;
+
+    padding: 0 12px !important;
+
+    font-size: 0.67rem !important;
+}
+
+.app-final-button i {
+    margin-right: 5px;
+}
+
+
+/* =====================================================
+   MÓVIL
+   ===================================================== */
+
+@media (max-width: 576px) {
+
+    .app-signatures-section {
+        padding: 14px;
+    }
+
+    .app-operator-fields {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .app-validate-button {
+        width: 100%;
+    }
+
+    .app-final-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .app-final-button {
+        min-height: 50px !important;
+    }
+
+    #formulario .signature {
+        height: 150px;
+    }
+}
+
+
+/* =====================================================
+   ESCRITORIO
+   ===================================================== */
+
+@media (min-width: 900px) {
+
+    .app-signature-card,
+    .app-operator-card {
+        padding: 16px;
+    }
+
+    #formulario .signature {
+        height: 170px;
+    }
+}
+
+
+/* =====================================================
+   CONTRASEÑA DEL OPERADOR
+   ===================================================== */
+
+/* =====================================================
+   CAMPO CONTRASEÑA OPERADOR
+   ===================================================== */
+
+.password-operador {
+  position: relative;
+}
+
+/* Input */
+
+.password-operador input {
+  padding-right: 45px;
+}
+
+/* Botón ojo */
+
+.btn-mostrar-password {
+  position: absolute;
+
+  top: 50%;
+
+  right: 0;
+
+  transform: translateY(-50%);
+
+  width: 42px;
+
+  height: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: #6c757d;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+/* Efecto al pasar el mouse */
+
+.btn-mostrar-password:hover {
+  color: var(--brand);
+}
+
+/* Quitar borde al hacer focus */
+
+.btn-mostrar-password:focus {
+  outline: none;
+
+  box-shadow: none;
+}
