@@ -518,7 +518,7 @@ const firmasPersonas = {
   "JORGE LEONARDO RODRIGUEZ": "jorge-leonardo-rodriguez.png",
   "PINEDA AGUDELO YONATAN STIVEN": "pineda-agudelo-yonatan-stiven.png",
   "QUEVEDO LADINO MARIO": "quevedo-ladino-mario.png",
-  "LUIS GABRIEL RODRUIGUEZ": "luis-gabriel-rodruiguez.png",
+  "LUIS GABRIEL RODRIGUEZ": "luis-gabriel-rodriguez.png",
   "NESTOR LEONARDO RODRIGUEZ": "nestor-leonardo-rodriguez.png",
   "ESNEIDER QUINTERO LOZANO": "esneider-quintero-lozano.png",
   "GERARDO MARIÑO": "gerardo-marino.png",

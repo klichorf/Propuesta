@@ -13,7 +13,7 @@ guarda los archivos con estos nombres:
 - `jorge-leonardo-rodriguez.png`
 - `pineda-agudelo-yonatan-stiven.png`
 - `quevedo-ladino-mario.png`
-- `luis-gabriel-rodruiguez.png`
+- `luis-gabriel-rodriguez.png`
 - `nestor-leonardo-rodriguez.png`
 - `esneider-quintero-lozano.png`
 - `gerardo-marino.png`
