@@ -1,303 +1,222 @@
-import { limpiarOperador } from "../firmas/firmas.js";
-import { limpiarCanvas } from "../firmas/firmasCanvas.js";
-import { imagesData } from "../fotos.js";
-
+import { limpiarOperador } from '../firmas/firmas.js';
+import { limpiarFotos } from '../fotografias/estadoFotos.js';
 
 // ======================================================
 // OBTENER DATOS DEL FORMULARIO
 // ======================================================
 
 export function obtenerDatosFormulario() {
+  return {
+    codigo: document.getElementById('codigo').value,
 
-    return {
-        codigo:
-            document.getElementById("codigo").value,
+    planta: document.getElementById('planta').value.trim(),
 
-        planta:
-            document.getElementById("planta").value.trim(),
+    area: document.getElementById('area').value.trim(),
 
-        area:
-            document.getElementById("area").value.trim(),
+    equipo: document.getElementById('equipo').value.trim(),
 
-        equipo:
-            document.getElementById("equipo").value.trim(),
+    fechaInicio: document.getElementById('fechaInicio').value,
 
-        fechaInicio:
-            document.getElementById("fechaInicio").value,
+    fechaFin: document.getElementById('fechaFin').value,
 
-        fechaFin:
-            document.getElementById("fechaFin").value,
+    tipoMantenimiento: document.getElementById('tipoMantenimiento').value.trim(),
 
-        tipoMantenimiento:
-            document
-                .getElementById("tipoMantenimiento")
-                .value
-                .trim(),
+    ejecutor: document.getElementById('ejecutor').value,
 
-        ejecutor:
-            document.getElementById("ejecutor").value,
+    danos: document.getElementById('danos').value,
 
-        danos:
-            document.getElementById("danos").value,
+    trabajo: document.getElementById('trabajo').value,
 
-        trabajo:
-            document.getElementById("trabajo").value,
+    repuestos: document.getElementById('repuestos').value,
 
-        repuestos:
-            document.getElementById("repuestos").value,
-
-        timestamp:
-            new Date().toISOString()
-    };
+    timestamp: new Date().toISOString(),
+  };
 }
-
-
 
 // ======================================================
 // LIMPIAR FORMULARIO
 // ======================================================
 
 export function limpiarFormulario() {
+  console.log('🧹 Limpiando formulario...');
+
+  // ==================================================
+  // 1. RESET GENERAL DEL FORMULARIO
+  // ==================================================
+
+  const formulario = document.getElementById('formulario');
+
+  if (formulario) {
+    formulario.reset();
+  }
 
-    console.log("🧹 Limpiando formulario...");
+  // ==================================================
+  // 2. LIMPIAR PLANTA
+  // ==================================================
 
+  const planta = document.getElementById('planta');
 
-    // ==================================================
-    // 1. RESET GENERAL DEL FORMULARIO
-    // ==================================================
+  if (planta) {
+    planta.selectedIndex = 0;
+  }
 
-    const formulario =
-        document.getElementById("formulario");
+  // ==================================================
+  // 3. LIMPIAR ÁREA
+  // ==================================================
 
-    if (formulario) {
-        formulario.reset();
-    }
+  const area = document.getElementById('area');
 
+  if (area) {
+    area.selectedIndex = 0;
+  }
 
-    // ==================================================
-    // 2. LIMPIAR PLANTA
-    // ==================================================
+  // ==================================================
+  // 4. LIMPIAR EQUIPO
+  // ==================================================
 
-    const planta =
-        document.getElementById("planta");
+  const equipo = document.getElementById('equipo');
 
-    if (planta) {
-        planta.selectedIndex = 0;
-    }
+  if (equipo) {
+    equipo.selectedIndex = 0;
+  }
 
+  // ==================================================
+  // 5. LIMPIAR OPERADOR
+  //
+  // IMPORTANTE:
+  // - Elimina operador validado
+  // - Limpia cédula
+  // - Limpia contraseña
+  // - Limpia nombre
+  // - Limpia mensaje de validación
+  // - Limpia firma del operador
+  // - Bloquea nuevamente su firma
+  //
+  // NO toca la firma del técnico.
+  // ==================================================
 
-    // ==================================================
-    // 3. LIMPIAR ÁREA
-    // ==================================================
+  limpiarOperador();
 
-    const area =
-        document.getElementById("area");
+  // ==================================================
+  // 6. FIRMA DEL TÉCNICO
+  //
+  // NO HACER:
+  //
+  // limpiarFirma("sigEjecutor");
+  //
+  // La firma del técnico pertenece al usuario
+  // autenticado y debe permanecer disponible para
+  // el siguiente mantenimiento.
+  // ==================================================
 
-    if (area) {
-        area.selectedIndex = 0;
-    }
+  // ==================================================
+  // 7. LIMPIAR FOTOS ADJUNTAS
+  // ==================================================
 
+  limpiarFotos();
 
-    // ==================================================
-    // 4. LIMPIAR EQUIPO
-    // ==================================================
+  // ==================================================
+  // 7. LIMPIAR FOTOS ADJUNTAS
+  // ==================================================
 
-    const equipo =
-        document.getElementById("equipo");
+  limpiarFotos();
 
-    if (equipo) {
-        equipo.selectedIndex = 0;
-    }
+  const thumbs = document.getElementById('thumbs');
 
+  if (thumbs) {
+    thumbs.replaceChildren();
+  }
 
-    // ==================================================
-    // 5. LIMPIAR OPERADOR
-    //
-    // IMPORTANTE:
-    // - Elimina operador validado
-    // - Limpia cédula
-    // - Limpia contraseña
-    // - Limpia nombre
-    // - Limpia mensaje de validación
-    // - Limpia firma del operador
-    // - Bloquea nuevamente su firma
-    //
-    // NO toca la firma del técnico.
-    // ==================================================
+  const contadorFotos = document.getElementById('contadorFotos');
 
-    limpiarOperador();
+  if (contadorFotos) {
+    contadorFotos.textContent = '0';
+  }
+  // ==================================================
+  // 8. LIMPIAR INPUTS DE ARCHIVOS
+  // ==================================================
 
+  document.querySelectorAll('#formulario input[type="file"]').forEach((input) => {
+    input.value = '';
+  });
 
-    // ==================================================
-    // 6. FIRMA DEL TÉCNICO
-    //
-    // NO HACER:
-    //
-    // limpiarFirma("sigEjecutor");
-    //
-    // La firma del técnico pertenece al usuario
-    // autenticado y debe permanecer disponible para
-    // el siguiente mantenimiento.
-    // ==================================================
+  // ==================================================
+  // 9. LIMPIAR FOTO DEL ACTIVO
+  // ==================================================
 
+  const vistaFotoActivo = document.getElementById('vistaFotoActivo');
 
-    // ==================================================
-    // 7. LIMPIAR FOTOS ADJUNTAS
-    // ==================================================
+  const imagenActivo = document.getElementById('imagenActivoSeleccionado');
 
-    imagesData.length = 0;
+  const skeletonFotoActivo = document.getElementById('skeletonFotoActivo');
 
-    const thumbs =
-        document.getElementById("thumbs");
+  if (imagenActivo) {
+    imagenActivo.onload = null;
+    imagenActivo.onerror = null;
 
-    if (thumbs) {
-        thumbs.innerHTML = "";
-    }
+    imagenActivo.removeAttribute('src');
 
+    imagenActivo.classList.add('d-none');
+  }
 
-    // ==================================================
-    // 8. LIMPIAR INPUTS DE ARCHIVOS
-    // ==================================================
+  if (vistaFotoActivo) {
+    vistaFotoActivo.classList.add('d-none');
+  }
 
-    document
-        .querySelectorAll(
-            '#formulario input[type="file"]'
-        )
-        .forEach(input => {
+  if (skeletonFotoActivo) {
+    skeletonFotoActivo.classList.add('d-none');
+  }
 
-            input.value = "";
+  // ==================================================
+  // 10. LIMPIAR TEXTO DEL ESTADO DE FOTO
+  // ==================================================
 
-        });
+  const estadoFotoActivo = document.getElementById('estadoFotoActivo');
 
+  if (estadoFotoActivo) {
+    estadoFotoActivo.textContent = 'FOTO DEL ACTIVO';
+  }
 
-    // ==================================================
-    // 9. LIMPIAR FOTO DEL ACTIVO
-    // ==================================================
+  // ==================================================
+  // 11. LIMPIAR INFORMACIÓN DE LA FOTO
+  // ==================================================
 
-    const vistaFotoActivo =
-        document.getElementById(
-            "vistaFotoActivo"
-        );
+  const infoEquipo = document.getElementById('infoEquipoFoto');
 
-    const imagenActivo =
-        document.getElementById(
-            "imagenActivoSeleccionado"
-        );
+  const infoUbicacion = document.getElementById('infoUbicacionFoto');
 
-    const skeletonFotoActivo =
-        document.getElementById(
-            "skeletonFotoActivo"
-        );
+  if (infoEquipo) {
+    infoEquipo.textContent = 'Equipo seleccionado';
+  }
 
+  if (infoUbicacion) {
+    infoUbicacion.textContent = 'Activo de mantenimiento';
+  }
 
-    if (imagenActivo) {
+  // ==================================================
+  // 12. LIMPIAR ENLACE DE FOTO
+  // ==================================================
 
-        imagenActivo.onload = null;
-        imagenActivo.onerror = null;
+  const linkFotoActivo = document.getElementById('linkFotoActivo');
 
-        imagenActivo.removeAttribute("src");
+  if (linkFotoActivo) {
+    linkFotoActivo.removeAttribute('href');
 
-        imagenActivo.classList.add("d-none");
-    }
+    linkFotoActivo.classList.add('d-none');
+  }
 
+  // ==================================================
+  // 13. VOLVER ARRIBA
+  // ==================================================
 
-    if (vistaFotoActivo) {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 
-        vistaFotoActivo.classList.add("d-none");
+  console.log('✅ Formulario completamente limpiado');
 
-    }
+  console.log('✍️ Firma del técnico conservada');
 
-
-    if (skeletonFotoActivo) {
-
-        skeletonFotoActivo.classList.add("d-none");
-
-    }
-
-
-    // ==================================================
-    // 10. LIMPIAR TEXTO DEL ESTADO DE FOTO
-    // ==================================================
-
-    const estadoFotoActivo =
-        document.getElementById(
-            "estadoFotoActivo"
-        );
-
-    if (estadoFotoActivo) {
-
-        estadoFotoActivo.textContent =
-            "FOTO DEL ACTIVO";
-
-    }
-
-
-    // ==================================================
-    // 11. LIMPIAR INFORMACIÓN DE LA FOTO
-    // ==================================================
-
-    const infoEquipo =
-        document.getElementById(
-            "infoEquipoFoto"
-        );
-
-    const infoUbicacion =
-        document.getElementById(
-            "infoUbicacionFoto"
-        );
-
-    if (infoEquipo) {
-
-        infoEquipo.textContent =
-            "Equipo seleccionado";
-
-    }
-
-    if (infoUbicacion) {
-
-        infoUbicacion.textContent =
-            "Activo de mantenimiento";
-
-    }
-
-
-    // ==================================================
-    // 12. LIMPIAR ENLACE DE FOTO
-    // ==================================================
-
-    const linkFotoActivo =
-        document.getElementById(
-            "linkFotoActivo"
-        );
-
-    if (linkFotoActivo) {
-
-        linkFotoActivo.removeAttribute("href");
-
-        linkFotoActivo.classList.add("d-none");
-
-    }
-
-
-    // ==================================================
-    // 13. VOLVER ARRIBA
-    // ==================================================
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-
-    console.log(
-        "✅ Formulario completamente limpiado"
-    );
-
-    console.log(
-        "✍️ Firma del técnico conservada"
-    );
-
-    console.log(
-        "🔒 Operador y validación limpiados"
-    );
+  console.log('🔒 Operador y validación limpiados');
 }

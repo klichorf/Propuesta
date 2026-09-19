@@ -543,3 +543,8 @@
 
   box-shadow: none;
 }
+
+
+.app-signature-card--tecnico.oculto {
+    display: none;
+}

@@ -11,19 +11,19 @@ let operadorValidado = null;
 // ======================================================
 
 export function obtenerSigEjecutorData() {
-    return sigEjecutorData;
+  return sigEjecutorData;
 }
 
 export function obtenerSigCoordinadorData() {
-    return sigCoordinadorData;
+  return sigCoordinadorData;
 }
 
 export function establecerSigEjecutorData(data) {
-    sigEjecutorData = data;
+  sigEjecutorData = data;
 }
 
 export function establecerSigCoordinadorData(data) {
-    sigCoordinadorData = data;
+  sigCoordinadorData = data;
 }
 
 // ======================================================
@@ -31,17 +31,17 @@ export function establecerSigCoordinadorData(data) {
 // ======================================================
 
 export function obtenerOperadorValidado() {
-    return operadorValidado;
+  return operadorValidado;
 }
 
 export function establecerOperadorValidado(operador) {
-    operadorValidado = operador;
+  operadorValidado = operador;
 }
 
 export function limpiarEstadoOperador() {
-    operadorValidado = null;
+  operadorValidado = null;
 }
 
 export function operadorEstaValidado() {
-    return operadorValidado !== null;
+  return operadorValidado !== null;
 }

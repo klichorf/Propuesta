@@ -2,41 +2,32 @@
 // GESTIÓN DE FIRMA DEL TÉCNICO
 // ------------------------------------------------------
 
-import {
-    obtenerNombreTecnico,
-    obtenerTecnico,
-} from "../services/firebase/tecnicos.js";
+import { obtenerNombreTecnico, obtenerTecnico } from '../services/firebase/tecnicos.js';
 
-import { auth } from "../services/firebase/auth.js";
+import { auth } from '../services/firebase/auth.js';
 
-import { firmasPersonas } from "../datos/firmasPersonas.js";
+import { firmasPersonas } from '../datos/firmasPersonas.js';
 
-import {
-    cargarImagenEnCanvas,
-    limpiarCanvas,
-} from "./firmasCanvas.js";
+import { cargarImagenEnCanvas, limpiarCanvas } from './firmasCanvas.js';
 
-import { normalizarNombre } from "./firmasUtils.js";
+import { normalizarNombre } from './firmasUtils.js';
 
-const firmasBaseUrl =
-    new URL("../../assets/firmas/", import.meta.url).href;
+const firmasBaseUrl = new URL('../../assets/firmas/', import.meta.url).href;
 
 // ======================================================
 // OBTENER TÉCNICO ACTUAL
 // ======================================================
 
 export function obtenerTecnicoActual() {
+  const user = auth.currentUser;
 
-    const user = auth.currentUser;
+  if (!user) {
+    return null;
+  }
 
-    if (!user) {
-        return null;
-    }
+  const correo = user.email?.trim().toLowerCase();
 
-    const correo =
-        user.email?.trim().toLowerCase();
-
-    return obtenerTecnico(correo);
+  return obtenerTecnico(correo);
 }
 
 // ======================================================
@@ -44,178 +35,140 @@ export function obtenerTecnicoActual() {
 // ======================================================
 
 export async function cargarTecnicoActual() {
+  const tecnico = obtenerTecnicoActual();
 
-    const tecnico =
-        obtenerTecnicoActual();
+  if (!tecnico) {
+    console.warn('⚠️ No existe técnico asociado al usuario');
 
-    if (!tecnico) {
+    return false;
+  }
 
-        console.warn(
-            "⚠️ No existe técnico asociado al usuario"
-        );
+  const nombre = tecnico.nombre || obtenerNombreTecnico(auth.currentUser?.email);
 
-        return false;
-    }
+  if (!nombre) {
+    return false;
+  }
 
-    const nombre =
-        tecnico.nombre ||
-        obtenerNombreTecnico(
-            auth.currentUser?.email
-        );
+  console.log('👤 Técnico identificado:', nombre);
 
-    if (!nombre) {
-        return false;
-    }
+  const nombreElemento = document.getElementById('nombreTecnicoFirma');
 
-    console.log(
-        "👤 Técnico identificado:",
-        nombre
-    );
+  if (nombreElemento) {
+    nombreElemento.textContent = nombre;
+  }
 
-    const nombreElemento =
-        document.getElementById(
-            "nombreTecnicoFirma"
-        );
+  const ejecutor = document.getElementById('ejecutor');
 
-    if (nombreElemento) {
-        nombreElemento.textContent = nombre;
-    }
+  if (ejecutor) {
+    ejecutor.value = nombre;
+    ejecutor.disabled = true;
+  }
 
-    const ejecutor =
-        document.getElementById("ejecutor");
+  const firmaCargada = await cargarFirmaPersona(nombre, 'sigEjecutor');
 
-    if (ejecutor) {
+  actualizarEstadoFirmaTecnico(firmaCargada);
+  bloquearEdicionFirmaTecnico();
+  if (firmaCargada) {
+    ocultarTarjetaFirmaTecnico();
+  }
 
-        ejecutor.value = nombre;
-        ejecutor.disabled = true;
-    }
-
-    const firmaCargada = await cargarFirmaPersona(
-        nombre,
-        "sigEjecutor"
-    );
-
-    actualizarEstadoFirmaTecnico(firmaCargada);
-    bloquearEdicionFirmaTecnico();
-
-    return firmaCargada;
+  return firmaCargada;
 }
 
 function actualizarEstadoFirmaTecnico(cargada) {
-    const estado = document.getElementById("estadoFirmaTecnico");
-    if (!estado) return;
+  const estado = document.getElementById('estadoFirmaTecnico');
+  if (!estado) return;
 
-    estado.textContent = cargada ? "Cargado" : "Pendiente";
-    estado.classList.toggle("pending", !cargada);
-    estado.classList.toggle("loaded", cargada);
+  estado.textContent = cargada ? 'Cargado' : 'Pendiente';
+  estado.classList.toggle('pending', !cargada);
+  estado.classList.toggle('loaded', cargada);
 }
 
 function bloquearEdicionFirmaTecnico() {
-    const canvas = document.getElementById("sigEjecutor");
-    if (!canvas) return;
+  const canvas = document.getElementById('sigEjecutor');
+  if (!canvas) return;
 
-    canvas.classList.add("signature-readonly", "firma-bloqueada");
-    canvas.setAttribute("aria-readonly", "true");
-    canvas.style.pointerEvents = "none";
-    canvas.style.cursor = "default";
+  canvas.classList.add('signature-readonly', 'firma-bloqueada');
+  canvas.setAttribute('aria-readonly', 'true');
+  canvas.style.pointerEvents = 'none';
+  canvas.style.cursor = 'default';
 }
 
 // ======================================================
 // CARGAR FIRMA DE PERSONA
 // ======================================================
 
-export function cargarFirmaPersona(
-    nombre,
-    idCanvas
-) {
+export function cargarFirmaPersona(nombre, idCanvas) {
+  const nombreNormalizado = normalizarNombre(nombre);
 
-    const nombreNormalizado =
-        normalizarNombre(nombre);
+  const archivo = firmasPersonas[nombreNormalizado];
 
-    const archivo =
-        firmasPersonas[nombreNormalizado];
+  if (!archivo) {
+    console.warn('⚠️ Firma no encontrada:', nombreNormalizado);
 
-    if (!archivo) {
+    limpiarCanvas(idCanvas);
 
-        console.warn(
-            "⚠️ Firma no encontrada:",
-            nombreNormalizado
-        );
+    return false;
+  }
 
-        limpiarCanvas(idCanvas);
-
-        return false;
-    }
-
-    return cargarImagenEnCanvas(
-        `${firmasBaseUrl}${archivo}`,
-        idCanvas,
-        archivo
-    );
+  return cargarImagenEnCanvas(`${firmasBaseUrl}${archivo}`, idCanvas, archivo);
 }
 
 // ======================================================
 // ACTUALIZAR TÉCNICO POR CORREO
 // ======================================================
 
-export function actualizarTecnicoPorCorreo(
-    correo
-) {
+export function actualizarTecnicoPorCorreo(correo) {
+  const ejecutor = document.getElementById('ejecutor');
 
-    const ejecutor =
-        document.getElementById("ejecutor");
+  if (!ejecutor) {
+    console.warn('⚠️ No se encontró #ejecutor');
 
-    if (!ejecutor) {
-        console.warn(
-            "⚠️ No se encontró #ejecutor"
-        );
+    return;
+  }
 
-        return;
-    }
+  const tecnico = obtenerTecnico(correo?.trim().toLowerCase());
 
-    const tecnico =
-        obtenerTecnico(
-            correo?.trim().toLowerCase()
-        );
+  if (!tecnico) {
+    console.warn('⚠️ No existe técnico asociado:', correo);
 
-    if (!tecnico) {
+    ejecutor.value = '';
 
-        console.warn(
-            "⚠️ No existe técnico asociado:",
-            correo
-        );
+    limpiarCanvas('sigEjecutor');
+    actualizarEstadoFirmaTecnico(false);
+    bloquearEdicionFirmaTecnico();
 
-        ejecutor.value = "";
+    return;
+  }
 
-        limpiarCanvas("sigEjecutor");
-        actualizarEstadoFirmaTecnico(false);
-        bloquearEdicionFirmaTecnico();
+  ejecutor.value = tecnico.nombre;
 
-        return;
-    }
+  const nombreElemento = document.getElementById('nombreTecnicoFirma');
 
-    ejecutor.value = tecnico.nombre;
+  if (nombreElemento) {
+    nombreElemento.textContent = tecnico.nombre;
+  }
 
-    const nombreElemento =
-        document.getElementById(
-            "nombreTecnicoFirma"
-        );
+cargarFirmaPersona(tecnico.nombre, 'sigEjecutor').then((cargada) => {
+  actualizarEstadoFirmaTecnico(cargada);
+  bloquearEdicionFirmaTecnico();
 
-    if (nombreElemento) {
-        nombreElemento.textContent =
-            tecnico.nombre;
-    }
+  if (cargada) {
+    ocultarTarjetaFirmaTecnico();
+  }
+});
 
-    cargarFirmaPersona(
-        tecnico.nombre,
-        "sigEjecutor"
-    ).then((cargada) => {
-        actualizarEstadoFirmaTecnico(cargada);
-        bloquearEdicionFirmaTecnico();
-    });
+  console.log('👤 Técnico identificado:', tecnico.nombre);
+}
 
-    console.log(
-        "👤 Técnico identificado:",
-        tecnico.nombre
-    );
+function ocultarTarjetaFirmaTecnico() {
+  const canvas = document.getElementById('sigEjecutor');
+
+  if (!canvas) return;
+
+  const tarjeta = canvas.closest('.app-signature-card');
+
+  if (!tarjeta) return;
+
+  tarjeta.hidden = true;
 }

@@ -2,129 +2,87 @@
 // MÓDULO: GENERACIÓN DE PDF
 // ------------------------------------------------------
 
-import { PDF_CONFIG } from "../pdf/pdfConfig.js";
+import { PDF_CONFIG } from '../pdf/pdfConfig.js';
 
-import {
-    crearLayout
-} from "../pdf/pdfLayout.js";
+import { crearLayout } from '../pdf/pdfLayout.js';
 
-import {
-    crearContenidoPDF
-} from "../pdf/pdfContenido.js";
+import { crearContenidoPDF } from '../pdf/pdfContenido.js';
 
-import {
-    agregarFirmas
-} from "../pdf/pdfFirmas.js";
+import { agregarFirmas } from '../pdf/pdfFirmas.js';
 
-import {
-    agregarRegistroFotografico
-} from "../pdf/pdfFotos.js";
+import { agregarRegistroFotografico } from '../pdf/pdfFotos.js';
 
+import { obtenerValor } from '../pdf/pdfUtils.js';
 
-import {
-    obtenerValor
-} from "../pdf/pdfUtils.js";
+import { obtenerFotos } from '../fotografias/estadoFotos.js';
 
 // ======================================================
 // GENERAR PDF
 // ======================================================
 
 export async function generarPDF() {
+  const { jsPDF } = window.jspdf;
 
-    const { jsPDF } =
-        window.jspdf;
+  if (!jsPDF) {
+    throw new Error('jsPDF no está disponible.');
+  }
 
-    if (!jsPDF) {
+  const doc = new jsPDF({
+    unit: 'pt',
+    format: 'a4',
+  });
 
-        throw new Error(
-            "jsPDF no está disponible."
-        );
-    }
+  // ==================================================
+  // LAYOUT
+  // ==================================================
 
-    const doc =
-        new jsPDF({
-            unit: "pt",
-            format: "a4",
-        });
+  const layout = crearLayout(doc);
 
-    // ==================================================
-    // LAYOUT
-    // ==================================================
+  await layout.agregarEncabezado();
 
-    const layout =
-        crearLayout(doc);
+  layout.establecerY(PDF_CONFIG.margen + PDF_CONFIG.headerHeight);
 
-    await layout.agregarEncabezado();
+  // ==================================================
+  // CONTENIDO
+  // ==================================================
 
-    layout.establecerY(
-        PDF_CONFIG.margen +
-        PDF_CONFIG.headerHeight
-    );
+  const contenido = crearContenidoPDF(doc, layout);
 
-    // ==================================================
-    // CONTENIDO
-    // ==================================================
+  await contenido.agregarDatosPrincipales();
 
-    const contenido =
-        crearContenidoPDF(
-            doc,
-            layout
-        );
+  await contenido.agregarSeccion('Daños encontrados', obtenerValor('danos'));
 
-    await contenido.agregarDatosPrincipales();
+  await contenido.agregarSeccion('Trabajo ejecutado', obtenerValor('trabajo'));
 
-    await contenido.agregarSeccion(
-        "Daños encontrados",
-        obtenerValor("danos")
-    );
+  await contenido.agregarSeccion('Repuestos utilizados', obtenerValor('repuestos'));
 
-    await contenido.agregarSeccion(
-        "Trabajo ejecutado",
-        obtenerValor("trabajo")
-    );
+  await contenido.agregarSeccion('Herramientas utilizadas', obtenerValor('herramientas'));
 
-    await contenido.agregarSeccion(
-        "Repuestos utilizados ",
-        obtenerValor("repuestos")
-    );
+  // ==================================================
+  // FIRMAS
+  // ==================================================
 
-    await contenido.agregarSeccion(
-        "Herramientas utilizadas",
-        obtenerValor("herramientas")
-    );
+  await agregarFirmas(doc, layout);
 
-    // ==================================================
-    // FIRMAS
-    // ==================================================
+  layout.agregarPie();
 
-    await agregarFirmas(
-        doc,
-        layout
-    );
+  // ==================================================
+  // FOTOS
+  // ==================================================
 
-    layout.agregarPie();
+  const fotos = obtenerFotos();
 
-    // ==================================================
-    // FOTOS
-    // ==================================================
+  console.log('📸 [PDF] Fotografías disponibles:', fotos.length);
 
-    await agregarRegistroFotografico(
-        doc,
-        layout
-    );
+  await agregarRegistroFotografico(doc, layout, fotos);
 
-    // ==================================================
-    // EXPORTAR
-    // ==================================================
+  // ==================================================
+  // EXPORTAR
+  // ==================================================
 
-    const blob =
-        doc.output("blob");
+  const blob = doc.output('blob');
 
-    return new File(
-        [blob],
-        "informe.pdf",
-        {
-            type: "application/pdf",
-        }
-    );
+  return new File([blob], 'informe.pdf', {
+    type: 'application/pdf',
+  });
 }

@@ -2,7 +2,7 @@
 // MÓDULO PRINCIPAL: INICIALIZACIÓN
 // ------------------------------------------------------
 
-import { initFotos } from './fotos.js';
+import { initFotos } from '../js/fotografias/fotografias.js';
 import { initFirmas, actualizarTecnicoPorCorreo } from './firmas/firmas.js';
 import { generarPDF } from './pdf/pdf.js';
 import { validarFormulario } from './validacion/validarFormulario.js';

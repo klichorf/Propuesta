@@ -2,19 +2,15 @@
 // CANVAS DE FIRMAS
 // ------------------------------------------------------
 
-import {
-    establecerSigEjecutorData,
-    establecerSigCoordinadorData,
-    operadorEstaValidado,
-} from "./firmasEstado.js";
+import { establecerSigEjecutorData, establecerSigCoordinadorData, operadorEstaValidado } from './firmasEstado.js';
 
 function actualizarEstadoFirmaCoordinador(cargada) {
-    const estado = document.getElementById("estadoFirmaCoordinador");
-    if (!estado) return;
+  const estado = document.getElementById('estadoFirmaCoordinador');
+  if (!estado) return;
 
-    estado.textContent = cargada ? "Cargado" : "Pendiente";
-    estado.classList.toggle("pending", !cargada);
-    estado.classList.toggle("loaded", cargada);
+  estado.textContent = cargada ? 'Cargado' : 'Pendiente';
+  estado.classList.toggle('pending', !cargada);
+  estado.classList.toggle('loaded', cargada);
 }
 
 // ======================================================
@@ -22,117 +18,107 @@ function actualizarEstadoFirmaCoordinador(cargada) {
 // ======================================================
 
 export function inicializarCanvas(id) {
+  const canvas = document.getElementById(id);
 
-    const canvas = document.getElementById(id);
+  if (!canvas) {
+    console.warn(`⚠️ Canvas ${id} no encontrado`);
+    return;
+  }
 
-    if (!canvas) {
-        console.warn(`⚠️ Canvas ${id} no encontrado`);
-        return;
+  const rect = canvas.getBoundingClientRect();
+
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  const ctx = canvas.getContext('2d', {
+    willReadFrequently: true,
+  });
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  let dibujando = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  function obtenerPosicion(evento) {
+    const r = canvas.getBoundingClientRect();
+
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+
+    return {
+      x: (evento.clientX - r.left) * scaleX,
+      y: (evento.clientY - r.top) * scaleY,
+    };
+  }
+
+  canvas.addEventListener('pointerdown', (evento) => {
+    if (id === 'sigEjecutor') {
+      return;
     }
 
-    const rect = canvas.getBoundingClientRect();
-
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-
-    const ctx = canvas.getContext("2d", {
-        willReadFrequently: true,
-    });
-
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    let dibujando = false;
-    let lastX = 0;
-    let lastY = 0;
-
-    function obtenerPosicion(evento) {
-
-        const r = canvas.getBoundingClientRect();
-
-        const scaleX = canvas.width / r.width;
-        const scaleY = canvas.height / r.height;
-
-        return {
-            x: (evento.clientX - r.left) * scaleX,
-            y: (evento.clientY - r.top) * scaleY,
-        };
+    if (id === 'sigCoordinador' && !operadorEstaValidado()) {
+      return;
     }
 
-    canvas.addEventListener("pointerdown", (evento) => {
+    dibujando = true;
 
-        if (id === "sigEjecutor") {
-            return;
-        }
+    ({ x: lastX, y: lastY } = obtenerPosicion(evento));
+  });
 
-        if (
-            id === "sigCoordinador" &&
-            !operadorEstaValidado()
-        ) {
-            return;
-        }
+  canvas.addEventListener('pointermove', (evento) => {
+    if (!dibujando) {
+      return;
+    }
 
-        dibujando = true;
+    const { x, y } = obtenerPosicion(evento);
 
-        ({
-            x: lastX,
-            y: lastY,
-        } = obtenerPosicion(evento));
-    });
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(x, y);
 
-    canvas.addEventListener("pointermove", (evento) => {
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
 
-        if (!dibujando) {
-            return;
-        }
+    ctx.stroke();
 
-        const { x, y } = obtenerPosicion(evento);
+    lastX = x;
+    lastY = y;
+  });
 
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(x, y);
+  canvas.addEventListener('pointerup', () => {
+    dibujando = false;
 
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
+    if (id === 'sigCoordinador' && tieneContenido(canvas)) {
+      actualizarEstadoFirmaCoordinador(true);
+      document.dispatchEvent(new CustomEvent('firma:cambiada'));
+    }
+  });
 
-        ctx.stroke();
+  canvas.addEventListener('pointerleave', () => {
+    dibujando = false;
 
-        lastX = x;
-        lastY = y;
-    });
-
-    canvas.addEventListener("pointerup", () => {
-        dibujando = false;
-
-        if (id === "sigCoordinador" && tieneContenido(canvas)) {
-            actualizarEstadoFirmaCoordinador(true);
-            document.dispatchEvent(new CustomEvent("firma:cambiada"));
-        }
-    });
-
-    canvas.addEventListener("pointerleave", () => {
-        dibujando = false;
-
-        if (id === "sigCoordinador" && tieneContenido(canvas)) {
-            actualizarEstadoFirmaCoordinador(true);
-            document.dispatchEvent(new CustomEvent("firma:cambiada"));
-        }
-    });
+    if (id === 'sigCoordinador' && tieneContenido(canvas)) {
+      actualizarEstadoFirmaCoordinador(true);
+      document.dispatchEvent(new CustomEvent('firma:cambiada'));
+    }
+  });
 }
 
 function tieneContenido(canvas) {
-    const ctx = canvas?.getContext("2d", { willReadFrequently: true });
-    if (!ctx || !canvas.width || !canvas.height) return false;
+  const ctx = canvas?.getContext('2d', { willReadFrequently: true });
+  if (!ctx || !canvas.width || !canvas.height) return false;
 
-    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    for (let i = 0; i < pixels.length; i += 4) {
-        if (pixels[i] !== 255 || pixels[i + 1] !== 255 || pixels[i + 2] !== 255) {
-            return true;
-        }
+  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  for (let i = 0; i < pixels.length; i += 4) {
+    if (pixels[i] !== 255 || pixels[i + 1] !== 255 || pixels[i + 2] !== 255) {
+      return true;
     }
+  }
 
-    return false;
+  return false;
 }
 
 // ======================================================
@@ -140,110 +126,67 @@ function tieneContenido(canvas) {
 // ======================================================
 
 export function dibujarImagenEnCanvas(canvas, imagen) {
+  const ctx = canvas.getContext('2d', {
+    willReadFrequently: true,
+  });
 
-    const ctx = canvas.getContext("2d", {
-        willReadFrequently: true,
-    });
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+  ctx.fillStyle = '#fff';
 
-    ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+  const margen = 12;
 
-    const margen = 12;
+  const maxW = canvas.width - margen * 2;
 
-    const maxW =
-        canvas.width - margen * 2;
+  const maxH = canvas.height - margen * 2;
 
-    const maxH =
-        canvas.height - margen * 2;
+  const escala = Math.min(maxW / imagen.width, maxH / imagen.height);
 
-    const escala = Math.min(
-        maxW / imagen.width,
-        maxH / imagen.height
-    );
+  const ancho = imagen.width * escala;
 
-    const ancho =
-        imagen.width * escala;
+  const alto = imagen.height * escala;
 
-    const alto =
-        imagen.height * escala;
+  const x = (canvas.width - ancho) / 2;
 
-    const x =
-        (canvas.width - ancho) / 2;
+  const y = (canvas.height - alto) / 2;
 
-    const y =
-        (canvas.height - alto) / 2;
-
-    ctx.drawImage(
-        imagen,
-        x,
-        y,
-        ancho,
-        alto
-    );
+  ctx.drawImage(imagen, x, y, ancho, alto);
 }
 
 // ======================================================
 // CARGAR IMAGEN EN CANVAS
 // ======================================================
 
-export function cargarImagenEnCanvas(
-    url,
-    idCanvas,
-    nombreArchivo
-) {
+export function cargarImagenEnCanvas(url, idCanvas, nombreArchivo) {
+  const canvas = document.getElementById(idCanvas);
 
-    const canvas =
-        document.getElementById(idCanvas);
+  if (!canvas) {
+    return Promise.resolve(false);
+  }
 
-    if (!canvas) {
-        return Promise.resolve(false);
-    }
+  return new Promise((resolve) => {
+    const imagen = new Image();
 
-    return new Promise((resolve) => {
+    imagen.onload = () => {
+      dibujarImagenEnCanvas(canvas, imagen);
 
-        const imagen = new Image();
+      canvas.classList.remove('border-danger');
 
-        imagen.onload = () => {
+      resolve(true);
+    };
 
-            dibujarImagenEnCanvas(
-                canvas,
-                imagen
-            );
+    imagen.onerror = () => {
+      console.error('❌ No se pudo cargar firma:', nombreArchivo);
 
-            canvas.classList.remove(
-                "border-danger"
-            );
+      limpiarCanvas(idCanvas);
 
-            resolve(true);
-        };
+      resolve(false);
+    };
 
-        imagen.onerror = () => {
-
-            console.error(
-                "❌ No se pudo cargar firma:",
-                nombreArchivo
-            );
-
-            limpiarCanvas(idCanvas);
-
-            resolve(false);
-        };
-
-        imagen.src = url;
-    });
+    imagen.src = url;
+  });
 }
 
 // ======================================================
@@ -251,39 +194,26 @@ export function cargarImagenEnCanvas(
 // ======================================================
 
 export function limpiarCanvas(idCanvas) {
+  const canvas = document.getElementById(idCanvas);
 
-    const canvas =
-        document.getElementById(idCanvas);
+  if (!canvas) {
+    return;
+  }
 
-    if (!canvas) {
-        return;
-    }
+  const ctx = canvas.getContext('2d');
 
-    const ctx =
-        canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+  ctx.fillStyle = '#fff';
 
-    ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+  if (idCanvas === 'sigEjecutor') {
+    establecerSigEjecutorData(null);
+  }
 
-    if (idCanvas === "sigEjecutor") {
-        establecerSigEjecutorData(null);
-    }
-
-    if (idCanvas === "sigCoordinador") {
-        establecerSigCoordinadorData(null);
-        actualizarEstadoFirmaCoordinador(false);
-    }
+  if (idCanvas === 'sigCoordinador') {
+    establecerSigCoordinadorData(null);
+    actualizarEstadoFirmaCoordinador(false);
+  }
 }

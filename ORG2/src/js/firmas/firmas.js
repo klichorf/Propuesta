@@ -3,152 +3,98 @@
 // ORQUESTADOR PRINCIPAL
 // ------------------------------------------------------
 
-import {
-    inicializarCanvas,
-    limpiarCanvas,
-} from "../firmas/firmasCanvas.js";
+import { inicializarCanvas, limpiarCanvas } from '../firmas/firmasCanvas.js';
+
+import { cargarTecnicoActual, actualizarTecnicoPorCorreo } from '../firmas/firmaTecnico.js';
 
 import {
-    cargarTecnicoActual,
-    actualizarTecnicoPorCorreo,
-} from "../firmas/firmaTecnico.js";
+  validarOperadorFormulario,
+  alternarPassword,
+  limpiarOperador,
+  bloquearFirma,
+} from '../firmas/firmaOperador.js';
 
-import {
-    validarOperadorFormulario,
-    alternarPassword,
-    limpiarOperador,
-    bloquearFirma,
-} from "../firmas/firmaOperador.js";
+import { obtenerOperadorValidado } from '../firmas/firmasEstado.js';
 
-import {
-    obtenerOperadorValidado,
-} from "../firmas/firmasEstado.js";
+import { obtenerTecnico } from '../services/firebase/tecnicos.js';
 
-import {
-    obtenerTecnico,
-} from "../services/firebase/tecnicos.js";
-
-import { auth } from "../services/firebase/auth.js";
+import { auth } from '../services/firebase/auth.js';
 
 // ======================================================
 // INICIALIZACIÓN
 // ======================================================
 
 export function initFirmas() {
+  console.log('✍️ Inicializando gestión de firmas...');
 
-    console.log(
-        "✍️ Inicializando gestión de firmas..."
-    );
+  // --------------------------------------------------
+  // CANVAS
+  // --------------------------------------------------
 
-    // --------------------------------------------------
-    // CANVAS
-    // --------------------------------------------------
+  inicializarCanvas('sigEjecutor');
 
-    inicializarCanvas(
-        "sigEjecutor"
-    );
+  inicializarCanvas('sigCoordinador');
 
-    inicializarCanvas(
-        "sigCoordinador"
-    );
+  bloquearFirma();
+  bloquearFirmaTecnico();
 
-    bloquearFirma();
-    bloquearFirmaTecnico();
+  // --------------------------------------------------
+  // BOTÓN LIMPIAR TÉCNICO
+  // --------------------------------------------------
 
-    // --------------------------------------------------
-    // BOTÓN LIMPIAR TÉCNICO
-    // --------------------------------------------------
+  const btnEjecutor = document.querySelector('#sigEjecutor')?.parentElement.querySelector('.signature-tools button');
 
-    const btnEjecutor =
-        document
-            .querySelector("#sigEjecutor")
-            ?.parentElement
-            .querySelector(
-                ".signature-tools button"
-            );
+  if (btnEjecutor) {
+    btnEjecutor.addEventListener('click', () => limpiarCanvas('sigEjecutor'));
+  }
 
-    if (btnEjecutor) {
+  // --------------------------------------------------
+  // BOTÓN LIMPIAR OPERADOR
+  // --------------------------------------------------
 
-        btnEjecutor.addEventListener(
-            "click",
-            () => limpiarCanvas(
-                "sigEjecutor"
-            )
-        );
-    }
+  const btnCoordinador = document.getElementById('btnLimpiarFirmaCoordinador');
 
-    // --------------------------------------------------
-    // BOTÓN LIMPIAR OPERADOR
-    // --------------------------------------------------
+  if (btnCoordinador) {
+    btnCoordinador.addEventListener('click', () => limpiarCanvas('sigCoordinador'));
+  }
 
-    const btnCoordinador =
-        document.getElementById(
-            "btnLimpiarFirmaCoordinador"
-        );
+  // --------------------------------------------------
+  // TÉCNICO
+  // --------------------------------------------------
 
-    if (btnCoordinador) {
+  cargarTecnicoActual();
 
-        btnCoordinador.addEventListener(
-            "click",
-            () => limpiarCanvas(
-                "sigCoordinador"
-            )
-        );
-    }
+  // --------------------------------------------------
+  // OPERADOR
+  // --------------------------------------------------
 
-    // --------------------------------------------------
-    // TÉCNICO
-    // --------------------------------------------------
+  const btnValidar = document.getElementById('btnValidarOperador');
 
-    cargarTecnicoActual();
+  if (btnValidar) {
+    btnValidar.addEventListener('click', validarOperadorFormulario);
+  }
 
-    // --------------------------------------------------
-    // OPERADOR
-    // --------------------------------------------------
+  // --------------------------------------------------
+  // PASSWORD
+  // --------------------------------------------------
 
-    const btnValidar =
-        document.getElementById(
-            "btnValidarOperador"
-        );
+  const btnPassword = document.getElementById('btnMostrarPasswordOperador');
 
-    if (btnValidar) {
+  if (btnPassword) {
+    btnPassword.addEventListener('click', alternarPassword);
+  }
 
-        btnValidar.addEventListener(
-            "click",
-            validarOperadorFormulario
-        );
-    }
-
-    // --------------------------------------------------
-    // PASSWORD
-    // --------------------------------------------------
-
-    const btnPassword =
-        document.getElementById(
-            "btnMostrarPasswordOperador"
-        );
-
-    if (btnPassword) {
-
-        btnPassword.addEventListener(
-            "click",
-            alternarPassword
-        );
-    }
-
-    console.log(
-        "✅ Gestión de firmas inicializada"
-    );
+  console.log('✅ Gestión de firmas inicializada');
 }
 
 export function bloquearFirmaTecnico() {
-    const canvas = document.getElementById("sigEjecutor");
-    if (!canvas) return;
+  const canvas = document.getElementById('sigEjecutor');
+  if (!canvas) return;
 
-    canvas.style.pointerEvents = "none";
-    canvas.style.cursor = "default";
-    canvas.classList.add("signature-readonly", "firma-bloqueada");
-    canvas.setAttribute("aria-readonly", "true");
+  canvas.style.pointerEvents = 'none';
+  canvas.style.cursor = 'default';
+  canvas.classList.add('signature-readonly', 'firma-bloqueada');
+  canvas.setAttribute('aria-readonly', 'true');
 }
 
 // ======================================================
@@ -156,77 +102,45 @@ export function bloquearFirmaTecnico() {
 // ======================================================
 
 export function limpiarFirma(id) {
-    limpiarCanvas(id);
+  limpiarCanvas(id);
 }
 
 // ======================================================
 // LIMPIAR OPERADOR
 // ======================================================
 
-export {
-    limpiarOperador,
-    actualizarTecnicoPorCorreo,
-};
+export { limpiarOperador, actualizarTecnicoPorCorreo };
 
 // ======================================================
 // DATOS PARA PDF
 // ======================================================
 
 export function obtenerDatosFirmas() {
+  const user = auth.currentUser;
 
-    const user =
-        auth.currentUser;
+  const correo = user?.email?.trim().toLowerCase() || '';
 
-    const correo =
-        user?.email
-            ?.trim()
-            .toLowerCase() || "";
+  const tecnico = obtenerTecnico(correo);
 
-    const tecnico =
-        obtenerTecnico(correo);
+  const nombreTecnico = document.getElementById('nombreTecnicoFirma')?.textContent?.trim() || tecnico?.nombre || '';
 
-    const nombreTecnico =
-        document
-            .getElementById(
-                "nombreTecnicoFirma"
-            )
-            ?.textContent
-            ?.trim() ||
-        tecnico?.nombre ||
-        "";
+  const cargoTecnico = tecnico?.cargo || 'Técnico de Mantenimiento';
 
-    const cargoTecnico =
-        tecnico?.cargo ||
-        "Técnico de Mantenimiento";
+  const operador = obtenerOperadorValidado();
 
-    const operador =
-        obtenerOperadorValidado();
+  const nombreOperador = document.getElementById('nombreOperador')?.textContent?.trim() || operador?.nombre || '';
 
-    const nombreOperador =
-        document
-            .getElementById(
-                "nombreOperador"
-            )
-            ?.textContent
-            ?.trim() ||
-        operador?.nombre ||
-        "";
+  const cargoOperador = operador?.cargo || '';
 
-    const cargoOperador =
-        operador?.cargo ||
-        "";
+  return {
+    tecnico: {
+      nombre: nombreTecnico,
+      cargo: cargoTecnico,
+    },
 
-    return {
-
-        tecnico: {
-            nombre: nombreTecnico,
-            cargo: cargoTecnico,
-        },
-
-        operador: {
-            nombre: nombreOperador,
-            cargo: cargoOperador,
-        },
-
-    };
+    operador: {
+      nombre: nombreOperador,
+      cargo: cargoOperador,
+    },
+  };
 }

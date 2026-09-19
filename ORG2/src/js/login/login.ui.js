@@ -63,33 +63,16 @@ export function limpiarUsuarioActual(usuarioActual) {
 
 
 export function mostrarBotonCerrarSesionActivo(btnCerrarSesion) {
+  if (!btnCerrarSesion) return;
 
-    if (!btnCerrarSesion) {
-        return;
-    }
-
-    btnCerrarSesion.disabled = false;
-
-    btnCerrarSesion.innerHTML = `
-                       <i class="bi bi-door-open"></i>
-                    `;
+  btnCerrarSesion.disabled = false;
 }
-
 
 export function mostrarBotonCerrarSesionInactivo(btnCerrarSesion) {
+  if (!btnCerrarSesion) return;
 
-    if (!btnCerrarSesion) {
-        return;
-    }
-
-    btnCerrarSesion.disabled =
-        false;
-
-    btnCerrarSesion.innerHTML = `
-                        <i class="bi bi-box-arrow-right"></i>
-                    `;
+  btnCerrarSesion.disabled = false;
 }
-
 
 export function prepararBotonLogin(btnLogin) {
 

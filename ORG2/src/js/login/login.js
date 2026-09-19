@@ -1,423 +1,248 @@
-import {
-    iniciarSesion,
-    observarSesion,
-    configurarPersistencia,
-    cerrarSesion
-} from "../services/firebase/auth.js";
+import { iniciarSesion, observarSesion, configurarPersistencia, cerrarSesion } from '../services/firebase/auth.js';
+
+import { limpiarFormulario } from '../botones/datosFormulario.js';
+
+import { marcarInformeLimpio } from '../estadoInforme.js';
+
+import { mostrarLoadercompartir, ocultarLoadercompartir } from '../services/onedrive/loader.js';
+
+import { obtenerNombreTecnico, obtenerTecnico } from '../services/firebase/tecnicos.js';
+
+import { configurarFocoModalCerrarSesion, obtenerElementosLogin } from './login.dom.js';
 
 import {
-    limpiarFormulario
-} from "../botones/datosFormulario.js";
-
-import { marcarInformeLimpio } from "../estadoInforme.js";
-
-import {
-    mostrarLoadercompartir,
-    ocultarLoadercompartir
-} from "../services/onedrive/loader.js";
-
-import {
-    obtenerNombreTecnico,
-    obtenerTecnico
-} from "../services/firebase/tecnicos.js";
-
-import {
-    configurarFocoModalCerrarSesion,
-    obtenerElementosLogin
-} from "./login.dom.js";
-
-import {
-    limpiarErrorLogin,
-    limpiarUsuarioActual,
-    mostrarAplicacion,
-    mostrarBotonCerrarSesionActivo,
-    mostrarBotonCerrarSesionInactivo,
-    mostrarErrorLogin,
-    mostrarLogin,
-    mostrarSaludo,
-    prepararBotonConfirmarCierre,
-    prepararBotonLogin,
-    restaurarBotonConfirmarCierre,
-    restaurarBotonLogin
-} from "./login.ui.js";
-
+  limpiarErrorLogin,
+  limpiarUsuarioActual,
+  mostrarAplicacion,
+  mostrarBotonCerrarSesionActivo,
+  mostrarBotonCerrarSesionInactivo,
+  mostrarErrorLogin,
+  mostrarLogin,
+  mostrarSaludo,
+  prepararBotonConfirmarCierre,
+  prepararBotonLogin,
+  restaurarBotonConfirmarCierre,
+  restaurarBotonLogin,
+} from './login.ui.js';
 
 const {
-    loginScreen,
-    appContent,
-    loginForm,
-    loginEmail,
-    loginPassword,
-    loginError,
-    btnLogin,
-    usuarioActual,
-    btnCerrarSesion,
-    modalCerrarSesion,
-    btnConfirmarCerrarSesion
+  loginScreen,
+  appContent,
+  loginForm,
+  loginEmail,
+  loginPassword,
+  loginError,
+  btnLogin,
+  usuarioActual,
+  btnCerrarSesion,
+  modalCerrarSesion,
+  btnConfirmarCerrarSesion,
 } = obtenerElementosLogin();
 
-
-configurarFocoModalCerrarSesion(
-    modalCerrarSesion,
-    btnCerrarSesion
-);
-
+configurarFocoModalCerrarSesion(modalCerrarSesion, btnCerrarSesion);
 
 // =====================================================
 // INICIAR AUTENTICACION
 // =====================================================
 
 async function iniciarAutenticacion() {
+  console.log('🔵 [LOGIN] Mostrando loader inicial');
+  mostrarLoadercompartir();
 
-    console.log("🔵 [LOGIN] Mostrando loader inicial");
-    mostrarLoadercompartir();
+  try {
+    await configurarPersistencia();
 
-    try {
+    observarSesion(async (user) => {
+      if (user) {
+        await manejarUsuarioAutenticado(user);
+        return;
+      }
 
-        await configurarPersistencia();
-
-        observarSesion(async (user) => {
-
-            if (user) {
-
-                await manejarUsuarioAutenticado(user);
-                return;
-
-            }
-
-            manejarUsuarioNoAutenticado();
-
-        });
-
-    } catch (error) {
-
-        console.error(
-            "❌ Error inicializando autenticación:",
-            error
-        );
-
-    }
-
+      manejarUsuarioNoAutenticado();
+    });
+  } catch (error) {
+    console.error('❌ Error inicializando autenticación:', error);
+  }
 }
-
 
 // =====================================================
 // USUARIO AUTENTICADO
 // =====================================================
 
 async function manejarUsuarioAutenticado(user) {
+  console.log('✅ Usuario autenticado:', user.email);
 
-    console.log(
-        "✅ Usuario autenticado:",
-        user.email
-    );
+  mostrarBotonCerrarSesionActivo(btnCerrarSesion);
 
-    mostrarBotonCerrarSesionActivo(btnCerrarSesion);
+  const nombreTecnico = obtenerNombreTecnico(user.email);
+  const tecnicoAutenticado = obtenerTecnico(user.email);
 
-const nombreTecnico = obtenerNombreTecnico(user.email);
-const tecnicoAutenticado = obtenerTecnico(user.email);
-
-if (usuarioActual) {
+  if (usuarioActual) {
     mostrarSaludo(nombreTecnico);
-}
+  }
 
-const perfilNombre = document.getElementById("perfilNombre");
-const perfilCargo = document.getElementById("perfilCargo");
+  const perfilNombre = document.getElementById('perfilNombre');
+  const perfilCargo = document.getElementById('perfilCargo');
 
-if (perfilNombre) {
-    perfilNombre.textContent = nombreTecnico || "Técnico";
-}
+  if (perfilNombre) {
+    perfilNombre.textContent = nombreTecnico || 'Técnico';
+  }
 
-if (perfilCargo) {
-    perfilCargo.textContent = tecnicoAutenticado?.cargo || "Técnico de mantenimiento";
-}
+  if (perfilCargo) {
+    perfilCargo.textContent = tecnicoAutenticado?.cargo || 'Técnico de mantenimiento';
+  }
 
-    mostrarAplicacion(
-        loginScreen,
-        appContent
-    );
+  mostrarAplicacion(loginScreen, appContent);
 
-    if (!window.__APP_CARGADA__) {
-
-        window.__APP_CARGADA__ = true;
-
-        try {
-
-            const {
-                inicializarAplicacion
-            } = await import("../main.js");
-
-            await inicializarAplicacion(
-                user.email
-            );
-
-            console.log(
-                "✅ Aplicación cargada correctamente"
-            );
-
-            ocultarLoadercompartir();
-
-        } catch (error) {
-
-            console.error(
-                "❌ Error cargando la aplicación:",
-                error
-            );
-
-            ocultarLoadercompartir();
-
-        }
-
-        return;
-    }
+  if (!window.__APP_CARGADA__) {
+    window.__APP_CARGADA__ = true;
 
     try {
+      const { inicializarAplicacion } = await import('../main.js');
 
-        const {
-            actualizarTecnico
-        } = await import("../main.js");
+      await inicializarAplicacion(user.email);
 
-        if (
-            typeof actualizarTecnico ===
-            "function"
-        ) {
+      console.log('✅ Aplicación cargada correctamente');
 
-            actualizarTecnico(
-                user.email
-            );
-
-            console.log(
-                "🔄 Técnico actualizado por cambio de cuenta"
-            );
-
-        }
-
+      ocultarLoadercompartir();
     } catch (error) {
+      console.error('❌ Error cargando la aplicación:', error);
 
-        console.error(
-            "❌ Error actualizando técnico:",
-            error
-        );
-
+      ocultarLoadercompartir();
     }
-}
 
+    return;
+  }
+
+  try {
+    const { actualizarTecnico } = await import('../main.js');
+
+    if (typeof actualizarTecnico === 'function') {
+      actualizarTecnico(user.email);
+
+      console.log('🔄 Técnico actualizado por cambio de cuenta');
+    }
+  } catch (error) {
+    console.error('❌ Error actualizando técnico:', error);
+  }
+}
 
 // =====================================================
 // USUARIO NO AUTENTICADO
 // =====================================================
 
 function manejarUsuarioNoAutenticado() {
+  console.log('🔒 Usuario no autenticado');
 
-    console.log(
-        "🔒 Usuario no autenticado"
-    );
+  try {
+    limpiarFormulario();
+    marcarInformeLimpio();
 
-    try {
+    console.log('🧹 Formulario limpiado');
+  } catch (error) {
+    console.error('❌ Error limpiando formulario:', error);
+  }
 
-        limpiarFormulario();
-        marcarInformeLimpio();
+  limpiarUsuarioActual(usuarioActual);
 
-        console.log(
-            "🧹 Formulario limpiado"
-        );
+  // Restablece la navegación visual del informe al cerrar sesión.
+  window.dispatchEvent(new Event('maintenance:reset'));
+  mostrarBotonCerrarSesionInactivo(btnCerrarSesion);
 
-    } catch (error) {
+  mostrarLogin(loginScreen, appContent);
 
-        console.error(
-            "❌ Error limpiando formulario:",
-            error
-        );
-
-    }
-
-    limpiarUsuarioActual(usuarioActual);
-
-    // Restablece la navegación visual del informe al cerrar sesión.
-    window.dispatchEvent(new Event("maintenance:reset"));
-    mostrarBotonCerrarSesionInactivo(btnCerrarSesion);
-
-    mostrarLogin(
-        loginScreen,
-        appContent
-    );
-
-    ocultarLoadercompartir();
+  ocultarLoadercompartir();
 }
-
 
 // =====================================================
 // LOGIN
 // =====================================================
 
-loginForm?.addEventListener(
-    "submit",
-    async (event) => {
+loginForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
 
-        event.preventDefault();
+  limpiarErrorLogin(loginError);
+  prepararBotonLogin(btnLogin);
 
-        limpiarErrorLogin(loginError);
-        prepararBotonLogin(btnLogin);
+  try {
+    await iniciarSesion(loginEmail.value.trim(), loginPassword.value);
 
-        try {
+    console.log('✅ Inicio de sesión correcto');
+  } catch (error) {
+    console.error('❌ Error de login:', error);
 
-            await iniciarSesion(
-                loginEmail.value.trim(),
-                loginPassword.value
-            );
-
-            console.log(
-                "✅ Inicio de sesión correcto"
-            );
-
-        } catch (error) {
-
-            console.error(
-                "❌ Error de login:",
-                error
-            );
-
-            mostrarErrorLogin(
-                loginError,
-                error
-            );
-
-        } finally {
-
-            restaurarBotonLogin(btnLogin);
-
-        }
-
-    }
-);
-
+    mostrarErrorLogin(loginError, error);
+  } finally {
+    restaurarBotonLogin(btnLogin);
+  }
+});
 
 // =====================================================
 // BOTON CERRAR SESION
 // =====================================================
 
-btnCerrarSesion?.addEventListener(
-    "click",
-    () => {
+btnCerrarSesion?.addEventListener('click', () => {
+  if (!modalCerrarSesion) {
+    console.error('❌ No existe el modal #modalCerrarSesion');
 
-        if (!modalCerrarSesion) {
+    return;
+  }
 
-            console.error(
-                "❌ No existe el modal #modalCerrarSesion"
-            );
+  const modal = bootstrap.Modal.getOrCreateInstance(modalCerrarSesion);
 
-            return;
-
-        }
-
-        const modal =
-            bootstrap.Modal.getOrCreateInstance(
-                modalCerrarSesion
-            );
-
-        modal.show();
-
-    }
-);
-
+  modal.show();
+});
 
 // =====================================================
 // CONFIRMAR CERRAR SESION
 // =====================================================
 
-btnConfirmarCerrarSesion?.addEventListener(
-    "click",
-    async () => {
+btnConfirmarCerrarSesion?.addEventListener('click', async () => {
+  try {
+    prepararBotonConfirmarCierre(btnConfirmarCerrarSesion);
 
-        try {
+    if (modalCerrarSesion) {
+      const modal = bootstrap.Modal.getInstance(modalCerrarSesion);
 
-            prepararBotonConfirmarCierre(
-                btnConfirmarCerrarSesion
-            );
-
-            if (modalCerrarSesion) {
-
-                const modal =
-                    bootstrap.Modal.getInstance(
-                        modalCerrarSesion
-                    );
-
-                modal?.hide();
-
-            }
-
-            await esperarCierreModal(
-                modalCerrarSesion
-            );
-
-            await cerrarSesion();
-
-            console.log(
-                "🔒 Sesión cerrada"
-            );
-
-        } catch (error) {
-
-            console.error(
-                "❌ Error cerrando sesión:",
-                error
-            );
-
-        } finally {
-
-            restaurarBotonConfirmarCierre(
-                btnConfirmarCerrarSesion
-            );
-
-        }
-
+      modal?.hide();
     }
-);
 
+    await esperarCierreModal(modalCerrarSesion);
+
+    await cerrarSesion();
+
+    console.log('🔒 Sesión cerrada');
+  } catch (error) {
+    console.error('❌ Error cerrando sesión:', error);
+  } finally {
+    restaurarBotonConfirmarCierre(btnConfirmarCerrarSesion);
+  }
+});
 
 function esperarCierreModal(modalCerrarSesion) {
+  return new Promise((resolve) => {
+    if (!modalCerrarSesion) {
+      resolve();
+      return;
+    }
 
-    return new Promise(resolve => {
-
-        if (!modalCerrarSesion) {
-
-            resolve();
-            return;
-
-        }
-
-        modalCerrarSesion.addEventListener(
-            "hidden.bs.modal",
-            resolve,
-            { once: true }
-        );
-
-    });
+    modalCerrarSesion.addEventListener('hidden.bs.modal', resolve, { once: true });
+  });
 }
-
 
 // =====================================================
 // OBTENER PRIMER NOMBRE
 // =====================================================
 
 function obtenerPrimerNombre(nombreCompleto) {
+  if (!nombreCompleto) {
+    return 'Usuario';
+  }
 
-    if (!nombreCompleto) {
-        return "Usuario";
-    }
+  const nombre = nombreCompleto.trim().split(/\s+/)[0];
 
-    const nombre =
-        nombreCompleto
-            .trim()
-            .split(/\s+/)[0];
-
-    return (
-        nombre.charAt(0).toUpperCase() +
-        nombre.slice(1).toLowerCase()
-    );
-
+  return nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
 }
-
 
 // =====================================================
 // INICIAR
@@ -425,7 +250,4 @@ function obtenerPrimerNombre(nombreCompleto) {
 
 iniciarAutenticacion();
 
-
-export {
-    mostrarSaludo
-};
+export { mostrarSaludo };

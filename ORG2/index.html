@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="src/styles/layout.css" />
 
-    <link rel="stylesheet" href="src/styles/header.css" />
 
     <link rel="stylesheet" href="src/styles/formulario.css" />
 
@@ -42,7 +41,7 @@
 
     <link rel="stylesheet" href="src/styles/responsive.css" />
 
-    <link rel="stylesheet" href="src/styles/calendario.css" />
+
 
     <link rel="stylesheet" href="src/styles/login.css" />
     <link rel="stylesheet" href="src/styles/ui-final.css" />
@@ -116,7 +115,7 @@
           <div class="app-welcome">
             <div class="app-brand">
               <img
-                src="src/assets/images/logo-reference.png"
+                src="src/assets/images/logo.png"
                 alt="Organización Cárdenas S.A.S."
                 class="app-brand-logo"
               />
@@ -136,8 +135,6 @@
                 <strong id="usuarioHeader">
                   <span id="usuarioActual" class="fw-semibold text-primary-emphasis"></span>
                 </strong>
-
-                <span>Técnico de mantenimiento</span>
               </div>
             </div>
           </div>
@@ -188,19 +185,7 @@
                          ===================================================== -->
 
             <section class="app-section-card">
-              <div class="app-section-header">
-                <div class="app-section-icon">
-                  <i class="bi bi-qr-code-scan"></i>
-                </div>
 
-                <div>
-                  <span class="app-section-kicker"> IDENTIFICAR ACTIVO </span>
-
-                  <h3>Escanea el código del equipo</h3>
-
-                  <p>Usa el código QR para cargar automáticamente la información del activo.</p>
-                </div>
-              </div>
 
               <!-- BOTÓN QR -->
 
@@ -497,11 +482,11 @@
               <!-- TIEMPO -->
 
               <div class="app-time-card">
-                <div class="app-time-icon">
+                  <div class="app-time-icon">
                   <i class="bi bi-stopwatch"></i>
-                </div>
+              </div>
 
-                <div class="app-time-content">
+                <div class="app-time-content" >
                   <span> TIEMPO EMPLEADO </span>
 
                   <input
@@ -510,9 +495,10 @@
                     readonly
                     class="form-control"
                     placeholder="Se calculará automáticamente"
-                    disabled
-                  />
+                    disabled/>
                 </div>
+
+
               </div>
 
               <!-- DAÑOS -->
@@ -637,13 +623,6 @@
                   <i class="bi bi-images"></i>
                 </div>
 
-                <div>
-                  <span class="app-section-kicker"> EVIDENCIA </span>
-
-                  <h3>Registro fotográfico</h3>
-
-                  <p>Agrega fotografías para documentar el trabajo realizado.</p>
-                </div>
               </div>
 
               <div class="app-photo-actions">
@@ -708,20 +687,13 @@
                   <i class="bi bi-pen"></i>
                 </div>
 
-                <div>
-                  <span class="app-section-kicker"> VALIDACIÓN </span>
-
-                  <h3>Firmas del informe</h3>
-
-                  <p>Valida los responsables antes de finalizar el informe.</p>
-                </div>
               </div>
 
               <!-- =================================================
                              FIRMA TÉCNICO
                              ================================================= -->
 
-              <div class="app-signature-card">
+              <div class="app-signature-card app-signature-card--tecnico" >
                 <div class="app-signature-heading">
                   <div class="app-signature-avatar">
                     <i class="bi bi-person-gear"></i>
@@ -978,7 +950,7 @@
               aria-label="Cerrar sesión"
             >
               <i class="bi bi-box-arrow-right"></i>
-              <span style="color: black;">Cerrar sesión</span>
+              <span style="color: black">Cerrar sesión</span>
             </button>
           </div>
         </div>
@@ -1063,5 +1035,73 @@
         </div>
       </div>
     </div>
+
+
+    <!-- ===================================================== -->
+<!-- MODAL CONFIRMAR ELIMINACIÓN DE FOTOGRAFÍA -->
+<!-- ===================================================== -->
+
+<div
+    class="modal fade"
+    id="modalEliminarFoto"
+    tabindex="-1"
+    aria-labelledby="modalEliminarFotoLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header">
+                <h5
+                    class="modal-title fw-bold"
+                    id="modalEliminarFotoLabel"
+                >
+                    <i class="bi bi-trash text-danger me-2"></i>
+                    Eliminar fotografía
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-2">
+                    ¿Estás seguro de que deseas eliminar esta fotografía?
+                </p>
+
+                <small class="text-muted">
+                    Esta acción no se puede deshacer.
+                </small>
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="btnConfirmarEliminarFoto"
+                >
+                    <i class="bi bi-trash me-1"></i>
+                    Sí, eliminar
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
   </body>
 </html>
