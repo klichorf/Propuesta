@@ -5,8 +5,6 @@ import { renderizarFotos } from './renderFotos.js';
 import { inicializarModalEliminarFoto } from './modalEliminarFoto.js';
 import { fileToDataURL } from './convertirImagen.js';
 
-let imagesData = [];
-
 export function initFotos() {
   const inputFotos = document.getElementById('fotos');
   const inputTomar = document.getElementById('fotosTomar');
@@ -22,7 +20,7 @@ export function initFotos() {
   configurarInput(inputTomar);
   configurarDropZone(dropZone);
 
-  renderizarFotos(imagesData);
+  renderizarFotos(obtenerFotos());
 }
 
 function configurarInput(input) {

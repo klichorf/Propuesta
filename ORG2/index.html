@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="src/styles/layout.css" />
 
-
     <link rel="stylesheet" href="src/styles/formulario.css" />
 
     <link rel="stylesheet" href="src/styles/botones.css" />
@@ -36,12 +35,11 @@
     <link rel="stylesheet" href="src/styles/loaders.css" />
 
     <link rel="stylesheet" href="src/styles/reportes.css" />
+    <link rel="stylesheet" href="src/styles/informes.css" />
 
     <link rel="stylesheet" href="src/styles/componentes.css" />
 
     <link rel="stylesheet" href="src/styles/responsive.css" />
-
-
 
     <link rel="stylesheet" href="src/styles/login.css" />
     <link rel="stylesheet" href="src/styles/ui-final.css" />
@@ -114,11 +112,7 @@
         <form id="formulario" class="card shadow p-4" onsubmit="return false;">
           <div class="app-welcome">
             <div class="app-brand">
-              <img
-                src="src/assets/images/logo.png"
-                alt="Organización Cárdenas S.A.S."
-                class="app-brand-logo"
-              />
+              <img src="src/assets/images/logo.png" alt="Organización Cárdenas S.A.S." class="app-brand-logo" />
 
               <div class="app-brand-copy">
                 <strong>ORGANIZACIÓN</strong>
@@ -185,8 +179,6 @@
                          ===================================================== -->
 
             <section class="app-section-card">
-
-
               <!-- BOTÓN QR -->
 
               <button id="btnQR" type="button" class="app-qr-button">
@@ -482,11 +474,11 @@
               <!-- TIEMPO -->
 
               <div class="app-time-card">
-                  <div class="app-time-icon">
+                <div class="app-time-icon">
                   <i class="bi bi-stopwatch"></i>
-              </div>
+                </div>
 
-                <div class="app-time-content" >
+                <div class="app-time-content">
                   <span> TIEMPO EMPLEADO </span>
 
                   <input
@@ -495,10 +487,9 @@
                     readonly
                     class="form-control"
                     placeholder="Se calculará automáticamente"
-                    disabled/>
+                    disabled
+                  />
                 </div>
-
-
               </div>
 
               <!-- DAÑOS -->
@@ -622,7 +613,6 @@
                 <div class="app-section-icon photos">
                   <i class="bi bi-images"></i>
                 </div>
-
               </div>
 
               <div class="app-photo-actions">
@@ -686,14 +676,13 @@
                 <div class="app-section-icon signatures">
                   <i class="bi bi-pen"></i>
                 </div>
-
               </div>
 
               <!-- =================================================
                              FIRMA TÉCNICO
                              ================================================= -->
 
-              <div class="app-signature-card app-signature-card--tecnico" >
+              <div class="app-signature-card app-signature-card--tecnico">
                 <div class="app-signature-heading">
                   <div class="app-signature-avatar">
                     <i class="bi bi-person-gear"></i>
@@ -886,6 +875,30 @@
             </section>
           </fieldset>
         </form>
+        <section id="pantallaInformes" class="app-reports-screen d-none" aria-labelledby="tituloInformes">
+          <header class="app-reports-header">
+            <div>
+              <span class="app-section-kicker">MIS INFORMES</span>
+              <h2 id="tituloInformes">Informes de hoy</h2>
+              <span id="fechaInformes" class="app-reports-date"></span>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <span id="contadorInformes" class="app-reports-counter" aria-label="Cantidad de informes">0</span>
+              <button
+                type="button"
+                id="btnActualizarInformes"
+                class="btn btn-outline-primary"
+                title="Actualizar informes"
+                aria-label="Actualizar informes"
+              >
+                <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+              </button>
+            </div>
+          </header>
+
+          <div id="listaInformes" class="app-reports-list" aria-live="polite"></div>
+        </section>
       </main>
 
       <!-- =====================================================
@@ -1036,72 +1049,44 @@
       </div>
     </div>
 
-
     <!-- ===================================================== -->
-<!-- MODAL CONFIRMAR ELIMINACIÓN DE FOTOGRAFÍA -->
-<!-- ===================================================== -->
+    <!-- MODAL CONFIRMAR ELIMINACIÓN DE FOTOGRAFÍA -->
+    <!-- ===================================================== -->
 
-<div
-    class="modal fade"
-    id="modalEliminarFoto"
-    tabindex="-1"
-    aria-labelledby="modalEliminarFotoLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog modal-dialog-centered">
+    <div
+      class="modal fade"
+      id="modalEliminarFoto"
+      tabindex="-1"
+      aria-labelledby="modalEliminarFotoLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="modalEliminarFotoLabel">
+              <i class="bi bi-trash text-danger me-2"></i>
+              Eliminar fotografía
+            </h5>
 
-            <div class="modal-header">
-                <h5
-                    class="modal-title fw-bold"
-                    id="modalEliminarFotoLabel"
-                >
-                    <i class="bi bi-trash text-danger me-2"></i>
-                    Eliminar fotografía
-                </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Cerrar"
-                ></button>
-            </div>
+          <div class="modal-body">
+            <p class="mb-2">¿Estás seguro de que deseas eliminar esta fotografía?</p>
 
-            <div class="modal-body">
-                <p class="mb-2">
-                    ¿Estás seguro de que deseas eliminar esta fotografía?
-                </p>
+            <small class="text-muted"> Esta acción no se puede deshacer. </small>
+          </div>
 
-                <small class="text-muted">
-                    Esta acción no se puede deshacer.
-                </small>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-            <div class="modal-footer">
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    Cancelar
-                </button>
-
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    id="btnConfirmarEliminarFoto"
-                >
-                    <i class="bi bi-trash me-1"></i>
-                    Sí, eliminar
-                </button>
-
-            </div>
-
+            <button type="button" class="btn btn-danger" id="btnConfirmarEliminarFoto">
+              <i class="bi bi-trash me-1"></i>
+              Sí, eliminar
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
   </body>
 </html>

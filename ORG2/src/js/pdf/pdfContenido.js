@@ -4,6 +4,7 @@
 
 import { PDF_CONFIG } from "./pdfConfig.js";
 import { obtenerValor, formatearFecha } from "./pdfUtils.js";
+import { obtenerNombreEquipo } from "../informes/resumenActividades.js";
 
 export function crearContenidoPDF(
     doc,
@@ -74,7 +75,11 @@ export function crearContenidoPDF(
 
             [
                 "Equipo",
-                obtenerValor("equipo"),
+                obtenerNombreEquipo(obtenerValor("equipo"), {
+                    equipoNombre: obtenerValor("equipoNombre"),
+                    planta: obtenerValor("planta"),
+                    area: obtenerValor("area"),
+                }),
             ],
 
             [

@@ -1,0 +1,62 @@
+/* ------------------------------------------------------
+   ESTILOS: RESUMEN Y ESTADO DE COMPARTICIÓN
+   ------------------------------------------------------ */
+
+.app-report-summary {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  background: rgba(13, 110, 253, 0.05);
+}
+
+.app-report-summary-title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.app-report-summary p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.app-report-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+}
+
+.app-report-share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.app-report-shared-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: rgba(25, 135, 84, 0.1);
+  color: #146c43;
+}
+
+@media (max-width: 576px) {
+  .app-report-share-actions,
+  .app-report-share-buttons {
+    width: 100%;
+  }
+
+  .app-report-share-buttons .btn {
+    flex: 1 1 auto;
+  }
+}

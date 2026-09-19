@@ -42,6 +42,7 @@ nav?.addEventListener("click", (event) => {
         // Nunca borra lo que el técnico ya diligenció.
         irInicio();
         actualizarActivo("inicio");
+        window.dispatchEvent(new CustomEvent("app:navegacion", { detail: { pagina: "inicio" } }));
         return;
     }
 
@@ -66,6 +67,7 @@ nuevoInforme?.addEventListener("click", () => {
     marcarInformeLimpio();
     resetWizard();
     actualizarActivo("inicio");
+    window.dispatchEvent(new CustomEvent("app:navegacion", { detail: { pagina: "nuevo" } }));
 });
 
 function actualizarActivo(pagina) {

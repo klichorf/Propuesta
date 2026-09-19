@@ -2,7 +2,7 @@
 // MÓDULO PRINCIPAL: INICIALIZACIÓN
 // ------------------------------------------------------
 
-import { initFotos } from '../js/fotografias/fotografias.js';
+import { initFotos } from './fotografias/fotografias.js';
 import { initFirmas, actualizarTecnicoPorCorreo } from './firmas/firmas.js';
 import { generarPDF } from './pdf/pdf.js';
 import { validarFormulario } from './validacion/validarFormulario.js';
@@ -18,6 +18,7 @@ import { initFotoActivoSeleccionado } from './activos/fotoActivoUI.js';
 
 import { initWizard } from './wizard.js';
 import { initEstadoInforme } from './estadoInforme.js';
+import { initInformes } from './informes/informes.js';
 
 // ------------------------------------------------------
 // CONTROL GLOBAL DE FOCO EN MODALES BOOTSTRAP
@@ -64,6 +65,7 @@ export async function inicializarAplicacion(correoUsuario = '') {
   configurarFocoModales();
 
   initEstadoInforme();
+  initInformes();
 
   // --------------------------------------------------
   // INICIALIZACIONES PRINCIPALES

@@ -36,6 +36,7 @@ import {
 import { FirebaseError } from "../utils.js";
 
 import { normalizarUrlSharePoint } from "../../services/onedrive/sharepointUrls.js";
+import { auth } from "../../services/firebase/auth.js";
 
 // ------------------------------------------------------
 // GUARDAR MANTENIMIENTO
@@ -44,7 +45,19 @@ import { normalizarUrlSharePoint } from "../../services/onedrive/sharepointUrls.
 export async function guardarCompartir(data) {
     console.log("🔥 [FIREBASE] Guardando mantenimiento...");
 
-    const id = await guardarMantenimiento(data);
+    const usuario = auth.currentUser;
+
+    if (!usuario) {
+        throw new FirebaseError();
+    }
+
+    const datosConPropietario = {
+        ...data,
+        usuarioId: usuario.uid,
+        usuarioEmail: usuario.email?.trim().toLowerCase() || "",
+    };
+
+    const id = await guardarMantenimiento(datosConPropietario);
 
     if (!id) {
         throw new FirebaseError();
