@@ -33,7 +33,12 @@ const tecnicosPorCorreo = {
     "ascuervo@organizacioncardenas.com.co": {
         nombre: "ANGELO STIVEN CUERVO BELTRAN",
         cargo: "TÉCNICO DE MANTENIMIENTO"
-    }
+    }, 
+
+    "esneide2010@hotmail.com": {
+    nombre: "ESNEIDER QUINTERO LOZANO",
+    cargo: "CONTRATISTA"
+}
 
 };
 
